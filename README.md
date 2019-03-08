@@ -18,6 +18,29 @@ vue init webpack client
 ? Should we run `npm install` for you after the project has been created? (r
 ecommended) npm
 
-cd client
+cd client :
 npm install -> install all module
 npm run dev -> launch project
+
+--> Readme (client)
+
+cd server :
+npm init -f
+npm install --save nodemon eslint
+
+"start": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'npm run lint && node'",
+"lint": "./node_modules/.bin/eslint **/*.js"
+--> usefull for start server
+
+Error ? wtf?
+node ./node_modules/eslint/bin/eslint.js --init (script for config)
+sudo npm i eslint-plugin-vue@latest --save-dev = problem
+npm start
+
+Going through install:
+
+npm install --save express body-parser cors morgan
+
+delete ipaddr.js = working
+
+then do config src/app.js for making the server
