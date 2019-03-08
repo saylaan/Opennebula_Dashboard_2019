@@ -19,5 +19,5 @@ vue init webpack client
 ecommended) npm
 
 cd client
-npm install
-npm run dev
+npm install -> install all module
+npm run dev -> launch project
