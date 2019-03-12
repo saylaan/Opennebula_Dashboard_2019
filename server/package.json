@@ -17,8 +17,12 @@
     "express": "^4.16.4",
     "ipaddr": "0.0.9",
     "ipaddr.js": "^1.9.0",
+    "joi": "^14.3.1",
+    "joy": "^0.1.1",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "sequelize": "^4.43.0",
+    "sqlite3": "^3.1.8"
   },
   "devDependencies": {
     "eslint-plugin-vue": "^5.2.2"

@@ -5,7 +5,8 @@ const express = require('express')
 const bodyParser = require('body-parser') // process json data
 const cors = require('cors')
 const morgan = require('morgan')
-const {sequelize} = require('./models')
+const {sequelize} = require('./models') // models folder with index.js file who return a sequelize obj
+const config = require('./config/config')
 
 /* build an express app */
 const app = express()
@@ -14,23 +15,12 @@ app.use(morgan('combined')) // morgan doc -> print out log;
 app.use(bodyParser.json())
 app.use(cors()) // server hosted on different depend --> CARE (need good security)
 
-/* get / post / put / patch / delete */
-app.post('/register', (req, res) => {
-  res.send({
-    message : `Hello ${req.body.email}! Your user was registered! Have fun!`
-  })
-})
+require('./routes')(app) // attach all the different endpoint to the apps
 
-app.get('/status', (req, res) => {
-  res.send({
-    message: 'Hello my name is status'
-  })
-})
-
-sequilize.sync()
+sequelize.sync() // sync sequelize with the server
   .then(() => {
-    app.listen(process.env.PORT || 8081)
-    console.log('Server started on port $(config;port}')
+    app.listen(config.port)
+    console.log(`Server started on port ${config.port}... let's start working...`)
   })
 
 

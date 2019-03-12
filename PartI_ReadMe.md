@@ -19,10 +19,10 @@ vue init webpack client
 ? Should we run `npm install` for you after the project has been created? (r
 ecommended) npm
 
-npm install -> install all module
-npm run dev -> launch project
+npm install -> install all module ##
+npm install --save axios (request http for backend) ##
 
-npm install --save axios (request http for backend)
+npm run dev -> launch project ##
 
 cd /src : create folder service and file Api.js into it + AuthenticationService.js
 
@@ -39,7 +39,7 @@ npm install --save nodemon eslint
 
 Error ? wtf?
 node ./node_modules/eslint/bin/eslint.js --init (script for config)
-sudo npm i eslint-plugin-vue@latest --save-dev = problem
+npm i eslint-plugin-vue@latest --save-dev = problem
 
 npm start
 Going through install:
