@@ -1,6 +1,6 @@
 module.exports = { // basic config for the server
-    port: 8081,
-    db: {
+    port: 8082,
+    db: { // maybe i should use mysql instead
         database: process.env.DB_NAME || 'tabtracker', // name of DB
         user: process.env.DB_USER || 'tabtracker',
         password: process.env.DB_PASS || 'tabtracker',

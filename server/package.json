@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'sudo npm run lint && node'",
-    "lint": "./node_modules/.bin/eslint **/*.js"
+    "start": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'npm run lint && node'",
+    "lint": "./node_modules/.bin/eslint \"**/*.js\""
   },
   "keywords": [],
   "author": "",
@@ -16,13 +16,11 @@
     "eslint": "^5.15.1",
     "express": "^4.16.4",
     "ipaddr": "0.0.9",
-    "ipaddr.js": "^1.9.0",
     "joi": "^14.3.1",
-    "joy": "^0.1.1",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
-    "sequelize": "^4.43.0",
-    "sqlite3": "^3.1.8"
+    "sequelize": "^5.1.0",
+    "sqlite3": "^4.0.6"
   },
   "devDependencies": {
     "eslint-plugin-vue": "^5.2.2"

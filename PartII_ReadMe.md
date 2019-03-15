@@ -33,3 +33,25 @@ Joy != joi LOL
 --> Add this to the route such as the AuthenticationController
 --> Make the schema for the pattern check (regex) : JOY IS FUCKING USEFULL -> look the file for understand.
 5. Hash the password is really important
+
+## LINK THE BACK END REGISTRATION AND THE FRONT
+1. Change the method register to make the error occur and work well with the proper data in the backend
+2. Interact with the vue.js (div class="v-html="error"")
+
+In vue.js :
+1. Template => for html part "items" (v-... = v-specific alt)
+2. Script => obj :
+- data() = bind to the Template
+- method = method Template can access
+3. Style scoped => only in this Template
+
+npm install --save vuetify ##
+Include into main.js
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+It like materialize but you can have new tag like html <v-btn> etc
+
+Repaire Sqlite3
+npm uninstall sqlite3
+npm cache clean
+sudo npm install sqlite3

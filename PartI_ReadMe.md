@@ -33,7 +33,7 @@ npm init -f
 npm install --save nodemon eslint
 
 "start": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'npm run lint && node'",
-"lint": "./node_modules/.bin/eslint **/*.js"
+"lint": "./node_modules/.bin/eslint \"**/*.js\""
 
 --> usefull for start server
 
@@ -41,12 +41,35 @@ Error ? wtf?
 node ./node_modules/eslint/bin/eslint.js --init (script for config)
 npm i eslint-plugin-vue@latest --save-dev = problem
 
+Define some case for avoid error compilation
+"rules": {
+  "no-console": 0
+  "no-undef": 0
+} into .eslintrc.js
+
 npm start
-Going through install:
+Going through install:s
 npm install --save express body-parser cors morgan
+
+In app.js
+const morgan = require('morgan')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const express = require('express')
+
+const app = express()
+
+app.use(morgan('combined'))
+app.use(bodyParser.json())
+app.use(cors())
+
+app.listen(process.env.PORT || 8082)
+
 create src/app.js
-delete ipaddr.js = working
+delete ipaddr.js = working (sometime works)
 then do config src/app.js for making the server
+
+http://localhost:8082/status not http://localhost:8082/#/status
 
 ****
 **Build front :

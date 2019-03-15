@@ -1,6 +1,6 @@
 const Joi = require('joi')
 
-module.exports = {
+module.exports = { // looking if data pass or fail
     register (req, res, next) {
         const schema = {
             email: Joi.string().email(),

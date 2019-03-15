@@ -1,11 +1,19 @@
 <template>
-  <div>
-    <h1>Register</h1>
-
-    <input type='email' name="email" v-model="email" placeholder="email"/><br>
-    <input type='password' name="password" v-model="password" placeholder="password"/><br>
-    <button @click="register">Register</button>
-  </div>
+    <v-layout column>
+        <v-flex xs6 offset-xs3>
+            <div class="white elevation-2">
+                <v-toolbar class="purple" flat dense dark>
+                    <v-toolbar-title>Register</v-toolbar-title>
+                </v-toolbar>
+                <div class="pl-4 pr-4 pt-2 pb-2">
+                    <v-text-field label='Email' v-model="email"></v-text-field><br>
+                    <v-text-field label='Password' v-model="password"></v-text-field><br>
+                    <div class="error" v-html="error"/>
+                    <v-btn class="purple" @click="register">Register</v-btn>
+                </div>
+            </div>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
@@ -14,19 +22,29 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: null
     }
   },
   methods: {
     async register () {
-      await AuthenticationService.register({
-        email: this.email,
-        password: this.password
-      })
+      try {
+        await AuthenticationService.register({
+          email: this.email,
+          password: this.password
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+
+.error {
+    color: red;
+}
+
 </style>

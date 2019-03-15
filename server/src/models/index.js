@@ -1,5 +1,5 @@
 const fs = require('fs') // node.js module to create file system
-const path = require('path') // app and path, relative patchc
+const path = require('path') // app and path, relative path
 const Sequelize = require('sequelize') // connecting to the DB
 const config = require('../config/config') // file config for the server
 const db = {
