@@ -1,8 +1,13 @@
 <template>
   <div id="app">
-    <!-- <page-header/> -->
-    <!-- <img src="./assets/logo.png"> -->
-    <router-view/>
+    <v-app>
+      <page-header/>
+      <main>
+        <v-container fluid>
+          <router-view></router-view>
+        </v-container>
+      </main>
+    </v-app>
   </div>
 </template>
 s
@@ -28,14 +33,6 @@ export default {
 
 .v-input__slot {
     border-bottom:  1px solid black;
-}
-
-.v-toolbar__title {
-    color: white;
-}
-
-.v-btn__content {
-    color: white;
 }
 
 </style>
