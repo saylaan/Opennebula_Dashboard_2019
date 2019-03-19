@@ -1,4 +1,3 @@
-console.log('Server working...')
 
 /* Import package */
 const express = require('express')
@@ -8,6 +7,7 @@ const morgan = require('morgan')
 const {sequelize} = require('./models') // models folder with index.js file who return a sequelize obj
 const config = require('./config/config')
 
+console.log(`Server working... ${config.port}`)
 /* build an express app */
 const app = express()
 /* enable packages */
@@ -17,7 +17,7 @@ app.use(cors()) // server hosted on different depend --> CARE (need good securit
 
 require('./routes')(app) // attach all the different endpoint to the apps
 
-sequelize.sync() // sync sequelize with the server
+sequelize.sync() // sync sequelize with the server {force : true} = deleting all data
   .then(() => {
     app.listen(config.port)
     console.log(`Server started on port ${config.port}... let's start working...`)

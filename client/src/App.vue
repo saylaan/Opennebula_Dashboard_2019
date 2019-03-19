@@ -35,4 +35,9 @@ export default {
     border-bottom:  1px solid black;
 }
 
+.error {
+  color : black;
+  background-color: white;
+}
+
 </style>
