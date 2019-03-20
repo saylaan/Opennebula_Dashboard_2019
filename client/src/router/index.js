@@ -3,7 +3,10 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Register from '@/components/Register'
 import SignIn from '@/components/SignIn'
-import messageFAQ from '@/components/MessageFAQ'
+import MessageFAQ from '@/components/MessageFAQ'
+import Vlabs from '@/components/Vlabs'
+import CreateVlab from '@/components/CreateVlab'
+import ViewVlab from '@/components/ViewVlab'
 
 Vue.use(Router)
 
@@ -27,7 +30,22 @@ export default new Router({
     {
       path: '/messageFAQ',
       name: 'messageFAQ',
-      component: messageFAQ
+      component: MessageFAQ
+    },
+    {
+      path: '/vlabs',
+      name: 'vlabs',
+      component: Vlabs
+    },
+    {
+      path: '/vlabs/create',
+      name: 'vlab-create',
+      component: CreateVlab
+    },
+    {
+      path: '/vlabs/:vlabId',
+      name: 'vlab',
+      component: ViewVlab
     }
   ]
 })

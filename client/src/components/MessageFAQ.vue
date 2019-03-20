@@ -1,28 +1,35 @@
 <template>
     <v-layout wrap>
         <v-flex xs6 offset-xs3>
-            <div class="white elevation-2">
-                <v-toolbar class="purple lighten-1" flat dense dark>
-                    <v-toolbar-title>Message FAQ</v-toolbar-title>
-                </v-toolbar>
-                <div class="pl-4 pr-4 pt-2 pb-2" dark>
+              <panel title="Message FAQ">
+                <form>
                     <v-text-field label='Email' v-model="email"></v-text-field><br>
+                    <v-textarea label="Message" v-model="msg"></v-textarea>
                     <div class="error" v-html="error"/>
                     <v-btn class="purple" @click="send" dark>Send</v-btn>
-                </div>
-            </div>
+                </form>
+              </panel>
         </v-flex>
     </v-layout>
 </template>
 
 <script>
+import Panel from '@/components/Panel'
+
+// TODO :  make the send message to the database
 export default {
   data () {
     return {
+      email: null,
+      msg: null,
+      error: null
     }
   },
   methods: {
     send () {}
+  },
+  components: {
+    Panel
   }
 }
 </script>

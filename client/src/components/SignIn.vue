@@ -1,11 +1,7 @@
 <template>
     <v-layout wrap>
         <v-flex xs6 offset-xs3 v-if="!$store.state.isUserLoggedIn">
-            <div class="white elevation-2">
-                <v-toolbar class="purple lighten-1" flat dense dark>
-                    <v-toolbar-title>Sign in</v-toolbar-title>
-                </v-toolbar>
-                <div class="pl-4 pr-4 pt-2 pb-2" dark>
+              <panel title="Sign in">
                   <form
                     name="sandbox-form"
                     autocomplete="off">
@@ -14,14 +10,15 @@
                     <div class="error" v-html="error"/>
                     <v-btn class="purple" @click="signin" dark>Sign in</v-btn>
                   </form>
-                </div>
-            </div>
+              </panel>
         </v-flex>
     </v-layout>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
+
 export default {
   data () {
     return {
@@ -43,6 +40,9 @@ export default {
         this.error = error.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>

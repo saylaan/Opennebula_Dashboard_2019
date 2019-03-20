@@ -40,13 +40,13 @@ export default {
         email: this.email,
         password: this.password
       })
-    /* Testing async register with print data into response*/
-    // async register () {
-    //   const response = await AuthenticationService.register({
-    //     email: this.email,
-    //     password: this.password
-    //   })
-    //   console.log(response.data)
+      /* Testing async register with print data into response*/
+      // async register () {
+      //   const response = await AuthenticationService.register({
+      //     email: this.email,
+      //     password: this.password
+      //   })
+      //   console.log(response.data)
     }
   }
 }
