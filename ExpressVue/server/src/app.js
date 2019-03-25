@@ -6,17 +6,13 @@ const cors = require('cors')
 const morgan = require('morgan')
 const {sequelize} = require('./models') // models folder with index.js file who return a sequelize obj
 const config = require('./config/config')
-const Opennebula = require('opennebula')
-const one = new Opennebula('oneadmin:79a311fb8404252b6047ebea31f1204331fec85f',
-'http://vlab.ale-aapp.com:2633/RPC2')
+// const Opennebula = require('opennebula')
+// const one = new Opennebula('oneadmin:79a311fb8404252b6047ebea31f1204331fec85f',
+// 'http://vlab.ale-aapp.com:2633/RPC2')
 
 one.version(function(err, data) {
   console.log(data);
   console.log('Trying to find the version')
-});
-
-one.config(function(err, data) {
-  console.log(data);
 });
 
 console.log(`Server working... ${config.port}`)
