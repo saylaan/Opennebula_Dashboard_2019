@@ -1,0 +1,10 @@
+Learn Python:
+Installation de py sur linux ou windows
+
+For example :
+print('hello world')
+python name.py --> hello world
+
+Les variables en python n'ont pas de type!
+x = "hello world"
+print(x)

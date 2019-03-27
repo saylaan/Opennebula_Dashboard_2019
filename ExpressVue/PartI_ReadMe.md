@@ -1,5 +1,7 @@
 # SandboxALE-AAPP_2019
 Create an webAAP for managing OpenNebula VMs
+Problem on NPM windows:
+npm config get proxy. (http://proxy.esd.alcatel-lucent.com:8080/)
 
 **cd client :
 npm install -g vue-cli

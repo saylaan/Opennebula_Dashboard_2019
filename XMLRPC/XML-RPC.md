@@ -1,5 +1,7 @@
 # SandboxALE-AAPP_2019
 XML-RPC :
+Very simple concept with a limited set of capabilities. (reduce the difficulty of implementing the protocol and testing its interoperability)
+Can manage to build sophisticated and powerfull architectures
 -http protocol
 -small XML Vocabulary
 -client = procedure name + param
