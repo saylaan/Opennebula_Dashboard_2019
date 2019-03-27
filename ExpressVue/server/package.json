@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'npm run lint && node'",
-    "lint": "./node_modules/.bin/eslint \"**/*.js\""
+    "start": "node_modules/nodemon/bin/nodemon.js src/app.js --exec 'npm run lint && node'",
+    "lint": "node_modules/.bin/eslint \"**/*.js\""
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,7 @@
     "nodemon": "^1.18.10",
     "opennebula": "^1.0.12",
     "sequelize": "^5.1.0",
+    "source": "0.0.3",
     "sqlite3": "^4.0.6",
     "url": "^0.11.0",
     "xml2js": "^0.4.19",
