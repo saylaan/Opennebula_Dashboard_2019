@@ -25,8 +25,12 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
     app.listen(config.port)
     console.log(`Server started on port ${config.port}... let's start working...`)
     one.version(function(err, data) {
-      console.log(data);
       console.log('Trying to find the version')
-    });
+      console.log(data)
+    })
+    one.getHosts(function(err, data) {
+      console.log('Trying to get all hosts')
+      console.log(data)
+    })
   })
 // full stack web App using Vue.js
