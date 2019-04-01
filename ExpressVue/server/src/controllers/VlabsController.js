@@ -1,14 +1,45 @@
 const {Vlab} = require('../models')
-const config = require('../config/config')
+
+// async getAllVlabs (req, res) { // for searching all Vlabs
+//   try {
+//     const vlabs = await Vlab.findAll({
+//         limit: 100
+//     })
+//     res.send(vlabs)
+//   } catch (err) {
+//     res.status(500).send({
+//       err: 'An error has occured while trying to fetch all the Vlab'
+//     })
+//   }
+// }
 
 module.exports = {
     async getAllVlabs (req, res) {
       try {
-        const vlabs = await Vlab.findAll({
+        let vlabs = null
+        const search = req.query.search
+        if (search) {
+          console.log('Try to match ' + search)
+          vlabs = await Vlab.findAll({
+            where: {
+              $or: [
+                'title', 'name', 'time', 'vlabImage'
+              ].map(key => ({
+                [key]: {
+                  $like: `%${search}%`
+                }
+              }))
+            }
+          })
+        } else {
+          console.log('WTF') 
+          vlabs = await Vlab.findAll({
             limit: 100
-        })
+          })
+        }
         res.send(vlabs)
       } catch (err) {
+        console.log('WHERE IS THE ERROR')
         res.status(500).send({
           err: 'An error has occured while trying to fetch all the Vlab'
         })
@@ -36,7 +67,21 @@ module.exports = {
         res.send(vlab)
       } catch (err) {
         res.status(500).send({
-          err: 'An error has occured while trying to get a Vlab'
+          err: 'An error has occured while trying to get the Vlab'
+        })
+      }
+    },
+    async put (req, res) {
+      try {
+        const vlab = await Vlab.update(req.body, {
+          where : {
+            id: req.params.vlabId
+          }
+        })
+        res.send(vlab)
+      } catch (err) {
+        res.status(500).send({
+          err: 'An error has occured while trying to update the vlab'
         })
       }
     }

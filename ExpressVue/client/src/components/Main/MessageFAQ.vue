@@ -5,7 +5,7 @@
                 <form>
                     <v-text-field label='Email' v-model="email"></v-text-field><br>
                     <v-textarea label="Message" v-model="msg"></v-textarea>
-                    <div class="error" v-html="error"/>
+                    <div class="danger-alert" v-html="error"/>
                     <v-btn class="purple" @click="send" dark>Send</v-btn>
                 </form>
               </panel>
@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
-
 // TODO :  make the send message to the database
 export default {
   data () {
@@ -27,17 +25,14 @@ export default {
   },
   methods: {
     send () {}
-  },
-  components: {
-    Panel
   }
 }
 </script>
 
 <style scoped>
 
-.error {
-    color: red;
+.danger-alert {
+  color: red;
 }
 
 </style>

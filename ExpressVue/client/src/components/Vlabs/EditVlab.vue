@@ -1,20 +1,20 @@
 <template>
   <v-layout wrap>
     <v-flex xs6 offset-xs3>
-      <panel title="Adding Vlab">
+      <panel title="Edit vlab">
         <v-text-field label='Title' v-model="vlab.title"
           :rules="[required]"></v-text-field><br>
         <v-text-field label='Name' v-model="vlab.name"
           :rules="[required]"></v-text-field><br>
-        <v-text-field label='Days left' v-model="vlab.credential"
+        <v-text-field label='Days left' v-model="vlab.time"
           :rules="[required]"></v-text-field><br>
         <v-textarea label='Logo' v-model="vlab.vlabImage"
           :rules="[required]"></v-textarea><br>
         <span class="danger-alert">
           {{error}}
         </span>
-        <v-btn class="purple" @click="create({name: 'vlab'})" dark>
-          Create Vlab
+        <v-btn class="purple" @click="save({name: 'vlab'})" dark>
+          Save Vlab
         </v-btn>
       </panel>
     </v-flex>
@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
 import VlabService from '@/services/VlabService'
 
 export default {
@@ -31,7 +30,7 @@ export default {
       vlab: {
         title: null,
         name: null,
-        credential: null,
+        time: null,
         vlabImage: null
       },
       error: null,
@@ -39,7 +38,7 @@ export default {
     }
   },
   methods: {
-    async create (route) {
+    async save (route) {
       this.error = null
       const areAllFieldsFilledIn = Object
         .keys(this.vlab)
@@ -48,16 +47,28 @@ export default {
         this.error = 'Please fill in all the required fields.'
         return
       }
+      const vlabId = this.$store.state.route.params.vlabId
+      console.log(this.vlab)
       try {
-        await VlabService.post(this.vlab)
-        this.$router.push(route)
+        await VlabService.put(this.vlab)
+        this.$router.push({
+          name: 'vlab',
+          params: {
+            vlabId: vlabId
+          }
+        })
       } catch (err) {
         console.log(err)
       }
     }
   },
-  components: {
-    Panel
+  async mounted () {
+    try {
+      const vlabId = this.$store.state.route.params.vlabId
+      this.vlab = (await VlabService.getVlab(vlabId)).data
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 </script>

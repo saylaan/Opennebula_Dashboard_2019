@@ -1,6 +1,4 @@
 <template>
-  <v-layout>
-      <v-flex xs6 offset-xs3>
         <panel title="Vlab view">
             <v-layout wrap>
               <v-flex xs6>
@@ -17,29 +15,27 @@
               <v-flex xs6>
                 <img class="album-image" :src="vlab.vlabImage" />
               </v-flex>
+                <v-btn dark class="purple"
+                :to="{
+                  name: 'edit-vlab',
+                  params () {
+                    return {
+                      vlabId: vlab.id
+                    }
+                  }
+                 }">
+                 Edit
+                </v-btn>
             </v-layout>
         </panel>
-      </v-flex>
-  </v-layout>
 </template>
 
 <script>
-import VlabService from '@/services/VlabService'
-import Panel from '@/components/Panel'
 
 export default {
-  data () {
-    return {
-      vlab: null
-    }
-  },
-  async mounted () {
-    const vlabId = this.$store.state.route.params.vlabId
-    this.vlab = (await VlabService.getVlab(vlabId)).data
-  },
-  components: {
-    Panel
-  }
+  props: [
+    'vlab'
+  ]
 }
 </script>
 

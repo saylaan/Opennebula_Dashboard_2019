@@ -3,32 +3,32 @@
     <router-link to="/">
       <img src="../assets/LogoALE.png"
         aspect-ratio="0.2"
-        @click="navigateTo({name: 'home'})">
+        :to="{name: 'home'}">
     </router-link>
     <v-toolbar-title class="mr-1">
     </v-toolbar-title>
     <v-toolbar-items>
       <v-btn flat dark
-      @click="navigateTo({name: 'vlabs'})">
+      :to="{name: 'vlabs'}">
       Vlab
     </v-btn>
   </v-toolbar-items>
   <v-spacer></v-spacer>
   <v-toolbar-items>
     <v-btn v-if="!$store.state.isUserLoggedIn" flat dark
-    @click="navigateTo({name: 'messageFAQ'})">
+    :to="{name: 'messageFAQ'}">
     <v-icon x-large color="purple darken-5">email</v-icon>
   </v-btn>
 </v-toolbar-items>
 <v-toolbar-items>
   <v-btn v-if="!$store.state.isUserLoggedIn" flat dark
-  @click="navigateTo({name: 'signin'})">
+  :to="{name: 'signin'}">
   Sign in
 </v-btn>
 </v-toolbar-items>
 <v-toolbar-items>
   <v-btn v-if="!$store.state.isUserLoggedIn" flat dark
-  @click="navigateTo({name: 'register'})">
+  :to="{name: 'register'}">
   Register
 </v-btn>
 <v-btn v-if="$store.state.isUserLoggedIn" flat dark
@@ -42,9 +42,6 @@ Log out
 <script>
 export default {
   methods: {
-    navigateTo (route) {
-      this.$router.push(route)
-    },
     logout () {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
@@ -55,8 +52,6 @@ export default {
   }
 }
 </script>
-
-SandboxALE-AAPP_2019
 
 <style scoped>
 </style>

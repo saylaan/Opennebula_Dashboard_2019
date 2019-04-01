@@ -3,6 +3,8 @@ const AuthenticationControllerPolicy = require('./policies/AuthenticationControl
 
 const VlabsController = require('./controllers/VlabsController')
 
+const VlabUsersController = require ('./controllers/VlabsUsersController')
+
 module.exports = (app) => {
     /* get / post / put / patch / delete */ // this for making the controller of data through the routes
     // app.get('/status', (req, res) => { // Just a testing method for see if back-end works well
@@ -13,7 +15,6 @@ module.exports = (app) => {
     app.post('/register',
         AuthenticationControllerPolicy.register,
         AuthenticationController.register)
-
     app.post('/signin',
         AuthenticationController.signin)
 
@@ -21,7 +22,11 @@ module.exports = (app) => {
         VlabsController.getAllVlabs)
     app.get('/vlabs/:vlabId',
         VlabsController.getVlab)
+    app.put('/vlabs/:vlabId',
+        VlabsController.put)
     app.post('/vlabs',
         VlabsController.post)
 
+    app.get('/vlabUser',
+        VlabUsersController.getVlabUsers)
 }

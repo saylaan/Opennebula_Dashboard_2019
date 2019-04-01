@@ -24,9 +24,33 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
   .then(() => {
     app.listen(config.port)
     console.log(`Server started on port ${config.port}... let's start working...`)
-    one.version(function(err, data) {
-      console.log(data);
-      console.log('Trying to find the version')
-    });
+
+    // const group = one.getGroup(102)
+
+    // const user = one.getUser(14)
+    // user.info(function(err, data) {
+    //   console.log(data)
+    // })
+    // one.getHosts(function(err, data) {
+    //   console.log(data)
+    // })
+    // one.getClusters(function(err, data) {
+    //   console.log(data)
+    // })
+    // one.getGroups(function(err, data) {
+    //   console.log(data)
+    // })
+    // one.getUsers(function(err, data) {
+    //   console.log(data)
+    // })
+    // one.getVNets(function(err, data) {
+    //   console.log(data)
+    // }, null, 0, 100)
+    // one.getVMs(function(err, data) {
+    //   console.log(data)
+    // }, null, 0, 0, null)
+    // one.getTemplates(function(err, data) {
+    //   console.log(data)
+    // }, null, 0, 100)
   })
 // full stack web App using Vue.js

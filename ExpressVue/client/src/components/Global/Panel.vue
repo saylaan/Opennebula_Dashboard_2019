@@ -15,13 +15,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      // title: 'Hello world'
-    }
-  },
-  methods: {
-  },
   props: [
     'title'
   ]
