@@ -52,5 +52,6 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
     // one.getTemplates(function(err, data) {
     //   console.log(data)
     // }, null, 0, 100)
+
   })
 // full stack web App using Vue.js
