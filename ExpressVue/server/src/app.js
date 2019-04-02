@@ -28,9 +28,5 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
       console.log('Trying to find the version')
       console.log(data)
     })
-    one.getHosts(function(err, data) {
-      console.log('Trying to get all hosts')
-      console.log(data)
-    })
   })
 // full stack web App using Vue.js
