@@ -26,16 +26,75 @@
                  }">
                  Edit
                 </v-btn>
+                <v-btn
+                 v-if="isUserLoggedIn && !vlabuser"
+                 dark class="purple"
+                 @click="setUser">
+                 Add User
+                </v-btn>
+                <v-btn
+                 v-if="isUserLoggedIn && vlabuser"
+                 dark class="purple"
+                 @click="deleteUser">
+                 Delete User
+                </v-btn>
             </v-layout>
         </panel>
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import VlabUsersService from '@/services/VlabUsersService'
 
 export default {
   props: [
     'vlab'
-  ]
+  ],
+  data () {
+    return {
+      vlabuser: null
+    }
+  },
+  watch: {
+    async vlab () {
+      if (!this.isUserLoggedIn) {
+        return
+      }
+      try {
+        this.vlabuser = (await VlabUsersService.getVlabUser({
+          VlabId: this.vlab.id,
+          UserId: this.$store.state.user.id
+        })).data
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
+  },
+  methods: {
+    async setUser () {
+      try {
+        this.vlabuser = (await VlabUsersService.post({
+          VlabId: this.vlab.id,
+          UserId: this.$store.state.user.id
+        })).data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async deleteUser () {
+      try {
+        this.vlabuser = await VlabUsersService.delete(this.vlabuser.id)
+        this.vlabuser = null
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
 }
 </script>
 

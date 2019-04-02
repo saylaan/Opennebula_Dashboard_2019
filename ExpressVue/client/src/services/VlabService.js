@@ -18,8 +18,3 @@ export default { // Hitting the end point register
     return Api().put(`vlabs/${vlab.id}`)
   }
 }
-
-// AuthenticationService.register({
-//   email: 'testing@gmail.com',
-//   password: '123456'
-// })

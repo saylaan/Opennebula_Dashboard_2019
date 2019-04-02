@@ -3,7 +3,7 @@ const AuthenticationControllerPolicy = require('./policies/AuthenticationControl
 
 const VlabsController = require('./controllers/VlabsController')
 
-const VlabUsersController = require ('./controllers/VlabsUsersController')
+const VlabUsersController = require ('./controllers/VlabUsersController')
 
 module.exports = (app) => {
     /* get / post / put / patch / delete */ // this for making the controller of data through the routes
@@ -27,6 +27,10 @@ module.exports = (app) => {
     app.post('/vlabs',
         VlabsController.post)
 
-    app.get('/vlabUser',
+    app.get('/vlabUsers',
         VlabUsersController.getVlabUsers)
+    app.post('/vlabUsers',
+        VlabUsersController.post)
+    app.delete(`/vlabUsers/:vlabuserId`, 
+        VlabUsersController.delete)
 }

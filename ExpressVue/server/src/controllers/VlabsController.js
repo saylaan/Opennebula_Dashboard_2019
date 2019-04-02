@@ -32,7 +32,6 @@ module.exports = {
             }
           })
         } else {
-          console.log('WTF') 
           vlabs = await Vlab.findAll({
             limit: 100
           })
