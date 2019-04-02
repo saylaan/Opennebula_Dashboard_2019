@@ -23,6 +23,12 @@ fs // give us the ability to add more models down the road
         db[model.name] = model
     })
 
+Object.keys(db).forEach(function (modelName) {
+    if ('associate' in db[modelName]) {
+        db[modelName].associate(db)
+    }
+})
+
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 

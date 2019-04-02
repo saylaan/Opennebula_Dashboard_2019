@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import Register from '@/components/Register'
-import SignIn from '@/components/SignIn'
-import MessageFAQ from '@/components/MessageFAQ'
-import Vlabs from '@/components/Vlabs'
-import CreateVlab from '@/components/CreateVlab'
-import ViewVlab from '@/components/ViewVlab'
+import Home from '@/components/Main/Home'
+import Register from '@/components/Main/Register'
+import SignIn from '@/components/Main/SignIn'
+import MessageFAQ from '@/components/Main/MessageFAQ'
+import Vlabs from '@/components/Vlabs/Index'
+import CreateVlab from '@/components/Vlabs/CreateVlab'
+import EditVlab from '@/components/Vlabs/EditVlab'
+import ViewVlab from '@/components/Vlabs/ViewVlab/Index'
 
 Vue.use(Router)
 
@@ -46,6 +47,15 @@ export default new Router({
       path: '/vlabs/:vlabId',
       name: 'vlab',
       component: ViewVlab
+    },
+    {
+      path: '/vlabs/:vlabId/edit',
+      name: 'edit-vlab',
+      component: EditVlab
+    },
+    {
+      path: '*',
+      redirect: 'vlabs'
     }
   ]
 })

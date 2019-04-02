@@ -1,11 +1,10 @@
 <template>
-  <v-layout wrap>
-      <v-flex xs6 offset-xs3>
+    <v-layout>
         <panel title="Vlab">
           <v-btn
             class="purple lighten-3"
             slot="action"
-            @click="navigateTo({name: 'vlab-create'})"
+            :to="{name: 'vlab-create'}"
             light medium absolute right middle fab>
             <v-icon>add</v-icon>
           </v-btn>
@@ -22,11 +21,11 @@
                   {{vlab.time}}
                 </div>
                 <v-btn dark class="purple"
-                @click="navigateTo({
+                :to="{
                   name: 'vlab',
                   params: {
                     vlabId: vlab.id}
-                 })">
+                 }">
                  View Vlab
                 </v-btn>
               </v-flex>
@@ -36,12 +35,10 @@
             </v-layout>
           </div>
         </panel>
-      </v-flex>
-  </v-layout>
+    </v-layout>
 </template>
 
 <script>
-import Panel from '@/components/Panel'
 import VlabService from '@/services/VlabService'
 
 export default {
@@ -50,16 +47,13 @@ export default {
       vlabs: null
     }
   },
-  async mounted () { // request to the DB
-    this.vlabs = (await VlabService.getAllVlabs()).data
-  },
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.vlabs = (await VlabService.getAllVlabs(value)).data
+      }
     }
-  },
-  components: {
-    Panel
   }
 }
 </script>

@@ -10,7 +10,7 @@
     </v-app>
   </div>
 </template>
-s
+
 <script>
 import PageHeader from '@/components/Header.vue'
 export default {
@@ -34,10 +34,4 @@ export default {
 .v-input__slot {
     border-bottom:  1px solid black;
 }
-
-.error {
-  color : black;
-  background-color: white;
-}
-
 </style>

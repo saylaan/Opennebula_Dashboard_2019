@@ -1,3 +1,5 @@
+const path = require('path') // import function of path (__dirname)
+
 module.exports = { // basic config for the server
     port: 8082,
     db: { // maybe i should use mysql instead
@@ -7,7 +9,7 @@ module.exports = { // basic config for the server
         options: {
             dialect: process.env.DIALECT || 'sqlite', // tell what kind of db we are going to be connect to
             host: process.env.HOST || 'localhost',
-            storage: './tabtracker.sqlite'
+            storage: path.resolve(__dirname, '../../tabtracker.sqlite') // give the path to find the .sqlite
         }
     },
     authentication: {

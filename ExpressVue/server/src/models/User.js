@@ -3,7 +3,6 @@ const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs')) // store password 
 
 function hashPassword (user, options) {
   const SALT_FACTOR = 8
-  console.log('wtf')
   if (!user.changed('password')) {
     return;
   }
@@ -25,12 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       unique: true // really important for one data / no more
     },
     password: DataTypes.STRING
-  }, {
-    hooks: {
-      beforeCreate: hashPassword,
-      beforeUpdate: hashPassword,
-      beforeSave: hashPassword
-    }
   })
 
   User.prototype.comparePassword = function (password) {
@@ -42,3 +35,11 @@ module.exports = (sequelize, DataTypes) => {
 
   return User
 }
+
+// , {
+//   hooks: {
+//     beforeCreate: hashPassword,
+//     beforeUpdate: hashPassword,
+//     beforeSave: hashPassword
+//   }
+// })
