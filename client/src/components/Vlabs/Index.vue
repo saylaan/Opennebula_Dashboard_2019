@@ -2,6 +2,7 @@
   <v-layout>
       <v-flex xs6>
         <vlabs-users />
+        <vlabs-users-logs class="mt-2"/>
       </v-flex>
       <v-flex xs6 class="ml-2">
         <vlabs-search-panel />
@@ -15,6 +16,7 @@ import VlabsPanel from './VlabsPanel'
 import VlabsSearchPanel from './VlabsSearchPanel'
 import VlabService from '@/services/VlabService'
 import VlabsUsers from './VlabsUsers'
+import VlabsUsersLogs from './VlabsUsersLogs'
 
 export default {
   data () {
@@ -28,7 +30,8 @@ export default {
   components: {
     VlabsPanel,
     VlabsSearchPanel,
-    VlabsUsers
+    VlabsUsers,
+    VlabsUsersLogs
   }
 }
 </script>

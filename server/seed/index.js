@@ -2,13 +2,15 @@ const {
   sequelize,
   Vlab,
   User,
-  VlabUser
+  VlabUser,
+  VLabUserLog
 } = require('../src/models')
 
 const Promise = require('bluebird')
 const vlabs = require('./vlabs.json')
 const users = require('./users.json')
 const vlabUsers = require('./vlabUsers.json')
+const vlabUserLogs = require('./vlabUserLogs.json')
 
 sequelize.sync({force: true})
   .then(async function () {
@@ -27,6 +29,12 @@ sequelize.sync({force: true})
     await Promise.all(
       vlabUsers.map(vlabUser => {
         VlabUser.create(vlabUser)
+      })
+    )
+
+    await Promise.all(
+      vlabUserLogs.map(vlabLogUser => {
+        vlbUserLogs.create(vlabLogUser)
       })
     )
   })

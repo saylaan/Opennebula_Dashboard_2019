@@ -1,9 +1,9 @@
 <template>
-  <panel title="Vlabs Users">
+  <panel title="Vlab user logs">
     <v-data-table
       :headers:="headers"
       :pagination.sync="pagination"
-      :items="vlabusers">
+      :items="vlablogs">
       <template v-slot:items="props">
         <td class="text-xs-right">
           {{props.item.title}}
@@ -18,7 +18,7 @@
 
 <script>
 import {mapState} from 'vuex'
-import VlabUserService from '@/services/VlabUserService'
+import VlabUserLogService from '@/services/VlabUserLogService'
 
 export default {
   data () {
@@ -37,7 +37,7 @@ export default {
         sortBy: 'data',
         descending: true
       },
-      vlabusers: []
+      vlablog: []
     }
   },
   computed: {
@@ -48,8 +48,8 @@ export default {
   },
   async mounted () {
     if (this.isUserLoggedIn) {
-      this.vlabusers = (await VlabUserService.getVlabUsers({
-        UserId: this.user.id
+      this.vlablog = (await VlabUserLogService.index({
+        userId: this.user.id
       })).data
     }
   }

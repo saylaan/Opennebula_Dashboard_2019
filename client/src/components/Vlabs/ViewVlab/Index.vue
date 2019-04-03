@@ -17,20 +17,36 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import VlabData from './VlabData'
 import VlabVm from './VlabVM'
 import VlabVms from './VlabVMs'
 import VlabService from '@/services/VlabService'
+import VlabUserLogService from '@/services/VlabUserLogService'
 
 export default {
   data () {
     return {
-      vlab: null
+      vlab: {}
     }
   },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user',
+      'route'
+    ])
+  },
   async mounted () {
-    const vlabId = this.$store.state.route.params.vlabId
+    const vlabId = this.params.vlabId
     this.vlab = (await VlabService.getVlab(vlabId)).data
+
+    if (this.isUserLoggedIn) {
+      VlabUserLogService.post({
+        VlabId: vlabId,
+        UserId: this.user.id
+      })
+    }
   },
   components: {
     VlabData,

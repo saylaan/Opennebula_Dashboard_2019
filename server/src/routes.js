@@ -5,6 +5,8 @@ const VlabsController = require('./controllers/VlabsController')
 
 const VlabUsersController = require ('./controllers/VlabUsersController')
 
+const VlabUserLogsController = require ('./controllers/VlabUserLogsController')
+
 module.exports = (app) => {
     /* get / post / put / patch / delete */ // this for making the controller of data through the routes
     // app.get('/status', (req, res) => { // Just a testing method for see if back-end works well
@@ -33,4 +35,9 @@ module.exports = (app) => {
         VlabUsersController.post)
     app.delete(`/vlabUsers/:vlabuserId`, 
         VlabUsersController.delete)
+
+    app.get('/VlabUsersLogs',
+        VlabUserLogsController.index)
+    app.post('/VlabUsersLogs',
+        VlabUserLogsController.post)
 }

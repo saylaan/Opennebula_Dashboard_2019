@@ -1,7 +1,5 @@
 const {
-  VlabUser,
-  User,
-  Vlab
+  VlabUserLog
 } = require('../models')
 const _ = require('lodash')
 
@@ -55,18 +53,6 @@ module.exports = {
       } catch (err) {
         res.status(500).send({
           err: 'An error has occured while trying to create the Vlab User'
-        })
-      }
-    },
-    async delete (req, res) {
-      try {
-        const {vlabuserId} = req.params
-        const vlabuser = await VlabUser.findByPk(vlabuserId)
-        await vlabuser.destroy()
-        res.send(vlabuser)
-      } catch (err) {
-        res.status(500).send({
-          err: 'An error has occured while trying to delete the Vlab User'
         })
       }
     }

@@ -44,7 +44,7 @@
 
 <script>
 import {mapState} from 'vuex'
-import VlabUsersService from '@/services/VlabUsersService'
+import VlabUserService from '@/services/VlabUserService'
 
 export default {
   computed: {
@@ -67,32 +67,22 @@ export default {
         return
       }
       try {
-        this.vlabuser = (await VlabUsersService.getVlabUsers({
+        const vlabusers = (await VlabUserService.getVlabUsers({
           VlabId: this.vlab.id,
           UserId: this.user.id
         })).data
+        if (vlabusers.length) {
+          this.vlabuser = vlabusers[0]
+        }
       } catch (err) {
         console.log(err)
       }
     }
   },
-  async mounted () {
-    if (!this.isUserLoggedIn) {
-      return
-    }
-    try {
-      this.vlabuser = (await VlabUsersService.getVlabUsers({
-        VlabId: this.vlab.id,
-        UserId: this.user.id
-      })).data
-    } catch (err) {
-      console.log(err)
-    }
-  },
   methods: {
     async setUser () {
       try {
-        this.vlabuser = (await VlabUsersService.post({
+        this.vlabuser = (await VlabUserService.post({
           VlabId: this.vlab.id,
           UserId: this.user.id
         })).data
@@ -102,7 +92,7 @@ export default {
     },
     async deleteUser () {
       try {
-        this.vlabuser = await VlabUsersService.delete(this.vlabuser.id)
+        this.vlabuser = await VlabUserService.delete(this.vlabuser.id)
         this.vlabuser = null
       } catch (err) {
         console.log(err)
