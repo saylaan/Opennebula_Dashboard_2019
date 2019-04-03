@@ -47,6 +47,12 @@ import {mapState} from 'vuex'
 import VlabUsersService from '@/services/VlabUsersService'
 
 export default {
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user'
+    ])
+  },
   props: [
     'vlab'
   ],
@@ -61,26 +67,22 @@ export default {
         return
       }
       try {
-        this.vlabuser = (await VlabUsersService.getVlabUser({
+        this.vlabuser = (await VlabUsersService.getVlabUsers({
           VlabId: this.vlab.id,
-          UserId: this.$store.state.user.id
+          UserId: this.user.id
         })).data
       } catch (err) {
         console.log(err)
       }
     }
   },
-  computed: {
-    ...mapState([
-      'isUserLoggedIn'
-    ])
-  },
+
   methods: {
     async setUser () {
       try {
         this.vlabuser = (await VlabUsersService.post({
           VlabId: this.vlab.id,
-          UserId: this.$store.state.user.id
+          UserId: this.user.id
         })).data
       } catch (err) {
         console.log(err)

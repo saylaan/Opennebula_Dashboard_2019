@@ -1,7 +1,7 @@
 import Api from '@/services/Api'
 
 export default { // Hitting the end point register
-  getVlabUser (vlabuser) {
+  getVlabUsers (vlabuser) {
     return Api().get('VlabUsers', {
       params: vlabuser
     })

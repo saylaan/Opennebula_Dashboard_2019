@@ -1,6 +1,9 @@
 <template>
-  <v-layout wrap>
-      <v-flex xs6 offset-xs3>
+  <v-layout>
+      <v-flex xs6>
+        <vlabs-users />
+      </v-flex>
+      <v-flex xs6 class="ml-2">
         <vlabs-search-panel />
         <vlabs-panel class="mt-2"/>
       </v-flex>
@@ -11,6 +14,7 @@
 import VlabsPanel from './VlabsPanel'
 import VlabsSearchPanel from './VlabsSearchPanel'
 import VlabService from '@/services/VlabService'
+import VlabsUsers from './VlabsUsers'
 
 export default {
   data () {
@@ -23,7 +27,8 @@ export default {
   },
   components: {
     VlabsPanel,
-    VlabsSearchPanel
+    VlabsSearchPanel,
+    VlabsUsers
   }
 }
 </script>

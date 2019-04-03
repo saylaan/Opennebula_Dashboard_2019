@@ -4,16 +4,18 @@ module.exports = {
     async getVlabUsers (req, res) {
       try {
         const {VlabId, UserId} = req.query
+        console.log(req.query)
         const vlabUser = await VlabUser.findOne({
           where: {
             UserId: UserId,
             VlabId: VlabId
           }
         })
-        if (!vlabUser)
+        if (!vlabUser) {
           res.send({
             message: 'no more vlab link to a user'
           })
+        }
         res.send(vlabUser)
       } catch (err) {
         res.status(500).send({
