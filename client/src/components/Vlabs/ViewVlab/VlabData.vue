@@ -27,13 +27,13 @@
                  Edit
                 </v-btn>
                 <v-btn
-                 v-if="isUserLoggedIn && !vlabuser"
+                 v-if="isUserLoggedIn && !this.vlabuser"
                  dark class="purple"
                  @click="setUser">
                  Add User
                 </v-btn>
                 <v-btn
-                 v-if="isUserLoggedIn && vlabuser"
+                 v-if="isUserLoggedIn && this.vlabuser"
                  dark class="purple"
                  @click="deleteUser">
                  Delete User
@@ -76,7 +76,20 @@ export default {
       }
     }
   },
-
+  async mounted () {
+    console.log(this.user.id)
+    if (!this.isUserLoggedIn) {
+      return
+    }
+    try {
+      this.vlabuser = (await VlabUsersService.getVlabUsers({
+        VlabId: this.vlab.id,
+        UserId: this.user.id
+      })).data
+    } catch (err) {
+      console.log(err)
+    }
+  },
   methods: {
     async setUser () {
       try {

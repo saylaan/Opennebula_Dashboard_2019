@@ -19,7 +19,6 @@ module.exports = {
         let vlabs = null
         const search = req.query.search
         if (search) {
-          console.log('Try to match ' + search)
           vlabs = await Vlab.findAll({
             where: {
               $or: [
@@ -38,7 +37,6 @@ module.exports = {
         }
         res.send(vlabs)
       } catch (err) {
-        console.log('WHERE IS THE ERROR')
         res.status(500).send({
           err: 'An error has occured while trying to fetch all the Vlab'
         })
@@ -62,7 +60,6 @@ module.exports = {
             error: 'The vlab does not exist'
           })
         }
-        console.log(vlab)
         res.send(vlab)
       } catch (err) {
         res.status(500).send({
