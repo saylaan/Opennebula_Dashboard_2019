@@ -10,11 +10,6 @@ module.exports = {
             VlabId: VlabId
           }
         })
-        if (!vlabUser) {
-          res.send({
-            message: 'no more vlab link to a user'
-          })
-        }
         res.send(vlabUser)
       } catch (err) {
         res.status(500).send({

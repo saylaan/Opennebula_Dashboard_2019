@@ -77,7 +77,6 @@ export default {
     }
   },
   async mounted () {
-    console.log(this.user.id)
     if (!this.isUserLoggedIn) {
       return
     }
