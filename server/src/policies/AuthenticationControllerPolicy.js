@@ -1,12 +1,12 @@
 const Joi = require('joi')
 
 module.exports = { // looking if data pass or fail
-    register (req, res, next) {
+    register(req, res, next) {
         const schema = {
             email: Joi.string().email(),
             password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$'))
         }
-        const {error, value} = Joi.validate(req.body, schema)
+        const { error, value } = Joi.validate(req.body, schema)
 
         if (error) {
             switch (error.details[0].context.key) {

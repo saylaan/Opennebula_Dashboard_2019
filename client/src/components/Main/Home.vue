@@ -6,13 +6,13 @@
 
 <script>
 export default {
-  name: 'Hello',
-  data () {
+  name: "Hello",
+  data() {
     return {
-      msg: 'Home page for Sandbox ALE in progress....'
-    }
+      msg: "Home page for Sandbox ALE in progress...."
+    };
   }
-}
+};
 </script>
 
 <style scoped>

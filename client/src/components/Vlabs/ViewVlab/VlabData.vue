@@ -1,112 +1,94 @@
 <template>
-        <panel title="Vlab view">
-            <v-layout wrap>
-              <v-flex xs6>
-                <div class="vlab-title">
-                  {{vlab.title}}
-                </div>
-                <div class="vlab-name">
-                  {{vlab.name}}
-                </div>
-                <div class="vlab-time">
-                  {{vlab.time}}
-                </div>
-              </v-flex>
-              <v-flex xs6>
-                <img class="album-image" :src="vlab.vlabImage" />
-              </v-flex>
-                <v-btn dark class="purple"
-                :to="{
+  <panel title="Vlab view">
+    <v-layout wrap>
+      <v-flex xs6>
+        <div class="vlab-title">{{vlab.title}}</div>
+        <div class="vlab-name">{{vlab.name}}</div>
+        <div class="vlab-time">{{vlab.time}}</div>
+      </v-flex>
+      <v-flex xs6>
+        <img class="album-image" :src="vlab.vlabImage">
+      </v-flex>
+      <v-btn
+        dark
+        class="purple"
+        :to="{
                   name: 'edit-vlab',
                   params () {
                     return {
                       vlabId: vlab.id
                     }
                   }
-                 }">
-                 Edit
-                </v-btn>
-                <v-btn
-                 v-if="isUserLoggedIn && !this.vlabuser"
-                 dark class="purple"
-                 @click="setUser">
-                 Add User
-                </v-btn>
-                <v-btn
-                 v-if="isUserLoggedIn && this.vlabuser"
-                 dark class="purple"
-                 @click="deleteUser">
-                 Delete User
-                </v-btn>
-            </v-layout>
-        </panel>
+                 }"
+      >Edit</v-btn>
+      <v-btn v-if="isUserLoggedIn && !this.vlabuser" dark class="purple" @click="setUser">Add User</v-btn>
+      <v-btn
+        v-if="isUserLoggedIn && this.vlabuser"
+        dark
+        class="purple"
+        @click="deleteUser"
+      >Delete User</v-btn>
+    </v-layout>
+  </panel>
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import VlabUserService from '@/services/VlabUserService'
+import { mapState } from "vuex";
+import VlabUserService from "@/services/VlabUserService";
 
 export default {
   computed: {
-    ...mapState([
-      'isUserLoggedIn',
-      'user'
-    ])
+    ...mapState(["isUserLoggedIn", "user"])
   },
-  props: [
-    'vlab'
-  ],
-  data () {
+  props: ["vlab"],
+  data() {
     return {
       vlabuser: null
-    }
+    };
   },
   watch: {
-    async vlab () {
+    async vlab() {
       if (!this.isUserLoggedIn) {
-        return
+        return;
       }
       try {
         const vlabusers = (await VlabUserService.getVlabUsers({
-          VlabId: this.vlab.id,
-          UserId: this.user.id
-        })).data
+          VlabId: this.vlab.id
+        })).data;
         if (vlabusers.length) {
-          this.vlabuser = vlabusers[0]
+          this.vlabuser = vlabusers[0];
         }
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
   },
   methods: {
-    async setUser () {
+    async setUser() {
       try {
         this.vlabuser = (await VlabUserService.post({
-          VlabId: this.vlab.id,
-          UserId: this.user.id
-        })).data
+          VlabId: this.vlab.id
+        })).data;
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
-    async deleteUser () {
+    async deleteUser() {
       try {
-        this.vlabuser = await VlabUserService.delete(this.vlabuser.id)
-        this.vlabuser = null
+        this.vlabuser = await VlabUserService.delete(this.vlabuser.id);
+        this.vlabuser = null;
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
-
 .vlab {
   padding: 20px;
-  height : 200px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -126,5 +108,4 @@ export default {
   width: 50%;
   margin: 0 auto;
 }
-
 </style>

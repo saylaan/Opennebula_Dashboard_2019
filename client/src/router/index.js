@@ -5,8 +5,8 @@ import Register from '@/components/Main/Register'
 import SignIn from '@/components/Main/SignIn'
 import MessageFAQ from '@/components/Main/MessageFAQ'
 import Vlabs from '@/components/Vlabs/Index'
-import CreateVlab from '@/components/Vlabs/CreateVlab'
-import EditVlab from '@/components/Vlabs/EditVlab'
+import CreateVlab from '@/components/Vlabs/Manage/CreateVlab'
+import EditVlab from '@/components/Vlabs/Manage/EditVlab'
 import ViewVlab from '@/components/Vlabs/ViewVlab/Index'
 
 Vue.use(Router)

@@ -24,6 +24,8 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
     "opennebula": "^1.0.12",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "sequelize": "^5.1.0",
     "source": "0.0.3",
     "sqlite3": "^4.0.6",

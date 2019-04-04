@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div>
     <v-layout>
       <v-flex xs6 offset-xs3>
         <vlab-data :vlab="vlab"/>
@@ -13,39 +13,34 @@
         <vlab-vm/>
       </v-flex>
     </v-layout>
-</div>
+  </div>
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import VlabData from './VlabData'
-import VlabVm from './VlabVM'
-import VlabVms from './VlabVMs'
-import VlabService from '@/services/VlabService'
-import VlabUserLogService from '@/services/VlabUserLogService'
+import { mapState } from "vuex";
+import VlabData from "./VlabData";
+import VlabVm from "./VlabVM";
+import VlabVms from "./VlabVMs";
+import VlabService from "@/services/VlabService";
+import VlabUserLogService from "@/services/VlabUserLogService";
 
 export default {
-  data () {
+  data() {
     return {
       vlab: {}
-    }
+    };
   },
   computed: {
-    ...mapState([
-      'isUserLoggedIn',
-      'user',
-      'route'
-    ])
+    ...mapState(["isUserLoggedIn", "user", "route"])
   },
-  async mounted () {
-    const vlabId = this.route.params.vlabId
-    this.vlab = (await VlabService.getVlab(vlabId)).data
+  async mounted() {
+    const vlabId = this.route.params.vlabId;
+    this.vlab = (await VlabService.getVlab(vlabId)).data;
 
     if (this.isUserLoggedIn) {
       VlabUserLogService.post({
-        VlabId: vlabId,
-        UserId: this.user.id
-      })
+        VlabId: vlabId
+      });
     }
   },
   components: {
@@ -53,9 +48,8 @@ export default {
     VlabVm,
     VlabVms
   }
-}
+};
 </script>
 
 <style scoped>
-
 </style>

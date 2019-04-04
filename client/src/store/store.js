@@ -15,7 +15,7 @@ export default new Vuex.Store({ // for keeping tracking of state
     isUserLoggedIn: false
   },
   mutations: {
-    setToken (state, token) {
+    setToken(state, token) {
       state.token = token
       if (token) {
         state.isUserLoggedIn = true
@@ -23,15 +23,15 @@ export default new Vuex.Store({ // for keeping tracking of state
         state.isUserLoggedIn = false
       }
     },
-    setUser (state, user) {
+    setUser(state, user) {
       state.user = user
     }
   },
   actions: {
-    setToken ({commit}, token) {
+    setToken({ commit }, token) {
       commit('setToken', token)
     },
-    setUser ({commit}, user) {
+    setUser({ commit }, user) {
       commit('setUser', user)
     }
   }
