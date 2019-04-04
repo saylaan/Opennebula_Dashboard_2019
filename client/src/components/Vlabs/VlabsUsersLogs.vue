@@ -3,7 +3,7 @@
     <v-data-table
       :headers:="headers"
       :pagination.sync="pagination"
-      :items="vlablogs">
+      :items="vlabuserlogs">
       <template v-slot:items="props">
         <td class="text-xs-right">
           {{props.item.title}}
@@ -34,10 +34,10 @@ export default {
         }
       ],
       pagination: {
-        sortBy: 'data',
+        sortBy: 'createAt',
         descending: true
       },
-      vlablog: []
+      vlabuserlogs: []
     }
   },
   computed: {
@@ -48,8 +48,8 @@ export default {
   },
   async mounted () {
     if (this.isUserLoggedIn) {
-      this.vlablog = (await VlabUserLogService.index({
-        userId: this.user.id
+      this.vlabuserlogs = (await VlabUserLogService.index({
+        UserId: this.user.id
       })).data
     }
   }

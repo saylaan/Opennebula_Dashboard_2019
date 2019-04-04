@@ -1,12 +1,12 @@
 import Api from '@/services/Api'
 
 export default { // Hitting the end point register
-  index (log) {
+  index (userId) {
     return Api().get('VlabUserLogs', {
-      params: log
+      params: userId
     })
   },
-  post (log) {
-    return Api().post('VlabUserLogs', log)
+  post (userId) {
+    return Api().post('VlabUserLogs', userId)
   }
 }

@@ -38,7 +38,7 @@ export default {
     ])
   },
   async mounted () {
-    const vlabId = this.params.vlabId
+    const vlabId = this.route.params.vlabId
     this.vlab = (await VlabService.getVlab(vlabId)).data
 
     if (this.isUserLoggedIn) {

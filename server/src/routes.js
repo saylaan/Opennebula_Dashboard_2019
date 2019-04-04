@@ -36,8 +36,8 @@ module.exports = (app) => {
     app.delete(`/vlabUsers/:vlabuserId`, 
         VlabUsersController.delete)
 
-    app.get('/VlabUsersLogs',
+    app.get('/VlabUserLogs',
         VlabUserLogsController.index)
-    app.post('/VlabUsersLogs',
+    app.post('/VlabUserLogs',
         VlabUserLogsController.post)
 }

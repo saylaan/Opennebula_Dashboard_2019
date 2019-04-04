@@ -3,7 +3,7 @@ const {
   Vlab,
   User,
   VlabUser,
-  VLabUserLog
+  VlabUserLog
 } = require('../src/models')
 
 const Promise = require('bluebird')
@@ -33,8 +33,8 @@ sequelize.sync({force: true})
     )
 
     await Promise.all(
-      vlabUserLogs.map(vlabLogUser => {
-        vlbUserLogs.create(vlabLogUser)
+      vlabUserLogs.map(vlabUserLog => {
+        VlabUserLog.create(vlabUserLog)
       })
     )
   })

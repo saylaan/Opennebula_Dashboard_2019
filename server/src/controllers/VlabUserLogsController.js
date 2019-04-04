@@ -1,33 +1,30 @@
 const {
+  Vlab,
   VlabUserLog
 } = require('../models')
 const _ = require('lodash')
 
 module.exports = {
-    async getVlabUsers (req, res) {
+    async index (req, res) {
       try {
-        const {VlabId, UserId} = req.query
-        const where = {
-          UserId: UserId
-        }
-        if (VlabId) {
-          where.VlabId = VlabId
-        }
-        const vlabusers = await VlabUser.findAll({
-          where: where,
+        const {UserId} = req.query
+        const vlabuserlogs = await VlabUserLog.findAll({
+          where: {
+            UserId: UserId
+          },
           include: [
             {
               model: Vlab
             }
           ]
         })
-        .map(vlabuser => vlabuser.toJSON())
-        .map(vlabuser => _.extend(
+        .map(vlabuserlog => vlabuserlog.toJSON())
+        .map(vlabuserlog => _.extend(
           {},
-          vlabuser.Vlab,
-          vlabuser
+          vlabuserlog.Vlab,
+          vlabuserlog
           ))
-        res.send(vlabusers)
+        res.send(_.uniqBy(vlabuserlogs, vlabuserlog => vlabuserlog.VlabId))
       } catch (err) {
         res.status(500).send({
           err: 'An error has occured while trying to get the Vlab User'
@@ -37,22 +34,14 @@ module.exports = {
     async post (req, res) {
       try {
         const {VlabId, UserId} = req.body
-        const vlabuser = await VlabUser.findOne({
-          where: {
+        const vlabuserlog = await VlabUserLog.create({
             VlabId: VlabId,
             UserId: UserId
-          }
         })
-        if (vlabuser) {
-          return res.status(400).send({
-            error: 'this user already have a vlab'
-          })
-        }
-        const newVlabUser = await VlabUser.create(req.body)
-        res.send(newVlabUser)
+        res.send(vlabuserlog)
       } catch (err) {
         res.status(500).send({
-          err: 'An error has occured while trying to create the Vlab User'
+          err: 'An error has occured while trying to create the log for the user'
         })
       }
     }

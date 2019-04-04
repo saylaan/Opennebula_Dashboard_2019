@@ -1,6 +1,5 @@
 const {
   VlabUser,
-  User,
   Vlab
 } = require('../models')
 const _ = require('lodash')
