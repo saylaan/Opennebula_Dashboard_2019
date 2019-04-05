@@ -5,16 +5,24 @@ module.exports = {
     try {
       let vlabs = null
       const search = req.query.search
+      console.log('search = ', search)
+      console.log('search = ', search)
+      console.log('search = ', search)
+      console.log('search = ', search)
       if (search) {
         vlabs = await Vlab.findAll({
           where: {
-            $or: [
-              'title', 'name', 'time', 'vlabImage'
-            ].map(key => ({
-              [key]: {
-                $like: `%${search}%`
-              }
-            }))
+            title: search 
+            // TODO : FIX ME FOR MULTIPLE RESEARCH IN NODEJS
+            // $or: [
+            //   'title', 'name', 'time', 'vlabImage'
+            // ]: search
+            // .map(key => ({
+            //   [key]: search
+            //   // {
+            //   //   $like: `%${search}%`
+            //   // }
+            // }))
           }
         })
       } else {
