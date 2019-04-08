@@ -8,6 +8,12 @@ import Vlabs from '@/components/Vlabs/Index'
 import CreateVlab from '@/components/Vlabs/Manage/CreateVlab'
 import EditVlab from '@/components/Vlabs/Manage/EditVlab'
 import ViewVlab from '@/components/Vlabs/ViewVlab/Index'
+import Dashboard from '@/components/Dashboard/Index'
+import Settings from '@/components/Settings/Index'
+import EditSettings from '@/components/Settings/Manage/EditSettings'
+import Users from '@/components/Users/Index'
+import CreateUser from '@/components/Users/Manage/CreateUser'
+import EditUser from '@/components/Users/Manage/EditUser'
 
 Vue.use(Router)
 
@@ -54,8 +60,43 @@ export default new Router({
       component: EditVlab
     },
     {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Dashboard
+    },
+    {
       path: '*',
-      redirect: 'vlabs'
+      redirect: 'dashboard'
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings
+    },
+    {
+      path: '/settings/:userId/edit',
+      name: 'edit-settings',
+      component: EditSettings
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: Users
+    },
+    {
+      path: '/users/create',
+      name: 'user-create',
+      component: CreateUser
+    },
+    {
+      path: '/users/:userId/edit',
+      name: 'edit-user',
+      component: EditUser
     }
+    // {
+    //   path: '/users/:userId',
+    //   name: 'user',
+    //   component: ViewUser
+    // }
   ]
 })

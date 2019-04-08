@@ -6,7 +6,7 @@
       </v-flex>
     </v-layout>
     <v-layout>
-      <v-flex xs6>
+      <v-flex xs6 >
         <vlab-vms/>
       </v-flex>
       <v-flex xs6 class="ml-2">

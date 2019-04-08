@@ -10,8 +10,7 @@
         <img class="album-image" :src="vlab.vlabImage">
       </v-flex>
       <v-btn
-        dark
-        class="purple"
+        class="blue-grey lighten-3"
         :to="{
                   name: 'edit-vlab',
                   params () {
@@ -21,11 +20,10 @@
                   }
                  }"
       >Edit</v-btn>
-      <v-btn v-if="isUserLoggedIn && !this.vlabuser" dark class="purple" @click="setUser">Add User</v-btn>
+      <v-btn v-if="isUserLoggedIn && !this.vlabuser" class="blue-grey lighten-3" @click="setUser">Add User</v-btn>
       <v-btn
         v-if="isUserLoggedIn && this.vlabuser"
-        dark
-        class="purple"
+        class="blue-grey lighten-3"
         @click="deleteUser"
       >Delete User</v-btn>
     </v-layout>

@@ -11,7 +11,9 @@ import Panel from '@/components/Global/Panel'
 
 Vue.config.productionTip = false
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  iconfont: 'md'
+})
 Vue.component('panel', Panel)
 
 sync(store, router)

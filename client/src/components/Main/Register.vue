@@ -13,7 +13,7 @@
           ></v-text-field>
           <br>
           <div class="danger-alert" v-html="error"></div>
-          <v-btn class="purple" @click="register" dark>Register</v-btn>
+          <v-btn class="blue-grey lighten-3" @click="register" >Register</v-btn>
         </form>
       </panel>
     </v-flex>

@@ -1,0 +1,56 @@
+<template>
+  <v-toolbar :clipped-left="main.primaryDrawer.clipped" app fixed>
+    <img
+      src="../../assets/LogoALE.png"
+      v-if="main.primaryDrawer.type !== 'permanent'"
+      @click.stop="main.primaryDrawer.model = !main.primaryDrawer.model"
+      aspect-ratio="0.1"
+      @click="mainNav({name: 'home'})"
+    >
+    <v-spacer></v-spacer>
+    <v-toolbar-items>
+      <v-btn flat :to="{name: 'messageFAQ'}">
+        <v-icon grey x-large>email</v-icon>
+      </v-btn>
+    </v-toolbar-items>
+    <v-toolbar-items>
+      <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'signin'}">Sign in</v-btn>
+    </v-toolbar-items>
+    <v-toolbar-items>
+      <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'register'}">Register</v-btn>
+      <v-btn v-if="isUserLoggedIn" flat @click="logout">Log out</v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
+</template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: {
+    ...mapState(["user", "isUserLoggedIn"])
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("setToken", null);
+      this.$store.dispatch("setUser", null);
+      this.$router.push({
+        name: "home"
+      });
+    },
+    mainNav(route) {
+      if (!this.isUserLoggedIn) {
+        this.$router.push(route)
+      }
+    }
+  },
+  props: {
+    main: {
+      type: Object
+    }
+  }
+};
+</script>
+
+<style scoped>
+</style>

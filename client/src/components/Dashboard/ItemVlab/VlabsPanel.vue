@@ -1,19 +1,6 @@
 <template>
   <v-layout column>
     <panel title="Vlab">
-      <v-btn
-        class="blue-grey darken-1"
-        slot="action"
-        :to="{name: 'vlab-create'}"
-        light
-        medium
-        absolute
-        right
-        middle
-        fab
-      >
-        <v-icon>add</v-icon>
-      </v-btn>
       <v-flex v-for="vlab in vlabs" :key="vlab.title" class="vlab">
         <v-layout row>
           <v-flex xs6>
