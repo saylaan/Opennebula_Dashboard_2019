@@ -1,17 +1,9 @@
 <template>
-  <v-layout row justify-center>
-    <v-flex xs6 v-if="isUserLoggedIn">
-      <vlabs-users/>
-      <vlabs-users-logs class="mt-2"/>
-    </v-flex>
-    <v-flex
-      :class="{
-          xs12: !isUserLoggedIn,
-          xs6: isUserLoggedIn
-        }"
-      class="ml-2"
-    >
+  <v-layout column justify-center>
+    <v-flex xs12>
       <vlabs-search-panel/>
+    </v-flex>
+    <v-flex xs12>
       <vlabs-panel class="mt-2"/>
     </v-flex>
   </v-layout>
@@ -22,8 +14,6 @@ import { mapState } from "vuex";
 import VlabsPanel from "./ItemVlab/VlabsPanel";
 import VlabsSearchPanel from "./ItemVlab/VlabsSearchPanel";
 import VlabService from "@/services/VlabService";
-import VlabsUsers from "./ItemVlab/VlabsUsers";
-import VlabsUsersLogs from "./ItemVlab/VlabsUsersLogs";
 
 export default {
   data() {
@@ -40,9 +30,7 @@ export default {
   },
   components: {
     VlabsPanel,
-    VlabsSearchPanel,
-    VlabsUsers,
-    VlabsUsersLogs
+    VlabsSearchPanel
   },
   props: {
     main: {

@@ -11,7 +11,7 @@
         <v-textarea label="Logo" v-model="vlab.vlabImage" :rules="[required]"></v-textarea>
         <br>
         <span class="danger-alert">{{error}}</span>
-        <v-btn class="purple" @click="save({name: 'vlab'})" dark>Save Vlab</v-btn>
+        <v-btn class="blue-grey lighten-3" @click="save({name: 'vlab'})">Save Vlab</v-btn>
       </panel>
     </v-flex>
   </v-layout>

@@ -1,22 +1,43 @@
 <template>
-  <div id="app">
-    <v-app>
-      <page-header/>
-      <main>
-        <v-container fluid>
-          <router-view></router-view>
-        </v-container>
-      </main>
-    </v-app>
-  </div>
+  <v-app :dark="main.dark">
+    <nav-bar v-if="isUserLoggedIn" v-bind:main="main"/>
+    <toolbar v-bind:main="main"/>
+    <v-content>
+      <v-container fluid>
+        <router-view v:bind:main="main"></router-view>
+      </v-container>
+    </v-content>
+    <v-footer :inset="main.inset" app>
+      <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-import PageHeader from "@/components/Nav/Header.vue";
+import Toolbar from "@/components/Nav/Toolbar.vue";
+import NavBar from "@/components/Nav/NavBar.vue";
+import { mapState } from "vuex";
+
 export default {
+  data: () => ({
+    main: {
+      dark: false,
+      inset: true,
+      drawers: ["Default (no property)"],
+      primaryDrawer: {
+        model: null,
+        type: "default (no property)",
+        clipped: false
+      }
+    }
+  }),
   name: "App",
   components: {
-    PageHeader
+    Toolbar,
+    NavBar
+  },
+  computed: {
+    ...mapState(["isUserLoggedIn", "user"])
   }
 };
 </script>
@@ -31,7 +52,4 @@ export default {
   margin-top: 60px;
 }
 
-.v-input__slot {
-  border-bottom: 1px solid black;
-}
 </style>
