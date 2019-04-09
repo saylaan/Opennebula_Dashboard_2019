@@ -28,7 +28,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: DataTypes.STRING,
     need: DataTypes.STRING,
-    admin: 0
+    admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   })
 
   User.prototype.comparePassword = function (password) {
