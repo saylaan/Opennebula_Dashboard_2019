@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center>
+  <v-layout v-if="isUserLoggedIn" column justify-center>
     <v-flex xs12>
       <Users-search-panel/>
     </v-flex>

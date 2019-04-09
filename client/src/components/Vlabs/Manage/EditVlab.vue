@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-layout v-if="isUserLoggedIn" wrap>
     <v-flex xs6 offset-xs3>
       <panel title="Edit vlab">
         <v-text-field label="Title" v-model="vlab.title" :rules="[required]"></v-text-field>
@@ -19,6 +19,7 @@
 
 <script>
 import VlabService from "@/services/VlabService";
+import { mapState } from "vuex";
 
 export default {
   data() {
@@ -32,6 +33,9 @@ export default {
       error: null,
       required: value => !!value || "Required."
     };
+  },
+  computed: {
+    ...mapState(["isUserLoggedIn", "user"])
   },
   methods: {
     async save(route) {

@@ -1,10 +1,11 @@
 <template>
-  <panel title="Search">
+  <panel v-if="isUserLoggedIn" title="Search">
     <v-text-field label="Search by company, name, days left" v-model="search"></v-text-field>
   </panel>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import _ from "lodash";
 
 export default {
@@ -12,6 +13,9 @@ export default {
     return {
       search: null
     };
+  },
+  computed: {
+    ...mapState(["isUserLoggedIn", "user"])
   },
   watch: {
     search: _.debounce(async function(value) {

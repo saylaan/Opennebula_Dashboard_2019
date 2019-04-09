@@ -1,5 +1,5 @@
 <template>
-    <panel title="Setting">
+    <panel v-if="isUserLoggedIn" title="Setting">
       <v-btn
       :to="{name: 'edit-settings'}"
       class="blue-grey lighten-3">
@@ -8,7 +8,12 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: {
+    ...mapState(["isUserLoggedIn", "user"])
+  }
 };
 </script>
 

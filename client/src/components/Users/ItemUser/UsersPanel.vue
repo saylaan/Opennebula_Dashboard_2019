@@ -1,5 +1,5 @@
 <template>
-  <v-layout column>
+  <v-layout v-if="isUserLoggedIn" column>
           <v-btn
         class="blue-grey darken-1"
         slot="action"
@@ -23,8 +23,12 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 
 export default {
+  computed: {
+    ...mapState(["isUserLoggedIn", "user"])
+  }
 };
 </script>
 

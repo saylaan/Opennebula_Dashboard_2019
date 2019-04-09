@@ -1,5 +1,5 @@
 <template>
-  <panel title="Vlabs Users">
+  <panel v-if="isUserLoggedIn" title="Vlabs Users">
     <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabusers">
       <template v-slot:items="props">
         <td class="text-xs-right">{{props.item.title}}</td>

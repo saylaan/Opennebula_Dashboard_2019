@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-layout v-if="isUserLoggedIn" wrap>
     <v-flex xs6 offset-xs3>
       <panel title="Edit user">
         <span class="danger-alert">{{error}}</span>
@@ -10,8 +10,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 
-export default {};
+export default {
+  computed: {
+    ...mapState(["isUserLoggedIn", "user"])
+  }
+};
 </script>
 
 <style scoped>

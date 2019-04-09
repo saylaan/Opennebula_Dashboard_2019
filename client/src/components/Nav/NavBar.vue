@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="isUserLoggedIn"
     v-model="main.primaryDrawer.model"
     :clipped="main.primaryDrawer.clipped"
     fixed
@@ -13,7 +14,7 @@
       </v-list-tile>
     </v-list>
     <v-list>
-      <v-list-tile @click="navToDash({name: 'dashboard'})">
+      <v-list-tile @click="navTo({name: 'dashboard'})">
         <v-list-tile-action>
           <v-icon x-large>dashboard</v-icon>
         </v-list-tile-action>
@@ -63,9 +64,6 @@ export default {
   },
   methods: {
     navTo(route) {
-      this.$router.push(route)
-    },
-    navToDash(route) {
       this.$router.push(route)
     }
   }

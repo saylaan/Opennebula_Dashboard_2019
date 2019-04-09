@@ -1,5 +1,5 @@
 <template>
-  <v-layout column>
+  <v-layout v-if="isUserLoggedIn" column>
     <panel title="Vlab">
       <v-btn
         class="blue-grey darken-1"
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import VlabService from "@/services/VlabService";
 
 export default {
@@ -46,6 +47,9 @@ export default {
     return {
       vlabs: null
     };
+  },
+  computed: {
+    ...mapState(["isUserLoggedIn", "user"])
   },
   watch: {
     "$route.query.search": {
