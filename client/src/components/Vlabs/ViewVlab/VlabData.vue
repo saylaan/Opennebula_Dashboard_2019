@@ -1,5 +1,5 @@
 <template>
-  <panel title="Vlab view">
+  <panel v-if="isUserLoggedIn" title="Vlab view">
     <v-layout wrap>
       <v-flex xs6>
         <div class="vlab-title">{{vlab.title}}</div>

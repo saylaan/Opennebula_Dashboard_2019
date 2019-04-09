@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-layout v-if="isUserLoggedIn"  wrap>
     <v-flex xs6 offset-xs3 v-if="isUserLoggedIn">
       <settings-panel/>
     </v-flex>

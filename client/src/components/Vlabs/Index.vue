@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout v-if="isUserLoggedIn" row justify-center>
     <v-flex xs6 v-if="isUserLoggedIn">
       <vlabs-users/>
       <vlabs-users-logs class="mt-2"/>

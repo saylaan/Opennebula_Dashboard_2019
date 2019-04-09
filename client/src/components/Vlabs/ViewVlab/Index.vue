@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <v-layout>
+  <v-layout column v-if="isUserLoggedIn">
+    <v-layout row>
       <v-flex xs6 offset-xs3>
         <vlab-data :vlab="vlab"/>
       </v-flex>
     </v-layout>
-    <v-layout>
+    <v-layout row class="mt-2">
       <v-flex xs6 >
         <vlab-vms/>
       </v-flex>
@@ -13,7 +13,7 @@
         <vlab-vm/>
       </v-flex>
     </v-layout>
-  </div>
+  </v-layout>
 </template>
 
 <script>
