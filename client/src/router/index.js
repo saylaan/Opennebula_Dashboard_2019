@@ -14,6 +14,7 @@ import EditSettings from '@/components/Settings/Manage/EditSettings'
 import Users from '@/components/Users/Index'
 import CreateUser from '@/components/Users/Manage/CreateUser'
 import EditUser from '@/components/Users/Manage/EditUser'
+import ViewUser from '@/components/Users/ViewUser/index'
 
 Vue.use(Router)
 
@@ -82,6 +83,11 @@ export default new Router({
       path: '/users',
       name: 'users',
       component: Users
+    },
+    {
+      path: '/users/:userId',
+      name: 'user',
+      component: ViewUser
     },
     {
       path: '/users/create',
