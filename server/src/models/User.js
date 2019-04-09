@@ -19,11 +19,16 @@ function hashPassword(user, options) {
 module.exports = (sequelize, DataTypes) => {
   // creation of the table into the DB
   const User = sequelize.define('User', {
+    companyname: DataTypes.STRING,
+    firstname: DataTypes.STRING,
+    lastname: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
       unique: true // really important for one data / no more
     },
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    need: DataTypes.STRING,
+    admin: 0
   })
 
   User.prototype.comparePassword = function (password) {

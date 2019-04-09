@@ -1,9 +1,9 @@
 <template>
   <v-layout column align-center v-if="!isUserLoggedIn" class="hello">
-    <h1>{{ msg }}</h1>
+    <h1 class="mt-5">{{ msg }}</h1>
     <!-- <img src="../../assets/oxeArch.jpg"> -->
-    <v-btn class="trial" :to="{name: 'register'}">START FREE TRIAL NOW</v-btn>
-    <img src="../../assets/o2g.png">
+    <img class="mt-5" src="../../assets/o2g.png">
+    <v-btn depressed large color="primary mt-5" :to="{name: 'register'}">START FREE TRIAL NOW</v-btn>
   </v-layout>
 </template>
 
@@ -24,12 +24,6 @@ export default {
 </script>
 
 <style scoped>
-
-.trial {
-  width: 300px;
-  height: 200px;
-  color: red;
-}
 
 img {
   width: 400px;
