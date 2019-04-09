@@ -21,7 +21,7 @@ import { mapState } from "vuex";
 export default {
   data: () => ({
     main: {
-      dark: false,
+      dark: true,
       inset: true,
       drawers: ["Default (no property)"],
       primaryDrawer: {
