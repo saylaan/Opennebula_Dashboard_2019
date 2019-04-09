@@ -1,6 +1,6 @@
 <template>
   <v-layout wrap>
-    <v-flex xs6 offset-xs3>
+    <v-flex v-if="isUserLoggedIn" xs6 offset-xs3>
       <panel title="Adding Vlab">
         <v-text-field label="Title" v-model="vlab.title" :rules="[required]"></v-text-field>
         <br>
@@ -11,7 +11,7 @@
         <v-textarea label="Logo" v-model="vlab.vlabImage" :rules="[required]"></v-textarea>
         <br>
         <span class="danger-alert">{{error}}</span>
-        <v-btn class="purple" @click="create({name: 'vlab'})" dark>Create Vlab</v-btn>
+        <v-btn class="blue-grey lighten-3" @click="create({name: 'vlab'})">Create Vlab</v-btn>
       </panel>
     </v-flex>
   </v-layout>
@@ -19,6 +19,7 @@
 
 <script>
 import VlabService from "@/services/VlabService";
+import { mapState } from "vuex";
 
 export default {
   data() {
@@ -32,6 +33,9 @@ export default {
       error: null,
       required: value => !!value || "Required."
     };
+  },
+  computed: {
+    ...mapState(["isUserLoggedIn", "user"])
   },
   methods: {
     async create(route) {

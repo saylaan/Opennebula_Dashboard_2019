@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <v-layout>
+  <v-layout column v-if="isUserLoggedIn">
+    <v-layout row>
       <v-flex xs6 offset-xs3>
         <vlab-data :vlab="vlab"/>
       </v-flex>
     </v-layout>
-    <v-layout>
-      <v-flex xs6>
+    <v-layout row class="mt-2">
+      <v-flex xs6 >
         <vlab-vms/>
       </v-flex>
       <v-flex xs6 class="ml-2">
         <vlab-vm/>
       </v-flex>
     </v-layout>
-  </div>
+  </v-layout>
 </template>
 
 <script>

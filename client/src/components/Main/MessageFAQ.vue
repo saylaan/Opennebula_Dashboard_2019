@@ -7,7 +7,7 @@
           <br>
           <v-textarea label="Message" v-model="msg"></v-textarea>
           <div class="danger-alert" v-html="error"/>
-          <v-btn class="purple" @click="send" dark>Send</v-btn>
+          <v-btn class="blue-grey lighten-3" @click="send">Send</v-btn>
         </form>
       </panel>
     </v-flex>
