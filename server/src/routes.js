@@ -1,10 +1,11 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const isAuthenticated = require('./policies/isAuthenticated')
+
+const UsersController = require('./controllers/UsersController')
+
 const VlabsController = require('./controllers/VlabsController')
-
 const VlabUsersController = require('./controllers/VlabUsersController')
-
 const VlabUserLogsController = require('./controllers/VlabUserLogsController')
 
 module.exports = (app) => {
@@ -19,6 +20,9 @@ module.exports = (app) => {
         AuthenticationController.register)
     app.post('/signin',
         AuthenticationController.signin)
+
+    app.get('/users',
+        UsersController.index)
 
     app.get('/vlabs',
         VlabsController.getAllVlabs)
