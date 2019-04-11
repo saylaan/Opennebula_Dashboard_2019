@@ -1,22 +1,24 @@
 <template>
-  <v-layout v-if="isUserLoggedIn">
-    <vlab-admin v-if="admin"/>
-    <vlab-user v-if="!admin"/>
+  <v-layout v-if="isUserLoggedIn && !admin" row justify-center>
   </v-layout>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import VlabAdmin from './VlabAdmin'
-import VlabUser from './VlabUser'
+import VlabService from "@/services/VlabService";
+import VlabsUsers from "./ItemVlab/VlabsUsers";
 
 export default {
+  data() {
+    return {
+      vlab: null
+    };
+  },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   components: {
-    VlabAdmin,
-    VlabUser
+    VlabsUsers
   },
   props: {
     main: {

@@ -30,7 +30,7 @@
           <v-list-tile-title>Vlabs</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile @click="navTo({name: 'users'})">
+      <v-list-tile v-if="admin" @click="navTo({name: 'users'})">
         <v-list-tile-action>
           <v-icon x-large>people</v-icon>
         </v-list-tile-action>
@@ -55,11 +55,12 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["user", "isUserLoggedIn"])
+    ...mapState(["user", "isUserLoggedIn", "admin"])
   },
   props: {
     main: {
-      type: Object
+      type: Object,
+      require: true
     }
   },
   methods: {

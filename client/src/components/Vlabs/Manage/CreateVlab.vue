@@ -1,7 +1,7 @@
 <template>
   <v-layout wrap>
     <v-flex v-if="isUserLoggedIn" xs6 offset-xs3>
-      <panel title="Adding Vlab">
+      <panel title="Create Vlab">
         <v-text-field label="Title" v-model="vlab.title" :rules="[required]"></v-text-field>
         <br>
         <v-text-field label="Name" v-model="vlab.name" :rules="[required]"></v-text-field>
@@ -11,7 +11,7 @@
         <v-textarea label="Logo" v-model="vlab.vlabImage" :rules="[required]"></v-textarea>
         <br>
         <span class="danger-alert">{{error}}</span>
-        <v-btn class="blue-grey lighten-3" @click="create({name: 'vlab'})">Create Vlab</v-btn>
+        <v-btn class="blue-grey lighten-3" @click="create({name: 'vlabs'})">Create Vlab</v-btn>
       </panel>
     </v-flex>
   </v-layout>

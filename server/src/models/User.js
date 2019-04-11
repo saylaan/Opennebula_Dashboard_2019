@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true // really important for one data / no more
     },
     password: DataTypes.STRING,
-    need: DataTypes.STRING,
+    purpose: DataTypes.STRING,
     admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

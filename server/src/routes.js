@@ -23,6 +23,15 @@ module.exports = (app) => {
 
     app.get('/users',
         UsersController.index)
+    app.get('/users/:userId',
+        UsersController.getUser)
+    app.put('/users/:userId',
+        UsersController.put)
+    app.put('/settings/:userId',
+        UsersController.updateSetting)
+    app.post('/users',
+        UsersController.post)
+
 
     app.get('/vlabs',
         VlabsController.getAllVlabs)

@@ -12,7 +12,8 @@ export default new Vuex.Store({ // for keeping tracking of state
   state: {
     token: null,
     user: null,
-    isUserLoggedIn: false
+    isUserLoggedIn: false,
+    admin: false
   },
   mutations: {
     setToken(state, token) {
@@ -25,6 +26,13 @@ export default new Vuex.Store({ // for keeping tracking of state
     },
     setUser(state, user) {
       state.user = user
+    },
+    setAdmin(state, admin) {
+      if (admin) {
+        state.admin = admin
+      } else {
+        state.admin = admin
+      }
     }
   },
   actions: {
@@ -33,6 +41,9 @@ export default new Vuex.Store({ // for keeping tracking of state
     },
     setUser({ commit }, user) {
       commit('setUser', user)
+    },
+    setAdmin({ commit }, admin) {
+      commit('setAdmin', admin)
     }
   }
 })

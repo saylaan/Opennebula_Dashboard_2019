@@ -46,7 +46,8 @@ export default {
   },
   props: {
     main: {
-      type: Object
+      type: Object,
+      required: true
     }
   }
 };

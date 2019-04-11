@@ -1,6 +1,6 @@
 <template>
   <v-layout v-if="isUserLoggedIn" column>
-    <panel title="Vlab">
+    <panel title="Vlabs">
       <v-btn
         class="blue-grey darken-1"
         slot="action"
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       vlabs: null
-    };
+    }
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user"])

@@ -38,10 +38,11 @@ export default {
           email: this.email,
           password: this.password
         });
+        this.$store.dispatch("setAdmin", response.data.user.admin)
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
         this.$router.push({
-          name: "vlabs"
+          name: "dashboard"
         });
       } catch (error) {
         this.error = error.response.data.error;

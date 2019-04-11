@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="isUserLoggedIn" column>
+  <v-layout v-if="isUserLoggedIn && admin" column>
     <panel title="Users">
     <v-btn
       class="blue-grey darken-1"
@@ -19,7 +19,7 @@
             <v-flex class="user-companyname">{{user.companyname}}</v-flex>
             <v-flex class="user-firstname">{{user.firstname}}</v-flex>
             <v-flex class="user-lastname">{{user.lastname}}</v-flex>
-            <v-flex class="user-need">{{user.need}}</v-flex>
+            <v-flex class="user-purpose">{{user.purpose}}</v-flex>
             <v-btn
               class="blue-grey lighten-3"
               :to="{
@@ -31,32 +31,30 @@
       </v-layout>
     </v-flex>
     </panel>
-    <!-- <panel title="User">
-      <v-btn
-      :to="{name: 'edit-user'}"
-      class="blue-grey lighten-3">
-      Edit User</v-btn>
-    </panel>-->
   </v-layout>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import UserService from "@/services/UserService"
 
 export default {
-  computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+  data () {
+    return {
+      users: null
+    }
   },
-  props: ['users']
-  // ,
-  // watch: {
-  //   // "$route.query.search": {
-  //   //   immediate: true,
-  //     async handler() {
-  //       this.users = (await UserService.index(value)).data;
-  //     }
-  //   }
-  // }
+  computed: {
+    ...mapState(["isUserLoggedIn", "user", "admin"])
+  },
+  watch: {
+    "$route.query.find": {
+      immediate: true,
+      async handler(value) {
+        this.users = (await UserService.index(value)).data;
+      }
+    }
+  }
 };
 </script>
 
@@ -79,8 +77,7 @@ export default {
   font-size: 18px;
 }
 
-.user-need {
+.user-purpose {
   font-size: 18px;
 }
-
 </style>

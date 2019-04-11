@@ -1,109 +1,54 @@
 <template>
-  <panel v-if="isUserLoggedIn" title="User view">
-    <!-- <v-layout wrap>
+  <panel v-if="isUserLoggedIn && admin" title="User view">
+    <v-layout wrap>
       <v-flex xs6>
-        <div class="vlab-title">{{vlab.title}}</div>
-        <div class="vlab-name">{{vlab.name}}</div>
-        <div class="vlab-time">{{vlab.time}}</div>
-      </v-flex>
-      <v-flex xs6>
-        <img class="album-image" :src="vlab.vlabImage">
+        <v-flex class="user-companyname">{{userview.companyname}}</v-flex>
+        <v-flex class="user-firstname">{{userview.firstname}}</v-flex>
+        <v-flex class="user-lastname">{{userview.lastname}}</v-flex>
+        <v-flex class="user-purpose">{{userview.purpose}}</v-flex>
       </v-flex>
       <v-btn
         class="blue-grey lighten-3"
-        :to="{
-                  name: 'edit-vlab',
-                  params () {
-                    return {
-                      vlabId: vlab.id
-                    }
-                  }
-                 }"
-      >Edit</v-btn>
-      <v-btn v-if="isUserLoggedIn && !this.vlabuser" class="blue-grey lighten-3" @click="setUser">Add User</v-btn>
-      <v-btn
-        v-if="isUserLoggedIn && this.vlabuser"
-        class="blue-grey lighten-3"
-        @click="deleteUser"
-      >Delete User</v-btn> -->
-    <!-- </v-layout> -->
+        :to="{name: 'edit-user', params () {
+            return {
+              userId: userview.id
+            }
+          }}">Edit</v-btn>
+    </v-layout>
   </panel>
 </template>
 
 <script>
 import { mapState } from "vuex";
-// import VlabUserService from "@/services/VlabUserService";
 
 export default {
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
-  }
-  // props: ["vlab"],
-  // data() {
-  //   return {
-  //     vlabuser: null
-  //   };
-  // },
-  // watch: {
-  //   async vlab() {
-  //     if (!this.isUserLoggedIn) {
-  //       return;
-  //     }
-  //     try {
-  //       const vlabusers = (await VlabUserService.getVlabUsers({
-  //         VlabId: this.vlab.id
-  //       })).data;
-  //       if (vlabusers.length) {
-  //         this.vlabuser = vlabusers[0];
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // },
-  // methods: {
-  //   async setUser() {
-  //     try {
-  //       this.vlabuser = (await VlabUserService.post({
-  //         VlabId: this.vlab.id
-  //       })).data;
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   },
-  //   async deleteUser() {
-  //     try {
-  //       this.vlabuser = await VlabUserService.delete(this.vlabuser.id);
-  //       this.vlabuser = null;
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // }
+    ...mapState(["isUserLoggedIn", "user", "admin"])
+  },
+  props: ['userview']
 };
 </script>
 
 <style scoped>
-/* .vlab {
+.user {
   padding: 20px;
   height: 200px;
   overflow: hidden;
 }
 
-.vlab-title {
+.user-companyname {
   font-size: 30px;
 }
 
-.vlab-name {
+.user-firstname {
   font-size: 24px;
 }
 
-.vlab-time {
+.user-lastname {
   font-size: 18px;
 }
 
-.album-image {
-  width: 50%;
-  margin: 0 auto;
-} */
+.user-purpose {
+  font-size: 18px;
+}
 </style>

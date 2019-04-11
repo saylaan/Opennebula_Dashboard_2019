@@ -1,10 +1,10 @@
 <template>
-  <v-layout v-if="isUserLoggedIn" column justify-center>
+  <v-layout v-if="isUserLoggedIn && admin" column justify-center>
     <v-flex xs12>
       <Users-search-panel/>
     </v-flex>
     <v-flex xs12>
-      <users-panel v-bind:users="users" class="mt-2"/>
+      <users-panel class="mt-2"/>
     </v-flex>
   </v-layout>
 </template>
@@ -22,7 +22,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   async mounted() {
     this.users = (await UserService.index()).data;
@@ -33,7 +33,8 @@ export default {
   },
   props: {
     main: {
-      type: Object
+      type: Object,
+      require: true
     }
   }
 };
