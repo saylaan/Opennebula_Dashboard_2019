@@ -36,7 +36,7 @@
           <v-textarea label="Purpose" type="purpose" v-model="purpose"></v-textarea>
           <br>
           <div class="danger-alert" v-html="error"></div>
-          <v-btn class="blue-grey lighten-3" @click="register">Register</v-btn>
+          <v-btn class="grey darken-1" @click="register">Register</v-btn>
         </form>
       </panel>
     </v-flex>

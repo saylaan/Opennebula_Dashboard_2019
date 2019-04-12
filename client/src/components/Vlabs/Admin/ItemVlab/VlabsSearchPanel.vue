@@ -1,5 +1,5 @@
 <template>
-  <panel v-if="isUserLoggedIn" title="Search">
+  <panel v-if="isUserLoggedIn && admin" title="Search">
     <v-text-field label="Search by company, name, days left" v-model="search"></v-text-field>
   </panel>
 </template>
@@ -15,7 +15,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   watch: {
     search: _.debounce(async function(value) {

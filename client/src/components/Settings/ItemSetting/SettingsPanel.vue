@@ -14,8 +14,8 @@
     <br>
     <v-textarea v-if="admin" label="Purpose" v-model="adminview.purpose" :rules="[required]"></v-textarea>
     <br>
-    <v-btn @click="saveSettings()" class="blue-grey lighten-3">Save Setting</v-btn>
-    <v-btn @click="discardSettings()" class="blue-grey lighten-3">Discard Setting</v-btn>
+    <v-btn @click="saveSettings()" class="grey darken-1">Save Setting</v-btn>
+    <v-btn @click="discardSettings()" class="grey darken-1">Discard Setting</v-btn>
   </panel>
 </template>
 

@@ -8,7 +8,7 @@
         <v-flex class="user-purpose">{{userview.purpose}}</v-flex>
       </v-flex>
       <v-btn
-        class="blue-grey lighten-3"
+        class="grey darken-1"
         :to="{name: 'edit-user', params () {
             return {
               userId: userview.id

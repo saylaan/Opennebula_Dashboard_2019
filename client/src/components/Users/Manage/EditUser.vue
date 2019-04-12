@@ -13,7 +13,7 @@
         <v-textarea label="Purpose" v-model="userview.purpose" :rules="[required]"></v-textarea>
         <br>
         <span class="danger-alert">{{error}}</span>
-        <v-btn class="blue-grey lighten-3" @click="save()">Save settings</v-btn>
+        <v-btn class="grey darken-1" @click="save()">Save settings</v-btn>
       </panel>
     </v-flex>
   </v-layout>

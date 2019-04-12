@@ -13,7 +13,7 @@
         <v-textarea label="Purpose" v-model="userview.purpose" :rules="[required]"></v-textarea>
         <br>
         <span class="danger-alert">{{error}}</span>
-        <v-btn class="blue-grey lighten-3" @click="create({name: 'users'})">
+        <v-btn class="grey darken-1" @click="create({name: 'users'})">
         Create User</v-btn>
       </panel>
     </v-flex>

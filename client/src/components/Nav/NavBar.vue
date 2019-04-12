@@ -6,6 +6,7 @@
     fixed
     overflow
     app
+    :dark="dark"
   >
     <v-list>
       <v-list-tile @click="navTo({name: 'settings'})">
@@ -55,7 +56,7 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["user", "isUserLoggedIn", "admin"])
+    ...mapState(["user", "isUserLoggedIn", "admin", "dark"])
   },
   props: {
     main: {

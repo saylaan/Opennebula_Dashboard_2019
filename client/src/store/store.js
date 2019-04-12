@@ -13,9 +13,18 @@ export default new Vuex.Store({ // for keeping tracking of state
     token: null,
     user: null,
     isUserLoggedIn: false,
-    admin: false
+    admin: false,
+    dark: false,
+    grad: 'to top right, #5D29A9, #CBC8D0'
   },
   mutations: {
+    setGrad(state, grad) {
+      if (grad) {
+        state.grad = grad
+      } else {
+        state.grad = grad
+      }
+    },
     setToken(state, token) {
       state.token = token
       if (token) {
@@ -33,9 +42,19 @@ export default new Vuex.Store({ // for keeping tracking of state
       } else {
         state.admin = admin
       }
+    },
+    setDark(state, dark) {
+      if (dark) {
+        state.dark = dark
+      } else {
+        state.dark = dark
+      }
     }
   },
   actions: {
+    setGrad({ commit }, grad) {
+      commit('setGrad', grad)
+    },
     setToken({ commit }, token) {
       commit('setToken', token)
     },
@@ -44,6 +63,9 @@ export default new Vuex.Store({ // for keeping tracking of state
     },
     setAdmin({ commit }, admin) {
       commit('setAdmin', admin)
+    },
+    setDark({ commit }, dark) {
+      commit('setDark', dark)
     }
   }
 })

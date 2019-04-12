@@ -1,8 +1,8 @@
 <template>
-  <v-layout v-if="isUserLoggedIn" column>
+  <v-layout v-if="isUserLoggedIn && admin" column>
     <panel title="Vlabs">
       <v-btn
-        class="blue-grey darken-1"
+        class="grey darken-3"
         slot="action"
         :to="{name: 'vlab-create'}"
         light
@@ -21,7 +21,7 @@
             <v-flex class="vlab-name">{{vlab.name}}</v-flex>
             <v-flex class="vlab-time">{{vlab.time}}</v-flex>
             <v-btn
-              class="blue-grey lighten-3"
+              class="grey darken-1"
               :to="{
                   name: 'vlab',
                   params: {
@@ -49,7 +49,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   watch: {
     "$route.query.search": {

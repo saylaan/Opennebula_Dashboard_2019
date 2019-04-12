@@ -7,8 +7,8 @@
 
 <script>
 import { mapState } from "vuex";
-import VlabAdmin from './VlabAdmin'
-import VlabUser from './VlabUser'
+import VlabAdmin from './Admin/VlabAdmin'
+import VlabUser from './User/VlabUser'
 
 export default {
   computed: {

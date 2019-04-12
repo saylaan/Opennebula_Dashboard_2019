@@ -5,9 +5,9 @@ import Register from '@/components/Main/Register'
 import SignIn from '@/components/Main/SignIn'
 import MessageFAQ from '@/components/Main/MessageFAQ'
 import Vlabs from '@/components/Vlabs/Index'
-import CreateVlab from '@/components/Vlabs/Manage/CreateVlab'
-import EditVlab from '@/components/Vlabs/Manage/EditVlab'
-import ViewVlab from '@/components/Vlabs/ViewVlab/Index'
+import CreateVlab from '@/components/Vlabs/Admin/Manage/CreateVlab'
+import EditVlab from '@/components/Vlabs/Admin/Manage/EditVlab'
+import ViewVlab from '@/components/Vlabs/Admin/ViewVlab/Index'
 import Dashboard from '@/components/Dashboard/Index'
 import Settings from '@/components/Settings/Index'
 import Users from '@/components/Users/Index'
@@ -66,7 +66,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: 'dashboard'
+      redirect: 'home'
     },
     {
       path: '/settings',

@@ -1,7 +1,7 @@
 <template>
-  <v-layout wrap>
-    <v-flex v-if="isUserLoggedIn" xs6 offset-xs3>
-      <panel title="Create Vlab">
+  <v-layout v-if="isUserLoggedIn && admin" wrap>
+    <v-flex xs6 offset-xs3>
+      <panel title="Edit vlab">
         <v-text-field label="Title" v-model="vlab.title" :rules="[required]"></v-text-field>
         <br>
         <v-text-field label="Name" v-model="vlab.name" :rules="[required]"></v-text-field>
@@ -11,7 +11,7 @@
         <v-textarea label="Logo" v-model="vlab.vlabImage" :rules="[required]"></v-textarea>
         <br>
         <span class="danger-alert">{{error}}</span>
-        <v-btn class="blue-grey lighten-3" @click="create({name: 'vlabs'})">Create Vlab</v-btn>
+        <v-btn class="grey darken-1" @click="save({name: 'vlab'})">Save Vlab</v-btn>
       </panel>
     </v-flex>
   </v-layout>
@@ -35,10 +35,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   methods: {
-    async create(route) {
+    async save(route) {
       this.error = null;
       const areAllFieldsFilledIn = Object.keys(this.vlab).every(
         key => !!this.vlab[key]
@@ -47,12 +47,27 @@ export default {
         this.error = "Please fill in all the required fields.";
         return;
       }
+      const vlabId = this.$store.state.route.params.vlabId;
+      console.log(this.vlab);
       try {
-        await VlabService.post(this.vlab);
-        this.$router.push(route);
+        await VlabService.put(this.vlab);
+        this.$router.push({
+          name: "vlab",
+          params: {
+            vlabId: vlabId
+          }
+        });
       } catch (err) {
         console.log(err);
       }
+    }
+  },
+  async mounted() {
+    try {
+      const vlabId = this.$store.state.route.params.vlabId;
+      this.vlab = (await VlabService.getVlab(vlabId)).data;
+    } catch (err) {
+      console.log(err);
     }
   }
 };
