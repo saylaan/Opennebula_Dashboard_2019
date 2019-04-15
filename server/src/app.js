@@ -46,12 +46,21 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
     // one.getUsers(function(err, data) {
     //   console.log(data)
     // })
+<<<<<<< HEAD
     // one.getVNets(function(err, data) {
     //   console.log(data)
     // }, null, 0, 100)
+    one.getVMs(function(err, data) {
+      console.log(data)
+    }, null, 0, 0, null)
+=======
+    one.getVNets(function(err, data) {
+      console.log(data)
+    }, null, 0, 100)
     // one.getVMs(function(err, data) {
     //   console.log(data)
     // }, null, 0, 0, null)
+>>>>>>> 4bf1f4bc3b133dde70c79cc4d961e4d73dff3397
     // one.getTemplates(function(err, data) {
     //   console.log(data)
     // }, null, 0, 100)

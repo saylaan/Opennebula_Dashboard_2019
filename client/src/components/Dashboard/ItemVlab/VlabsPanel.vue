@@ -8,7 +8,7 @@
             <v-flex class="vlab-name">{{vlab.name}}</v-flex>
             <v-flex class="vlab-time">{{vlab.time}}</v-flex>
             <v-btn
-              class="blue-grey lighten-3"
+              class="grey darken-1"
               :to="{
                   name: 'vlab',
                   params: {

@@ -5,10 +5,6 @@ module.exports = {
     try {
       let vlabs = null
       const search = req.query.search
-      console.log('search = ', search)
-      console.log('search = ', search)
-      console.log('search = ', search)
-      console.log('search = ', search)
       if (search) {
         vlabs = await Vlab.findAll({
           where: {
@@ -76,10 +72,4 @@ module.exports = {
       })
     }
   }
-  /* only for testing the response on Postman */
-  //register (req, res) { // express endpoint / middleware
-  // res.send({
-  //   message : `Hello ${req.body.email}! Your user was registered! Have fun!`
-  // })
-  //}
 }

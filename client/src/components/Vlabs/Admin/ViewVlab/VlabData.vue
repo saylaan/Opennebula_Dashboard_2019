@@ -1,5 +1,5 @@
 <template>
-  <panel v-if="isUserLoggedIn" title="Vlab view">
+  <panel v-if="isUserLoggedIn && admin" title="Vlab view">
     <v-layout wrap>
       <v-flex xs6>
         <div class="vlab-title">{{vlab.title}}</div>
@@ -10,7 +10,7 @@
         <img class="album-image" :src="vlab.vlabImage">
       </v-flex>
       <v-btn
-        class="blue-grey lighten-3"
+        class="grey darken-1"
         :to="{
                   name: 'edit-vlab',
                   params () {
@@ -20,10 +20,10 @@
                   }
                  }"
       >Edit</v-btn>
-      <v-btn v-if="isUserLoggedIn && !this.vlabuser" class="blue-grey lighten-3" @click="setUser">Add User</v-btn>
+      <v-btn v-if="isUserLoggedIn && !this.vlabuser" class="grey darken-1" @click="setUser">Add User</v-btn>
       <v-btn
         v-if="isUserLoggedIn && this.vlabuser"
-        class="blue-grey lighten-3"
+        class="grey darken-1"
         @click="deleteUser"
       >Delete User</v-btn>
     </v-layout>
@@ -36,7 +36,7 @@ import VlabUserService from "@/services/VlabUserService";
 
 export default {
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   props: ["vlab"],
   data() {

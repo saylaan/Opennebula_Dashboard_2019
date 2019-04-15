@@ -3,12 +3,16 @@ const Joi = require('joi')
 module.exports = { // looking if data pass or fail
     register(req, res, next) {
         const schema = {
-            companyname: Joi.string().require(),
-            firstname: Joi.string().require(),
-            lastname: Joi.string().require(),
-            email: Joi.string().email().require(),
+            companyname: Joi.string(),
+            firstname: Joi.string(),
+            lastname: Joi.string(),
+            email: Joi.string().email(),
             password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$')),
-            need: Joi.string().require()
+<<<<<<< HEAD
+            need: Joi.string()
+=======
+            purpose: Joi.string()
+>>>>>>> 4bf1f4bc3b133dde70c79cc4d961e4d73dff3397
         }
         const { error, value } = Joi.validate(req.body, schema)
 
@@ -43,7 +47,7 @@ module.exports = { // looking if data pass or fail
                         2. It must be at least 8 characters in length and not greater than 32 characters in length`
                     })
                     break;
-                case 'need':
+                case 'purpose':
                     res.status(400).send({
                         error: 'You must provide a valid purpose'
                     })

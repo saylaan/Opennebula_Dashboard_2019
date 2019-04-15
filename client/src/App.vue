@@ -1,5 +1,6 @@
 <template>
-  <v-app :dark="main.dark">
+  <v-app>
+    <v-jumbotron :gradient="grad" style="min-height:100%">
     <nav-bar v-if="isUserLoggedIn" v-bind:main="main"/>
     <toolbar v-bind:main="main"/>
     <v-content>
@@ -7,9 +8,10 @@
         <router-view v:bind:main="main"></router-view>
       </v-container>
     </v-content>
-    <v-footer :inset="main.inset" app>
+    <v-footer :dark="dark" :inset="main.inset" app>
       <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
+    </v-jumbotron>
   </v-app>
 </template>
 
@@ -21,7 +23,6 @@ import { mapState } from "vuex";
 export default {
   data: () => ({
     main: {
-      dark: false,
       inset: true,
       drawers: ["Default (no property)"],
       primaryDrawer: {
@@ -37,7 +38,7 @@ export default {
     NavBar
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "admin", "dark", "grad"])
   }
 };
 </script>
@@ -50,6 +51,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.v-footer {
+  opacity: 0.7
 }
 
 </style>

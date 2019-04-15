@@ -1,19 +1,6 @@
 <template>
   <v-layout v-if="isUserLoggedIn && admin" column>
     <panel title="Users">
-    <v-btn
-      class="grey darken-3"
-      slot="action"
-      :to="{name: 'user-create'}"
-      light
-      medium
-      absolute
-      right
-      middle
-      fab
-    >
-      <v-icon>add</v-icon>
-    </v-btn>
     <v-flex v-for="user in users" :key="user.title" class="user">
       <v-layout row>
             <v-flex class="user-companyname">{{user.companyname}}</v-flex>
@@ -21,7 +8,6 @@
             <v-flex class="user-lastname">{{user.lastname}}</v-flex>
             <v-flex class="user-purpose">{{user.purpose}}</v-flex>
             <v-btn
-              class="grey darken-1"
               :to="{
                   name: 'user',
                   params: {

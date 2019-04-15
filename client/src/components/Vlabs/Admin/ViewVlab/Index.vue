@@ -1,5 +1,5 @@
 <template>
-  <v-layout column v-if="isUserLoggedIn">
+  <v-layout column v-if="isUserLoggedIn && admin">
     <v-layout row>
       <v-flex xs6 offset-xs3>
         <vlab-data :vlab="vlab"/>
@@ -31,7 +31,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user", "route"])
+    ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
   async mounted() {
     const vlabId = this.route.params.vlabId;
