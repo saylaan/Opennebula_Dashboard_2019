@@ -49,9 +49,9 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
     // one.getVNets(function(err, data) {
     //   console.log(data)
     // }, null, 0, 100)
-    // one.getVMs(function(err, data) {
-    //   console.log(data)
-    // }, null, 0, 0, null)
+    one.getVMs(function(err, data) {
+      console.log(data)
+    }, null, 0, 0, null)
     // one.getTemplates(function(err, data) {
     //   console.log(data)
     // }, null, 0, 100)
