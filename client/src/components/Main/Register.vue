@@ -33,15 +33,10 @@
             autocomplete="new-password">
           </v-text-field>
           <br>
-          <v-select
-            :items="items"
-            label="Purpose, needs of the portal"
-            v-model="need"
-            outline
-          ></v-select>
+          <v-textarea label="Purpose" type="purpose" v-model="purpose"></v-textarea>
           <br>
           <div class="danger-alert" v-html="error"></div>
-          <v-btn class="blue-grey lighten-3" @click="register">Register</v-btn>
+          <v-btn class="grey darken-1" @click="register">Register</v-btn>
         </form>
       </panel>
     </v-flex>
@@ -54,33 +49,28 @@ import AuthenticationService from "@/services/AuthenticationService";
 export default {
   data() {
     return {
-      items: [
-        'enterprise', 'testing', 'personnal'
-      ],
       companyname: "",
       firstname: "",
       lastname: "",
       email: "",
       password: "",
-      need: "",
+      purpose: "",
       error: null
     };
   },
   methods: {
     async register() {
       try {
-        const response = await AuthenticationService.register({
+        await AuthenticationService.register({
           companyname: this.companyname,
           firstname: this.firstname,
           lastname: this.lastname,
           email: this.email,
           password: this.password,
-          need: this.need
+          purpose: this.purpose
         });
-        this.$store.dispatch("setToken", response.data.token);
-        this.$store.dispatch("setUser", response.data.user);
         this.$router.push({
-          name: "dashboard"
+          name: "home"
         });
       } catch (error) {
         this.error = error.response.data.error;

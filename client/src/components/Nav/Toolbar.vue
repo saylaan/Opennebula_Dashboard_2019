@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar :clipped-left="main.primaryDrawer.clipped" app fixed>
+  <v-toolbar :dark="dark" :clipped-left="main.primaryDrawer.clipped" app fixed>
     <img
       src="../../assets/LogoALE.png"
       v-if="main.primaryDrawer.type !== 'permanent'"
@@ -28,12 +28,14 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["user", "isUserLoggedIn"])
+    ...mapState(["user", "isUserLoggedIn", "dark"])
   },
   methods: {
     logout() {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
+      this.$store.dispatch("setDark", false);
+      this.$store.dispatch("setGrad", 'to top right, #5D29A9, #CBC8D0');
       this.$router.push({
         name: "home"
       });
@@ -46,11 +48,17 @@ export default {
   },
   props: {
     main: {
-      type: Object
+      type: Object,
+      required: true
     }
   }
 };
 </script>
 
 <style scoped>
+
+.v-toolbar {
+  opacity: 0.9
+}
+
 </style>

@@ -5,7 +5,7 @@
     "lastname": "Geoffroy",
     "email": "gtest@gmail.com",
     "password": "12345678",
-    "need": "enterprise",
+    "purpose": "enterprise",
     "admin": true
   },
   {
@@ -14,7 +14,7 @@
     "lastname": "Frank",
     "email": "ftest@gmail.com",
     "password": "12345678",
-    "need": "testing",
+    "purpose": "testing",
     "admin": true
   },
   {
@@ -23,6 +23,6 @@
     "lastname": "Testname",
     "email": "testing@gmail.com",
     "password": "12345678",
-    "need": "enterprise"
+    "purpose": "enterprise"
   }
 ]

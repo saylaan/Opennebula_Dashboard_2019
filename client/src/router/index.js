@@ -5,12 +5,11 @@ import Register from '@/components/Main/Register'
 import SignIn from '@/components/Main/SignIn'
 import MessageFAQ from '@/components/Main/MessageFAQ'
 import Vlabs from '@/components/Vlabs/Index'
-import CreateVlab from '@/components/Vlabs/Manage/CreateVlab'
-import EditVlab from '@/components/Vlabs/Manage/EditVlab'
-import ViewVlab from '@/components/Vlabs/ViewVlab/Index'
+import CreateVlab from '@/components/Vlabs/Admin/Manage/CreateVlab'
+import EditVlab from '@/components/Vlabs/Admin/Manage/EditVlab'
+import ViewVlab from '@/components/Vlabs/Admin/ViewVlab/Index'
 import Dashboard from '@/components/Dashboard/Index'
 import Settings from '@/components/Settings/Index'
-import EditSettings from '@/components/Settings/Manage/EditSettings'
 import Users from '@/components/Users/Index'
 import CreateUser from '@/components/Users/Manage/CreateUser'
 import EditUser from '@/components/Users/Manage/EditUser'
@@ -67,17 +66,12 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: 'dashboard'
+      redirect: 'home'
     },
     {
       path: '/settings',
       name: 'settings',
       component: Settings
-    },
-    {
-      path: '/settings/:userId/edit',
-      name: 'edit-settings',
-      component: EditSettings
     },
     {
       path: '/users',
@@ -99,10 +93,5 @@ export default new Router({
       name: 'edit-user',
       component: EditUser
     }
-    // {
-    //   path: '/users/:userId',
-    //   name: 'user',
-    //   component: ViewUser
-    // }
   ]
 })

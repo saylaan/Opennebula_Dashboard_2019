@@ -17,7 +17,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   async mounted() {
   },
@@ -26,7 +26,8 @@ export default {
   },
   props: {
     main: {
-      type: Object
+      type: Object,
+      require: true
     }
   }
 };

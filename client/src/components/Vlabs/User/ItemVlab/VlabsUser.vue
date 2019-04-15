@@ -1,9 +1,12 @@
 <template>
-  <panel v-if="isUserLoggedIn" title="Vlabs Users">
+  <panel v-if="isUserLoggedIn" title="Vlabs User">
     <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabusers">
       <template v-slot:items="props">
         <td class="text-xs-right">{{props.item.title}}</td>
         <td class="text-xs-right">{{props.item.name}}</td>
+        <td class="text-xs-right">
+          <v-btn>View Vlab</v-btn>
+        </td>
       </template>
     </v-data-table>
   </panel>
