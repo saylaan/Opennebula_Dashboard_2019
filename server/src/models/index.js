@@ -5,6 +5,9 @@ const config = require('../config/config') // file config for the server
 const db = {
 
 }
+const Opennebula = require('opennebula')
+const one = new Opennebula('geoffroy:2961Sailaan1992!',
+  'http://vlab.ale-aapp.com:2633/RPC2')
 
 const sequelize = new Sequelize( // creation of the obj sequelize --> making the connection with the config
     config.db.database,
@@ -12,6 +15,18 @@ const sequelize = new Sequelize( // creation of the obj sequelize --> making the
     config.db.password,
     config.db.options
 )
+
+// const folderModels = [
+//     "Message",
+//     "Template",
+//     "Url",
+//     "User",
+//     "Vlab",
+//     "Vm"
+// ]
+
+
+// TODO : GENERIC PUT IN WITH MODELS.
 
 fs // give us the ability to add more models down the road
     .readdirSync(__dirname)
@@ -28,6 +43,13 @@ Object.keys(db).forEach(function (modelName) {
         db[modelName].associate(db)
     }
 })
+
+// const vm = one.getVM(295)
+
+// vm.info(function(err, data) {
+// const test = data.VM.NAME
+// console.log(data.VM.NAME)
+// })
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize

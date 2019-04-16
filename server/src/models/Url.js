@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     url: DataTypes.STRING,
     log: DataTypes.STRING,
-    password: DataTypes.SRING
+    password: DataTypes.STRING
   })
 
   return Url

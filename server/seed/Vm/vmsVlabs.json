@@ -1,0 +1,14 @@
+[
+  {
+    "VmId": 1,
+    "VlabId": 1
+  },
+  {
+    "VmId": 2,
+    "VlabId": 1
+  },
+  {
+    "VmId": 3,
+    "VlabId": 1
+  }
+]

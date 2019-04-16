@@ -1,7 +1,7 @@
 const {
   Vlab,
   VlabUserLog
-} = require('../models')
+} = require('../../models')
 const _ = require('lodash')
 
 module.exports = {
