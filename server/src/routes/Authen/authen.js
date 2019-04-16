@@ -1,5 +1,5 @@
-const AuthenticationController = require('../controllers/Authen/AuthenticationController')
-const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy')
+const AuthenticationController = require('../../controllers/Authen/AuthenticationController')
+const AuthenticationControllerPolicy = require('../../policies/AuthenticationControllerPolicy')
 
 module.exports = (app) => {
     /* get / post / put / patch / delete */ // this for making the controller of data through the routes

@@ -22,6 +22,7 @@ require('./routes')(app) // attach all the different endpoint to the apps
 sequelize.sync() // sync sequelize with the server {force : true} = deleting all data
   .then(() => {
     app.listen(config.port)
+    console.log('####################### END INIT DB #######################\n\n')
     console.log(`Server started on port ${config.port}... let's start working...`)
   })
 // full stack web App using Vue.js
@@ -54,9 +55,6 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
     // one.getUsers(function(err, data) {
     //   console.log(data)
     // })
-    one.getVNets(function(err, data) {
-      console.log(data)
-    }, null, 0, 100)
     // one.getVMs(function(err, data) {
     //   console.log(data)
     // }, null, 0, 0, null)

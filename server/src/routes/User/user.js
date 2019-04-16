@@ -1,5 +1,5 @@
-const UsersController = require('../controllers/User/UsersController')
-const isAuthenticated = require('../policies/isAuthenticated')
+const UsersController = require('../../controllers/User/UsersController')
+const isAuthenticated = require('../../policies/isAuthenticated')
 
 module.exports = (app) => {
   app.get('/users',

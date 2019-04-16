@@ -16,26 +16,50 @@ const sequelize = new Sequelize( // creation of the obj sequelize --> making the
     config.db.options
 )
 
-// const folderModels = [
-//     "Message",
-//     "Template",
-//     "Url",
-//     "User",
-//     "Vlab",
-//     "Vm"
-// ]
+const folderModels = [
+    "Message",
+    "Template",
+    "Url",
+    "User",
+    "Vlab",
+    "Vm"
+]
 
+const isDirModels = file => {
+    for (let i = 0; i < folderModels.length; i++) {
+        if (folderModels[i] == file) {
+            return (false)
+        }
+    }
+    return(true)
+}
 
-// TODO : GENERIC PUT IN WITH MODELS.
+console.log('\n\n#################### START INIT MODELS ####################')
 
-fs // give us the ability to add more models down the road
+fs
     .readdirSync(__dirname)
     .filter((file) =>
         file !== 'index.js'
     )
     .forEach((file) => {
-        const model = sequelize.import(path.join(__dirname, file))
-        db[model.name] = model
+        if (isDirModels(file)) {
+            const model = sequelize.import(path.join(__dirname, file))
+            db[model.name] = model
+        }
+        for (let i = 0; i < folderModels.length; i++) {
+            if (!isDirModels(file)) {
+                fs
+                .readdirSync(path.join( __dirname, file))
+                .filter((tmp) => file !== 'index.js')
+                .forEach((tmp) => {
+                    console.log('######################## File in Folder :', tmp)
+                    console.log('Path ==>', path.join( path.join( __dirname, file), tmp))
+                    const model = sequelize.import(path.join( path.join( __dirname, file), tmp))
+                    db[model.name] = model
+                })
+            break
+            }
+        }
     })
 
 Object.keys(db).forEach(function (modelName) {
@@ -43,6 +67,8 @@ Object.keys(db).forEach(function (modelName) {
         db[modelName].associate(db)
     }
 })
+
+console.log('##################### END INIT MODELS #####################\n\n')
 
 // const vm = one.getVM(295)
 

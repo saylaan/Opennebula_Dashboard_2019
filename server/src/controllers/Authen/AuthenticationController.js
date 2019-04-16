@@ -12,7 +12,6 @@ function jwtSignUser(user) { // Override the function who sign a user obj using 
 module.exports = {
   async register(req, res) {
     try {
-      console.log(req.body)
       const user = await User.create(req.body)
       const userJson = user.toJSON()
       res.send({
