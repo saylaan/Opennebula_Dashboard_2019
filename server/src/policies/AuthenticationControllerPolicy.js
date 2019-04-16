@@ -8,7 +8,11 @@ module.exports = { // looking if data pass or fail
             lastname: Joi.string(),
             email: Joi.string().email(),
             password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$')),
+<<<<<<< HEAD
+            need: Joi.string()
+=======
             purpose: Joi.string()
+>>>>>>> 4bf1f4bc3b133dde70c79cc4d961e4d73dff3397
         }
         const { error, value } = Joi.validate(req.body, schema)
 

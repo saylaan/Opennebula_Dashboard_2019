@@ -54,14 +54,9 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
     // one.getUsers(function(err, data) {
     //   console.log(data)
     // })
-    // const vm = one.getVM(295)
-
-    // vm.info(function(err, data) {
-    //   console.log(date)
-    // })
-    // one.getVNets(function(err, data) {
-    //   console.log(data)
-    // }, null, 0, 100)
+    one.getVNets(function(err, data) {
+      console.log(data)
+    }, null, 0, 100)
     // one.getVMs(function(err, data) {
     //   console.log(data)
     // }, null, 0, 0, null)
