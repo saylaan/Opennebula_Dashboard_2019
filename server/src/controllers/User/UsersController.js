@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User } = require('../../models')
 
 module.exports = {
   async index(req, res) {
@@ -72,7 +72,7 @@ module.exports = {
       res.send(user)
     } catch (err) {
       res.status(500).send({
-        err: 'An error has occured while trying to update the user'
+        err: 'An error has occured while trying to update the setting of user'
       })
     }
   }

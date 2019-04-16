@@ -1,4 +1,4 @@
-const { Vlab } = require('../models')
+const { Vlab } = require('../../models')
 
 module.exports = {
   async getAllVlabs(req, res) {

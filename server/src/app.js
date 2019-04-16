@@ -6,9 +6,6 @@ const cors = require('cors')
 const morgan = require('morgan')
 const { sequelize } = require('./models') // models folder with index.js file who return a sequelize obj
 const config = require('./config/config')
-const Opennebula = require('opennebula')
-const one = new Opennebula('geoffroy:2961Sailaan1992!',
-  'http://vlab.ale-aapp.com:2633/RPC2')
 
 console.log(`Server working... ${config.port}`)
 /* build an express app */
@@ -21,14 +18,26 @@ app.use(cors()) // server hosted on different depend --> CARE (need good securit
 require('./passport') // this is for passport authen
 require('./routes')(app) // attach all the different endpoint to the apps
 
+
 sequelize.sync() // sync sequelize with the server {force : true} = deleting all data
   .then(() => {
     app.listen(config.port)
+    console.log('####################### END INIT DB #######################\n\n')
     console.log(`Server started on port ${config.port}... let's start working...`)
   })
 // full stack web App using Vue.js
 
     // const group = one.getGroup(102)
+    // console.log(test.NAME)
+    // const test = data.VM
+    // console.log(Object.data)
+    // for (var NAME in test) { //
+    //   if (test.hasOwnProperty(NAME)) {
+    //     console.log(NAME, test[NAME])
+    //   }
+    // }
+      // const test = JSON.parse(data)
+      // console.log(test.VM)
 
     // const user = one.getUser(14)
     // user.info(function(err, data) {
@@ -46,9 +55,6 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
     // one.getUsers(function(err, data) {
     //   console.log(data)
     // })
-    one.getVNets(function(err, data) {
-      console.log(data)
-    }, null, 0, 100)
     // one.getVMs(function(err, data) {
     //   console.log(data)
     // }, null, 0, 0, null)

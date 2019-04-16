@@ -1,6 +1,6 @@
-const { User } = require('../models')
+const { User } = require('../../models')
 const jwt = require('jsonwebtoken') // for token authen
-const config = require('../config/config')
+const config = require('../../config/config')
 
 function jwtSignUser(user) { // Override the function who sign a user obj using jwt library to get back a token
   const ONE_WEEK = 60 * 60 * 24 * 7
@@ -12,7 +12,6 @@ function jwtSignUser(user) { // Override the function who sign a user obj using 
 module.exports = {
   async register(req, res) {
     try {
-      console.log(req.body)
       const user = await User.create(req.body)
       const userJson = user.toJSON()
       res.send({

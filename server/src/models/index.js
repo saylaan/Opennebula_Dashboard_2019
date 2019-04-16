@@ -5,6 +5,9 @@ const config = require('../config/config') // file config for the server
 const db = {
 
 }
+const Opennebula = require('opennebula')
+const one = new Opennebula('geoffroy:2961Sailaan1992!',
+  'http://vlab.ale-aapp.com:2633/RPC2')
 
 const sequelize = new Sequelize( // creation of the obj sequelize --> making the connection with the config
     config.db.database,
@@ -13,14 +16,50 @@ const sequelize = new Sequelize( // creation of the obj sequelize --> making the
     config.db.options
 )
 
-fs // give us the ability to add more models down the road
+const folderModels = [
+    "Message",
+    "Template",
+    "Url",
+    "User",
+    "Vlab",
+    "Vm"
+]
+
+const isDirModels = file => {
+    for (let i = 0; i < folderModels.length; i++) {
+        if (folderModels[i] == file) {
+            return (false)
+        }
+    }
+    return(true)
+}
+
+console.log('\n\n#################### START INIT MODELS ####################')
+
+fs
     .readdirSync(__dirname)
     .filter((file) =>
         file !== 'index.js'
     )
     .forEach((file) => {
-        const model = sequelize.import(path.join(__dirname, file))
-        db[model.name] = model
+        if (isDirModels(file)) {
+            const model = sequelize.import(path.join(__dirname, file))
+            db[model.name] = model
+        }
+        for (let i = 0; i < folderModels.length; i++) {
+            if (!isDirModels(file)) {
+                fs
+                .readdirSync(path.join( __dirname, file))
+                .filter((tmp) => file !== 'index.js')
+                .forEach((tmp) => {
+                    console.log('######################## File in Folder :', tmp)
+                    console.log('Path ==>', path.join( path.join( __dirname, file), tmp))
+                    const model = sequelize.import(path.join( path.join( __dirname, file), tmp))
+                    db[model.name] = model
+                })
+            break
+            }
+        }
     })
 
 Object.keys(db).forEach(function (modelName) {
@@ -28,6 +67,15 @@ Object.keys(db).forEach(function (modelName) {
         db[modelName].associate(db)
     }
 })
+
+console.log('##################### END INIT MODELS #####################\n\n')
+
+// const vm = one.getVM(295)
+
+// vm.info(function(err, data) {
+// const test = data.VM.NAME
+// console.log(data.VM.NAME)
+// })
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize

@@ -3,12 +3,18 @@
     "name": "https",
     "url": "https://vlab10-ale.aapp",
     "log": "user1",
-    "password": "user1",
+    "password": "user1"
   },
   {
     "name": "SIP",
     "url": "https://SIP-ale.aapp",
     "log": "user1",
-    "password": "user1",
+    "password": "user1"
+  },
+  {
+    "name": "OpenNebula",
+    "url": "https://opennebula-ale.aapp",
+    "log": "user1",
+    "password": "user1"
   }
 ]
