@@ -110,3 +110,9 @@ Or an other example to make it more relevant:
 - We can make math with url (src for example : url=${Math.floor(Math.random() * 100) + 1})
 -{{ lorem.slice(0, 40)}} -> .slice cut the content of the sentence as needed
 -always put a xs(n) sm(n/2) md(n/2) -> resize of components because of other layout / flex ?
+
+-Add linear gradient :
+<v-jumbotron :gradient="grad>
+
+data() =>
+    grad: 'direction, hex1, hex2'
