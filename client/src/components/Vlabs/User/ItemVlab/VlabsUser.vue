@@ -14,7 +14,7 @@
 
 <script>
 import { mapState } from "vuex";
-import VlabUserService from "@/services/VlabUserService";
+import VlabUserService from "@/services/Vlab/VlabUserService";
 
 export default {
   data() {

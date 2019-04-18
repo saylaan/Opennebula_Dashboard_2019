@@ -2,18 +2,18 @@ const MessagesUserController = require('../../controllers/Message/MessagesUserCo
 const isAuthenticated = require('../../policies/isAuthenticated')
 
 module.exports = (app) => {
-    app.get('/users',
+    app.get('/messagesuser',
         isAuthenticated,
         MessagesUserController.index)
-    // app.get('/users/:userId',
+    // app.get('/messagesusers/:userId',
     //     isAuthenticated,
     //     MessagesUserController.getUser)
-    // app.put('/users/:userId',
+    // app.put('/messagesusers/:userId',
     //     MessagesUserController.put)
     // app.put('/settings/:userId',
     //     isAuthenticated,
     //     MessagesUserController.updateSetting)
-    app.post('/users',
+    app.post('/messagesuser',
         isAuthenticated,
         MessagesUserController.post)
 }

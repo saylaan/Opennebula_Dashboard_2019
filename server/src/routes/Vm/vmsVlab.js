@@ -2,18 +2,18 @@ const VmsVlabController = require('../../controllers/Vm/VmsVlabController')
 const isAuthenticated = require('../../policies/isAuthenticated')
 
 module.exports = (app) => {
-    app.get('/users',
+    app.get('/vmvlabs',
         isAuthenticated,
         VmsVlabController.index)
-    // app.get('/users/:userId',
+    // app.get('/vmvlabs/:userId',
     //     isAuthenticated,
     //     VmsVlabController.getUser)
-    // app.put('/users/:userId',
+    // app.put('/vmvlabs/:userId',
     //     VmsVlabController.put)
     // app.put('/settings/:userId',
     //     isAuthenticated,
     //     VmsVlabController.updateSetting)
-    app.post('/users',
+    app.post('/vmvlabs',
         isAuthenticated,
         VmsVlabController.post)
 }

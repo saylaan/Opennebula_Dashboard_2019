@@ -1,26 +1,35 @@
 <template>
-  <v-layout v-if="isUserLoggedIn" justify-center>
-    <v-layout v-if="admin" row>
-      <v-flex xs6>
-        <users-panel class="mt-2"/>
-      </v-flex>
-      <v-flex class="ml-2" xs6>
-        <vlabs-panel class="mt-2"/>
-      </v-flex>
-      <!-- TODO: MAKE THE NUMBER OF USER AND VLAB + NO SEARCH AND VIEW(only basic status) -->
-    </v-layout>
-    <v-layout v-if="!admin" row>
+  <v-layout v-if="isUserLoggedIn" row wrap justify-center>
+    <v-flex xs3 class=" ml-2 mt-2" v-if="admin">
+          <users-panel/>
+    </v-flex>
+    <v-flex xs3 class="ml-1 mr-1 mt-2" v-if="admin">
+          <vlabs-panel />
+    </v-flex>
+    <v-flex xs6 class="ml-1 mt-2" v-if="admin">
+      <messages-client-panel />
+    </v-flex>
+    <v-flex xs6 class="mt-2 ml-1" v-if="admin">
+      <messages-faq-panel />
+    </v-flex>
+
+    <v-flex v-if="!admin" row>
+      <!-- <v-flex xs12>
+        <user-messages class="mt-2"/>
+      </v-flex>-->
       <!-- TODO: MAKE THE USER DASHBOARD (TUTO ?) -->
-    </v-layout>
+    </v-flex>
   </v-layout>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import VlabService from "@/services/VlabService";
-import UserService from "@/services/UserService";
-import VlabsPanel from "./ItemVlab/VlabsPanel";
-import UsersPanel from "./ItemVlab/UsersPanel";
+import VlabService from "@/services/Vlab/VlabService";
+import UserService from "@/services/User/UserService";
+import VlabsPanel from "./DashboardAdmin/VlabsPanel";
+import UsersPanel from "./DashboardAdmin/UsersPanel";
+import MessagesClientPanel from "./DashboardAdmin/MessagesClientPanel";
+import MessagesFaqPanel from "./DashboardAdmin/MessagesFAQPanel";
 
 export default {
   data() {
@@ -38,7 +47,9 @@ export default {
   },
   components: {
     VlabsPanel,
-    UsersPanel
+    UsersPanel,
+    MessagesClientPanel,
+    MessagesFaqPanel
   },
   props: {
     main: {

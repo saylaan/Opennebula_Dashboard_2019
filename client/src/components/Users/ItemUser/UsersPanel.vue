@@ -15,7 +15,7 @@
       <v-icon>add</v-icon>
     </v-btn>
     <v-flex v-for="user in users" :key="user.title" class="user">
-      <v-layout row>
+      <v-layout row glow>
             <v-flex class="user-companyname">{{user.companyname}}</v-flex>
             <v-flex class="user-firstname">{{user.firstname}}</v-flex>
             <v-flex class="user-lastname">{{user.lastname}}</v-flex>
@@ -36,7 +36,7 @@
 
 <script>
 import { mapState } from "vuex";
-import UserService from "@/services/UserService"
+import UserService from "@/services/User/UserService"
 
 export default {
   data () {

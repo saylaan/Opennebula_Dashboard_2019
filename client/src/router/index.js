@@ -64,6 +64,9 @@ export default new Router({
       name: 'dashboard',
       component: Dashboard
     },
+    // {
+    //   path: '/dashboard/message/reply'
+    // }
     {
       path: '*',
       redirect: 'home'

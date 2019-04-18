@@ -2,18 +2,18 @@ const TemplatesVmController = require('../../controllers/Template/TemplatesVmCon
 const isAuthenticated = require('../../policies/isAuthenticated')
 
 module.exports = (app) => {
-    app.get('/users',
+    app.get('/templatevms',
         isAuthenticated,
         TemplatesVmController.index)
-    // app.get('/users/:userId',
+    // app.get('/templatevms/:userId',
     //     isAuthenticated,
     //     TemplatesVmController.getUser)
-    // app.put('/users/:userId',
+    // app.put('/templatevms/:userId',
     //     TemplatesVmController.put)
     // app.put('/settings/:userId',
     //     isAuthenticated,
     //     TemplatesVmController.updateSetting)
-    app.post('/users',
+    app.post('/templatevms',
         isAuthenticated,
         TemplatesVmController.post)
 }
