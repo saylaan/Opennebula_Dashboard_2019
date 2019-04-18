@@ -1,6 +1,6 @@
 <template>
-  <v-layout>
-    <v-flex offset-xs3>
+  <v-layout justify-center>
+    <v-flex xs6 elevation-24>
       <panel title="Message FAQ">
         <form>
           <v-text-field label="Email" v-model="email"></v-text-field>

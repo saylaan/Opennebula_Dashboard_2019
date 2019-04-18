@@ -1,6 +1,6 @@
 <template>
-  <v-layout wrap>
-    <v-flex xs6 offset-xs3 v-if="!$store.state.isUserLoggedIn">
+  <v-layout justify-center>
+    <v-flex elevation-24 xs6 v-if="!$store.state.isUserLoggedIn">
       <panel title="Sign in">
         <form name="sandbox-form" autocomplete="off">
           <v-text-field label="Email" v-model="email"></v-text-field>
@@ -44,11 +44,11 @@ export default {
           email: this.email,
           password: this.password
         });
-        this.$store.dispatch("setAdmin", response.data.user.admin)
+        this.$store.dispatch("setAdmin", response.data.user.admin);
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
         this.$store.dispatch("setDark", true);
-        this.$store.dispatch("setGrad", 'to top right, #07090C, #232321');
+        this.$store.dispatch("setGrad", "to top right, #07090C, #232321");
         this.$router.push({
           name: "dashboard"
         });

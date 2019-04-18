@@ -1,23 +1,30 @@
 <template>
-  <v-layout v-if="isUserLoggedIn" row wrap justify-center>
-    <v-flex xs3 class=" ml-2 mt-2" v-if="admin">
+  <v-layout v-if="isUserLoggedIn">
+    <v-flex v-if="admin">
+      <v-layout row justify-center wrap>
+        <v-flex xs3 class="ml-2 mt-2">
           <users-panel/>
+        </v-flex>
+        <v-flex xs3 class="ml-1 mr-1 mt-2">
+          <vlabs-panel/>
+        </v-flex>
+        <v-flex xs6 class="ml-1 mt-5">
+          <messages-from-client-panel/>
+        </v-flex>
+        <v-flex xs6 class="mt-2 ml-1">
+          <messages-faq-panel/>
+        </v-flex>
+      </v-layout>
     </v-flex>
-    <v-flex xs3 class="ml-1 mr-1 mt-2" v-if="admin">
-          <vlabs-panel />
-    </v-flex>
-    <v-flex xs6 class="ml-1 mt-2" v-if="admin">
-      <messages-client-panel />
-    </v-flex>
-    <v-flex xs6 class="mt-2 ml-1" v-if="admin">
-      <messages-faq-panel />
-    </v-flex>
-
-    <v-flex v-if="!admin" row>
-      <!-- <v-flex xs12>
-        <user-messages class="mt-2"/>
-      </v-flex>-->
-      <!-- TODO: MAKE THE USER DASHBOARD (TUTO ?) -->
+    <v-flex v-if="!admin">
+      <v-layout row justify-center wrap>
+        <v-flex xs6 class="ml-1 mt-2">
+          <vlab-client-panel/>
+        </v-flex>
+        <v-flex xs6 class="ml-1 mt-5">
+          <messages-client-panel class="mt-2"/>
+        </v-flex>
+      </v-layout>
     </v-flex>
   </v-layout>
 </template>
@@ -28,8 +35,10 @@ import VlabService from "@/services/Vlab/VlabService";
 import UserService from "@/services/User/UserService";
 import VlabsPanel from "./DashboardAdmin/VlabsPanel";
 import UsersPanel from "./DashboardAdmin/UsersPanel";
-import MessagesClientPanel from "./DashboardAdmin/MessagesClientPanel";
+import MessagesFromClientPanel from "./DashboardAdmin/MessagesFromClientPanel";
 import MessagesFaqPanel from "./DashboardAdmin/MessagesFAQPanel";
+import MessagesClientPanel from "./DashboardClient/MessagesClientPanel";
+import VlabClientPanel from "./DashboardClient/VlabClientPanel";
 
 export default {
   data() {
@@ -48,8 +57,10 @@ export default {
   components: {
     VlabsPanel,
     UsersPanel,
+    MessagesFromClientPanel,
+    MessagesFaqPanel,
     MessagesClientPanel,
-    MessagesFaqPanel
+    VlabClientPanel
   },
   props: {
     main: {

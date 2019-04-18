@@ -1,37 +1,22 @@
 <template>
-  <v-layout wrap>
-    <v-flex xs6 offset-xs3 v-if="!$store.state.isUserLoggedIn">
+  <v-layout justify-center>
+    <v-flex elevation-24 xs6 v-if="!$store.state.isUserLoggedIn">
       <panel title="Register">
         <form name="sandbox-form" autocomplete="off">
-          <v-text-field
-            label="Company name"
-            type="name"
-            v-model="companyname">
-          </v-text-field>
+          <v-text-field label="Company name" type="name" v-model="companyname"></v-text-field>
           <br>
-          <v-text-field
-            label="First name"
-            type="name"
-            v-model="firstname">
-          </v-text-field>
+          <v-text-field label="First name" type="name" v-model="firstname"></v-text-field>
           <br>
-          <v-text-field
-            label="Last name"
-            type="nane"
-            v-model="lastname">
-          </v-text-field>
+          <v-text-field label="Last name" type="nane" v-model="lastname"></v-text-field>
           <br>
-          <v-text-field
-            label="Email"
-            type="name"
-            v-model="email"></v-text-field>
+          <v-text-field label="Email" type="name" v-model="email"></v-text-field>
           <br>
           <v-text-field
             label="Password"
             type="password"
             v-model="password"
-            autocomplete="new-password">
-          </v-text-field>
+            autocomplete="new-password"
+          ></v-text-field>
           <br>
           <v-textarea label="Purpose" type="purpose" v-model="purpose"></v-textarea>
           <br>

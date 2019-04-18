@@ -17,9 +17,26 @@
       <v-flex v-for="vlab in vlabs" :key="vlab.title" class="vlab">
         <v-layout row>
           <v-flex xs6>
-            <v-flex class="vlab-title">{{vlab.title}}</v-flex>
-            <v-flex class="vlab-name">{{vlab.name}}</v-flex>
-            <v-flex class="vlab-time">{{vlab.time}}</v-flex>
+            <v-flex xs12>
+              <v-flex class="vlab-title">
+                <h5>
+                  Vlab name :
+                  {{vlab.title}}
+                </h5>
+              </v-flex>
+              <v-flex class="vlab-name">
+                <h5>
+                  Company name :
+                  {{vlab.name}}
+                </h5>
+              </v-flex>
+              <v-flex class="vlab-time">
+                <h5>
+                  Day left :
+                  {{vlab.time}}
+                </h5>
+              </v-flex>
+            </v-flex>
             <v-btn
               class="grey darken-1"
               :to="{
@@ -46,7 +63,7 @@ export default {
   data() {
     return {
       vlabs: null
-    }
+    };
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "admin"])
@@ -70,15 +87,15 @@ export default {
 }
 
 .vlab-title {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .vlab-name {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .vlab-time {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .album-image {

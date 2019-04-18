@@ -9,9 +9,11 @@
     :dark="dark"
   >
     <v-list>
-      <v-list-tile @click="navTo({name: 'settings'})">
-        <v-list-tile-avatar><img src="https://via.placeholder.com/150"></v-list-tile-avatar>
-        <v-list-tile-title>User X</v-list-tile-title>
+      <v-list-tile class="accent" @click="navTo({name: 'settings'})">
+        <v-list-tile-avatar>
+          <img src="https://via.placeholder.com/150">
+        </v-list-tile-avatar>
+        <v-list-tile-title>{{userview.firstname}} {{userview.lastname}}</v-list-tile-title>
       </v-list-tile>
     </v-list>
     <v-list>
@@ -47,14 +49,30 @@
           <v-list-tile-title>Settings</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <br>
+      <br>
+      <v-list-tile class="info" @click="navTo({name: 'helps'})">
+        <v-list-tile-action>
+          <v-icon x-large>help</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Help</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import UserService from "@/services/User/UserService";
 
 export default {
+  data() {
+    return {
+      userview: null
+    };
+  },
   computed: {
     ...mapState(["user", "isUserLoggedIn", "admin", "dark"])
   },
@@ -66,7 +84,14 @@ export default {
   },
   methods: {
     navTo(route) {
-      this.$router.push(route)
+      this.$router.push(route);
+    }
+  },
+  async mounted() {
+    try {
+      this.userview = (await UserService.getUser(this.user.id)).data;
+    } catch (err) {
+      console.log(err);
     }
   }
 };

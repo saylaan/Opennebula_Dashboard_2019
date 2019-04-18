@@ -2,7 +2,10 @@
   <v-layout v-if="isUserLoggedIn && admin" column>
     <panel title="Total User">
       <v-flex class="user">
-        <h2>Active User : {{ totalUser }}</h2>
+        <h2>Active User : {{ totalUsers }}</h2>
+        <br>
+        <br>
+        <h2>Unactive User : {{ totalUsers }}</h2>
       </v-flex>
     </panel>
   </v-layout>
@@ -10,14 +13,14 @@
 
 <script>
 import { mapState } from "vuex";
-import UserService from "@/services/User/UserService"
+import UserService from "@/services/User/UserService";
 
 export default {
-  data () {
+  data() {
     return {
       users: null,
-      totalUser: 0
-    }
+      totalUsers: 0
+    };
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "admin"])
@@ -28,7 +31,7 @@ export default {
       async handler(value) {
         this.users = (await UserService.index(value)).data;
         for (let user in this.users) {
-          this.totalUser++
+          this.totalUsers++;
         }
       }
     }
@@ -42,5 +45,4 @@ export default {
   height: 200px;
   overflow: hidden;
 }
-
 </style>
