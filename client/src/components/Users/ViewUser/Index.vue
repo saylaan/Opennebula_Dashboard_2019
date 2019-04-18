@@ -11,7 +11,7 @@
 <script>
 import { mapState } from "vuex";
 import UserData from "./UserData";
-import UserService from "@/services/UserService";
+import UserService from "@/services/User/UserService";
 
 export default {
   data() {

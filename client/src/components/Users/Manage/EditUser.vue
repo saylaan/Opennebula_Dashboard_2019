@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import UserService from "@/services/UserService";
+import UserService from "@/services/User/UserService";
 import { mapState } from "vuex";
 
 export default {

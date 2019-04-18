@@ -1,6 +1,6 @@
 <template>
-  <v-layout wrap>
-    <v-flex xs6 offset-xs3>
+  <v-layout>
+    <v-flex offset-xs3>
       <panel title="Message FAQ">
         <form>
           <v-text-field label="Email" v-model="email"></v-text-field>
@@ -15,7 +15,9 @@
 </template>
 
 <script>
-// TODO :  make the send message to the database
+import MessageService from '@/services/Message/MessageService'
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -24,8 +26,13 @@ export default {
       error: null
     };
   },
+  computed: {
+    ...mapState(["isUserLoggedIn", "user", "admin"])
+  },
   methods: {
-    send() {}
+    send() {
+      this.error = null
+    }
   }
 };
 </script>

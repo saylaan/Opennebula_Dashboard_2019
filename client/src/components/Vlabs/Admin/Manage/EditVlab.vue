@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import VlabService from "@/services/VlabService";
+import VlabService from "@/services/Vlab/VlabService";
 import { mapState } from "vuex";
 
 export default {

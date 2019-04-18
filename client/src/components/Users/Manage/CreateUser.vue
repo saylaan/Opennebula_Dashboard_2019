@@ -22,7 +22,7 @@
 
 <script>
 import { mapState } from "vuex";
-import UserService from "@/services/UserService"
+import UserService from "@/services/User/UserService"
 
 export default {
   data() {

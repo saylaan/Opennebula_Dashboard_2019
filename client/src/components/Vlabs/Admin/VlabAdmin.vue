@@ -21,7 +21,7 @@
 import { mapState } from "vuex";
 import VlabsPanel from "./ItemVlab/VlabsPanel";
 import VlabsSearchPanel from "./ItemVlab/VlabsSearchPanel";
-import VlabService from "@/services/VlabService";
+import VlabService from "@/services/Vlab/VlabService";
 import VlabsUsers from "./ItemVlab/VlabsUsers";
 import VlabsUsersLogs from "./ItemVlab/VlabsUsersLogs";
 

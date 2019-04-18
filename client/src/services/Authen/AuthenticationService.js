@@ -8,8 +8,3 @@ export default { // Hitting the end point register
     return Api().post('signin', credentials)
   }
 }
-
-// AuthenticationService.register({
-//   email: 'testing@gmail.com',
-//   password: '123456'
-// })

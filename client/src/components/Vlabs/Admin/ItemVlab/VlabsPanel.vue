@@ -40,7 +40,7 @@
 
 <script>
 import { mapState } from "vuex";
-import VlabService from "@/services/VlabService";
+import VlabService from "@/services/Vlab/VlabService";
 
 export default {
   data() {

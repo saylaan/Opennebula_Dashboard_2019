@@ -13,7 +13,7 @@
 import { mapState } from "vuex";
 import UsersPanel from "./ItemUser/UsersPanel";
 import UsersSearchPanel from "./ItemUser/UsersSearchPanel";
-import UserService from "@/services/UserService"
+import UserService from "@/services/User/UserService"
 
 export default {
   data() {

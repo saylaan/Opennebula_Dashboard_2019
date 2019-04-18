@@ -2,18 +2,18 @@ const TemplatesController = require('../../controllers/Template/TemplatesControl
 const isAuthenticated = require('../../policies/isAuthenticated')
 
 module.exports = (app) => {
-    app.get('/users',
+    app.get('/templates',
         isAuthenticated,
         TemplatesController.index)
-    // app.get('/users/:userId',
+    // app.get('/templates/:userId',
     //     isAuthenticated,
     //     TemplatesController.getUser)
-    // app.put('/users/:userId',
+    // app.put('/templates/:userId',
     //     TemplatesController.put)
     // app.put('/settings/:userId',
     //     isAuthenticated,
     //     TemplatesController.updateSetting)
-    app.post('/users',
+    app.post('/templates',
         isAuthenticated,
         TemplatesController.post)
 }

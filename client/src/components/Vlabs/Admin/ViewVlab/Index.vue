@@ -21,8 +21,8 @@ import { mapState } from "vuex";
 import VlabData from "./VlabData";
 import VlabVm from "./VlabVM";
 import VlabVms from "./VlabVMs";
-import VlabService from "@/services/VlabService";
-import VlabUserLogService from "@/services/VlabUserLogService";
+import VlabService from "@/services/Vlab/VlabService";
+import VlabUserLogService from "@/services/Vlab/VlabUserLogService";
 
 export default {
   data() {
