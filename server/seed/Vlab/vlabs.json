@@ -2,31 +2,31 @@
   {
     "title": "Vlab 1",
     "name": "Company 1",
-    "time": "Day Left 1",
+    "time": "1",
     "vlabImage": "http://via.placeholder.com/150"
   },
   {
     "title": "Vlab 2",
     "name": "Company 2",
-    "time": "Day Left 2",
+    "time": "2",
     "vlabImage": "http://via.placeholder.com/150"
   },
   {
     "title": "Vlab 3",
     "name": "Company 3",
-    "time": "Day Left 3",
+    "time": "3",
     "vlabImage": "http://via.placeholder.com/150"
   },
   {
     "title": "Vlab 4",
     "name": "Company 4",
-    "time": "Day Left 4",
+    "time": "4",
     "vlabImage": "http://via.placeholder.com/150"
   },
   {
     "title": "Vlab 5",
     "name": "Company 5",
-    "time": "Day Left 5",
+    "time": "5",
     "vlabImage": "http://via.placeholder.com/150"
   }
 ]

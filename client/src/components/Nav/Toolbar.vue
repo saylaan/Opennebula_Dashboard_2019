@@ -35,14 +35,14 @@ export default {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
       this.$store.dispatch("setDark", false);
-      this.$store.dispatch("setGrad", 'to top right, #5D29A9, #CBC8D0');
+      this.$store.dispatch("setGrad", "to top right, #5D29A9, #CBC8D0");
       this.$router.push({
         name: "home"
       });
     },
     mainNav(route) {
       if (!this.isUserLoggedIn) {
-        this.$router.push(route)
+        this.$router.push(route);
       }
     }
   },
@@ -56,9 +56,7 @@ export default {
 </script>
 
 <style scoped>
-
 .v-toolbar {
-  opacity: 0.9
+  opacity: 0.9;
 }
-
 </style>

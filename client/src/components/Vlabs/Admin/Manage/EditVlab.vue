@@ -1,6 +1,6 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin" wrap>
-    <v-flex xs6 offset-xs3>
+  <v-layout v-if="isUserLoggedIn && admin" justify-center>
+    <v-flex xs6>
       <panel title="Edit vlab">
         <v-text-field label="Title" v-model="vlab.title" :rules="[required]"></v-text-field>
         <br>

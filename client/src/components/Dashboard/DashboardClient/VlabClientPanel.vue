@@ -3,8 +3,6 @@
     <panel v-if="isUserLoggedIn" title="Total vlab">
       <v-flex class="vlab">
       <h2> Active Vlab : {{ totalVlabs }}</h2>
-      <br><br>
-      <h2> Unactive Vlab : {{ totalVlabs }}</h2>
       </v-flex>
     </panel>
   </v-layout>

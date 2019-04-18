@@ -16,10 +16,20 @@
     </v-btn>
     <v-flex v-for="user in users" :key="user.title" class="user">
       <v-layout row glow>
-            <v-flex class="user-companyname">{{user.companyname}}</v-flex>
-            <v-flex class="user-firstname">{{user.firstname}}</v-flex>
-            <v-flex class="user-lastname">{{user.lastname}}</v-flex>
-            <v-flex class="user-purpose">{{user.purpose}}</v-flex>
+        <v-flex xs9>
+          <v-layout column wrap>
+            <v-flex xs6 class="user-companyname">
+              <h5>Company name : {{user.companyname}}</h5>
+            </v-flex>
+            <v-flex xs6 class="user-firstname">
+              <h5>Name : {{user.firstname}} {{user.lastname}}</h5>
+            </v-flex>
+            <v-flex xs6 class="user-purpose">
+              <h5> Purpose: {{user.purpose}}</h5>
+            </v-flex>
+          </v-layout>
+      </v-flex>
+          <v-flex>
             <v-btn
               class="grey darken-1"
               :to="{
@@ -28,6 +38,7 @@
                     userId: user.id}
                  }"
             >View user</v-btn>
+          </v-flex>
       </v-layout>
     </v-flex>
     </panel>
@@ -61,23 +72,23 @@ export default {
 <style scoped>
 .user {
   padding: 20px;
-  height: 200px;
+  height: 100px;
   overflow: hidden;
 }
 
 .user-companyname {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .user-firstname {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .user-lastname {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .user-purpose {
-  font-size: 18px;
+  font-size: 20px;
 }
 </style>

@@ -1,19 +1,36 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="User view">
-    <v-layout wrap>
-      <v-flex xs6>
-        <v-flex class="user-companyname">{{userview.companyname}}</v-flex>
-        <v-flex class="user-firstname">{{userview.firstname}}</v-flex>
-        <v-flex class="user-lastname">{{userview.lastname}}</v-flex>
-        <v-flex class="user-purpose">{{userview.purpose}}</v-flex>
+    <v-layout column align-centerQ>
+      <v-flex>
+        <v-layout row wrap>
+        <v-flex xs12 class="user-companyname">
+          <h4> Company name :
+          {{userview.companyname}}
+          </h4>
+          <br>
+        </v-flex>
+        <v-flex xs12 class="user-firstname">
+          <h4> Name : {{userview.firstname}} {{userview.lastname}}
+          </h4>
+          <br>
+        </v-flex>
+        <v-flex xs12 class="user-purpose">
+          <h4> Purpose :
+          {{userview.purpose}}
+          </h4>
+          <br>
+        </v-flex>
+        </v-layout>
       </v-flex>
-      <v-btn
+      <v-flex>
+      <v-btn large block
         class="grey darken-1"
         :to="{name: 'edit-user', params () {
             return {
               userId: userview.id
             }
           }}">Edit</v-btn>
+      </v-flex>
     </v-layout>
   </panel>
 </template>
@@ -37,18 +54,18 @@ export default {
 }
 
 .user-companyname {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .user-firstname {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .user-lastname {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .user-purpose {
-  font-size: 18px;
+  font-size: 20px;
 }
 </style>

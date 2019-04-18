@@ -1,17 +1,30 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Vlab view">
-    <v-layout wrap>
-      <v-flex xs6>
-        <div class="vlab-title">{{vlab.title}}</div>
-        <div class="vlab-name">{{vlab.name}}</div>
-        <div class="vlab-time">{{vlab.time}}</div>
+    <v-layout column>
+      <v-flex xs12>
+        <v-flex class="vlab-title">
+          <h5>
+            Vlab name :
+            {{vlab.title}}
+          </h5>
+        </v-flex>
+        <v-flex class="vlab-name">
+          <h5>
+            Company name :
+            {{vlab.name}}
+          </h5>
+        </v-flex>
+        <v-flex class="vlab-time">
+          <h5>
+            Day left :
+            {{vlab.time}}
+          </h5>
+        </v-flex>
       </v-flex>
-      <v-flex xs6>
-        <img class="album-image" :src="vlab.vlabImage">
-      </v-flex>
-      <v-btn
-        class="grey darken-1"
-        :to="{
+      <v-flex xs12>
+        <v-btn
+          class="grey darken-1"
+          :to="{
                   name: 'edit-vlab',
                   params () {
                     return {
@@ -19,13 +32,18 @@
                     }
                   }
                  }"
-      >Edit</v-btn>
-      <v-btn v-if="isUserLoggedIn && !this.vlabuser" class="grey darken-1" @click="setUser">Add User</v-btn>
-      <v-btn
-        v-if="isUserLoggedIn && this.vlabuser"
-        class="grey darken-1"
-        @click="deleteUser"
-      >Delete User</v-btn>
+        >Edit</v-btn>
+        <v-btn
+          v-if="isUserLoggedIn && !this.vlabuser"
+          class="grey darken-1"
+          @click="setUser"
+        >Add User</v-btn>
+        <v-btn
+          v-if="isUserLoggedIn && this.vlabuser"
+          class="grey darken-1"
+          @click="deleteUser"
+        >Delete User</v-btn>
+      </v-flex>
     </v-layout>
   </panel>
 </template>
@@ -91,15 +109,15 @@ export default {
 }
 
 .vlab-title {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .vlab-name {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .vlab-time {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .album-image {

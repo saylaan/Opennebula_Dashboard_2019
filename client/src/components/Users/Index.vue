@@ -1,10 +1,10 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin" column justify-center>
-    <v-flex xs12>
+  <v-layout v-if="isUserLoggedIn && admin" row justify-center wrap>
+    <v-flex xs6 class="ml-1">
       <Users-search-panel/>
     </v-flex>
-    <v-flex xs12>
-      <users-panel class="mt-2"/>
+    <v-flex xs6 class="ml-1 mt-2">
+      <users-panel/>
     </v-flex>
   </v-layout>
 </template>
@@ -13,7 +13,7 @@
 import { mapState } from "vuex";
 import UsersPanel from "./ItemUser/UsersPanel";
 import UsersSearchPanel from "./ItemUser/UsersSearchPanel";
-import UserService from "@/services/User/UserService"
+import UserService from "@/services/User/UserService";
 
 export default {
   data() {

@@ -1,12 +1,12 @@
 <template>
-  <v-layout column v-if="isUserLoggedIn && admin">
-    <v-layout row>
-      <v-flex xs6 offset-xs3>
+  <v-layout column justify-center v-if="isUserLoggedIn && admin">
+    <v-layout justify-center>
+      <v-flex xs6>
         <vlab-data :vlab="vlab"/>
       </v-flex>
     </v-layout>
     <v-layout row class="mt-2">
-      <v-flex xs6 >
+      <v-flex xs6>
         <vlab-vms/>
       </v-flex>
       <v-flex xs6 class="ml-2">

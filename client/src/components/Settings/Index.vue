@@ -1,6 +1,6 @@
 <template>
-  <v-layout v-if="isUserLoggedIn"  wrap>
-    <v-flex xs6 offset-xs3 v-if="isUserLoggedIn">
+  <v-layout v-if="isUserLoggedIn" justify-center>
+    <v-flex xs6 v-if="isUserLoggedIn">
       <settings-panel/>
     </v-flex>
   </v-layout>
@@ -8,7 +8,7 @@
 
 <script>
 import { mapState } from "vuex";
-import SettingsPanel from './ItemSetting/SettingsPanel'
+import SettingsPanel from "./ItemSetting/SettingsPanel";
 
 export default {
   data() {
@@ -19,8 +19,7 @@ export default {
   computed: {
     ...mapState(["isUserLoggedIn", "user", "admin"])
   },
-  async mounted() {
-  },
+  async mounted() {},
   components: {
     SettingsPanel
   },

@@ -1,10 +1,8 @@
 <template>
-  <v-layout column v-if="isUserLoggedIn && admin">
-    <v-layout row>
-      <v-flex xs6 offset-xs3>
+  <v-layout justify-center v-if="isUserLoggedIn && admin">
+      <v-flex xs6 >
         <user-data v-bind:userview="userview"/>
       </v-flex>
-    </v-layout>
   </v-layout>
 </template>
 

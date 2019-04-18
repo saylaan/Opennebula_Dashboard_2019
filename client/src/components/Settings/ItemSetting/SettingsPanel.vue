@@ -1,6 +1,11 @@
 <template>
   <panel v-if="isUserLoggedIn" title="Setting">
-    <v-text-field v-if="admin" label="Company name" v-model="adminview.companyname" :rules="[required]"></v-text-field>
+    <v-text-field
+      v-if="admin"
+      label="Company name"
+      v-model="adminview.companyname"
+      :rules="[required]"
+    ></v-text-field>
     <br>
     <v-text-field v-if="admin" label="First name" v-model="adminview.firstname" :rules="[required]"></v-text-field>
     <br>
@@ -9,8 +14,20 @@
     <v-text-field v-if="admin" label="Email" v-model="adminview.email" :rules="[required]"></v-text-field>
     <v-text-field v-if="!admin" label="Email" v-model="userview.email" :rules="[required]"></v-text-field>
     <br>
-    <v-text-field v-if="admin" label="Password" v-model="adminview.password" type="password" :rules="[required]"></v-text-field>
-    <v-text-field v-if="!admin" label="Password" v-model="userview.password" type="password" :rules="[required]"></v-text-field>
+    <v-text-field
+      v-if="admin"
+      label="Password"
+      v-model="adminview.password"
+      type="password"
+      :rules="[required]"
+    ></v-text-field>
+    <v-text-field
+      v-if="!admin"
+      label="Password"
+      v-model="userview.password"
+      type="password"
+      :rules="[required]"
+    ></v-text-field>
     <br>
     <v-textarea v-if="admin" label="Purpose" v-model="adminview.purpose" :rules="[required]"></v-textarea>
     <br>
@@ -58,18 +75,18 @@ export default {
         }
         try {
           await UserService.updateSettings(this.adminview);
-          this.$router.push({name: 'settings'});
+          this.$router.push({ name: "settings" });
         } catch (err) {
           console.log(err);
         }
       } else {
         if (!this.userview.password || !this.userview.email) {
           this.error = "Please fill in all the required fields.";
-          return
+          return;
         }
         try {
           await UserService.updateSettings(this.userview);
-          this.$router.push({name: 'settings'});
+          this.$router.push({ name: "settings" });
         } catch (err) {
           console.log(err);
         }
