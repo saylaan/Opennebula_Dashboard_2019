@@ -56,6 +56,10 @@ For example:
 -Use id/tag like id/class in html/css
 -Use grid for making such as card-panel container for example.
 
+Be caution this is the proper syntax for the layout -flex
+Therefor a panel is consider such as a v-flex
+We have to set the layout each time we use it (row... etc)
+
 2.Icons:
 ->Import icons from a CDN = easier to user
 ->Custom icons by renaming the icons with our shortcut.
