@@ -1,9 +1,14 @@
 <template>
-  <v-layout column align-center v-if="!isUserLoggedIn" class="hello">
-    <h1>{{ msg }}</h1>
-    <!-- <img src="../../assets/oxeArch.jpg"> -->
-    <v-btn class="trial" :to="{name: 'register'}">START FREE TRIAL NOW</v-btn>
-    <img src="../../assets/o2g.png">
+  <v-layout column justify-center v-if="!isUserLoggedIn" class="hello">
+    <v-flex xs6 class="mt-5">
+      <h1>{{ msg }}</h1>
+    </v-flex>
+    <v-flex xs6 class="mt-5">
+      <img src="../../assets/o2g.png">
+    </v-flex>
+    <v-flex xs6>
+      <v-btn depressed large color="primary mt-5" :to="{name: 'register'}">START FREE TRIAL NOW</v-btn>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -14,7 +19,7 @@ export default {
   name: "Hello",
   data() {
     return {
-      msg: "Welcome to the portal Vlab of Alcatel-Lucent"
+      msg: "Welcome to Portal Vlab"
     };
   },
   computed: {
@@ -24,16 +29,4 @@ export default {
 </script>
 
 <style scoped>
-
-.trial {
-  width: 300px;
-  height: 200px;
-  color: red;
-}
-
-img {
-  width: 400px;
-  height: 500px;
-}
-
 </style>

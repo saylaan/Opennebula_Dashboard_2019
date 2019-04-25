@@ -1,0 +1,18 @@
+[
+  {
+    "MessageId": 1,
+    "UserId": 3
+  },
+  {
+    "MessageId": 2,
+    "UserId": 3
+  },
+  {
+    "MessageId": 3,
+    "UserId": 1
+  },
+  {
+    "MessageId": 4,
+    "UserId": 2
+  }
+]

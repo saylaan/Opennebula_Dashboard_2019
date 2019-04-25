@@ -1,0 +1,14 @@
+[
+  {
+    "TemplateId": 1,
+    "VmId": 1
+  },
+  {
+    "TemplateId": 2,
+    "VmId": 2
+  },
+  {
+    "TemplateId": 3,
+    "VmId": 3
+  }
+]

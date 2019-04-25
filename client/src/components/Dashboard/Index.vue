@@ -1,40 +1,71 @@
 <template>
-  <v-layout v-if="isUserLoggedIn" column justify-center>
-    <v-flex xs12>
-      <vlabs-search-panel/>
+  <v-layout v-if="isUserLoggedIn">
+    <v-flex v-if="admin">
+      <v-layout row justify-center wrap>
+        <v-flex xs3 class="ml-2 mt-2">
+          <users-panel/>
+        </v-flex>
+        <v-flex xs3 class="ml-1 mr-1 mt-2">
+          <vlabs-panel/>
+        </v-flex>
+        <v-flex xs6 class="ml-1 mt-5">
+          <messages-from-client-panel/>
+        </v-flex>
+        <v-flex xs6 class="mt-2 ml-1">
+          <messages-faq-panel/>
+        </v-flex>
+      </v-layout>
     </v-flex>
-    <v-flex xs12>
-      <vlabs-panel class="mt-2"/>
+    <v-flex v-if="!admin">
+      <v-layout row justify-center wrap>
+        <v-flex xs6 class="ml-1 mt-2">
+          <vlab-client-panel/>
+        </v-flex>
+        <v-flex xs6 class="ml-1 mt-5">
+          <messages-client-panel class="mt-2"/>
+        </v-flex>
+      </v-layout>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import VlabsPanel from "./ItemVlab/VlabsPanel";
-import VlabsSearchPanel from "./ItemVlab/VlabsSearchPanel";
-import VlabService from "@/services/VlabService";
+import VlabService from "@/services/Vlab/VlabService";
+import UserService from "@/services/User/UserService";
+import VlabsPanel from "./DashboardAdmin/VlabsPanel";
+import UsersPanel from "./DashboardAdmin/UsersPanel";
+import MessagesFromClientPanel from "./DashboardAdmin/MessagesFromClientPanel";
+import MessagesFaqPanel from "./DashboardAdmin/MessagesFAQPanel";
+import MessagesClientPanel from "./DashboardClient/MessagesClientPanel";
+import VlabClientPanel from "./DashboardClient/VlabClientPanel";
 
 export default {
   data() {
     return {
-      vlabs: null
+      vlabs: null,
+      users: null
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   async mounted() {
-    // request to the DB
     this.vlabs = (await VlabService.getAllVlabs()).data;
+    this.users = (await UserService.index()).data;
   },
   components: {
     VlabsPanel,
-    VlabsSearchPanel
+    UsersPanel,
+    MessagesFromClientPanel,
+    MessagesFaqPanel,
+    MessagesClientPanel,
+    VlabClientPanel
   },
   props: {
     main: {
-      type: Object
+      type: Object,
+      require: true
     }
   }
 };

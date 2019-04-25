@@ -1,52 +1,27 @@
 <template>
-  <v-layout v-if="isUserLoggedIn" row justify-center>
-    <v-flex xs6 v-if="isUserLoggedIn">
-      <vlabs-users/>
-      <vlabs-users-logs class="mt-2"/>
-    </v-flex>
-    <v-flex
-      :class="{
-          xs12: !isUserLoggedIn,
-          xs6: isUserLoggedIn
-        }"
-      class="ml-2"
-    >
-      <vlabs-search-panel/>
-      <vlabs-panel class="mt-2"/>
-    </v-flex>
+  <v-layout v-if="isUserLoggedIn">
+    <vlab-admin v-if="admin"/>
+    <vlab-user v-if="!admin"/>
   </v-layout>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import VlabsPanel from "./ItemVlab/VlabsPanel";
-import VlabsSearchPanel from "./ItemVlab/VlabsSearchPanel";
-import VlabService from "@/services/VlabService";
-import VlabsUsers from "./ItemVlab/VlabsUsers";
-import VlabsUsersLogs from "./ItemVlab/VlabsUsersLogs";
+import VlabAdmin from "./Admin/VlabAdmin";
+import VlabUser from "./User/VlabUser";
 
 export default {
-  data() {
-    return {
-      vlabs: null
-    };
-  },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
-  },
-  async mounted() {
-    // request to the DB
-    this.vlabs = (await VlabService.getAllVlabs()).data;
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   components: {
-    VlabsPanel,
-    VlabsSearchPanel,
-    VlabsUsers,
-    VlabsUsersLogs
+    VlabAdmin,
+    VlabUser
   },
   props: {
     main: {
-      type: Object
+      type: Object,
+      require: true
     }
   }
 };
