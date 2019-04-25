@@ -8,8 +8,8 @@
       @click="mainNav({name: 'home'})"
     >
     <v-spacer></v-spacer>
-    <v-toolbar-items>
-      <v-btn flat :to="{name: 'messageFAQ'}">
+    <v-toolbar-items v-if="!isUserLoggedIn">
+      <v-btn flat :to="{name: 'message'}">
         <v-icon grey x-large>email</v-icon>
       </v-btn>
     </v-toolbar-items>
@@ -28,7 +28,7 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["user", "isUserLoggedIn", "dark"])
+    ...mapState(["user", "isUserLoggedIn", "dark", "admin"])
   },
   methods: {
     logout() {

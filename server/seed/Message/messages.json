@@ -1,17 +1,44 @@
 [
   {
-    "email": "testing@gmail.com",
     "message": "Bonjour, je souhaites avoir un OXE",
-    "admin": false
+    "purpose": "need of a new device",
+    "user": true
   },
   {
-    "email": "gtest@gmail.com",
-    "message": "Oui bien sur",
+    "message": "Bonjour, je souhaites avoir plus de credential",
+    "purpose": "Need of credentials",
+    "user": true
+  },
+  {
+    "message": "Oui bien sur, il y a un delai de 2j mini",
     "admin": true
   },
   {
-    "email": "testing@gmail.com",
-    "message": "Bonjour, je souhaites avoir un OXE",
+    "message": "D'accord, je vous fais ça de suite cher client",
     "admin": true
+  },
+  {
+    "lastname": "Dupond",
+    "firstname": "George",
+    "email" : "huckgeoffroy.67@gmail.com",
+    "purpose": "Question about UX",
+    "message": "Do you think you got a good ux ?",
+    "faq": true
+  },
+  {
+    "lastname": "Jean",
+    "firstname": "Alain",
+    "email" : "huckgeoffroy.67@gmail.com",
+    "purpose": "Question about use of webapp",
+    "message": "Why using this aapp where as an other one ?",
+    "faq": true
+  },
+  {
+    "lastname": "Arnaud",
+    "firstname": "Frank",
+    "email" : "huckgeoffroy.67@gmail.com",
+    "purpose": "How to use?",
+    "message": "You need first to start a trial to be able to get credential",
+    "faq": true
   }
 ]

@@ -13,7 +13,7 @@
         <v-list-tile-avatar>
           <img src="https://via.placeholder.com/150">
         </v-list-tile-avatar>
-        <v-list-tile-title>{{userview.firstname}} {{userview.lastname}}</v-list-tile-title>
+        <v-list-tile-title>{{userview.lastname}} {{userview.firstname}}</v-list-tile-title>
       </v-list-tile>
     </v-list>
     <v-list>
@@ -51,7 +51,7 @@
       </v-list-tile>
       <br>
       <br>
-      <v-list-tile class="info" @click="navTo({name: 'helps'})">
+      <v-list-tile v-if="!admin" class="info" @click="navTo({name: 'helps'})">
         <v-list-tile-action>
           <v-icon x-large>help</v-icon>
         </v-list-tile-action>

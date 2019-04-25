@@ -1,8 +1,8 @@
 [
   {
     "companyname": "Sermes",
-    "firstname": "Huck",
-    "lastname": "Geoffroy",
+    "firstname": "Geoffroy",
+    "lastname": "HUCK",
     "email": "gtest@gmail.com",
     "password": "12345678",
     "purpose": "enterprise",
@@ -10,8 +10,8 @@
   },
   {
     "companyname": "ALE",
-    "firstname": "Gadot",
-    "lastname": "Frank",
+    "firstname": "Frank",
+    "lastname": "GADOT",
     "email": "ftest@gmail.com",
     "password": "12345678",
     "purpose": "testing",

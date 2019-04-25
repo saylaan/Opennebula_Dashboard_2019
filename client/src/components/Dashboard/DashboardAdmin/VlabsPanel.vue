@@ -31,7 +31,6 @@ export default {
         this.vlabs = (await VlabService.getAllVlabs()).data;
         for (let vlab in this.vlabs) {
           this.totalVlabs++
-          console.log(vlab)
         }
       }
     }

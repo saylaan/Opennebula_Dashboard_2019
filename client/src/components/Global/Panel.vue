@@ -1,10 +1,10 @@
 <template>
   <v-layout class="white elevation-2" column>
     <v-flex>
-    <v-toolbar class="grey lighten-1" flat dense>
-      <v-toolbar-title>{{title}}</v-toolbar-title>
-      <slot name="action"/>
-    </v-toolbar>
+      <v-toolbar class="grey lighten-1" flat dense>
+        <v-toolbar-title>{{title}}</v-toolbar-title>
+        <slot name="action"/>
+      </v-toolbar>
     </v-flex>
 
     <v-flex class="pl-4 pr-4 pt-2 pb-2">
@@ -20,13 +20,11 @@ export default {
 </script>
 
 <style scoped>
-
 .v-toolbar {
   opacity: 0.8;
 }
 
 .v-flex {
-  background-color: #DDD7E5;
+  background-color: #ddd7e5;
 }
-
 </style>

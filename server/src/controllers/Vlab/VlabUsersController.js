@@ -66,6 +66,7 @@ module.exports = {
     try {
       const UserId = req.user.id
       const { vlabuserId } = req.params
+
       const vlabuser = await VlabUser.findOne({
         where: {
           id: vlabuserId,

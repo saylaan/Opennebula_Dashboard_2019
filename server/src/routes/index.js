@@ -29,7 +29,6 @@ module.exports = function(app){
         console.log('###############  File or Folder : ', file)
         const name = file.substr(0, file.indexOf('.'));
         if (isDirRoutes(file)) {
-            console.log('WTF')
             require('./' + name)(app);
         }
         for (let i = 0; i < folderRoutes.length; i++) {

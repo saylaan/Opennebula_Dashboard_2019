@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Main/Home'
 import Register from '@/components/Main/Register'
 import SignIn from '@/components/Main/SignIn'
-import MessageFAQ from '@/components/Main/MessageFAQ'
+import Message from '@/components/Main/Message'
 import Vlabs from '@/components/Vlabs/Index'
 import CreateVlab from '@/components/Vlabs/Admin/Manage/CreateVlab'
 import EditVlab from '@/components/Vlabs/Admin/Manage/EditVlab'
@@ -25,6 +25,10 @@ export default new Router({
       component: Home
     },
     {
+      path: '*',
+      redirect: 'home'
+    },
+    {
       path: '/register',
       name: 'register',
       component: Register
@@ -35,41 +39,14 @@ export default new Router({
       component: SignIn
     },
     {
-      path: '/messageFAQ',
-      name: 'messageFAQ',
-      component: MessageFAQ
-    },
-    {
-      path: '/vlabs',
-      name: 'vlabs',
-      component: Vlabs
-    },
-    {
-      path: '/vlabs/create',
-      name: 'vlab-create',
-      component: CreateVlab
-    },
-    {
-      path: '/vlabs/:vlabId',
-      name: 'vlab',
-      component: ViewVlab
-    },
-    {
-      path: '/vlabs/:vlabId/edit',
-      name: 'edit-vlab',
-      component: EditVlab
+      path: '/message',
+      name: 'message',
+      component: Message
     },
     {
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
-    },
-    // {
-    //   path: '/dashboard/message/reply'
-    // }
-    {
-      path: '*',
-      redirect: 'home'
     },
     {
       path: '/settings',
@@ -95,6 +72,26 @@ export default new Router({
       path: '/users/:userId/edit',
       name: 'edit-user',
       component: EditUser
+    },
+    {
+      path: '/vlabs',
+      name: 'vlabs',
+      component: Vlabs
+    },
+    {
+      path: '/vlabs/create',
+      name: 'vlab-create',
+      component: CreateVlab
+    },
+    {
+      path: '/vlabs/:vlabId',
+      name: 'vlab',
+      component: ViewVlab
+    },
+    {
+      path: '/vlabs/:vlabId/edit',
+      name: 'edit-vlab',
+      component: EditVlab
     }
   ]
 })

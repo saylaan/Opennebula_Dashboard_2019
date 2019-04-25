@@ -48,7 +48,6 @@ export default {
         return;
       }
       const vlabId = this.$store.state.route.params.vlabId;
-      console.log(this.vlab);
       try {
         await VlabService.put(this.vlab);
         this.$router.push({
