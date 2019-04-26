@@ -21,7 +21,7 @@
             <v-timeline-item :color="`${steps[0].color}`" dark large right>
               <template v-slot:opposite>
                 <span
-                  :class="`headline font-weight-bold red--text text--lighten-4`"
+                  :class="`headline font-weight-bold grey--text text--darken-3`"
                   v-text="`Step ${steps[0].step}`"
                 ></span>
               </template>
@@ -40,7 +40,7 @@
             <v-timeline-item :color="`${steps[1].color}`" fill-dot dark left small>
               <template v-slot:opposite>
                 <span
-                  :class="`headline font-weight-bold red--text text--lighten-4`"
+                  :class="`headline font-weight-bold grey--text text--darken-3`"
                   v-text="`Step ${steps[1].step}`"
                 ></span>
               </template>
@@ -57,7 +57,7 @@
             <v-timeline-item :color="`${steps[2].color}`" dark large right>
               <template v-slot:opposite>
                 <span
-                  :class="`headline font-weight-bold red--text text--lighten-4`"
+                  :class="`headline font-weight-bold grey--text text--darken-3`"
                   v-text="`Step ${steps[2].step}`"
                 ></span>
               </template>
@@ -74,7 +74,7 @@
             <v-timeline-item :color="`${steps[3].color}`" dark fill-dot left small>
               <template v-slot:opposite>
                 <span
-                  :class="`headline font-weight-bold red--text text--lighten-4`"
+                  :class="`headline font-weight-bold grey--text text--darken-3`"
                   v-text="`Step ${steps[3].step}`"
                 ></span>
               </template>
@@ -91,7 +91,7 @@
             <v-timeline-item :color="`${steps[4].color}`" dark large right>
               <template v-slot:opposite>
                 <span
-                  :class="`headline font-weight-bold red--text text--lighten-4`"
+                  :class="`headline font-weight-bold grey--text text--darken-3`"
                   v-text="`Step ${steps[4].step}`"
                 ></span>
               </template>
@@ -107,7 +107,7 @@
                         <v-timeline-item :color="`${steps[5].color}`" dark fill-dot left small>
               <template v-slot:opposite>
                 <span
-                  :class="`headline font-weight-bold red--text text--lighten-4`"
+                  :class="`headline font-weight-bold grey--text text--darken-3`"
                   v-text="`Step ${steps[5].step}`"
                 ></span>
               </template>
@@ -123,7 +123,7 @@
             <v-timeline-item :color="`${steps[6].color}`" dark right large>
               <template v-slot:opposite>
                 <span
-                  :class="`display-1 font-weight-bold red--text text--lighten-4`"
+                  :class="`display-1 font-weight-bold grey--text text--darken-3`"
                   v-text="`${steps[6].step}`"
                 ></span>
               </template>
