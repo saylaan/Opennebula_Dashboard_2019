@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <panel v-if="isUserLoggedIn" title="Message from client">
+    <panel v-if="isUserLoggedIn" title="Message from admin">
      <v-layout row>
         <v-flex xs9>
           <v-layout column>

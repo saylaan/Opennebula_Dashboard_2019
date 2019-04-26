@@ -51,7 +51,7 @@
       </v-list-tile>
       <br>
       <br>
-      <v-list-tile v-if="!admin" class="info" @click="navTo({name: 'helps'})">
+      <v-list-tile v-if="!admin" class="info" href="http://vlab.aapp.al-enterprise.com/doku.php">
         <v-list-tile-action>
           <v-icon x-large>help</v-icon>
         </v-list-tile-action>
