@@ -3,6 +3,7 @@
     v-if="isUserLoggedIn"
     v-model="main.primaryDrawer.model"
     :clipped="main.primaryDrawer.clipped"
+    :mini-variant="main.primaryDrawer.mini"
     fixed
     overflow
     app

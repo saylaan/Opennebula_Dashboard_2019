@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Main/Home'
+
 import Register from '@/components/Main/Register'
 import SignIn from '@/components/Main/SignIn'
-import Message from '@/components/Main/Message'
+
+import Message from '@/components/Message/Message'
+import ViewMessage from '@/components/Message/ViewMessage/Index'
+
 import Vlabs from '@/components/Vlabs/Index'
 import CreateVlab from '@/components/Vlabs/Admin/Manage/CreateVlab'
 import EditVlab from '@/components/Vlabs/Admin/Manage/EditVlab'
 import ViewVlab from '@/components/Vlabs/Admin/ViewVlab/Index'
 import Dashboard from '@/components/Dashboard/Index'
+
 import Settings from '@/components/Settings/Index'
+
 import Users from '@/components/Users/Index'
 import CreateUser from '@/components/Users/Manage/CreateUser'
 import EditUser from '@/components/Users/Manage/EditUser'
@@ -42,6 +48,11 @@ export default new Router({
       path: '/message',
       name: 'message',
       component: Message
+    },
+    {
+      path: '/message/:messageId',
+      name: 'message-view',
+      component: ViewMessage
     },
     {
       path: '/dashboard',

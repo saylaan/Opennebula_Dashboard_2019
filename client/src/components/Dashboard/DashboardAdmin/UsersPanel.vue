@@ -28,8 +28,8 @@ export default {
   watch: {
     "$route.query.find": {
       immediate: true,
-      async handler(value) {
-        this.users = (await UserService.index(value)).data;
+      async handler() {
+        this.users = (await UserService.index()).data;
         for (let user in this.users) {
           this.totalUsers++;
         }

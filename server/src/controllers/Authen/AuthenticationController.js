@@ -1,6 +1,8 @@
 const { User } = require('../../models')
 const jwt = require('jsonwebtoken') // for token authen
 const config = require('../../config/config')
+const Promise = require('bluebird')
+const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'))
 
 function jwtSignUser(user) { // Override the function who sign a user obj using jwt library to get back a token
   const ONE_WEEK = 60 * 60 * 24 * 7
@@ -13,10 +15,16 @@ module.exports = {
   async register(req, res) {
     try {
       const user = await User.create(req.body)
+      const tmpUser = user.toJSON()
+      const hashCreate = bcrypt.hashSync(Math.floor((Math.random() * 99999999) * 54), null, null)  
+      // user.password = user.hashPassword(user.password)
+      user.active_hash = hashCreate
       const userJson = user.toJSON()
+      console.log('hash', hashCreate)
+      console.log('userJson', userJson)
       res.send({
         user: userJson,
-        token: jwtSignUser(userJson)
+        token: jwtSignUser(tmpUser)
       })
     } catch (err) {
       res.status(400).send({ // send type error
@@ -54,10 +62,5 @@ module.exports = {
       })
     }
   }
-  /* only for testing the response on Postman */
-  //register (req, res) { // express endpoint / middleware
-  // res.send({
-  //   message : `Hello ${req.body.email}! Your user was registered! Have fun!`
-  // })
-  //}
+
 }

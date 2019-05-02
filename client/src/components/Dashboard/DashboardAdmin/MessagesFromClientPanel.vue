@@ -1,36 +1,47 @@
 <template>
   <v-layout>
     <panel v-if="isUserLoggedIn" title="Message from client">
-     <v-layout row>
-        <v-flex xs9>
+      <v-layout row>
+        <v-flex xs12>
           <v-layout column>
-            <v-flex v-for="message in messages" :key="message.email" class="email">
-              <v-layout row>
-                <v-flex xs6 class="message-lastname">
-                  <h5>name : {{message.lastname}}</h5>
+            <v-layout row align-center>
+              <v-flex xs2>
+                <h5 :class="`title font-weight-bold grey--text text--darken-3`">Lastname</h5>
+              </v-flex>
+              <v-flex class="ml-2" xs2>
+                <h5 :class="`title font-weight-bold grey--text text--darken-3`">Firstname</h5>
+              </v-flex>
+              <v-flex xs6>
+                <h5 :class="`title font-weight-bold grey--text text--darken-3`">Message</h5>
+              </v-flex>
+              <v-flex xs2>
+              </v-flex>
+            </v-layout>
+            <v-flex v-for="message in messages" :key="message.message" class="email">
+              <v-layout align-center row>
+                <v-flex xs2 class="message-lastname">
+                  <h5>{{message.lastname}}</h5>
                 </v-flex>
-                <v-flex xs6 class="message-firstname">
+                <v-flex xs2 class="message-firstname">
                   <h5>{{message.firstname}}</h5>
                 </v-flex>
-                <v-flex xs12 class="message-msg">
+                <v-flex xs6 class="message-message">
                   <h5>{{message.message}}</h5>
+                </v-flex>
+                <v-flex xs2>
+                  <v-layout align-center column>
+                    <v-flex>
+                      <v-btn :to="{name: 'message-view', params: {
+                        messageId: message.id
+                      }}" class="grey darken-1">Reply</v-btn>
+                    </v-flex>
+                    <v-flex>
+                      <v-btn class="grey darken-1" @click="deleteMsg(message.id)">Delete</v-btn>
+                    </v-flex>
+                  </v-layout>
                 </v-flex>
               </v-layout>
             </v-flex>
-          </v-layout>
-        </v-flex>
-        <v-flex xs3>
-          <v-layout column>
-          <v-flex>
-             <v-btn :to="{name: 'message'}"
-               class="grey darken-1"
-             >Reply</v-btn>
-           </v-flex>
-           <v-flex>
-             <v-btn
-               class="grey darken-1"
-             >Delete</v-btn>
-           </v-flex>
           </v-layout>
         </v-flex>
       </v-layout>
@@ -41,6 +52,7 @@
 <script>
 import { mapState } from "vuex";
 import MessageService from "@/services/Message/MessageService";
+import UserService from "@/services/User/UserService";
 
 export default {
   data() {
@@ -51,13 +63,19 @@ export default {
   computed: {
     ...mapState(["isUserLoggedIn", "user"])
   },
+  methods: {
+    async deleteMsg(messageId) {
+      console.log('test')
+    }
+  },
   async mounted() {
-    this.messages = await MessageService.indexCli().data;
+    //    add this method for better easy use : async getName(userid) {const test = (await UserService.getUser(userid)).data}
+    this.messages = (await MessageService.index(2)).data;
   },
   watch: {
     immediate: true,
     async handler() {
-      this.messages = await MessageService.indexCli().data;
+      this.messages = (await MessageService.index(2)).data;
     }
   }
 };
@@ -70,11 +88,11 @@ export default {
   overflow: scroll;
 }
 
-.message-lastname {
+.message-firstname {
   font-size: 20px;
 }
 
-.message-firstname {
+.message-lastname {
   font-size: 20px;
 }
 

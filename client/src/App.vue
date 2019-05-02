@@ -1,17 +1,17 @@
 <template>
   <v-app>
-    <v-jumbotron :gradient="grad" style="min-height:100%">
     <nav-bar v-if="isUserLoggedIn" v-bind:main="main"/>
     <toolbar v-bind:main="main"/>
+    <v-jumbotron :gradient="grad" style="height:100%; overflow:auto;">
     <v-content>
       <v-container fluid>
         <router-view v:bind:main="main"></router-view>
       </v-container>
     </v-content>
+    </v-jumbotron>
     <v-footer :dark="dark" :inset="main.inset" app>
       <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
-    </v-jumbotron>
   </v-app>
 </template>
 
@@ -28,7 +28,8 @@ export default {
       primaryDrawer: {
         model: null,
         type: "default (no property)",
-        clipped: false
+        clipped: false,
+        mini: false
       }
     }
   }),

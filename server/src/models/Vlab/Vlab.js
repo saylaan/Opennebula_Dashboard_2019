@@ -3,7 +3,11 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     name: DataTypes.STRING,
     time: DataTypes.STRING,
-    vlabImage: DataTypes.STRING
+    vlabImage: DataTypes.STRING,
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   })
 
   return Vlab

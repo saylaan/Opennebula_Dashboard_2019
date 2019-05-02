@@ -1,19 +1,27 @@
 [
   {
+    "userid": 3,
+    "lastname": "Testname",
+    "firstname": "testname",
     "message": "Bonjour, je souhaites avoir un OXE",
     "purpose": "need of a new device",
     "user": true
   },
   {
+    "userid": 3,
+    "lastname": "Testname",
+    "firstname": "testname",
     "message": "Bonjour, je souhaites avoir plus de credential",
     "purpose": "Need of credentials",
     "user": true
   },
   {
+    "userid": 2,
     "message": "Oui bien sur, il y a un delai de 2j mini",
     "admin": true
   },
   {
+    "userid": 1,
     "message": "D'accord, je vous fais ça de suite cher client",
     "admin": true
   },
@@ -28,7 +36,7 @@
   {
     "lastname": "Jean",
     "firstname": "Alain",
-    "email" : "huckgeoffroy.67@gmail.com",
+    "email" : "huckgeoffroytest@gmail.com",
     "purpose": "Question about use of webapp",
     "message": "Why using this aapp where as an other one ?",
     "faq": true
@@ -36,9 +44,9 @@
   {
     "lastname": "Arnaud",
     "firstname": "Frank",
-    "email" : "huckgeoffroy.67@gmail.com",
+    "email" : "huckgeoffroyno@gmail.com",
     "purpose": "How to use?",
-    "message": "You need first to start a trial to be able to get credential",
+    "message": "I dont understand ok can i register and use the plateform",
     "faq": true
   }
 ]

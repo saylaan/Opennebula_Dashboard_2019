@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
+    userid: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
     lastname: {
       type: DataTypes.STRING,
       defaultValue: null
@@ -25,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     user: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    date: {
+      type: DataTypes.STRING,
+      defaultValue: null
     }
   })
 

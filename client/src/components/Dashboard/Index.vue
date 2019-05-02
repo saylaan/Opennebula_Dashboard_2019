@@ -31,8 +31,6 @@
 
 <script>
 import { mapState } from "vuex";
-import VlabService from "@/services/Vlab/VlabService";
-import UserService from "@/services/User/UserService";
 import VlabsPanel from "./DashboardAdmin/VlabsPanel";
 import UsersPanel from "./DashboardAdmin/UsersPanel";
 import MessagesFromClientPanel from "./DashboardAdmin/MessagesFromClientPanel";
@@ -41,18 +39,8 @@ import MessagesClientPanel from "./DashboardClient/MessagesClientPanel";
 import VlabClientPanel from "./DashboardClient/VlabClientPanel";
 
 export default {
-  data() {
-    return {
-      vlabs: null,
-      users: null
-    };
-  },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "admin"])
-  },
-  async mounted() {
-    this.vlabs = (await VlabService.getAllVlabs()).data;
-    this.users = (await UserService.index()).data;
   },
   components: {
     VlabsPanel,

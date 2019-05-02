@@ -80,6 +80,13 @@ export default {
           console.log(err);
         }
       } else {
+        const areAllFieldsFilledIn = Object.keys(this.userview).every(
+          key => !!this.userview[key]
+        );
+        if (!areAllFieldsFilledIn) {
+          this.error = "Please fill in all the required fields.";
+          return;
+        }
         if (!this.userview.password || !this.userview.email) {
           this.error = "Please fill in all the required fields.";
           return;
