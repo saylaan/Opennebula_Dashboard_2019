@@ -14,7 +14,17 @@ export default { // Hitting the end point register
   post(messageId, msg) {
     return Api().post(`message/${messageId}`, msg)
   },
-  deleteMsg(messageuserId) {
-    return Api().delete(`dashboard/${messageuserId}`)
+  postNewMsg(msg) {
+    return Api().post('message', msg)
+  },
+  deleteMsgPost(messageId) {
+    return Api().delete(`message/${messageId}`)
+  },
+  deleteMessage(messageId) {
+    return Api().delete('dashboard', {
+      params: {
+        messageId: messageId
+      }
+    })
   }
 }

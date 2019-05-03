@@ -1,28 +1,28 @@
 [
   {
-    "companyname": "Sermes",
-    "firstname": "Geoffroy",
     "lastname": "HUCK",
+    "firstname": "Geoffroy",
     "email": "gtest@gmail.com",
     "password": "12345678",
+    "companyname": "Sermes",
     "purpose": "enterprise",
     "admin": true
   },
   {
-    "companyname": "ALE",
-    "firstname": "Frank",
     "lastname": "GADOT",
+    "firstname": "Frank",
     "email": "ftest@gmail.com",
     "password": "12345678",
+    "companyname": "ALE",
     "purpose": "testing",
     "admin": true
   },
   {
-    "companyname": "test",
-    "firstname": "testname",
     "lastname": "Testname",
+    "firstname": "testname",
     "email": "testing@gmail.com",
     "password": "12345678",
+    "companyname": "test",
     "purpose": "enterprise"
   }
 ]

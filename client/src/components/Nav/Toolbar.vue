@@ -8,7 +8,7 @@
       @click="mainNav({name: 'home'})"
     >
     <v-spacer></v-spacer>
-    <v-toolbar-items v-if="!isUserLoggedIn">
+    <v-toolbar-items v-if="!admin">
       <v-btn flat :to="{name: 'message'}">
         <v-icon grey x-large>email</v-icon>
       </v-btn>

@@ -11,4 +11,12 @@ module.exports = (app) => {
     app.post('/message/:messageId',
         isAuthenticated,
         MessageController.post)
+    app.post('/message',
+        MessageController.postNewMsg)
+    app.delete('/message/:messageId',
+        isAuthenticated,
+        MessageController.delete)
+    app.delete('/dashboard',
+        isAuthenticated,
+        MessageController.deleteBis)
 }

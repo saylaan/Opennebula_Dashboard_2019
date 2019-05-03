@@ -2,18 +2,18 @@ const VmsController = require('../../controllers/Vm/VmsController')
 const isAuthenticated = require('../../policies/isAuthenticated')
 
 module.exports = (app) => {
-    app.get('/vms',
+    app.get('/vm',
         isAuthenticated,
-        VmsController.index)
-    // app.get('/vms/:userId',
-    //     isAuthenticated,
-    //     VmsController.getUser)
-    // app.put('/vms/:userId',
-    //     VmsController.put)
-    // app.put('/settings/:userId',
-    //     isAuthenticated,
-    //     VmsController.updateSetting)
-    app.post('/vms',
+        UrlsController.index)
+    app.get('/vm/:vmId',
         isAuthenticated,
-        VmsController.post)
+        UrlsController.getVm)
+    app.put('/vm/:vmId',
+        UrlsController.put)
+    app.delete('/vm/:vmId',
+        isAuthenticated,
+        UrlsController.delete)
+    app.post('/vm',
+        isAuthenticated,
+        UrlsController.post)
 }

@@ -1,15 +1,15 @@
 import Api from '@/services/Api'
 
-export default { // Hitting the end point register
-  index(urluser) {
+export default {
+  index(urlId) {
     return Api().get('urlsUser', {
-      params: urluser
+      params: urlId
     })
   },
-  post(urluser) {
-    return Api().post('urlsUser', urluser)
+  post(urlUser) {
+    return Api().post('urlsUser', urlUser)
   },
-  delete(urluserId) {
-    return Api().delete(`urlsUser/${urluserId}`)
+  delete(urlUserId) {
+    return Api().delete(`urlsUser/${urlUserId}`)
   }
 }

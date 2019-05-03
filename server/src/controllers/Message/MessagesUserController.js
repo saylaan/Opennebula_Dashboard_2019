@@ -45,5 +45,51 @@ module.exports = {
         err: 'An error has occured while trying to create the message for the user'
       })
     }
+  },
+  async delete(req, res) {
+    try {
+      const UserId = req.user.id
+      const { messageUserId } = req.params
+
+      const messageuser = await MessageUser.findOne({
+        where: {
+          id: messageUserId,
+          UserId: UserId
+        }
+      })
+      if (!messageuser) {
+        return res.status(403).send({
+          error: 'you do not have access to this vlabuser'
+        })
+      }
+      await messageuser.destroy()
+      res.send(messageuser)
+    } catch (err) {
+      res.status(500).send({
+        err: 'An error has occured while trying to delete the message User'
+      })
+    }
+  },
+  async delAdmin(req, res) {
+    try {
+      const { messageUserId } = req.params
+
+      const messageuser = await MessageUser.findOne({
+        where: {
+          id: messageUserId
+        }
+      })
+      if (!messageuser) {
+        return res.status(403).send({
+          error: 'you do not have access to this vlabuser'
+        })
+      }
+      await messageuser.destroy()
+      res.send(messageuser)
+    } catch (err) {
+      res.status(500).send({
+        err: 'An error has occured while trying to delete the message User'
+      })
+    }
   }
 }

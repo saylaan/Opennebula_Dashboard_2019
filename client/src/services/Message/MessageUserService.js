@@ -1,15 +1,18 @@
 import Api from '@/services/Api'
 
 export default { // Hitting the end point register
-  index(urluser) {
-    return Api().get('urlsUser', {
-      params: urluser
+  index(messageId) {
+    return Api().get('messagesUser', {
+      params: messageId
     })
   },
-  post(urluser) {
-    return Api().post('urlsUser', urluser)
+  post(messageUser) {
+    return Api().post('messagesUser', messageUser)
   },
-  delete(urluserId) {
-    return Api().delete(`urlsUser/${urluserId}`)
+  delete(messageUserId) {
+    return Api().delete(`messagesUser/${messageUserId}`)
+  },
+  delAdmin(messageUserId) {
+    return Api().delete(`dashboard/${messageUserId}`)
   }
 }

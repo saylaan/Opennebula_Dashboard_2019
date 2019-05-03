@@ -59,7 +59,9 @@ export default {
         lastname: null,
         message: null,
         admin: false,
-        user: false
+        user: false,
+        faq: false,
+        userid: 0
       },
       error: null,
       userview: null,
@@ -79,15 +81,22 @@ export default {
     },
     async sendMessage() {
       this.error = null
+
+      // get User
       this.userview = (await UserService.getUser(this.user.id)).data
-      if (this.admin) {
-        this.msg.admin = true
-      } else {
+      if (this.message.user) {
         this.msg.user = true
+      } else if (this.message.faq) {
+        this.msg.faq = true
+      } else {
+        this.msg.admin = true
       }
       this.msg.email = this.userview.email
       this.msg.firstname = this.userview.firstname
       this.msg.lastname = this.userview.lastname
+      this.msg.userid = this.userview.id
+
+      // Checking all filled
       const areAllFieldsFilledIn = Object.keys(this.msg).every(
         key => !!this.msg[key]
       );
@@ -95,21 +104,35 @@ export default {
       //   this.error = "Please fill in all the required fields.";
       //   return;
       // }
+
+      // New date for the message
       const day = this.formatted_date()
+
+      // Duplicate msg post
       const newMsg = {
         "email": this.msg.email,
         "firstname": this.msg.firstname,
         "lastname": this.msg.lastname,
         "message": this.message.lastname + ' ' + this.message.firstname + ' ' +
-        this.message.createdAt + ': \n' + this.message.message + '\n\n' +
+        this.message.createdAt + ': \n\n' + this.message.message + '\n\n' +
         this.msg.lastname + ' ' + this.msg.firstname + ' ' + day + ': \n' +
-        this.msg.message,
+        this.msg.message + '\n\n',
         "admin": this.msg.admin,
         "user": this.msg.user,
-        "date": day
+        "faq": this.msg.faq,
+        "date": day,
+        "userid": this.msg.userid
       }
+
+      // post the message and delete older
       try {
         await MessageService.post(this.message.id, newMsg)
+        try {
+          this.message = await MessageService.deleteMsgPost(this.message.id)
+          this.message = null
+        } catch (err) {
+          console.log(err)
+        }
         this.$router.push({name: "dashboard"})
       } catch (err) {
         console.log(err)

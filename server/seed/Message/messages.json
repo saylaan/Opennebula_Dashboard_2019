@@ -17,12 +17,18 @@
   },
   {
     "userid": 2,
+    "lastname": "GADOT",
+    "firstname": "Frank",
     "message": "Oui bien sur, il y a un delai de 2j mini",
+    "purpose": "help",
     "admin": true
   },
   {
     "userid": 1,
+    "lastname": "HUCK",
+    "firstname": "Geoffroy",
     "message": "D'accord, je vous fais ça de suite cher client",
+    "purpose": "help",
     "admin": true
   },
   {

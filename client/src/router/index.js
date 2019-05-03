@@ -8,13 +8,13 @@ import SignIn from '@/components/Main/SignIn'
 import Message from '@/components/Message/Message'
 import ViewMessage from '@/components/Message/ViewMessage/Index'
 
+import Dashboard from '@/components/Dashboard/Index'
+
 import Vlabs from '@/components/Vlabs/Index'
 import CreateVlab from '@/components/Vlabs/Admin/Manage/CreateVlab'
 import EditVlab from '@/components/Vlabs/Admin/Manage/EditVlab'
-import ViewVlab from '@/components/Vlabs/Admin/ViewVlab/Index'
-import Dashboard from '@/components/Dashboard/Index'
-
 import Settings from '@/components/Settings/Index'
+import ViewVlab from '@/components/Vlabs/ViewVlab/Index'
 
 import Users from '@/components/Users/Index'
 import CreateUser from '@/components/Users/Manage/CreateUser'

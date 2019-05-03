@@ -2,18 +2,18 @@ const UrlsController = require('../../controllers/Url/UrlsController')
 const isAuthenticated = require('../../policies/isAuthenticated')
 
 module.exports = (app) => {
-    app.get('/urls',
+    app.get('/url',
         isAuthenticated,
         UrlsController.index)
-    // app.get('/urls/:userId',
-    //     isAuthenticated,
-    //     UrlsController.getUser)
-    // app.put('/urls/:userId',
-    //     UrlsController.put)
-    // app.put('/settings/:userId',
-    //     isAuthenticated,
-    //     UrlsController.updateSetting)
-    app.post('/urls',
+    app.get('/url/:urlId',
+        isAuthenticated,
+        UrlsController.getVm)
+    app.put('/url/:urlId',
+        UrlsController.put)
+    app.delete('/url/:urlId',
+        isAuthenticated,
+        UrlsController.delete)
+    app.post('/url',
         isAuthenticated,
         UrlsController.post)
 }

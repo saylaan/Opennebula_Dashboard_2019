@@ -5,15 +5,12 @@ module.exports = (app) => {
     app.get('/messagesuser',
         isAuthenticated,
         MessagesUserController.index)
-    // app.get('/messagesusers/:userId',
-    //     isAuthenticated,
-    //     MessagesUserController.getUser)
-    // app.put('/messagesusers/:userId',
-    //     MessagesUserController.put)
-    // app.put('/settings/:userId',
-    //     isAuthenticated,
-    //     MessagesUserController.updateSetting)
     app.post('/messagesuser',
         isAuthenticated,
         MessagesUserController.post)
+    app.delete('/messagesuser/:messageUserId',
+        isAuthenticated,
+        MessagesUserController.delete)
+    app.delete('/dashboard/:messageUserId',
+        MessagesUserController.delAdmin)
 }

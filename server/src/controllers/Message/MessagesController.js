@@ -19,7 +19,7 @@ module.exports = {
       } else if (value == 3) {
         messages = await Message.findAll({
           where: {
-            admin: true
+            admin: true,
           }
         })
       }
@@ -31,7 +31,16 @@ module.exports = {
     }
   },
   async post(req, res) {
-    console.log('test')
+    try {
+      const message = await Message.create(req.body)
+      res.send(message)
+    } catch (err) {
+      res.status(500).send({
+        error: 'An error has occured while trying to create a new message'
+      })
+    }
+  },
+  async postNewMsg(req, res) {
     try {
       const message = await Message.create(req.body)
       res.send(message)
@@ -53,6 +62,38 @@ module.exports = {
     } catch (err) {
       res.status(500).send({
         error: 'An error has occured while trying to get the message'
+      })
+    }
+  },
+  async delete(req, res) {
+    try {
+      const message = await Message.findByPk(req.params.messageId)
+      if (!message) {
+        return res.status(403).send({
+          error: 'The message does no exist'
+        })
+      }
+      await message.destroy()
+      res.send(message)
+    } catch (err) {
+      res.status(500).send({
+        err: 'An error has occured while trying to delete the Vlab User'
+      })
+    }
+  },
+  async deleteBis(req, res) {
+    try {
+      const message = await Message.findByPk(req.query.messageId)
+      if (!message) {
+        return res.status(403).send({
+          error: 'The message does no exist'
+        })
+      }
+      await message.destroy()
+      res.send(message)
+    } catch (err) {
+      res.status(500).send({
+        err: 'An error has occured while trying to delete the Vlab User'
       })
     }
   }

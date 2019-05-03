@@ -26,7 +26,7 @@
                   <h5>{{message.firstname}}</h5>
                 </v-flex>
                 <v-flex xs6 class="message-message">
-                  <h5>{{message.message}}</h5>
+                  <h5>{{message.createdAt}} : {{message.message}}</h5>
                 </v-flex>
                 <v-flex xs2>
                   <v-layout align-center column>
@@ -52,12 +52,14 @@
 <script>
 import { mapState } from "vuex";
 import MessageService from "@/services/Message/MessageService";
+import MessageUserService from "@/services/Message/MessageUserService";
 import UserService from "@/services/User/UserService";
 
 export default {
   data() {
     return {
-      messages: null
+      messages: null,
+      result: null
     };
   },
   computed: {
@@ -65,17 +67,25 @@ export default {
   },
   methods: {
     async deleteMsg(messageId) {
-      console.log('test')
+      try {
+        this.result = await MessageService.deleteMessage(messageId)
+        this.result = await MessageUserService.delAdmin(messageId)
+        this.result = null
+        this.messages = (await MessageService.index(2)).data;
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   async mounted() {
-    //    add this method for better easy use : async getName(userid) {const test = (await UserService.getUser(userid)).data}
     this.messages = (await MessageService.index(2)).data;
   },
   watch: {
-    immediate: true,
-    async handler() {
-      this.messages = (await MessageService.index(2)).data;
+    "$route.query.find": {
+      immediate: true,
+      async handler() {
+        this.messages = (await MessageService.index(2)).data;
+      }
     }
   }
 };

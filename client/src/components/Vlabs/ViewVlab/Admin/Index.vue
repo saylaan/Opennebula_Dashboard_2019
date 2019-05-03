@@ -1,16 +1,16 @@
 <template>
-  <v-layout column justify-center v-if="isUserLoggedIn && admin">
+  <v-layout column v-if="isUserLoggedIn && admin">
     <v-layout justify-center>
       <v-flex xs6>
         <vlab-data :vlab="vlab"/>
       </v-flex>
     </v-layout>
-    <v-layout row class="mt-2">
+    <v-layout row justify-center class="mt-2">
       <v-flex xs6>
-        <vlab-vms/>
+        <vlab-vm/>
       </v-flex>
       <v-flex xs6 class="ml-2">
-        <vlab-vm/>
+        <vlab-url/>
       </v-flex>
     </v-layout>
   </v-layout>
@@ -20,7 +20,7 @@
 import { mapState } from "vuex";
 import VlabData from "./VlabData";
 import VlabVm from "./VlabVM";
-import VlabVms from "./VlabVMs";
+import VlabUrl from "./VlabUrl";
 import VlabService from "@/services/Vlab/VlabService";
 import VlabUserLogService from "@/services/Vlab/VlabUserLogService";
 
@@ -46,7 +46,7 @@ export default {
   components: {
     VlabData,
     VlabVm,
-    VlabVms
+    VlabUrl
   }
 };
 </script>

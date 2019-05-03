@@ -6,15 +6,17 @@
           <br>
           <v-layout row>
             <v-flex xs6>
-              <v-text-field label="lastname" v-model="lastname"></v-text-field>
+              <v-text-field label="lastname" v-model="msg.lastname"></v-text-field>
             </v-flex>
             <v-flex class="ml-2" xs6>
-              <v-text-field label="firstname" v-model="firstname"></v-text-field>
+              <v-text-field label="firstname" v-model="msg.firstname"></v-text-field>
             </v-flex>
           </v-layout>
-          <v-text-field label="Email" v-model="email"></v-text-field>
+          <v-text-field label="Email" v-model="msg.email"></v-text-field>
           <br>
-          <v-textarea label="Message" v-model="msg"></v-textarea>
+          <v-text-field label="Purpose" v-model="msg.purpose"></v-text-field>
+          <br>
+          <v-textarea label="Message" v-model="msg.message"></v-textarea>
           <div class="danger-alert" v-html="error"/>
           <v-btn class="grey darken-1" @click="sendFAQ">Send</v-btn>
         </form>
@@ -22,18 +24,9 @@
       <panel title="Message" v-if="isUserLoggedIn && !admin">
         <form>
           <br>
-          <v-textarea label="Message" v-model="msg"></v-textarea>
+          <v-text-field label="Purpose" v-model="msg.purpose"></v-text-field>
           <br>
-          <v-text-field label="Purpose" v-mode="purpose"></v-text-field>
-          <br>
-          <div class="danger-alert" v-html="error"/>
-          <v-btn class="grey darken-1" @click="sendUser">Send</v-btn>
-        </form>
-      </panel>
-      <panel title="Message" v-if="isUserLoggedIn && admin">
-        <form>
-          <br>
-          <v-textarea label="Message" v-model="msg"></v-textarea>
+          <v-textarea label="Message" v-model="msg.message"></v-textarea>
           <br>
           <div class="danger-alert" v-html="error"/>
           <v-btn class="grey darken-1" @click="sendUser">Send</v-btn>
@@ -45,28 +38,119 @@
 
 <script>
 import MessageService from "@/services/Message/MessageService";
+import UserService from "@/services/User/UserService";
 import { mapState } from "vuex";
 
 export default {
   data() {
     return {
-      lastname: null,
-      firstname: null,
-      email: null,
-      msg: null,
-      purpose: null,
-      error: null
-    };
+      msg: {
+        email: null,
+        firstname: null,
+        lastname: null,
+        message: null,
+        admin: false,
+        user: false,
+        faq: false,
+        userid: 0,
+        purpose: null
+      },
+      error: null,
+      userview: null,
+      required: value => !!value || "Required."
+    }
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   methods: {
-    sendFAQ() {
-      this.error = null;
+    formatted_date() {
+      var result = ""
+      var d = new Date()
+      result += d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes()
+      return (result)
     },
-    sendUser() {
+    async sendFAQ() {
       this.error = null;
+
+      this.msg.faq = true
+      // Checking all filled
+      const areAllFieldsFilledIn = Object.keys(this.msg).every(
+        key => !!this.msg[key]
+      );
+      // if (!areAllFieldsFilledIn) {
+      //   this.error = "Please fill in all the required fields.";
+      //   return;
+      // }
+
+      // New date for the message
+      const day = this.formatted_date()
+
+      // Duplicate msg post
+      const newMsg = {
+        "email": this.msg.email,
+        "firstname": this.msg.firstname,
+        "lastname": this.msg.lastname,
+        "message": this.msg.lastname + ' ' + this.msg.firstname + ' ' + day + ': \n' +
+        this.msg.message + '\n\n',
+        "admin": this.msg.admin,
+        "user": this.msg.user,
+        "faq": this.msg.faq,
+        "date": day,
+        "userid": 0,
+        "purpose": this.msg.purpose
+      }
+
+      // post the message and delete older
+      try {
+        await MessageService.postNewMsg(newMsg)
+        this.$router.push({name: "home"})
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async sendUser() {
+      this.error = null;
+      this.userview = (await UserService.getUser(this.user.id)).data
+      this.msg.user = true
+      this.msg.email = this.userview.email
+      this.msg.firstname = this.userview.firstname
+      this.msg.lastname = this.userview.lastname
+      this.msg.userid = this.userview.id
+
+      // Checking all filled
+      const areAllFieldsFilledIn = Object.keys(this.msg).every(
+        key => !!this.msg[key]
+      );
+      // if (!areAllFieldsFilledIn) {
+      //   this.error = "Please fill in all the required fields.";
+      //   return;
+      // }
+
+      // New date for the message
+      const day = this.formatted_date()
+
+      // Duplicate msg post
+      const newMsg = {
+        "email": this.msg.email,
+        "firstname": this.msg.firstname,
+        "lastname": this.msg.lastname,
+        "message": this.msg.lastname + ' ' + this.msg.firstname + ' ' + day + ': \n' +
+        this.msg.message + '\n\n',
+        "admin": this.msg.admin,
+        "user": this.msg.user,
+        "faq": this.msg.faq,
+        "date": day,
+        "userid": this.msg.userid,
+        "purpose": this.msg.purpose
+      }
+      // post the message and delete older
+      try {
+        await MessageService.postNewMsg(newMsg)
+        this.$router.push({name: "dashboard"})
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 };

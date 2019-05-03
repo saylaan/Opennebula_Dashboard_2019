@@ -25,7 +25,7 @@
                   <h5>{{message.firstname}}</h5>
                 </v-flex>
                 <v-flex xs6 class="message-message">
-                  <h5>{{message.message}}</h5>
+                  <h5>{{message.createdAt}} : {{message.message}}</h5>
                 </v-flex>
                 <v-flex xs2>
                   <v-layout align-center column>
@@ -55,7 +55,8 @@ import MessageService from "@/services/Message/MessageService";
 export default {
   data() {
     return {
-      messages: null
+      messages: null,
+      result: null
     };
   },
   computed: {
@@ -63,16 +64,24 @@ export default {
   },
   methods: {
     async deleteMsg(messageId) {
-      console.log('test')
+      try {
+        this.result = await MessageService.deleteMessage(messageId)
+        this.result = null
+        this.messages = (await MessageService.index(1)).data;
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   async mounted() {
     this.messages = (await MessageService.index(1)).data;
   },
   watch: {
-    immediate: true,
-    async handler() {
-      this.messages = (await MessageService.index(1)).data;
+    "$route.query.find": {
+      immediate: true,
+      async handler() {
+        this.messages = (await MessageService.index(1)).data;
+      }
     }
   }
 };
