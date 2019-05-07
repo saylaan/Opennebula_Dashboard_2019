@@ -21,6 +21,12 @@ import CreateUser from '@/components/Users/Manage/CreateUser'
 import EditUser from '@/components/Users/Manage/EditUser'
 import ViewUser from '@/components/Users/ViewUser/index'
 
+import CreateUrl from '@/components/Vlabs/ViewVlab/Admin/Manage/CreateUrl'
+import EditUrl from '@/components/Vlabs/ViewVlab/Admin/Manage/EditUrl'
+
+import CreateVm from '@/components/Vlabs/ViewVlab/Admin/Manage/CreateVm'
+import EditVm from '@/components/Vlabs/ViewVlab/Admin/Manage/EditVm'
+
 Vue.use(Router)
 
 export default new Router({
@@ -103,6 +109,26 @@ export default new Router({
       path: '/vlabs/:vlabId/edit',
       name: 'edit-vlab',
       component: EditVlab
+    },
+    {
+      path: '/vlabs/:vlabId/create',
+      name: 'create-url',
+      component: CreateUrl
+    },
+    {
+      path: '/vlabs/:vlabId/editUrl/:urlId',
+      name: 'edit-url',
+      component: EditUrl
+    },
+    {
+      path: '/vlabs/:vlabId/create',
+      name: 'create-vm',
+      component: CreateVm
+    },
+    {
+      path: '/vlabs/:vlabId/editVm/:vmId',
+      name: 'edit-vm',
+      component: EditVm
     }
   ]
 })

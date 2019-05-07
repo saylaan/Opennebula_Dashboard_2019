@@ -33,7 +33,13 @@
               <v-flex class="vlab-time">
                 <h5>
                   Day left :
-                  {{vlab.time}}
+                  {{(vlab.time <= 1)? 'Need credential': vlab.time}}
+                </h5>
+              </v-flex>
+              <v-flex class="vlab-time">
+                <h5>
+                  active :
+                  {{vlab.active ? 'OK' : 'KO'}}
                 </h5>
               </v-flex>
             </v-flex>

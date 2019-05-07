@@ -10,5 +10,29 @@
   {
     "VmId": 3,
     "VlabId": 1
+  },
+  {
+    "VmId": 4,
+    "VlabId": 2
+  },
+  {
+    "VmId": 5,
+    "VlabId": 2
+  },
+  {
+    "VmId": 6,
+    "VlabId": 2
+  },
+  {
+    "VmId": 7,
+    "VlabId": 3
+  },
+  {
+    "VmId": 8,
+    "VlabId": 3
+  },
+  {
+    "VmId": 9,
+    "VlabId": 3
   }
 ]

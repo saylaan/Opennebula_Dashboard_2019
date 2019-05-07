@@ -1,14 +1,14 @@
-const VmsVlabController = require('../../controllers/Vm/VmsVlabController')
+const VmsUserController = require('../../controllers/Vm/VmsUserController')
 const isAuthenticated = require('../../policies/isAuthenticated')
 
 module.exports = (app) => {
     app.get('/vmsuser',
         isAuthenticated,
-        MessagesUserController.index)
+        VmsUserController.index)
     app.post('/vmsuser',
         isAuthenticated,
-        MessagesUserController.post)
+        VmsUserController.post)
     app.delete('/vmsuser/:vmUserId',
         isAuthenticated,
-        MessagesUserController.delete)
+        VmsUserController.delete)
 }

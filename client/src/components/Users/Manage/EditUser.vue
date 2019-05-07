@@ -14,6 +14,7 @@
         <br>
         <span class="danger-alert">{{error}}</span>
         <v-btn class="grey darken-1" @click="save()">Save settings</v-btn>
+        <v-btn class="grey darken-1" @click="discard()">Discard</v-btn>
       </panel>
     </v-flex>
   </v-layout>
@@ -38,7 +39,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user", "admin"])
+    ...mapState(["isUserLoggedIn", "route", "user", "admin"])
   },
   methods: {
     async save() {
@@ -50,7 +51,7 @@ export default {
         this.error = "Please fill in all the required fields.";
         return;
       }
-      const userId = this.$store.state.route.params.userId;
+      const userId = this.route.params.userId;
       try {
         await UserService.put(this.userview);
         this.$router.push({
@@ -62,11 +63,15 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    async discard() {
+      const userId = this.route.params.userId;
+      this.userview = (await UserService.getUser(userId)).data;
     }
   },
   async mounted() {
     try {
-      const userId = this.$store.state.route.params.userId;
+      const userId = this.route.params.userId;
       this.userview = (await UserService.getUser(userId)).data;
     } catch (err) {
       console.log(err);

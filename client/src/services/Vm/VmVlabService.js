@@ -1,13 +1,16 @@
 import Api from '@/services/Api'
 
 export default {
-  index(vmId) {
+  index(VlabId) {
     return Api().get('vmsVlab', {
-      params: vmId
+      params: VlabId
     })
   },
-  post(vmVlab) {
-    return Api().post('vmsVlab', vmVlab)
+  post(vmId, vlabId) {
+    return Api().post('vmsVlab',{
+      VlabId: vlabId,
+      VmId: vmId
+    })
   },
   delete(vmVlabId) {
     return Api().delete(`vmsVlab/${vmVlabId}`)

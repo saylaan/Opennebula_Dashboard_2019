@@ -1,38 +1,38 @@
 [
   {
     "UrlId": 1,
-    "UserId": 1
+    "VlabId": 1
   },
   {
     "UrlId": 2,
-    "UserId": 1
+    "VlabId": 1
   },
   {
     "UrlId": 3,
-    "UserId": 1
+    "VlabId": 1
   },
   {
     "UrlId": 4,
-    "UserId": 2
+    "VlabId": 2
   },
   {
     "UrlId": 5,
-    "UserId": 2
+    "VlabId": 2
   },
   {
     "UrlId": 6,
-    "UserId": 2
+    "VlabId": 2
   },
   {
     "UrlId": 7,
-    "UserId": 3
+    "VlabId": 3
   },
   {
     "UrlId": 8,
-    "UserId": 3
+    "VlabId": 3
   },
   {
     "UrlId": 9,
-    "UserId": 3
+    "VlabId": 3
   }
 ]

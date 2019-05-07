@@ -45,5 +45,29 @@ module.exports = {
         err: 'An error has occured while trying to create the url for the user'
       })
     }
+  },
+  async delete(req, res) {
+    try {
+      const UserId = req.user.id
+      const { urlUserId } = req.params
+
+      const urluser = await UrlUser.findOne({
+        where: {
+          id: urlUserId,
+          UserId: UserId
+        }
+      })
+      if (!urlUser) {
+        return res.status(403).send({
+          error: 'you do nat have acces to this urluser'
+        })
+      }
+      await urluser.destroy()
+      res.send(urluser)
+    } catch (err) {
+      res.status(500).send({
+        error: 'An error has occured while trying to delete the url user'
+      })
+    }
   }
 }

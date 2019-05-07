@@ -7,7 +7,7 @@ module.exports = (app) => {
         UrlsController.index)
     app.get('/url/:urlId',
         isAuthenticated,
-        UrlsController.getVm)
+        UrlsController.getUrl)
     app.put('/url/:urlId',
         UrlsController.put)
     app.delete('/url/:urlId',

@@ -1,20 +1,62 @@
 [
   {
     "name": "https",
-    "url": "https://vlab10-ale.aapp",
+    "url": "https://vlab1-ale.aapp",
     "log": "user1",
-    "password": "user1"
+    "password": "user1",
+    "active": true
   },
   {
     "name": "SIP",
-    "url": "https://SIP-ale.aapp",
+    "url": "https://SIP1-ale.aapp",
     "log": "user1",
-    "password": "user1"
+    "password": "user1",
+    "active": true
   },
   {
     "name": "OpenNebula",
-    "url": "https://opennebula-ale.aapp",
+    "url": "https://opennebula1-ale.aapp",
     "log": "user1",
-    "password": "user1"
+    "password": "user1",
+    "active": true
+  },
+  {
+    "name": "https",
+    "url": "https://vlab2-ale.aapp",
+    "log": "user2",
+    "password": "user2",
+    "active": true
+  },
+  {
+    "name": "SIP",
+    "url": "https://SIP2-ale.aapp",
+    "log": "user2",
+    "password": "user2",
+    "active": true
+  },
+  {
+    "name": "OpenNebula",
+    "url": "https://opennebula2-ale.aapp",
+    "log": "user2",
+    "password": "user2",
+    "active": true
+  },
+  {
+    "name": "https",
+    "url": "https://vlab3-ale.aapp",
+    "log": "user3",
+    "password": "user3"
+  },
+  {
+    "name": "SIP",
+    "url": "https://SIP3-ale.aapp",
+    "log": "user3",
+    "password": "user3"
+  },
+  {
+    "name": "OpenNebula",
+    "url": "https://opennebula3-ale.aapp",
+    "log": "user3",
+    "password": "user3"
   }
 ]

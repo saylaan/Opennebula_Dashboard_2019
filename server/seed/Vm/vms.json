@@ -1,14 +1,43 @@
 [
   {
     "name": "O2G 1",
+    "type": "OXE",
+    "active": true
+  },
+  {
+    "name": "OXE 1",
+    "type": "OXE"
+  },
+  {
+    "name": "OXE TESTING 1",
+    "type": "OXE 2",
+    "active": true
+  },
+  {
+    "name": "O2G 2",
     "type": "OXE"
   },
   {
     "name": "OXE 2",
+    "type": "OXE",
+    "active": true
+  },
+  {
+    "name": "OXE TESTING 2",
+    "type": "OXE 2"
+  },
+  {
+    "name": "O2G 3",
+    "type": "OXE",
+    "active": true
+  },
+  {
+    "name": "OXE 3",
     "type": "OXE"
   },
   {
-    "name": "OXE TESTING",
-    "type": "OXE 2"
+    "name": "OXE TESTING 3",
+    "type": "OXE 2",
+    "active": true
   }
 ]

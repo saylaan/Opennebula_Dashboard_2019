@@ -4,11 +4,11 @@ const isAuthenticated = require('../../policies/isAuthenticated')
 module.exports = (app) => {
     app.get('/urlsuser',
         isAuthenticated,
-        MessagesUserController.index)
+        UrlsUserController.index)
     app.post('/urlsuser',
         isAuthenticated,
-        MessagesUserController.post)
+        UrlsUserController.post)
     app.delete('/urlsuser/:urlUserId',
         isAuthenticated,
-        MessagesUserController.delete)
+        UrlsUserController.delete)
 }

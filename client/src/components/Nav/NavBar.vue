@@ -17,6 +17,7 @@
         <v-list-tile-title>{{userview.lastname}} {{userview.firstname}}</v-list-tile-title>
       </v-list-tile>
     </v-list>
+    <v-divider></v-divider>
     <v-list>
       <v-list-tile @click="navTo({name: 'dashboard'})">
         <v-list-tile-action>

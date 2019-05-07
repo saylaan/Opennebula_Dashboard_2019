@@ -23,6 +23,15 @@
     "email": "testing@gmail.com",
     "password": "12345678",
     "companyname": "test",
+    "purpose": "enterprise",
+    "active": true
+  },
+  {
+    "lastname": "other",
+    "firstname": "other",
+    "email": "other@gmail.com",
+    "password": "12345678",
+    "companyname": "other",
     "purpose": "enterprise"
   }
 ]

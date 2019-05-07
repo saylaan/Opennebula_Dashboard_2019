@@ -4,11 +4,11 @@ const isAuthenticated = require('../../policies/isAuthenticated')
 module.exports = (app) => {
     app.get('/vmsvlab',
         isAuthenticated,
-        MessagesUserController.index)
+        VmsVlabController.index)
     app.post('/vmsvlab',
         isAuthenticated,
-        MessagesUserController.post)
+        VmsVlabController.post)
     app.delete('/vmsvlab/:vmVlabId',
         isAuthenticated,
-        MessagesUserController.delete)
+        VmsVlabController.delete)
 }

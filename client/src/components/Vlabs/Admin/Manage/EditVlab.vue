@@ -12,6 +12,7 @@
         <br>
         <span class="danger-alert">{{error}}</span>
         <v-btn class="grey darken-1" @click="save({name: 'vlab'})">Save Vlab</v-btn>
+        <v-btn class="grey darken-1" @click="discard()">Discard</v-btn>
       </panel>
     </v-flex>
   </v-layout>
@@ -35,7 +36,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user", "admin"])
+    ...mapState(["isUserLoggedIn", "route", "user", "admin"])
   },
   methods: {
     async save(route) {
@@ -47,7 +48,7 @@ export default {
         this.error = "Please fill in all the required fields.";
         return;
       }
-      const vlabId = this.$store.state.route.params.vlabId;
+      const vlabId = this.route.params.vlabId;
       try {
         await VlabService.put(this.vlab);
         this.$router.push({
@@ -59,11 +60,15 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    async discard() {
+      const vlabId = this.route.params.vlabId;
+      this.url = (await VlabService.getVlab(vlabId)).data;
     }
   },
   async mounted() {
     try {
-      const vlabId = this.$store.state.route.params.vlabId;
+      const vlabId = this.route.params.vlabId;
       this.vlab = (await VlabService.getVlab(vlabId)).data;
     } catch (err) {
       console.log(err);

@@ -4,16 +4,16 @@ const isAuthenticated = require('../../policies/isAuthenticated')
 module.exports = (app) => {
     app.get('/vm',
         isAuthenticated,
-        UrlsController.index)
+        VmsController.index)
     app.get('/vm/:vmId',
         isAuthenticated,
-        UrlsController.getVm)
+        VmsController.getVm)
     app.put('/vm/:vmId',
-        UrlsController.put)
+        VmsController.put)
     app.delete('/vm/:vmId',
         isAuthenticated,
-        UrlsController.delete)
+        VmsController.delete)
     app.post('/vm',
         isAuthenticated,
-        UrlsController.post)
+        VmsController.post)
 }
