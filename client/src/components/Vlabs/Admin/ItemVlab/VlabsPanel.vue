@@ -75,11 +75,11 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   methods: {
-    needCredential (time) {
+    needCredential(time) {
       if (time <= 1) {
-        return ('Need credential')
+        return "Need credential";
       }
-      return (time)
+      return time;
     }
   },
   watch: {

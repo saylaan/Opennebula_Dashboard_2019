@@ -1,41 +1,69 @@
 <template>
   <panel v-if="isUserLoggedIn" title="VM">
-    <v-layout wrap>
     <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabvms">
       <template v-slot:items="props">
-        <td class="text-xs-right">{{props.item.title}}</td>
+        <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
         <td class="text-xs-right">{{props.item.name}}</td>
+        <td class="text-xs-right">{{props.item.type}}</td>
       </template>
     </v-data-table>
-    </v-layout>
   </panel>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import VmVlabService from "@/services/Vm/VmVlabService";
+import VlabService from "@/services/Vlab/VlabService";
 
 export default {
   data() {
     return {
       headers: [
         {
-          text: "VlabName",
-          value: "title"
+          text: "Active",
+          value: "active"
         },
         {
-          text: "CompanyName",
+          text: "Vm name",
           value: "name"
+        },
+        {
+          text: "vm type",
+          value: "type"
         }
       ],
       pagination: {
         sortBy: "createAt",
         descending: true
       },
-      vlabvms: []
+      vlabvms: [],
+      vlab: null
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user", "admin"])
+    ...mapState(["isUserLoggedIn", "user", "route", "admin"])
+  },
+  watch: {
+    async vlabvm() {
+      try {
+        this.vlabvms = (await VmVlabService.index({
+          VlabId: this.vlab.id
+        })).data;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
+  async mounted() {
+    const vlabId = this.route.params.vlabId;
+    this.vlab = (await VlabService.getVlab(vlabId)).data;
+    try {
+      this.vlabvms = (await VmVlabService.index({
+        VlabId: this.vlab.id
+      })).data;
+    } catch (err) {
+      console.log(err);
+    }
   }
 };
 </script>

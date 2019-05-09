@@ -1,8 +1,8 @@
 <template>
   <v-layout row justify-center v-if="isUserLoggedIn">
-      <v-flex xs6>
-        <message-data :message="message"/>
-      </v-flex>
+    <v-flex xs6>
+      <message-data :message="message"/>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -21,8 +21,8 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
   async mounted() {
-    const messageId = this.route.params.messageId
-    this.message = (await MessageService.getMessage(messageId)).data
+    const messageId = this.route.params.messageId;
+    this.message = (await MessageService.getMessage(messageId)).data;
   },
   components: {
     MessageData

@@ -7,22 +7,23 @@
         <v-text-field label="Type" v-model="vm.type" :rules="[required]"></v-text-field>
         <br>
         <span class="danger-alert">{{error}}</span>
-        <v-btn class="grey darken-1"
+        <v-btn
+          class="grey darken-1"
           @click="save({name: 'vlab',
             params: {
               vlabId: vlabId
             }
-          })">Save Vm</v-btn>
-        <v-btn class="grey darken-1"
-          @click="discard()">Discard</v-btn>
+          })"
+        >Save Vm</v-btn>
+        <v-btn class="grey darken-1" @click="discard()">Discard</v-btn>
       </panel>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import VmService from '@/services/Vm/VmService'
-import VmVlabService from '@/services/Vm/VmVlabService'
+import VmService from "@/services/Vm/VmService";
+import VmVlabService from "@/services/Vm/VmVlabService";
 import { mapState } from "vuex";
 
 export default {
@@ -53,7 +54,7 @@ export default {
       }
       try {
         await VmService.put(this.vm);
-        this.$router.push(route)
+        this.$router.push(route);
       } catch (err) {
         console.log(err);
       }
@@ -65,7 +66,7 @@ export default {
   async mounted() {
     try {
       this.vmId = this.route.params.vmId;
-      this.vlabId = this.route.params.vlabId
+      this.vlabId = this.route.params.vlabId;
       this.vm = (await VmService.getVm(this.vmId)).data;
     } catch (err) {
       console.log(err);

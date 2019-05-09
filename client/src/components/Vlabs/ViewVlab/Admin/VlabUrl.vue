@@ -1,42 +1,44 @@
 <template>
   <panel v-if="isUserLoggedIn" title="URL">
-     <v-btn
-        class="grey darken-3"
-        slot="action"
-        :to="{name: 'create-url'}"
-        light
-        medium
-        absolute
-        right
-        middle
-        fab
-      >
-        <v-icon>add</v-icon>
-      </v-btn>
+    <v-btn
+      class="grey darken-3"
+      slot="action"
+      :to="{name: 'create-url'}"
+      light
+      medium
+      absolute
+      right
+      middle
+      fab
+    >
+      <v-icon>add</v-icon>
+    </v-btn>
     <v-layout wrap>
-    <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlaburls">
-      <template v-slot:items="props">
-        <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
-        <td class="text-xs-right">{{props.item.name}}</td>
-        <td class="text-xs-right">{{props.item.url}}</td>
-        <td class="text-xs-right">{{props.item.log}}</td>
-        <td class="text-xs-right">{{props.item.password}}</td>
-        <v-btn class="grey darken-1"
-        :to="{
+      <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlaburls">
+        <template v-slot:items="props">
+          <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
+          <td class="text-xs-right">{{props.item.name}}</td>
+          <td class="text-xs-right">{{props.item.url}}</td>
+          <td class="text-xs-right">{{props.item.log}}</td>
+          <td class="text-xs-right">{{props.item.password}}</td>
+          <v-btn
+            class="grey darken-1"
+            :to="{
                 name: `edit-url`,
                 params : {
                     urlId: props.item.id
                 }
-        }">Edit</v-btn>
-      </template>
-    </v-data-table>
+        }"
+          >Edit</v-btn>
+        </template>
+      </v-data-table>
     </v-layout>
   </panel>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import UrlVlabService from "@/services/Url/UrlVlabService"
+import UrlVlabService from "@/services/Url/UrlVlabService";
 import VlabService from "@/services/Vlab/VlabService";
 
 export default {

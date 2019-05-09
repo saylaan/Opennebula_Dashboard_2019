@@ -1,27 +1,29 @@
 <template>
-  <panel v-if="isUserLoggedIn" title="Vlab Info">
+  <panel v-if="isUserLoggedIn" title="Vm Info">
     <v-flex class="vlab">
-      <h2>Active Vlab : {{ activeVlab }}</h2>
+      <h2>Active Vm : {{ activeVms }}</h2>
       <br>
       <br>
-      <h2>Unactive Vlab : {{ totalVlabs - activeVlab }}</h2>
+      <h2>Unactive Vm : {{ totalVms - activeVms }}</h2>
       <br>
       <br>
-      <h2>Total Vlab : {{ totalVlabs }}</h2>
+      <h2>Total Vm : {{ totalVms }}</h2>
     </v-flex>
   </panel>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import VmVlabService from "@/services/Vm/VmVlabService";
 import VlabUserService from "@/services/Vlab/VlabUserService";
 
 export default {
   data() {
     return {
+      vms: null,
       vlabs: null,
-      totalVlabs: 0,
-      activeVlab: 0
+      totalVms: 0,
+      activeVms: 0
     };
   },
   computed: {
@@ -33,9 +35,14 @@ export default {
       async handler() {
         this.vlabs = (await VlabUserService.getVlabUsers()).data;
         for (var i = 0; i !== this.vlabs.length; i++) {
-          this.totalVlabs++;
-          if (this.vlabs[i].active) {
-            this.activeVlab++;
+          this.vms = (await VmVlabService.index({
+            VlabId: this.vlabs[i].id
+          })).data;
+          for (var j = 0; j !== this.vms.length; j++) {
+            this.totalVms++;
+            if (this.vms[j].active) {
+              this.activeVms++;
+            }
           }
         }
       }

@@ -11,8 +11,8 @@
 
 <script>
 import { mapState } from "vuex";
-import ViewVlabUser from './User/index'
-import ViewVlabAdmin from './Admin/index'
+import ViewVlabUser from "./User/index";
+import ViewVlabAdmin from "./Admin/index";
 
 export default {
   computed: {

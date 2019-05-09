@@ -1,7 +1,5 @@
 <template>
-  <v-layout>
-    <panel v-if="isUserLoggedIn" title="Message FAQ">
-      <v-layout row>
+    <panel v-if="isUserLoggedIn && admin" title="Message FAQ">
         <v-flex xs12>
           <v-layout column>
             <v-layout row align-center>
@@ -43,9 +41,7 @@
             </v-flex>
           </v-layout>
         </v-flex>
-      </v-layout>
     </panel>
-  </v-layout>
 </template>
 
 <script>
@@ -60,7 +56,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   methods: {
     async deleteMsg(messageId) {

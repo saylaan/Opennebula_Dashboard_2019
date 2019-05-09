@@ -1,5 +1,11 @@
 <template>
-  <v-toolbar :dark="dark" :clipped-left="main.primaryDrawer.clipped" :mini="main.primaryDrawer.mini" app fixed>
+  <v-toolbar
+    :dark="dark"
+    :clipped-left="main.primaryDrawer.clipped"
+    :mini="main.primaryDrawer.mini"
+    app
+    fixed
+  >
     <img
       src="../../assets/LogoALE.png"
       v-if="main.primaryDrawer.type !== 'permanent'"

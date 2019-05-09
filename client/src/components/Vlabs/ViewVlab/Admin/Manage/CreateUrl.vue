@@ -11,20 +11,22 @@
         <v-textarea label="Password" v-model="url.password" :rules="[required]"></v-textarea>
         <br>
         <span class="danger-alert">{{error}}</span>
-        <v-btn class="grey darken-1"
+        <v-btn
+          class="grey darken-1"
           @click="create({name: 'vlab',
             params: {
               vlabId: vlabId
             }
-          })">Create Url</v-btn>
+          })"
+        >Create Url</v-btn>
       </panel>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import UrlService from '@/services/Url/UrlService'
-import UrlVlabService from '@/services/Url/UrlVlabService'
+import UrlService from "@/services/Url/UrlService";
+import UrlVlabService from "@/services/Url/UrlVlabService";
 // TODO add URLVLAB and URLUSER
 import { mapState } from "vuex";
 
@@ -56,8 +58,8 @@ export default {
         return;
       }
       try {
-        const url = (await UrlService.post(this.url)).data
-        await UrlVlabService.post(url.id, this.vlabId)
+        const url = (await UrlService.post(this.url)).data;
+        await UrlVlabService.post(url.id, this.vlabId);
         this.$router.push(route);
       } catch (err) {
         console.log(err);
@@ -65,7 +67,7 @@ export default {
     }
   },
   async mounted() {
-    this.vlabId = this.route.params.vlabId
+    this.vlabId = this.route.params.vlabId;
   }
 };
 </script>

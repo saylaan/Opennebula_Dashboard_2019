@@ -17,32 +17,9 @@
         <v-flex class="vlab-time">
           <h5>
             Day left :
-            {{vlab.time}}
+            {{ needCredential(vlab.time) }}
           </h5>
         </v-flex>
-      </v-flex>
-      <v-flex xs12>
-        <v-btn
-          class="grey darken-1"
-          :to="{
-                  name: 'edit-vlab',
-                  params () {
-                    return {
-                      vlabId: vlab.id
-                    }
-                  }
-                 }"
-        >Edit</v-btn>
-        <v-btn
-          v-if="isUserLoggedIn && !this.vlabuser"
-          class="grey darken-1"
-          @click="setUser"
-        >Add User</v-btn>
-        <v-btn
-          v-if="isUserLoggedIn && this.vlabuser"
-          class="grey darken-1"
-          @click="deleteUser"
-        >Delete User</v-btn>
       </v-flex>
     </v-layout>
   </panel>
@@ -96,6 +73,12 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    needCredential(time) {
+      if (time <= 1) {
+        return "Need credential";
+      }
+      return time;
     }
   }
 };

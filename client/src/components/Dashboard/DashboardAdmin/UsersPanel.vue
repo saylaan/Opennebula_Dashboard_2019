@@ -1,14 +1,15 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin" column>
-    <panel title="Total User">
-      <v-flex class="user">
-        <h2>Active User : {{ totalUsers }}</h2>
-        <br>
-        <br>
-        <h2>Unactive User : {{ totalUsers }}</h2>
-      </v-flex>
-    </panel>
-  </v-layout>
+  <panel v-if="isUserLoggedIn && admin" title="Total User">
+    <v-flex class="user">
+      <h2>Active User : {{ activeUsers }}</h2>
+      <br>
+      <br>
+      <h2>Unactive User : {{ totalUsers - activeUsers }}</h2>
+      <br>
+      <br>
+      <h2>Total User : {{ totalUsers }}</h2>
+    </v-flex>
+  </panel>
 </template>
 
 <script>
@@ -19,7 +20,8 @@ export default {
   data() {
     return {
       users: null,
-      totalUsers: 0
+      totalUsers: 0,
+      activeUsers: 0
     };
   },
   computed: {
@@ -30,8 +32,11 @@ export default {
       immediate: true,
       async handler() {
         this.users = (await UserService.index()).data;
-        for (let user in this.users) {
+        for (var i = 0; i !== this.users.length; i++) {
           this.totalUsers++;
+          if (this.users[i].active) {
+            this.activeUsers++;
+          }
         }
       }
     }
@@ -42,7 +47,7 @@ export default {
 <style scoped>
 .user {
   padding: 20px;
-  height: 200px;
-  overflow: hidden;
+  width: 200px;
+  overflow: visible;
 }
 </style>

@@ -28,10 +28,10 @@
         </v-flex>
       </v-layout>
       <v-layout column>
-      <v-flex xs12>
-        <v-btn
-          class="grey darken-1"
-          :to="{
+        <v-flex xs12>
+          <v-btn
+            class="grey darken-1"
+            :to="{
                   name: 'edit-vlab',
                   params () {
                     return {
@@ -39,18 +39,18 @@
                     }
                   }
                  }"
-        >Edit</v-btn>
-        <v-btn
-          v-if="isUserLoggedIn && !this.vlabuser"
-          class="grey darken-1"
-          @click="setUser"
-        >Add User</v-btn>
-        <v-btn
-          v-if="isUserLoggedIn && this.vlabuser"
-          class="grey darken-1"
-          @click="deleteUser"
-        >Delete User</v-btn>
-      </v-flex>
+          >Edit</v-btn>
+          <v-btn
+            v-if="isUserLoggedIn && !this.vlabuser"
+            class="grey darken-1"
+            @click="setUser"
+          >Add User</v-btn>
+          <v-btn
+            v-if="isUserLoggedIn && this.vlabuser"
+            class="grey darken-1"
+            @click="deleteUser"
+          >Delete User</v-btn>
+        </v-flex>
       </v-layout>
     </v-layout>
   </panel>
@@ -105,11 +105,11 @@ export default {
         console.log(err);
       }
     },
-    needCredential (time) {
+    needCredential(time) {
       if (time <= 1) {
-        return ('Need credential')
+        return "Need credential";
       }
-      return (time)
+      return time;
     }
   }
 };

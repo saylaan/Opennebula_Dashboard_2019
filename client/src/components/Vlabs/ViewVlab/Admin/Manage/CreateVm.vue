@@ -7,20 +7,22 @@
         <v-text-field label="Type" v-model="vm.type" :rules="[required]"></v-text-field>
         <br>
         <span class="danger-alert">{{error}}</span>
-        <v-btn class="grey darken-1"
+        <v-btn
+          class="grey darken-1"
           @click="create({name: 'vlab',
             params: {
               vlabId: vlabId
             }
-          })">Create Vm</v-btn>
+          })"
+        >Create Vm</v-btn>
       </panel>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import VmService from '@/services/Vm/VmService'
-import VmVlabService from '@/services/Vm/VmVlabService'
+import VmService from "@/services/Vm/VmService";
+import VmVlabService from "@/services/Vm/VmVlabService";
 // TODO add URLVLAB and URLUSER
 import { mapState } from "vuex";
 
@@ -50,8 +52,8 @@ export default {
         return;
       }
       try {
-        const vm = (await VmService.post(this.vm)).data
-        await VmVlabService.post(vm.id, this.vlabId)
+        const vm = (await VmService.post(this.vm)).data;
+        await VmVlabService.post(vm.id, this.vlabId);
         this.$router.push(route);
       } catch (err) {
         console.log(err);
@@ -59,7 +61,7 @@ export default {
     }
   },
   async mounted() {
-    this.vlabId = this.route.params.vlabId
+    this.vlabId = this.route.params.vlabId;
   }
 };
 </script>

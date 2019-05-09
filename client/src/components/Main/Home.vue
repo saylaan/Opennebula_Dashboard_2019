@@ -1,7 +1,9 @@
 <template>
   <v-layout v-if="!isUserLoggedIn" justify-center column>
-    <v-flex class="mt-5" xs12 >
-      <h1 class="display-3 mr-3 white--text font-weight-black blue-grey--text text--darken-2">{{ msg }}</h1>
+    <v-flex class="mt-5" xs12>
+      <h1
+        class="display-3 mr-3 white--text font-weight-black blue-grey--text text--darken-2"
+      >{{ msg }}</h1>
     </v-flex>
     <v-flex xs12>
       <v-layout row align-center justify-center class="mx-auto">
@@ -15,7 +17,7 @@
                 </v-card-title>
           <v-img :src="images.sample"></v-img>
           </v-card>
-        </v-flex> -->
+        </v-flex>-->
         <v-flex xs6 class="mt-5 mr-5">
           <v-timeline>
             <v-timeline-item :color="`${steps[0].color}`" dark large right>
@@ -44,7 +46,7 @@
                   v-text="`Step ${steps[1].step}`"
                 ></span>
               </template>
-              <v-card >
+              <v-card>
                 <v-card-title :class="`${steps[1].color} justify-center`">
                   <h2
                     class="headline font-weight-bold blue-grey--text text--lighten-5"
@@ -96,15 +98,15 @@
                 ></span>
               </template>
               <v-card>
-                <v-card-title  :class="`${steps[4].color} justify-center`">
+                <v-card-title :class="`${steps[4].color} justify-center`">
                   <h2
-                    class="headline mr-3 font-weight-bold blue-grey--text text--lighten-5 "
+                    class="headline mr-3 font-weight-bold blue-grey--text text--lighten-5"
                     v-text="`${steps[4].msg}`"
                   ></h2>
                 </v-card-title>
               </v-card>
             </v-timeline-item>
-                        <v-timeline-item :color="`${steps[5].color}`" dark fill-dot left small>
+            <v-timeline-item :color="`${steps[5].color}`" dark fill-dot left small>
               <template v-slot:opposite>
                 <span
                   :class="`headline font-weight-bold grey--text text--darken-3`"
@@ -151,7 +153,7 @@ export default {
   data() {
     return {
       images: {
-        sample: require('../../assets/o2g.png')
+        sample: require("../../assets/o2g.png")
       },
       msg: "Welcome to Portal Vlab",
       about: "What about our solution?",
@@ -188,7 +190,8 @@ export default {
         {
           step: "And more....",
           color: "pink",
-          msg: "Feedbacks - Helps - Messages - Dashboard for activity - Vlab view"
+          msg:
+            "Feedbacks - Helps - Messages - Dashboard for activity - Vlab view"
         }
       ]
     };

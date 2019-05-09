@@ -5,14 +5,14 @@
         <td class="text-xs-right">{{props.item.title}}</td>
         <td class="text-xs-right">{{props.item.name}}</td>
         <td class="text-xs-right">
-            <v-btn
-              class="grey darken-1"
-              :to="{
+          <v-btn
+            class="grey darken-1"
+            :to="{
                   name: 'vlab',
                   params: {
                     vlabId: props.item.VlabId}
                  }"
-            >View Vlab</v-btn>
+          >View Vlab</v-btn>
         </td>
       </template>
     </v-data-table>
