@@ -7,7 +7,7 @@ export default {
     })
   },
   post(vmId, vlabId) {
-    return Api().post('vmsVlab',{
+    return Api().post('vmsVlab', {
       VlabId: vlabId,
       VmId: vmId
     })

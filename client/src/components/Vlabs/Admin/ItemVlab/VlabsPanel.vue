@@ -33,7 +33,7 @@
               <v-flex class="vlab-time">
                 <h5>
                   Day left :
-                  {{(vlab.time <= 1)? 'Need credential': vlab.time}}
+                  {{needCredential(vlab.time)}}
                 </h5>
               </v-flex>
               <v-flex class="vlab-time">
@@ -73,6 +73,14 @@ export default {
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "admin"])
+  },
+  methods: {
+    needCredential (time) {
+      if (time <= 1) {
+        return ('Need credential')
+      }
+      return (time)
+    }
   },
   watch: {
     "$route.query.search": {

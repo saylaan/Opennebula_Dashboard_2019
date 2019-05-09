@@ -17,7 +17,7 @@
         <v-flex xs3 class="vlab-time">
           <h5>
             Day left :
-            {{(vlab.time <= 1)? 'Need credential' : vlab.time}}
+            {{ needCredential(vlab.time) }}
           </h5>
         </v-flex>
         <v-flex xs3 class="vlab-time">
@@ -104,6 +104,12 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    needCredential (time) {
+      if (time <= 1) {
+        return ('Need credential')
+      }
+      return (time)
     }
   }
 };
