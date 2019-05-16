@@ -13,7 +13,10 @@ const {
   VmUser,
   VmVlab,
   TemplateVm,
-  Template
+  Template,
+  Sip,
+  SipUser,
+  SipVlab
 } = require('../src/models')
 
 const Promise = require('bluebird')
@@ -36,6 +39,10 @@ const urlsVlabs = require('./Url/urlsVlabs.json')
 const vms = require('./Vm/vms.json')
 const vmsUsers = require('./Vm/vmsUsers.json')
 const vmsVlabs = require('./Vm/vmsVlabs.json')
+
+const sips = require('./Sip/sips.json')
+const sipsUsers = require('./Sip/sipsUsers.json')
+const sipsVlabs = require('./Sip/sipsVlabs.json')
 
 sequelize.sync({force: true})
   .then(async function () {
@@ -114,6 +121,24 @@ sequelize.sync({force: true})
         VmVlab.create(vmVlab)
       })
     )
+
+/* ####################################################################### */
+    /* SIP */
+    await Promise.all(
+      sips.map(sip => {
+        Sip.create(sip)
+      })
+    )
+    await Promise.all(
+      sipsUsers.map(sipsUser => {
+        SipUser.create(sipsUser)
+      })
+    )
+    await Promise.all(
+      sipsVlabs.map(sipsVlab => {
+        SipVlab.create(sipsVlab)
+      })
+      )
 
 /* ####################################################################### */
     /* TEMPLATE */

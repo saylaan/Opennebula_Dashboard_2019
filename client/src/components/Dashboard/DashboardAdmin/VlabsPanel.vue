@@ -1,5 +1,6 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Total vlab">
+    <v-layout justify-center>
     <v-flex class="vlab">
       <h2>Active Vlab : {{ activeVlabs }}</h2>
       <br>
@@ -9,6 +10,7 @@
       <br>
       <h2>Total Vlab : {{ totalVlabs }}</h2>
     </v-flex>
+    </v-layout>
   </panel>
 </template>
 

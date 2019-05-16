@@ -3,17 +3,31 @@
     <v-flex elevation-24 xs6 v-if="!$store.state.isUserLoggedIn">
       <panel title="Sign in">
         <form name="sandbox-form" autocomplete="off">
-          <v-text-field label="Email" v-model="email"></v-text-field>
+          <v-text-field class="mt-5" label="Email" v-model="email" outline clearable>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>email</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
           <br>
           <v-text-field
             label="Password"
             type="password"
             v-model="password"
             autocomplete="new-password"
-          ></v-text-field>
+            outline
+            clearable
+          >
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>https</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
           <br>
           <div class="danger-alert" v-html="error"/>
-          <v-btn class="grey darken-1" @click="signin">Sign in</v-btn>
+          <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" @click="signin">Sign in</v-btn>
         </form>
       </panel>
     </v-flex>

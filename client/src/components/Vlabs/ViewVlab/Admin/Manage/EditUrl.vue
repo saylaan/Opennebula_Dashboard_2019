@@ -2,24 +2,59 @@
   <v-layout v-if="isUserLoggedIn && admin" justify-center>
     <v-flex xs6>
       <panel title="Edit url">
-        <v-text-field label="Name" v-model="url.name" :rules="[required]"></v-text-field>
+        <v-text-field class="mt-5" label="Name" v-model="url.name" :rules="[required]"
+        outline clearable>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>all_out</v-icon>
+              </v-fade-transition>
+            </template>
+        </v-text-field>
         <br>
-        <v-text-field label="Url" v-model="url.url" :rules="[required]"></v-text-field>
+        <v-text-field label="Url" v-model="url.url" :rules="[required]"
+        outline clearable>
+                            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>link</v-icon>
+              </v-fade-transition>
+            </template></v-text-field>
         <br>
-        <v-text-field label="Login" v-model="url.log" :rules="[required]"></v-text-field>
+          <v-text-field class="padding-input" label="Login" type="log" v-model="url.log" 
+          outline clearable>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>account_box</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
         <br>
-        <v-textarea label="Password" v-model="url.password" :rules="[required]"></v-textarea>
+          <v-text-field
+            label="Password"
+            type="password"
+            v-model="url.password"
+            autocomplete="new-password"
+            outline
+            clearable
+          >
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>https</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
         <br>
         <span class="danger-alert">{{error}}</span>
         <v-btn
-          class="grey darken-1"
+          elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
           @click="save({name: 'vlab',
             params: {
               vlabId: vlabId
             }
           })"
         >Save Url</v-btn>
-        <v-btn class="grey darken-1" @click="discard()">Discard</v-btn>
+        <v-btn 
+        elevation-24 large class="grey darken-1 mb-4 font-weight-bold" 
+        @click="discard()">Discard</v-btn>
       </panel>
     </v-flex>
   </v-layout>

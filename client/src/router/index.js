@@ -27,6 +27,9 @@ import EditUrl from '@/components/Vlabs/ViewVlab/Admin/Manage/EditUrl'
 import CreateVm from '@/components/Vlabs/ViewVlab/Admin/Manage/CreateVm'
 import EditVm from '@/components/Vlabs/ViewVlab/Admin/Manage/EditVm'
 
+import CreateSip from '@/components/Vlabs/ViewVlab/Admin/Manage/CreateSip'
+import EditSip from '@/components/Vlabs/ViewVlab/Admin/Manage/EditSip'
+
 Vue.use(Router)
 
 export default new Router({
@@ -129,6 +132,16 @@ export default new Router({
       path: '/vlabs/:vlabId/editVm/:vmId',
       name: 'edit-vm',
       component: EditVm
+    },
+    {
+      path: '/vlabs/:vlabId/create',
+      name: 'create-sip',
+      component: CreateSip
+    },
+    {
+      path: '/vlabs/:vlabId/editSip/:sipId',
+      name: 'edit-sip',
+      component: EditSip
     }
   ]
 })

@@ -29,8 +29,8 @@
       </v-layout>
       <v-layout column>
         <v-flex xs12>
-          <v-btn
-            class="grey darken-1"
+          <!-- <v-btn
+            class="grey darken-1 font-weight-bold"
             :to="{
                   name: 'edit-vlab',
                   params () {
@@ -39,15 +39,15 @@
                     }
                   }
                  }"
-          >Edit</v-btn>
+          >Edit</v-btn> -->
           <v-btn
             v-if="isUserLoggedIn && !this.vlabuser"
-            class="grey darken-1"
+            class="grey darken-1 font-weight-bold"
             @click="setUser"
           >Add User</v-btn>
           <v-btn
             v-if="isUserLoggedIn && this.vlabuser"
-            class="grey darken-1"
+            class="grey darken-1 font-weight-bold"
             @click="deleteUser"
           >Delete User</v-btn>
         </v-flex>
@@ -132,10 +132,5 @@ export default {
 
 .vlab-time {
   font-size: 20px;
-}
-
-.album-image {
-  width: 50%;
-  margin: 0 auto;
 }
 </style>

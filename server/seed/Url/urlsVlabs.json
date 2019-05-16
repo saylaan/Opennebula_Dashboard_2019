@@ -8,10 +8,6 @@
     "VlabId": 1
   },
   {
-    "UrlId": 3,
-    "VlabId": 1
-  },
-  {
     "UrlId": 4,
     "VlabId": 2
   },
@@ -20,19 +16,11 @@
     "VlabId": 2
   },
   {
+    "UrlId": 5,
+    "VlabId": 3
+  },
+  {
     "UrlId": 6,
-    "VlabId": 2
-  },
-  {
-    "UrlId": 7,
-    "VlabId": 3
-  },
-  {
-    "UrlId": 8,
-    "VlabId": 3
-  },
-  {
-    "UrlId": 9,
     "VlabId": 3
   }
 ]

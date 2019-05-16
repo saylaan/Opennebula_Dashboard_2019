@@ -83,6 +83,10 @@ Vue = 12 point grid system with 5 types of media breakpoints (size & orientation
 <v-dialog :fullscreen="$vuetify.breakpoint.xsOnly">
 We can customize but it's not necessary at all.
 
+
+III.Input & Controls
+outline clearable -> nice
+
 ##################################################################################
 Tips:
 -dont need class="" just put all inline

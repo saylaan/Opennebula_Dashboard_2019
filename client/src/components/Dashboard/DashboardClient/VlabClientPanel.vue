@@ -1,13 +1,13 @@
 <template>
   <panel v-if="isUserLoggedIn" title="Vlab Info">
     <v-flex class="vlab">
-      <h2>Active Vlab : {{ activeVlab }}</h2>
+      <h2>Active Vlab : {{ activeVlab ? 'OK' : 'KO' }}</h2>
+      <!-- <br>
+      <br> -->
+      <!-- <h2>Unactive Vlab : {{ totalVlabs - activeVlab }}</h2>
       <br>
       <br>
-      <h2>Unactive Vlab : {{ totalVlabs - activeVlab }}</h2>
-      <br>
-      <br>
-      <h2>Total Vlab : {{ totalVlabs }}</h2>
+      <h2>Total Vlab : {{ totalVlabs }}</h2> -->
     </v-flex>
   </panel>
 </template>
@@ -47,7 +47,6 @@ export default {
 <style scoped>
 .vlab {
   padding: 20px;
-  height: 200px;
   overflow: hidden;
 }
 </style>

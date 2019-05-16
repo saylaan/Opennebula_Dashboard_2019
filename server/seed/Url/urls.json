@@ -1,62 +1,42 @@
 [
   {
-    "name": "https",
+    "name": "VNC Access",
     "url": "https://vlab1-ale.aapp",
     "log": "user1",
-    "password": "user1",
+    "password": "XXXXX",
     "active": true
   },
   {
-    "name": "SIP",
-    "url": "https://SIP1-ale.aapp",
-    "log": "user1",
-    "password": "user1",
+    "name": "O2G Access",
+    "url": "https://o2g-vlab50.ale-aapp.com/",
+    "log": "admin",
+    "password": "XXXXXX",
     "active": true
   },
   {
-    "name": "OpenNebula",
-    "url": "https://opennebula1-ale.aapp",
-    "log": "user1",
-    "password": "user1",
-    "active": true
-  },
-  {
-    "name": "https",
+    "name": "VNC Access",
     "url": "https://vlab2-ale.aapp",
     "log": "user2",
-    "password": "user2",
+    "password": "XXXXX",
     "active": true
   },
   {
-    "name": "SIP",
-    "url": "https://SIP2-ale.aapp",
-    "log": "user2",
-    "password": "user2",
+    "name": "O2G Access",
+    "url": "https://o2g-vlab50.ale-aapp.com/",
+    "log": "admin",
+    "password": "XXXXXX",
     "active": true
   },
   {
-    "name": "OpenNebula",
-    "url": "https://opennebula2-ale.aapp",
-    "log": "user2",
-    "password": "user2",
-    "active": true
-  },
-  {
-    "name": "https",
+    "name": "VNC Access",
     "url": "https://vlab3-ale.aapp",
     "log": "user3",
-    "password": "user3"
+    "password": "XXXXX"
   },
   {
-    "name": "SIP",
-    "url": "https://SIP3-ale.aapp",
-    "log": "user3",
-    "password": "user3"
-  },
-  {
-    "name": "OpenNebula",
-    "url": "https://opennebula3-ale.aapp",
-    "log": "user3",
-    "password": "user3"
+    "name": "O2G Access",
+    "url": "https://o2g-vlab50.ale-aapp.com/",
+    "log": "admin",
+    "password": "XXXXXX"
   }
 ]

@@ -1,6 +1,6 @@
 <template>
   <panel v-if="isUserLoggedIn" title="VM">
-    <v-btn
+    <!-- <v-btn
       class="grey darken-3"
       slot="action"
       :to="{name: 'create-vm'}"
@@ -12,22 +12,22 @@
       fab
     >
       <v-icon>add</v-icon>
-    </v-btn>
+    </v-btn> -->
     <v-layout wrap>
       <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabvms">
         <template v-slot:items="props">
           <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
           <td class="text-xs-right">{{props.item.name}}</td>
           <td class="text-xs-right">{{props.item.type}}</td>
-          <v-btn
-            class="grey darken-1"
+          <!-- <v-btn
+            class="grey darken-1 font-weight-bold"
             :to="{
                 name: `edit-vm`,
                 params : {
                     vmId: props.item.id
                 }
         }"
-          >Edit</v-btn>
+          >Edit</v-btn> -->
         </template>
       </v-data-table>
     </v-layout>

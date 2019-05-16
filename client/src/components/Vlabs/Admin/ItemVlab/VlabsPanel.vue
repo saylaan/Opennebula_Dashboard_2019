@@ -1,7 +1,7 @@
 <template>
   <v-layout v-if="isUserLoggedIn && admin" column>
     <panel title="Vlabs">
-      <v-btn
+      <!-- <v-btn
         class="grey darken-3"
         slot="action"
         :to="{name: 'vlab-create'}"
@@ -13,50 +13,25 @@
         fab
       >
         <v-icon>add</v-icon>
-      </v-btn>
-      <v-flex v-for="vlab in vlabs" :key="vlab.title" class="vlab">
-        <v-layout row>
-          <v-flex xs6>
-            <v-flex xs12>
-              <v-flex class="vlab-title">
-                <h5>
-                  Vlab name :
-                  {{vlab.title}}
-                </h5>
-              </v-flex>
-              <v-flex class="vlab-name">
-                <h5>
-                  Company name :
-                  {{vlab.name}}
-                </h5>
-              </v-flex>
-              <v-flex class="vlab-time">
-                <h5>
-                  Day left :
-                  {{needCredential(vlab.time)}}
-                </h5>
-              </v-flex>
-              <v-flex class="vlab-time">
-                <h5>
-                  active :
-                  {{vlab.active ? 'OK' : 'KO'}}
-                </h5>
-              </v-flex>
-            </v-flex>
-            <v-btn
-              class="grey darken-1"
+      </v-btn> -->
+    <v-layout wrap>
+      <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabs">
+        <template v-slot:items="props">
+          <td class="text-xs-right">{{props.item.title}}</td>
+          <td class="text-xs-right">{{props.item.name}}</td>
+          <td class="text-xs-right">{{needCredential(props.item.time)}}</td>
+          <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
+                      <v-btn
+              class="grey darken-1 font-weight-bold"
               :to="{
                   name: 'vlab',
                   params: {
-                    vlabId: vlab.id}
+                    vlabId: props.item.id}
                  }"
             >View Vlab</v-btn>
-          </v-flex>
-          <v-flex xs6>
-            <img class="album-image" :src="vlab.vlabImage">
-          </v-flex>
-        </v-layout>
-      </v-flex>
+        </template>
+      </v-data-table>
+    </v-layout>
     </panel>
   </v-layout>
 </template>
@@ -68,7 +43,29 @@ import VlabService from "@/services/Vlab/VlabService";
 export default {
   data() {
     return {
-      vlabs: null
+      headers: [
+        {
+          text: "Name",
+          value: "title"
+        },
+        {
+          text: "CompanyName",
+          value: "name"
+        },
+        {
+          text: "TimeLeft",
+          value: "time"
+        },
+        {
+          text: "Active",
+          value: "active"
+        }
+      ],
+      pagination: {
+        sortBy: "createAt",
+        descending: true
+      },
+      vlabs: []
     };
   },
   computed: {

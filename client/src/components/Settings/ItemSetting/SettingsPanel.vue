@@ -5,14 +5,100 @@
       label="Company name"
       v-model="adminview.companyname"
       :rules="[required]"
-    ></v-text-field>
+      outline
+      clearable
+    >
+      <template v-slot:prepend>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">help</v-icon>
+          </template>
+          The name of the company must be valid
+        </v-tooltip>
+      </template>
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>domain</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field>
     <br>
-    <v-text-field v-if="admin" label="First name" v-model="adminview.firstname" :rules="[required]"></v-text-field>
+    <v-text-field
+      class="padding-input"
+      outline
+      clearable
+      v-if="admin"
+      label="First name"
+      v-model="adminview.firstname"
+      :rules="[required]"
+    >
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>account_box</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field>
     <br>
-    <v-text-field v-if="admin" label="Last name" v-model="adminview.lastname" :rules="[required]"></v-text-field>
+    <v-text-field
+      class="padding-input"
+      outline
+      clearable
+      v-if="admin"
+      label="Last name"
+      v-model="adminview.lastname"
+      :rules="[required]"
+    >
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>account_box</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field>
     <br>
-    <v-text-field v-if="admin" label="Email" v-model="adminview.email" :rules="[required]"></v-text-field>
-    <v-text-field v-if="!admin" label="Email" v-model="userview.email" :rules="[required]"></v-text-field>
+    <v-text-field
+      outline
+      clearable
+      v-if="admin"
+      label="Email"
+      v-model="adminview.email"
+      :rules="[required]"
+    >
+      <template v-slot:prepend>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">help</v-icon>
+          </template>
+          Your email must be valid
+        </v-tooltip>
+      </template>
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>email</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field>
+    <!-- <v-text-field
+      outline
+      clearable
+      v-if="!admin"
+      label="Email"
+      v-model="userview.email"
+      :rules="[required]"
+    >
+      <template v-slot:prepend>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">help</v-icon>
+          </template>
+          Your email must be valid
+        </v-tooltip>
+      </template>
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>email</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field> -->
     <br>
     <v-text-field
       v-if="admin"
@@ -20,19 +106,64 @@
       v-model="adminview.password"
       type="password"
       :rules="[required]"
-    ></v-text-field>
+      outline
+      clearable
+    >
+      <template v-slot:prepend>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">help</v-icon>
+          </template>
+          Your password must contain at least 8 characters
+        </v-tooltip>
+      </template>
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>https</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field>
     <v-text-field
+      outline
+      clearable
       v-if="!admin"
       label="Password"
       v-model="userview.password"
       type="password"
       :rules="[required]"
-    ></v-text-field>
+    >
+      <template v-slot:prepend>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">help</v-icon>
+          </template>
+          Your password must contain at least 8 characters
+        </v-tooltip>
+      </template>
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>https</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field>
     <br>
-    <v-textarea v-if="admin" label="Purpose" v-model="adminview.purpose" :rules="[required]"></v-textarea>
-    <br>
-    <v-btn @click="saveSettings()" class="grey darken-1">Save Setting</v-btn>
-    <v-btn @click="discardSettings()" class="grey darken-1">Discard Setting</v-btn>
+          <v-textarea label="Purpose" type="purpose" v-model="purpose" outline clearable>
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Explain for what purpose you need a access to the portal
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>notes</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-textarea>
+    <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save Setting</v-btn>
+    <v-btn elevation-24  large @click="discardSettings()" class="grey darken-1 font-weight-bold">Discard Setting</v-btn>
   </panel>
 </template>
 
@@ -44,7 +175,6 @@ export default {
   data() {
     return {
       userview: {
-        email: null,
         password: null
       },
       adminview: {
@@ -126,4 +256,7 @@ export default {
 </script>
 
 <style scoped>
+.padding-input {
+  margin-left: 32px;
+}
 </style>

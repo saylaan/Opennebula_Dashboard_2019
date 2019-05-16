@@ -5,7 +5,8 @@
     "firstname": "testname",
     "message": "Bonjour, je souhaites avoir un OXE",
     "purpose": "need of a new device",
-    "user": true
+    "user": true,
+    "date": "2019/06/01 17:00"
   },
   {
     "userid": 3,
@@ -13,6 +14,7 @@
     "firstname": "testname",
     "message": "Bonjour, je souhaites avoir plus de credential",
     "purpose": "Need of credentials",
+    "date": "2019/01/10 10:00",
     "user": true
   },
   {
@@ -21,7 +23,8 @@
     "firstname": "Frank",
     "message": "Oui bien sur, il y a un delai de 2j mini",
     "purpose": "help",
-    "admin": true
+    "admin": true,
+    "date": "2019/02/10 11:00"
   },
   {
     "userid": 1,
@@ -29,7 +32,8 @@
     "firstname": "Geoffroy",
     "message": "D'accord, je vous fais ça de suite cher client",
     "purpose": "help",
-    "admin": true
+    "admin": true,
+    "date": "2018/12/24 9:00"
   },
   {
     "lastname": "Dupond",
@@ -37,7 +41,8 @@
     "email" : "huckgeoffroy.67@gmail.com",
     "purpose": "Question about UX",
     "message": "Do you think you got a good ux ?",
-    "faq": true
+    "faq": true,
+    "date": "2018/12/10 9:00"
   },
   {
     "lastname": "Jean",
@@ -45,7 +50,8 @@
     "email" : "huckgeoffroytest@gmail.com",
     "purpose": "Question about use of webapp",
     "message": "Why using this aapp where as an other one ?",
-    "faq": true
+    "faq": true,
+    "date": "2018/09/17 15:00"
   },
   {
     "lastname": "Arnaud",
@@ -53,6 +59,7 @@
     "email" : "huckgeoffroyno@gmail.com",
     "purpose": "How to use?",
     "message": "I dont understand ok can i register and use the plateform",
-    "faq": true
+    "faq": true,
+    "date": "2018/07/11 9:00"
   }
 ]

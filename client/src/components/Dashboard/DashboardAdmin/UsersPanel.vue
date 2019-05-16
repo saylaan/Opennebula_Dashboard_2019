@@ -1,5 +1,6 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Total User">
+    <v-layout justify-center>
     <v-flex class="user">
       <h2>Active User : {{ activeUsers }}</h2>
       <br>
@@ -9,6 +10,7 @@
       <br>
       <h2>Total User : {{ totalUsers }}</h2>
     </v-flex>
+    </v-layout>
   </panel>
 </template>
 

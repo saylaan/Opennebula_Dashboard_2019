@@ -22,7 +22,7 @@
           <td class="text-xs-right">{{props.item.log}}</td>
           <td class="text-xs-right">{{props.item.password}}</td>
           <v-btn
-            class="grey darken-1"
+            class="grey darken-1 font-weight-bold"
             :to="{
                 name: `edit-url`,
                 params : {

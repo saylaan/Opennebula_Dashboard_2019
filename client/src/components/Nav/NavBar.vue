@@ -14,12 +14,12 @@
         <v-list-tile-avatar>
           <img src="https://via.placeholder.com/150">
         </v-list-tile-avatar>
-        <v-list-tile-title>{{userview.lastname}} {{userview.firstname}}</v-list-tile-title>
+        <v-list-tile-title class="title font-weight-medium">{{userview.lastname}} {{userview.firstname}}</v-list-tile-title>
       </v-list-tile>
     </v-list>
     <v-divider></v-divider>
     <v-list>
-      <v-list-tile @click="navTo({name: 'dashboard'})">
+      <v-list-tile class="mt-3" @click="navTo({name: 'dashboard'})">
         <v-list-tile-action>
           <v-icon x-large>dashboard</v-icon>
         </v-list-tile-action>
@@ -27,7 +27,7 @@
           <v-list-tile-title>Dashboard</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile @click="navTo({name: 'vlabs'})">
+      <v-list-tile class="mt-2" @click="navTo({name: 'vlabs'})">
         <v-list-tile-action>
           <v-icon x-large>settings_system_daydream</v-icon>
         </v-list-tile-action>
@@ -35,7 +35,7 @@
           <v-list-tile-title>Vlabs</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile v-if="admin" @click="navTo({name: 'users'})">
+      <v-list-tile class="mt-2" v-if="admin" @click="navTo({name: 'users'})">
         <v-list-tile-action>
           <v-icon x-large>people</v-icon>
         </v-list-tile-action>
@@ -43,7 +43,7 @@
           <v-list-tile-title>Users</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile @click="navTo({name: 'settings'})">
+      <v-list-tile class="mt-2" @click="navTo({name: 'settings'})">
         <v-list-tile-action>
           <v-icon x-large>settings</v-icon>
         </v-list-tile-action>
@@ -51,9 +51,7 @@
           <v-list-tile-title>Settings</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <br>
-      <br>
-      <v-list-tile v-if="!admin" class="info" href="http://vlab.aapp.al-enterprise.com/doku.php">
+      <v-list-tile v-if="!admin" class="info mt-5" href="http://vlab.aapp.al-enterprise.com/doku.php">
         <v-list-tile-action>
           <v-icon x-large>help</v-icon>
         </v-list-tile-action>

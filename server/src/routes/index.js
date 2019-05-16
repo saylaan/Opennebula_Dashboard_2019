@@ -4,6 +4,7 @@ const path = require('path') // app and path, relative path
 const folderRoutes = [
     "Authen",
     "Message",
+    "Sip",
     "Template",
     "Url",
     "User",

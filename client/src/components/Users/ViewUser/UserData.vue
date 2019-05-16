@@ -23,8 +23,8 @@
         </v-layout>
       </v-flex>
       <v-flex>
-      <v-btn large block
-        class="grey darken-1"
+      <v-btn large
+        class="grey darken-1 font-weight-bold"
         :to="{name: 'edit-user', params () {
             return {
               userId: userview.id

@@ -6,7 +6,7 @@
         <td class="text-xs-right">{{props.item.name}}</td>
         <td class="text-xs-right">
           <v-btn
-            class="grey darken-1"
+            class="grey darken-1 font-weight-bold"
             :to="{
                   name: 'vlab',
                   params: {

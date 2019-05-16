@@ -5,12 +5,17 @@
         <vlab-data :vlab="vlab"/>
       </v-flex>
     </v-layout>
-    <v-layout row justify-center class="mt-2">
+    <v-layout row justify-center class="ml-1 mt-2">
       <v-flex xs6>
         <vlab-vm/>
       </v-flex>
       <v-flex xs6 class="ml-2">
         <vlab-url/>
+      </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-flex xs6 class="mt-2 ml-1">
+        <vlab-sip/>
       </v-flex>
     </v-layout>
   </v-layout>
@@ -21,6 +26,7 @@ import { mapState } from "vuex";
 import VlabData from "./VlabData";
 import VlabVm from "./VlabVM";
 import VlabUrl from "./VlabUrl";
+import VlabSip from "./VlabSip";
 import VlabService from "@/services/Vlab/VlabService";
 import VlabUserLogService from "@/services/Vlab/VlabUserLogService";
 
@@ -46,7 +52,8 @@ export default {
   components: {
     VlabData,
     VlabVm,
-    VlabUrl
+    VlabUrl,
+    VlabSip
   }
 };
 </script>

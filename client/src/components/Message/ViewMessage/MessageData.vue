@@ -31,16 +31,24 @@
       </v-flex>
       <br>
       <br>
-      <v-text-field
-        label="Message"
-        v-model="msg.message"
-        type="message"
-        :rules="[required]"
-        xs12
-        class="message-message"
-      ></v-text-field>
+          <v-textarea outline clearable label="Message" v-model="msg.message"
+          type="message" :rules="[required]">
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Enter the message to send to the FAQ
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>subject</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-textarea>
       <v-flex xs6>
-        <v-btn @click="sendMessage()" class="grey darken-1">Send Message</v-btn>
+        <v-btn  elevation-24 large class="grey darken-1 mb-4 font-weight-bold" @click="sendMessage()">Send Message</v-btn>
       </v-flex>
     </v-layout>
   </panel>

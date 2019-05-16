@@ -1,8 +1,8 @@
 <template>
   <v-layout class="white elevation-2" column>
-    <v-flex>
+    <v-flex elevation-12>
       <v-toolbar class="grey lighten-1" flat dense>
-        <v-toolbar-title>{{title}}</v-toolbar-title>
+        <v-toolbar-title class="headline font-weight-bold" >{{title}}</v-toolbar-title>
         <slot name="action"/>
       </v-toolbar>
     </v-flex>

@@ -3,33 +3,122 @@
     <v-flex xs6 elevation-24>
       <panel title="Message FAQ" v-if="!isUserLoggedIn">
         <form>
-          <br>
-          <v-layout row>
+          <v-layout class="mt-5" row>
             <v-flex xs6>
-              <v-text-field label="lastname" v-model="msg.lastname"></v-text-field>
+              <v-text-field class="padding-input" outline clearable label="lastname" v-model="msg.lastname"
+              type="lastname" :rules="[required]">
+                <template v-slot:append>
+                  <v-fade-transition leave-absolute>
+                    <v-icon>account_box</v-icon>
+                  </v-fade-transition>
+                </template>
+              </v-text-field>
             </v-flex>
-            <v-flex class="ml-2" xs6>
-              <v-text-field label="firstname" v-model="msg.firstname"></v-text-field>
+            <v-flex class="ml-4" xs6>
+              <v-text-field outline clearable label="firstname" v-model="msg.firstname"
+              type="firstname" :rules="[required]">
+                <template v-slot:append>
+                  <v-fade-transition leave-absolute>
+                    <v-icon>account_box</v-icon>
+                  </v-fade-transition>
+                </template>
+              </v-text-field>
             </v-flex>
           </v-layout>
-          <v-text-field label="Email" v-model="msg.email"></v-text-field>
           <br>
-          <v-text-field label="Purpose" v-model="msg.purpose"></v-text-field>
+          <v-text-field outline clearable label="Email" v-model="msg.email"
+          type="email" :rules="[required]">
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Your email must be valid
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>email</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
           <br>
-          <v-textarea label="Message" v-model="msg.message"></v-textarea>
+          <v-text-field outline clearable label="Purpose" v-model="msg.purpose"
+          type="purpose" :rules="[required]">
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Enther the purpose of your message as title
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>notes</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
+          <br>
+          <v-textarea outline clearable label="Message" v-model="msg.message"
+          type="message" :rules="[required]">
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Enter the message to send to the FAQ
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>subject</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-textarea>
           <div class="danger-alert" v-html="error"/>
-          <v-btn class="grey darken-1" @click="sendFAQ">Send</v-btn>
+          <v-btn large elevation-24 class="grey darken-1 mb-4 font-weight-bold" @click="sendFAQ">Send</v-btn>
         </form>
       </panel>
       <panel title="Message" v-if="isUserLoggedIn && !admin">
         <form>
           <br>
-          <v-text-field label="Purpose" v-model="msg.purpose"></v-text-field>
+          <v-text-field outline clearable label="Purpose" v-model="msg.purpose"
+          type="purpose" :rules="[required]">
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                The name of the company must be valid
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>notes</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
           <br>
-          <v-textarea label="Message" v-model="msg.message"></v-textarea>
+          <v-textarea outline clearable label="Message" v-model="msg.message"
+          type="message" :rules="[required]">
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                The name of the company must be valid
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>subject</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-textarea>
           <br>
           <div class="danger-alert" v-html="error"/>
-          <v-btn class="grey darken-1" @click="sendUser">Send</v-btn>
+          <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" @click="sendUser">Send</v-btn>
         </form>
       </panel>
     </v-flex>
@@ -182,5 +271,9 @@ export default {
 <style scoped>
 .danger-alert {
   color: red;
+}
+
+.padding-input {
+  margin-left: 32px;
 }
 </style>

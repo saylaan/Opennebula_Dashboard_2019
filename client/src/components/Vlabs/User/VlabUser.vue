@@ -5,12 +5,12 @@
     <v-flex class="ml-1" xs9>
       <vlabs-user/>
     </v-flex>
-    <v-flex class="mt-5" xs5>
+    <v-flex class="mt-5" xs9>
       <vlabs-user-logs/>
     </v-flex>
-    <v-flex class="ml-5 mt-5" xs5>
+    <!-- <v-flex class="ml-5 mt-5" xs5>
       <vlabs-user-urls/>
-    </v-flex>
+    </v-flex> -->
   </v-layout>
 </template>
 

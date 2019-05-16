@@ -14,33 +14,24 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-    <v-flex v-for="user in users" :key="user.title" class="user">
-      <v-layout row glow>
-        <v-flex xs9>
-          <v-layout column wrap>
-            <v-flex xs6 class="user-companyname">
-              <h5>Company name : {{user.companyname}}</h5>
-            </v-flex>
-            <v-flex xs6 class="user-firstname">
-              <h5>Name : {{user.firstname}} {{user.lastname}}</h5>
-            </v-flex>
-            <v-flex xs6 class="user-purpose">
-              <h5> Purpose: {{user.purpose}}</h5>
-            </v-flex>
-          </v-layout>
-      </v-flex>
-          <v-flex>
-            <v-btn
-              class="grey darken-1"
+    <v-layout wrap>
+      <v-data-table :headers:="headers" :pagination.sync="pagination" :items="users">
+        <template v-slot:items="props">
+          <td class="text-xs-right">{{props.item.companyname}}</td>
+          <td class="text-xs-right">{{props.item.lastname}}</td>
+          <td class="text-xs-right">{{props.item.firstname}}</td>
+          <td class="text-xs-right">{{props.item.purpose}}</td>
+                      <v-btn
+              class="grey darken-1 font-weight-bold"
               :to="{
                   name: 'user',
                   params: {
-                    userId: user.id}
+                    userId: props.item.id}
                  }"
-            >View user</v-btn>
-          </v-flex>
-      </v-layout>
-    </v-flex>
+            >View Vlab</v-btn>
+        </template>
+      </v-data-table>
+    </v-layout>
     </panel>
   </v-layout>
 </template>
@@ -52,7 +43,29 @@ import UserService from "@/services/User/UserService"
 export default {
   data () {
     return {
-      users: null
+      headers: [
+        {
+          text: "CompanyName",
+          value: "companyname"
+        },
+        {
+          text: "Lastname",
+          vlaue: "lastname"
+        },
+        {
+          text: "Firstname",
+          value: "firstname"
+        },
+        {
+          text: "Purpose",
+          value: "purpose"
+        }
+      ],
+      pagination: {
+        sortBy: "createAt",
+        descending: true
+      },
+      users: []
     }
   },
   computed: {

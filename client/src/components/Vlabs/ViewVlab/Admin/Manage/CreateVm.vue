@@ -8,7 +8,7 @@
         <br>
         <span class="danger-alert">{{error}}</span>
         <v-btn
-          class="grey darken-1"
+          class="grey darken-1 font-weight-bold"
           @click="create({name: 'vlab',
             params: {
               vlabId: vlabId
@@ -23,7 +23,6 @@
 <script>
 import VmService from "@/services/Vm/VmService";
 import VmVlabService from "@/services/Vm/VmVlabService";
-// TODO add URLVLAB and URLUSER
 import { mapState } from "vuex";
 
 export default {

@@ -18,6 +18,7 @@ const sequelize = new Sequelize( // creation of the obj sequelize --> making the
 
 const folderModels = [
     "Message",
+    "Sip",
     "Template",
     "Url",
     "User",
@@ -70,6 +71,10 @@ Object.keys(db).forEach(function (modelName) {
 
 console.log('##################### END INIT MODELS #####################\n\n')
 
+
+    // one.getVMs(function(err, data) {
+    //   console.log(data)
+    // }, null, 0, 0, null)
 // const vm = one.getVM(295)
 
 // vm.info(function(err, data) {
