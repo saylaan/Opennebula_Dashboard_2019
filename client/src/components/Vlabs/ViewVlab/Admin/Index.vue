@@ -1,7 +1,7 @@
 <template>
   <v-layout column v-if="isUserLoggedIn && admin">
     <v-layout justify-center>
-      <v-flex xs9>
+      <v-flex xs8>
         <vlab-data :vlab="vlab"/>
       </v-flex>
     </v-layout>

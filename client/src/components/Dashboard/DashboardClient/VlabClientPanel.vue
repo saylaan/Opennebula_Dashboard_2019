@@ -1,14 +1,14 @@
 <template>
   <panel v-if="isUserLoggedIn" title="Vlab Info">
-    <v-flex class="vlab">
+    <v-layout justify-center>
       <h2>Active Vlab : {{ activeVlab ? 'OK' : 'KO' }}</h2>
+    </v-layout>
       <!-- <br>
       <br> -->
       <!-- <h2>Unactive Vlab : {{ totalVlabs - activeVlab }}</h2>
       <br>
       <br>
       <h2>Total Vlab : {{ totalVlabs }}</h2> -->
-    </v-flex>
   </panel>
 </template>
 

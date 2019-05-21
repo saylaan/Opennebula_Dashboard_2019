@@ -13,7 +13,6 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-    <v-layout wrap>
       <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlaburls">
         <template v-slot:items="props">
           <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
@@ -32,7 +31,6 @@
           >Edit</v-btn>
         </template>
       </v-data-table>
-    </v-layout>
   </panel>
 </template>
 

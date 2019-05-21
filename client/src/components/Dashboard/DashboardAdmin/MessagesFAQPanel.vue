@@ -65,12 +65,14 @@ export default {
   },
   async mounted() {
     this.messages = (await MessageService.index(1)).data;
+    // console.log('mounted message from faq dashboard', this.messages)
   },
   watch: {
     "$route.query.find": {
       immediate: true,
       async handler() {
         this.messages = (await MessageService.index(1)).data;
+        // console.log('watch message from faq dashboard', this.messages)
       }
     }
   }

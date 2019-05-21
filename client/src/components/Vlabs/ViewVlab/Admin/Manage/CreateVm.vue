@@ -6,7 +6,9 @@
         <br>
         <v-text-field label="Type" v-model="vm.type" :rules="[required]"></v-text-field>
         <br>
+        <v-layout justify-center>
         <span class="danger-alert">{{error}}</span>
+          
         <v-btn
           class="grey darken-1 font-weight-bold"
           @click="create({name: 'vlab',
@@ -15,6 +17,7 @@
             }
           })"
         >Create Vm</v-btn>
+        </v-layout>
       </panel>
     </v-flex>
   </v-layout>

@@ -12,12 +12,20 @@ export default new Vuex.Store({ // for keeping tracking of state
   state: {
     token: null,
     user: null,
+    type: null,
     isUserLoggedIn: false,
     admin: false,
     dark: false,
     grad: 'to top right, #5D29A9, #CBC8D0'
   },
   mutations: {
+    setType(state, type) {
+      if (type) {
+        state.type = type
+      } else {
+        state.type = type
+      }
+    },
     setGrad(state, grad) {
       if (grad) {
         state.grad = grad
@@ -52,6 +60,9 @@ export default new Vuex.Store({ // for keeping tracking of state
     }
   },
   actions: {
+    setType({ commit }, type) {
+      commit('setType', type)
+    },
     setGrad({ commit }, grad) {
       commit('setGrad', grad)
     },

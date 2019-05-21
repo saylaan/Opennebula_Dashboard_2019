@@ -27,7 +27,9 @@
           </v-text-field>
           <br>
           <div class="danger-alert" v-html="error"/>
+          <v-layout justify-center>
           <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" @click="signin">Sign in</v-btn>
+          </v-layout>
         </form>
       </panel>
     </v-flex>
@@ -36,6 +38,7 @@
 
 <script>
 import AuthenticationService from "@/services/Authen/AuthenticationService";
+import Swal from 'sweetalert2'
 
 export default {
   data() {
@@ -46,7 +49,7 @@ export default {
     };
   },
   props: {
-    main: {
+    drawer: {
       type: Object,
       require: true
     }
@@ -66,6 +69,14 @@ export default {
         this.$router.push({
           name: "dashboard"
         });
+        Swal.fire({
+          position: 'top-end',
+          type: 'success',
+          title: 'You sign in with email : ',
+          text: this.email,
+          showConfirmButton: false,
+          timer: 2000
+        })
       } catch (error) {
         this.error = error.response.data.error;
       }

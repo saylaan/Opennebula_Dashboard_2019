@@ -10,8 +10,10 @@
         <br>
         <v-textarea label="Logo" v-model="vlab.vlabImage" :rules="[required]"></v-textarea>
         <br>
+        <v-layout justify-center>
         <span class="danger-alert">{{error}}</span>
         <v-btn class="grey darken-1 font-weight-bold" @click="create({name: 'vlabs'})">Create Vlab</v-btn>
+        </v-layout>
       </panel>
     </v-flex>
   </v-layout>

@@ -73,11 +73,13 @@
             </template>
           </v-textarea>
         <br>
+        <v-layout justify-center>
         <span class="danger-alert">{{error}}</span>
         <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
         @click="save()">Save settings</v-btn>
         <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
         @click="discard()">Discard</v-btn>
+        </v-layout>
       </panel>
     </v-flex>
   </v-layout>

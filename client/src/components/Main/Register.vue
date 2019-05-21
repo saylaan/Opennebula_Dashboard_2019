@@ -90,6 +90,12 @@
             </template>
           </v-textarea>
           <br>
+          <div class="g-reCAPTCHAR" data-sitekey="6LdXEqQUAAAAAL3oAttg0UnznP__DAzEHRmLxhHv"></div>
+          <!-- <template>
+            <vue-recaptcha sitekey="6LdXEqQUAAAAAL3oAttg0UnznP__DAzEHRmLxhHv">
+              <v-btn>Click me</v-btn>
+            </vue-recaptcha>
+          </template> -->
           <div class="danger-alert" v-html="error"></div>
           <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" @click="register">Register</v-btn>
         </form>
@@ -100,6 +106,8 @@
 
 <script>
 import AuthenticationService from "@/services/Authen/AuthenticationService";
+import Swal from 'sweetalert2'
+import VueRecaptcha from 'vue-recaptcha'
 
 export default {
   data() {
@@ -124,6 +132,11 @@ export default {
           password: this.password,
           purpose: this.purpose
         });
+        Swal.fire({
+          type: 'success',
+          title: 'Registration Successfull',
+          text: 'Just wait the acceptation from the admin... check your email later'
+        })
         this.$router.push({
           name: "home"
         });
@@ -131,6 +144,9 @@ export default {
         this.error = error.response.data.error;
       }
     }
+  },
+  components: {
+    VueRecaptcha
   }
 };
 </script>

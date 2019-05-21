@@ -20,12 +20,12 @@
               <v-icon
                 large
                 @click="answerMsg({name: 'message-view', params: {
-                        messageId: message.id
+                        messageId: message.MessageId
                       }})"
               >create</v-icon>
             </v-flex>
             <v-flex>
-              <v-icon large @click="deleteMsg(message.id)">delete_sweep</v-icon>
+              <v-icon large @click="deleteMsg(message.id, message.MessageId)">delete_sweep</v-icon>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -51,10 +51,10 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "route"])
   },
   methods: {
-    async deleteMsg(messageId) {
+    async deleteMsg(msguserid, messageId) {
       try {
-        this.result = await MessageUserService.delete(messageId);
-        this.result = await MessageService.deleteMessage(messageId);
+        this.result = (await MessageUserService.delete(msguserid)).data;
+        this.result = (await MessageService.deleteMessage(messageId)).data;
         this.messages = (await MessageUserService.index()).data;
       } catch (err) {
         console.log(err);

@@ -1,34 +1,20 @@
 <template>
   <panel v-if="isUserLoggedIn" title="View Message">
-    <v-layout column justify-center>
-      <v-flex xs12>
-        <v-layout row>
-          <v-flex xs6>
-            <h5 :class="`title font-weight-bold grey--text text--darken-3`">Lastname</h5>
-          </v-flex>
-          <v-flex xs6>
-            <h5 :class="`title font-weight-bold grey--text text--darken-3`">Firstname</h5>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-      <br>
-      <br>
-      <v-flex xs12>
-        <v-layout row>
-          <v-flex xs6 class="message-lastname">
-            <h5>{{message.lastname}}</h5>
-          </v-flex>
-          <v-flex xs6 class="message-firstname">
-            <h5>{{message.firstname}}</h5>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-      <br>
-      <br>
-      <br>
-      <v-flex xs12 class="message-message">
-        <h5>{{message.message}}</h5>
-      </v-flex>
+    <v-layout class="mt-5" column justify-center>
+        <v-divider></v-divider>
+        <v-flex xs10>
+          <v-subheader
+            v-if="message.date"
+            :key="message.date"
+          >{{ message.date }} from {{message.lastname}} {{message.firstname}} :</v-subheader>
+          <v-list-tile :key="message.purpose">
+            <v-list-tile-content>
+              <v-list-tile-title>Purpose : {{message.purpose}} </v-list-tile-title>
+              <v-list-tile v-html="message.message"></v-list-tile>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-flex>
+        <v-divider></v-divider>
       <br>
       <br>
           <v-textarea outline clearable label="Message" v-model="msg.message"
@@ -38,7 +24,7 @@
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on">help</v-icon>
                 </template>
-                Enter the message to send to the FAQ
+                Enter the message to send
               </v-tooltip>
             </template>
             <template v-slot:append>
@@ -47,9 +33,10 @@
               </v-fade-transition>
             </template>
           </v-textarea>
-      <v-flex xs6>
+      
+      <v-layout justify-center>
         <v-btn  elevation-24 large class="grey darken-1 mb-4 font-weight-bold" @click="sendMessage()">Send Message</v-btn>
-      </v-flex>
+      </v-layout>
     </v-layout>
   </panel>
 </template>
@@ -62,6 +49,7 @@ import UserService from "@/services/User/UserService";
 export default {
   data() {
     return {
+      message: {},
       msg: {
         email: null,
         firstname: null,
@@ -70,28 +58,33 @@ export default {
         admin: false,
         user: false,
         faq: false,
-        userid: 0
+        userid: 0,
+        purpose: null
       },
+      tmp: null,
       error: null,
       userview: null,
       required: value => !!value || "Required."
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user", "admin"])
+    ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
-  props: ["message"],
+  async mounted() {
+    const messageId = this.route.params.messageId;
+    this.message = (await MessageService.getMessage(messageId)).data;
+  },
   methods: {
     formatted_date() {
       var result = "";
       var d = new Date();
       result +=
-        d.getFullYear() +
+        d.getDate() +
         "/" +
         (d.getMonth() + 1) +
         "/" +
-        d.getDate() +
-        " " +
+        d.getFullYear() +
+        " at" +
         d.getHours() +
         ":" +
         d.getMinutes();
@@ -102,6 +95,9 @@ export default {
 
       // get User
       this.userview = (await UserService.getUser(this.user.id)).data;
+      console.log('user', this.user)
+      console.log('userview', this.userview)
+      console.log('message', this.message)
       if (this.message.user) {
         this.msg.user = true;
       } else if (this.message.faq) {
@@ -113,6 +109,7 @@ export default {
       this.msg.firstname = this.userview.firstname;
       this.msg.lastname = this.userview.lastname;
       this.msg.userid = this.userview.id;
+      this.msg.purpose = this.message.purpose;
 
       // Checking all filled
       const areAllFieldsFilledIn = Object.keys(this.msg).every(
@@ -126,40 +123,30 @@ export default {
       // New date for the message
       const day = this.formatted_date();
 
+      // const oldMsgName = this.message.firstname + " " + this.message.lastname 
+      // const oldMsg = this.message.date + " from " + name + " " + this.message.message
+      const newMsgName = this.msg.firstname + " " + this.msg.lastname
+      const newMsgSend = day + " from " + newMsgName + " " + this.msg.message
       // Duplicate msg post
       const newMsg = {
         email: this.msg.email,
         firstname: this.msg.firstname,
         lastname: this.msg.lastname,
-        message:
-          this.message.lastname +
-          " " +
-          this.message.firstname +
-          " " +
-          this.message.createdAt +
-          ": \n\n" +
-          this.message.message +
-          "\n\n" +
-          this.msg.lastname +
-          " " +
-          this.msg.firstname +
-          " " +
-          day +
-          ": \n" +
-          this.msg.message +
-          "\n\n",
+        message: newMsgSend,
         admin: this.msg.admin,
         user: this.msg.user,
         faq: this.msg.faq,
         date: day,
-        userid: this.msg.userid
+        userid: this.msg.userid,
+        purpose: this.msg.purpose
       };
 
       // post the message and delete older
       try {
         await MessageService.post(this.message.id, newMsg);
         try {
-          this.message = await MessageService.deleteMsgPost(this.message.id);
+          this.message = (await MessageService.deleteMsgPost(this.message.id)).data;
+          console.log(this.message)
           this.message = null;
         } catch (err) {
           console.log(err);
@@ -180,15 +167,11 @@ export default {
   overflow: scroll;
 }
 
-.message-lastname {
-  font-size: 20px;
-}
-
-.message-firstname {
-  font-size: 20px;
+.message-from {
+  font-size: 25px;
 }
 
 .message-message {
-  font-size: 25px;
+  font-size: 20px;
 }
 </style>

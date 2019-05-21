@@ -2,7 +2,13 @@
   <v-layout class="white elevation-2" column>
     <v-flex elevation-12>
       <v-toolbar class="grey lighten-1" flat dense>
-        <v-toolbar-title class="headline font-weight-bold" >{{title}}</v-toolbar-title>
+        <v-toolbar-title class="headline font-weight-bold" >
+          <v-btn fab small>
+          <v-icon large @click="$router.go(-1)">
+            undo
+          </v-icon>
+          </v-btn>
+          {{title}}</v-toolbar-title>
         <slot name="action"/>
       </v-toolbar>
     </v-flex>

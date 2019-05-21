@@ -3,6 +3,7 @@
     "userid": 3,
     "lastname": "Testname",
     "firstname": "testname",
+    "email": "testing@gmail.com",
     "message": "Bonjour, je souhaites avoir un OXE",
     "purpose": "need of a new device",
     "user": true,
@@ -12,6 +13,7 @@
     "userid": 3,
     "lastname": "Testname",
     "firstname": "testname",
+    "email": "testing@gmail.com",
     "message": "Bonjour, je souhaites avoir plus de credential",
     "purpose": "Need of credentials",
     "date": "2019/01/10 10:00",
@@ -21,19 +23,21 @@
     "userid": 2,
     "lastname": "GADOT",
     "firstname": "Frank",
+    "email": "ftest@gmail.com",
     "message": "Oui bien sur, il y a un delai de 2j mini",
     "purpose": "help",
     "admin": true,
-    "date": "2019/02/10 11:00"
+    "date": "2019/02/10 at 11:00"
   },
   {
     "userid": 1,
     "lastname": "HUCK",
     "firstname": "Geoffroy",
+    "email": "gtest@gmail.com",
     "message": "D'accord, je vous fais ça de suite cher client",
     "purpose": "help",
     "admin": true,
-    "date": "2018/12/24 9:00"
+    "date": "2018/12/24 at 9:00"
   },
   {
     "lastname": "Dupond",
@@ -42,7 +46,7 @@
     "purpose": "Question about UX",
     "message": "Do you think you got a good ux ?",
     "faq": true,
-    "date": "2018/12/10 9:00"
+    "date": "2018/12/10 at 9:00"
   },
   {
     "lastname": "Jean",
@@ -51,7 +55,7 @@
     "purpose": "Question about use of webapp",
     "message": "Why using this aapp where as an other one ?",
     "faq": true,
-    "date": "2018/09/17 15:00"
+    "date": "2018/09/17 at 15:00"
   },
   {
     "lastname": "Arnaud",
@@ -60,6 +64,6 @@
     "purpose": "How to use?",
     "message": "I dont understand ok can i register and use the plateform",
     "faq": true,
-    "date": "2018/07/11 9:00"
+    "date": "2018/07/11 at 9:00"
   }
 ]

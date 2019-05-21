@@ -1,28 +1,24 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="User view">
-    <v-layout column align-centerQ>
-      <v-flex>
-        <v-layout row wrap>
-        <v-flex xs12 class="user-companyname">
+    <v-layout column justify-center align-center> 
+        <v-flex xs6 class="user-companyname">
           <h4> Company name :
           {{userview.companyname}}
           </h4>
           <br>
         </v-flex>
-        <v-flex xs12 class="user-firstname">
+        <v-flex xs6 class="user-firstname">
           <h4> Name : {{userview.firstname}} {{userview.lastname}}
           </h4>
           <br>
         </v-flex>
-        <v-flex xs12 class="user-purpose">
+        <v-flex xs6 class="user-purpose">
           <h4> Purpose :
           {{userview.purpose}}
           </h4>
           <br>
         </v-flex>
-        </v-layout>
-      </v-flex>
-      <v-flex>
+      <v-flex xs6>
       <v-btn large
         class="grey darken-1 font-weight-bold"
         :to="{name: 'edit-user', params () {

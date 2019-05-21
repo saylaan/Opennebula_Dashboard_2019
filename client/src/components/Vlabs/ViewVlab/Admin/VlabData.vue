@@ -1,8 +1,7 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Vlab view">
-    <v-layout row>
-      <v-layout align-center>
-        <v-flex xs3 class="vlab-title">
+    <v-layout row align-center justify-center>
+        <v-flex xs2 class="vlab-title">
           <h5>
             Vlab name :
             {{vlab.title}}
@@ -20,15 +19,13 @@
             {{ needCredential(vlab.time) }}
           </h5>
         </v-flex>
-        <v-flex xs3 class="vlab-time">
+        <v-flex xs2 class="vlab-time">
           <h5>
             Active :
             {{vlab.active? 'OK' : 'KO'}}
           </h5>
         </v-flex>
-      </v-layout>
-      <v-layout column>
-        <v-flex xs12>
+        <v-flex xs2>
           <!-- <v-btn
             class="grey darken-1 font-weight-bold"
             :to="{
@@ -51,7 +48,6 @@
             @click="deleteUser"
           >Delete User</v-btn>
         </v-flex>
-      </v-layout>
     </v-layout>
   </panel>
 </template>

@@ -14,7 +14,6 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-    <v-layout wrap>
       <v-data-table :headers:="headers" :pagination.sync="pagination" :items="users">
         <template v-slot:items="props">
           <td class="text-xs-right">{{props.item.companyname}}</td>
@@ -31,7 +30,6 @@
             >View Vlab</v-btn>
         </template>
       </v-data-table>
-    </v-layout>
     </panel>
   </v-layout>
 </template>

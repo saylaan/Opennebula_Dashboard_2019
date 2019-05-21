@@ -1,7 +1,6 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Total vlab">
-    <v-layout justify-center>
-    <v-flex class="vlab">
+    <v-layout class="vlab" column align-center justify-center>
       <h2>Active Vlab : {{ activeVlabs }}</h2>
       <br>
       <br>
@@ -9,7 +8,6 @@
       <br>
       <br>
       <h2>Total Vlab : {{ totalVlabs }}</h2>
-    </v-flex>
     </v-layout>
   </panel>
 </template>
@@ -48,8 +46,6 @@ export default {
 
 <style scoped>
 .vlab {
-  padding: 20px;
-  width: 200px;
   overflow: visible;
 }
 </style>

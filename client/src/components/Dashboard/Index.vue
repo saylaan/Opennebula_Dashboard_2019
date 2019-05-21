@@ -20,9 +20,11 @@
     </v-flex>
     <v-flex v-if="!admin">
       <v-layout justify-center column>
+        <v-layout justify-center>
         <v-flex xs6 class="mt-2">
           <vlab-client-panel/>
         </v-flex>
+        </v-layout>
         <!-- <v-flex xs6 class="ml-1 mt-2">
             <vm-client-panel/>
         </v-flex>-->
@@ -39,7 +41,6 @@
             <sip-client-panel/>
           </v-flex>
         </v-layout>
-        <v-layout justify-center></v-layout>
       </v-layout>
     </v-flex>
   </v-layout>

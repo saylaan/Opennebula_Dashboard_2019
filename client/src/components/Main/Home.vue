@@ -1,10 +1,12 @@
 <template>
   <v-layout v-if="!isUserLoggedIn" justify-center column>
-    <v-flex class="mt-5" xs12>
+    <v-layout justify-center>
+    <v-flex class="mt-5" xs6>
       <h1
         class="display-3 mr-3 white--text font-weight-black blue-grey--text text--darken-2"
       >{{ msg }}</h1>
     </v-flex>
+    </v-layout>
     <v-flex xs12>
       <v-layout row align-center justify-center class="mx-auto">
         <!-- <v-flex xs3 offset-xs2 class="mr-2">

@@ -1,16 +1,12 @@
 <template>
-  <v-toolbar
-    :dark="dark"
-    :clipped-left="main.primaryDrawer.clipped"
-    :mini="main.primaryDrawer.mini"
-    app
-    fixed
-  >
+  <v-toolbar 
+    :clipped-left="drawer.clipped" 
+    app 
+    absolute
+    :dark="dark">
     <img
       src="../../assets/LogoALE.png"
-      v-if="main.primaryDrawer.type !== 'permanent'"
-      @click.stop="main.primaryDrawer.model = !main.primaryDrawer.model"
-      aspect-ratio="0.1"
+      aspect-ratio="1"
       @click="mainNav({name: 'home'})"
     >
     <v-spacer></v-spacer>
@@ -53,7 +49,7 @@ export default {
     }
   },
   props: {
-    main: {
+    drawer: {
       type: Object,
       required: true
     }

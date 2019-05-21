@@ -1,6 +1,6 @@
 <template>
   <v-layout justify-center v-if="isUserLoggedIn && admin">
-      <v-flex xs6 >
+      <v-flex xs6>
         <user-data v-bind:userview="userview"/>
       </v-flex>
   </v-layout>

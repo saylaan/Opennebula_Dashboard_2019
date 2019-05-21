@@ -43,6 +43,7 @@
             </template>
           </v-text-field>
         <br>
+        <v-layout justify-center>
         <span class="danger-alert">{{error}}</span>
         <v-btn
           elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
@@ -52,6 +53,7 @@
             }
           })"
         >Create Url</v-btn>
+        </v-layout>
       </panel>
     </v-flex>
   </v-layout>

@@ -147,7 +147,7 @@
       </template>
     </v-text-field>
     <br>
-          <v-textarea label="Purpose" type="purpose" v-model="purpose" outline clearable>
+          <v-textarea label="Purpose" type="purpose" v-model="userview.purpose" outline clearable>
             <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -162,8 +162,10 @@
               </v-fade-transition>
             </template>
           </v-textarea>
+    <v-layout justify-center>
     <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save Setting</v-btn>
     <v-btn elevation-24  large @click="discardSettings()" class="grey darken-1 font-weight-bold">Discard Setting</v-btn>
+    </v-layout>
   </panel>
 </template>
 
@@ -175,7 +177,8 @@ export default {
   data() {
     return {
       userview: {
-        password: null
+        password: null,
+        purpose: null
       },
       adminview: {
         companyname: null,
@@ -217,7 +220,7 @@ export default {
           this.error = "Please fill in all the required fields.";
           return;
         }
-        if (!this.userview.password || !this.userview.email) {
+        if (!this.userview.password || !this.userview.purpose) {
           this.error = "Please fill in all the required fields.";
           return;
         }

@@ -1,7 +1,6 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Total User">
-    <v-layout justify-center>
-    <v-flex class="user">
+    <v-layout class="user" column align-center justify-center>
       <h2>Active User : {{ activeUsers }}</h2>
       <br>
       <br>
@@ -9,7 +8,6 @@
       <br>
       <br>
       <h2>Total User : {{ totalUsers }}</h2>
-    </v-flex>
     </v-layout>
   </panel>
 </template>
@@ -48,8 +46,6 @@ export default {
 
 <style scoped>
 .user {
-  padding: 20px;
-  width: 200px;
   overflow: visible;
 }
 </style>

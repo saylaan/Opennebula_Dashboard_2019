@@ -76,14 +76,16 @@
               </v-fade-transition>
             </template>
           </v-textarea>
+          <v-layout justify-center>
           <div class="danger-alert" v-html="error"/>
           <v-btn large elevation-24 class="grey darken-1 mb-4 font-weight-bold" @click="sendFAQ">Send</v-btn>
+          </v-layout>
         </form>
       </panel>
       <panel title="Message" v-if="isUserLoggedIn && !admin">
         <form>
           <br>
-          <v-text-field outline clearable label="Purpose" v-model="msg.purpose"
+          <v-text-field class="mt-5" outline clearable label="Purpose" v-model="msg.purpose"
           type="purpose" :rules="[required]">
             <template v-slot:prepend>
               <v-tooltip bottom>
@@ -117,8 +119,10 @@
             </template>
           </v-textarea>
           <br>
+          <v-layout justify-center>
           <div class="danger-alert" v-html="error"/>
           <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" @click="sendUser">Send</v-btn>
+          </v-layout>
         </form>
       </panel>
     </v-flex>
@@ -127,6 +131,7 @@
 
 <script>
 import MessageService from "@/services/Message/MessageService";
+import MessageUserService from "@/services/Message/MessageUserService";
 import UserService from "@/services/User/UserService";
 import { mapState } from "vuex";
 
@@ -144,6 +149,8 @@ export default {
         userid: 0,
         purpose: null
       },
+      messageuser: null,
+      message: null,
       error: null,
       userview: null,
       required: value => !!value || "Required."
@@ -157,12 +164,12 @@ export default {
       var result = "";
       var d = new Date();
       result +=
-        d.getFullYear() +
+        d.getDate() +
         "/" +
         (d.getMonth() + 1) +
         "/" +
-        d.getDate() +
-        " " +
+        d.getFullYear() +
+        " at" +
         d.getHours() +
         ":" +
         d.getMinutes();
@@ -189,21 +196,13 @@ export default {
         email: this.msg.email,
         firstname: this.msg.firstname,
         lastname: this.msg.lastname,
-        message:
-          this.msg.lastname +
-          " " +
-          this.msg.firstname +
-          " " +
-          day +
-          ": \n" +
-          this.msg.message +
-          "\n\n",
+        message: this.msg.message,
         admin: this.msg.admin,
         user: this.msg.user,
         faq: this.msg.faq,
+        purpose: this.msg.purpose,
         date: day,
-        userid: 0,
-        purpose: this.msg.purpose
+        userid: 0
       };
 
       // post the message and delete older
@@ -240,25 +239,24 @@ export default {
         email: this.msg.email,
         firstname: this.msg.firstname,
         lastname: this.msg.lastname,
-        message:
-          this.msg.lastname +
-          " " +
-          this.msg.firstname +
-          " " +
-          day +
-          ": \n" +
-          this.msg.message +
-          "\n\n",
+        message: this.msg.message,
+        purpose: this.msg.purpose,
         admin: this.msg.admin,
         user: this.msg.user,
         faq: this.msg.faq,
         date: day,
-        userid: this.msg.userid,
-        purpose: this.msg.purpose
+        userid: this.msg.userid
       };
       // post the message and delete older
       try {
-        await MessageService.postNewMsg(newMsg);
+        this.message = (await MessageService.postNewMsg(newMsg)).data;
+        try {
+          this.messageuser = (await MessageUserService.post({
+            MessageId: this.message.id
+          }))
+        } catch (err) {
+          console.log(err)
+        }
         this.$router.push({ name: "dashboard" });
       } catch (err) {
         console.log(err);

@@ -1,15 +1,15 @@
 <template>
-  <v-app>
-    <nav-bar v-if="isUserLoggedIn" v-bind:main="main"/>
-    <toolbar v-bind:main="main"/>
-    <v-jumbotron :gradient="grad" style="height:100%; overflow:auto;">
+<v-app id="sandbox">
+    <navbar v-if="isUserLoggedIn" v-bind:drawer="drawer"/>
+    <toolbar v-bind:drawer="drawer"/>
+    <v-jumbotron :gradient="grad" style="height:100%; overflow:auto;" @click="isMini()">
     <v-content>
       <v-container fluid>
-        <router-view v:bind:main="main"></router-view>
+        <router-view v:bind:drawer="drawer"></router-view>
       </v-container>
     </v-content>
     </v-jumbotron>
-    <v-footer :dark="dark" :inset="main.inset" app>
+    <v-footer :dark="dark" :inset="footer.inset" app>
       <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -17,31 +17,41 @@
 
 <script>
 import Toolbar from "@/components/Nav/Toolbar.vue";
-import NavBar from "@/components/Nav/NavBar.vue";
+import Navbar from "@/components/Nav/NavBar.vue";
 import { mapState } from "vuex";
+import UserService from "@/services/User/UserService";
 
 export default {
-  data: () => ({
-    main: {
-      inset: true,
-      drawers: ["Default (no property)"],
-      primaryDrawer: {
+  data() {
+    return {
+      hover: false,
+      drawer: {
         model: null,
-        type: "default (no property)",
+        type: 'permanent',
         clipped: false,
-        mini: false
+        floating: true,
+        mini: true
+      },
+      footer: {
+        inset: true
       }
     }
-  }),
-  name: "App",
+  },
+  methods: {
+    isMini() {
+      if (!this.drawer.mini) {
+        this.drawer.mini = true
+      }
+    }
+  },
   components: {
     Toolbar,
-    NavBar
+    Navbar
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user", "admin", "dark", "grad"])
+    ...mapState(["isUserLoggedIn", "user", "admin", "grad", "dark"])
   }
-};
+}
 </script>
 
 <style>
@@ -52,6 +62,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.active {
+  background: green;
 }
 
 .v-footer {

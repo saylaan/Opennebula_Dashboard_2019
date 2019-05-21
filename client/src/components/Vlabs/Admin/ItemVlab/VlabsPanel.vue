@@ -1,6 +1,5 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin" column>
-    <panel title="Vlabs">
+    <panel v-if="isUserLoggedIn && admin" title="Vlabs">
       <!-- <v-btn
         class="grey darken-3"
         slot="action"
@@ -14,7 +13,6 @@
       >
         <v-icon>add</v-icon>
       </v-btn> -->
-    <v-layout wrap>
       <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabs">
         <template v-slot:items="props">
           <td class="text-xs-right">{{props.item.title}}</td>
@@ -31,9 +29,7 @@
             >View Vlab</v-btn>
         </template>
       </v-data-table>
-    </v-layout>
     </panel>
-  </v-layout>
 </template>
 
 <script>

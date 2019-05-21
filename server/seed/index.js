@@ -6,6 +6,8 @@ const {
   VlabUserLog,
   Message,
   MessageUser,
+  Resp,
+  RespMessage,
   Url,
   UrlUser,
   UrlVlab,
@@ -28,6 +30,8 @@ const users = require('./User/users.json')
 
 const messages = require('./Message/messages.json')
 const messagesUsers = require('./Message/messagesUsers.json')
+const resps = require('./Message/resps.json')
+const respsMessages = require('./Message/respsMessage.json')
 
 const templates = require('./Template/templates.json')
 const templatesVms = require('./Template/templatesVms.json')
@@ -84,7 +88,18 @@ sequelize.sync({force: true})
       messagesUsers.map(messagesUser => {
         MessageUser.create(messagesUser)
       })
-      )
+    )
+    /* RESP */
+    await Promise.all(
+      resps.map(resp => {
+        Resp.create(resp)
+      })
+    )
+    await Promise.all(
+      respsMessages.map(respsMessage => {
+        RespMessage.create(respsMessage)
+      })
+    )
 
 /* ####################################################################### */
     /* URL */
