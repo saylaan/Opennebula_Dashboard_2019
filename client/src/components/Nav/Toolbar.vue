@@ -45,6 +45,8 @@ export default {
     mainNav(route) {
       if (!this.isUserLoggedIn) {
         this.$router.push(route);
+      } else if (this.isUserLoggedIn) {
+        this.$router.push('dashboard')
       }
     }
   },

@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>
+  <v-layout class="mt-5" justify-center>
     <v-flex v-if="isUserLoggedIn && admin" xs6>
       <panel title="Create Url">
         <v-text-field  class="mt-5" label="Name" v-model="url.name" :rules="[required]"

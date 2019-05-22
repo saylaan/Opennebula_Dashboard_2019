@@ -162,7 +162,13 @@
               </v-fade-transition>
             </template>
           </v-textarea>
-    <v-layout justify-center>
+          <v-layout justify-center>
+            <v-flex xs6>
+          <v-switch v-if="!admin" large color="red" v-model="userview.emailactive" label="Active message by email"></v-switch>
+          <v-switch v-if="admin" large color="red" v-model="adminview.emailactive" label="Active message by email"></v-switch>
+            </v-flex>
+          </v-layout>
+    <v-layout class="mt-3" justify-center>
     <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save Setting</v-btn>
     <v-btn elevation-24  large @click="discardSettings()" class="grey darken-1 font-weight-bold">Discard Setting</v-btn>
     </v-layout>
@@ -178,7 +184,8 @@ export default {
     return {
       userview: {
         password: null,
-        purpose: null
+        purpose: null,
+        emailactive: false
       },
       adminview: {
         companyname: null,
@@ -186,7 +193,8 @@ export default {
         lastname: null,
         email: null,
         password: null,
-        purpose: null
+        purpose: null,
+        emailactive: false
       },
       error: null,
       required: value => !!value || "Required."
@@ -236,6 +244,7 @@ export default {
       try {
         if (!this.admin) {
           this.userview = (await UserService.getUser(this.user.id)).data;
+          console.log(this.userview)
         } else {
           this.adminview = (await UserService.getUser(this.user.id)).data;
         }

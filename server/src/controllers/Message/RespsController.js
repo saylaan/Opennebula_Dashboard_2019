@@ -1,29 +1,29 @@
-const { Message } = require('../../models')
+const { Resp } = require('../../models')
 const _ = require('lodash')
 module.exports = {
   async index(req, res) {
     try {
       const value = req.query.value
       if (value == 1) {
-        messages = await Message.findAll({
+        resps = await Resp.findAll({
             where: {
               faq: true
             }
           })
       } else if (value == 2) {
-        messages = await Message.findAll({
+        resps = await Resp.findAll({
           where: {
             user: true
           }
         })
       } else if (value == 3) {
-        messages = await Message.findAll({
+        resps = await Resp.findAll({
           where: {
             admin: true,
           }
         })
       }
-      res.send(_.uniqBy(messages))
+      res.send(_.uniqBy(resps))
     } catch (err) {
       res.status(500).send({
         err: 'An error has occured while trying to fetch all the resp'
@@ -32,8 +32,8 @@ module.exports = {
   },
   async post(req, res) {
     try {
-      const message = await Message.create(req.body)
-      res.send(message)
+      const resp = await Resp.create(req.body)
+      res.send(resp)
     } catch (err) {
       res.status(500).send({
         error: 'An error has occured while trying to create a new resp'
@@ -42,32 +42,32 @@ module.exports = {
   },
   async get(req, res) {
     try {
-      const message = await Message.findByPk(req.params.messageId)
-      if (!message) {
+      const resp = await Resp.findByPk(req.params.respId)
+      if (!resp) {
         return res.status(403).send({
-          error: 'The message does no exist'
+          error: 'The resp does no exist'
         })
       }
-      res.send(message)
+      res.send(resp)
     } catch (err) {
       res.status(500).send({
-        error: 'An error has occured while trying to get the message'
+        error: 'An error has occured while trying to get the resp'
       })
     }
   },
   async delete(req, res) {
     try {
-      const message = await Message.findByPk(req.params.messageId)
-      if (!message) {
+      const resp = await Resp.findByPk(req.params.respId)
+      if (!resp) {
         return res.status(403).send({
-          error: 'The message does no exist'
+          error: 'The resp does no exist'
         })
       }
-      await message.destroy()
-      res.send(message)
+      await resp.destroy()
+      res.send(resp)
     } catch (err) {
       res.status(500).send({
-        err: 'An error has occured while trying to delete the Vlab User'
+        err: 'An error has occured while trying to delete the resp'
       })
     }
   }

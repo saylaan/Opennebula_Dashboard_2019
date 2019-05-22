@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>
+  <v-layout class="mt-5" justify-center>
     <v-flex elevation-24 xs6 v-if="!$store.state.isUserLoggedIn">
       <panel title="Sign in">
         <form name="sandbox-form" autocomplete="off">

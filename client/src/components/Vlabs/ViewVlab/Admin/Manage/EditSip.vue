@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin" justify-center>
+  <v-layout class="mt-5" v-if="isUserLoggedIn && admin" justify-center>
     <v-flex xs6>
       <panel title="Edit sip">
         <v-text-field class="mt-5" label="Name" v-model="sip.name" :rules="[required]"

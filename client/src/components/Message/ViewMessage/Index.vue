@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center v-if="isUserLoggedIn">
+  <v-layout class="mt-5" row justify-center v-if="isUserLoggedIn">
     <v-flex xs6>
       <message-data/>
     </v-flex>

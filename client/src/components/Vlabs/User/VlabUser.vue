@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && !admin" row justify-center wrap>
+  <v-layout class="mt-5" v-if="isUserLoggedIn && !admin" row justify-center wrap>
     <!-- TODO: ALL THE VM LINK TO THE VLAB AND THEIR STATUS
     -->
     <v-flex class="ml-1" xs9>

@@ -5,7 +5,7 @@
     "firstname": "GADOT",
     "email": "ftest@gmail.com",
     "message": "Et voila pour vous",
-    "admin": true,
+    "user": true,
     "date": "2019/06/01 19:00"
   },
   {
@@ -15,7 +15,7 @@
     "email": "gtest@gmail.com",
     "message": "D'accord c'est parfait !",
     "date": "2019/03/10 10:00",
-    "admin": true
+    "user": true
   },
   {
     "userid": 3,

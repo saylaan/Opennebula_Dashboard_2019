@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="isUserLoggedIn">
+  <v-layout class="mt-5" v-if="isUserLoggedIn">
     <vlab-admin v-if="admin"/>
     <vlab-user v-if="!admin"/>
   </v-layout>

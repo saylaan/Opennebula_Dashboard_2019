@@ -1,13 +1,16 @@
 import Api from '@/services/Api'
 
 export default { // Hitting the end point register
-  index(respId) {
+  index(MessageId) {
     return Api().get('respsMessage', {
-      params: respId
+      params: MessageId
     })
   },
-  post(respMessage) {
-    return Api().post('respsMessage', respMessage)
+  post(messageId, respId) {
+    return Api().post('respsMessage', {
+      MessageId: messageId,
+      RespId: respId
+    })
   },
   delete(respMessageId) {
     return Api().delete(`respsMessage/${respMessageId}`)

@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin" justify-center>
+  <v-layout class="mt-5" v-if="isUserLoggedIn && admin" justify-center>
     <v-flex xs6>
       <panel title="Edit Vm">
         <v-text-field label="Name" v-model="vm.name" :rules="[required]"></v-text-field>

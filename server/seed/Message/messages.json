@@ -26,7 +26,7 @@
     "email": "ftest@gmail.com",
     "message": "Oui bien sur, il y a un delai de 2j mini",
     "purpose": "help",
-    "admin": true,
+    "user": true,
     "date": "2019/02/10 at 11:00"
   },
   {
@@ -36,7 +36,7 @@
     "email": "gtest@gmail.com",
     "message": "D'accord, je vous fais ça de suite cher client",
     "purpose": "help",
-    "admin": true,
+    "user": true,
     "date": "2018/12/24 at 9:00"
   },
   {

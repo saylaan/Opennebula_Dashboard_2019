@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>
+  <v-layout class="mt-5" justify-center>
     <v-flex v-if="isUserLoggedIn && admin" xs6>
       <panel title="Create Vlab">
         <v-text-field label="Title" v-model="vlab.title" :rules="[required]"></v-text-field>

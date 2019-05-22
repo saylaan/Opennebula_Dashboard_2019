@@ -6,7 +6,9 @@
     "password": "12345678",
     "companyname": "Sermes",
     "purpose": "enterprise",
-    "admin": true
+    "admin": true,
+    "active": true,
+    "emailactive": false  
   },
   {
     "lastname": "GADOT",
@@ -15,7 +17,9 @@
     "password": "12345678",
     "companyname": "ALE",
     "purpose": "testing",
-    "admin": true
+    "admin": true,
+    "active": true,
+    "emailactive": false  
   },
   {
     "lastname": "Testname",
@@ -24,7 +28,8 @@
     "password": "12345678",
     "companyname": "test",
     "purpose": "enterprise",
-    "active": true
+    "active": true,
+    "emailactive": true
   },
   {
     "lastname": "other",
@@ -32,6 +37,7 @@
     "email": "other@gmail.com",
     "password": "12345678",
     "companyname": "other",
-    "purpose": "enterprise"
+    "purpose": "enterprise",
+    "emailactive": true
   }
 ]

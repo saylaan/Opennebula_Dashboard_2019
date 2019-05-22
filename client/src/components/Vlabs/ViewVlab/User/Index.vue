@@ -1,5 +1,5 @@
 <template>
-  <v-layout column v-if="isUserLoggedIn">
+  <v-layout class="mt-5" column v-if="isUserLoggedIn">
     <v-layout justify-center>
       <v-flex xs6>
         <vlab-data :vlab="vlab"/>

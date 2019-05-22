@@ -8,7 +8,7 @@ module.exports = (app) => {
     app.get('/resp/:respId',
         isAuthenticated,
         RespController.get)
-    app.post('/resp/:respId',
+    app.post('/resp',
         isAuthenticated,
         RespController.post)
     app.delete('/resp/:respId',

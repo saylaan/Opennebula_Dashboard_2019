@@ -48,7 +48,6 @@ module.exports = {
   async delete(req, res) {
     try {
       const { urlVlabId } = req.params
-
       const urlVlab = await SipVlab.findOne({
         where: {
           id: urlVlabId

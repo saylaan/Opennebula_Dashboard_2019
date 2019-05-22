@@ -1,5 +1,5 @@
 <template>
-  <v-layout column v-if="isUserLoggedIn">
+  <v-layout class="mt-5" column v-if="isUserLoggedIn">
     <v-flex v-if="admin">
       <v-layout row justify-space-between>
         <v-flex xs4 class="mt-2">

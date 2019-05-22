@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin">
+  <v-layout class="mt-5" v-if="isUserLoggedIn && admin">
     <v-flex xs6 v-if="isUserLoggedIn">
       <vlabs-users/>
       <vlabs-users-logs class="mt-2"/>

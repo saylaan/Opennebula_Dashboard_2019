@@ -1,72 +1,68 @@
 const {
-  Message,
-  MessageUser
+  Resp,
+  RespMessage
 } = require('../../models')
 const _ = require('lodash')
 
 module.exports = {
   async index(req, res) {
     try {
-      const UserId = req.user.id
-      const messagesUser = await MessageUser.findAll({
+      const MessageId = req.query.MessageId
+      const respsMessage = await RespMessage.findAll({
         where: {
-          UserId: UserId
+          MessageId: MessageId
         },
         include: [
           {
-            model: Message
+            model: Resp
           }
         ]
       })
-        .map(messageUser => messageUser.toJSON())
-        .map(messageUser => _.extend(
+        .map(respMessage => respMessage.toJSON())
+        .map(respMessage => _.extend(
           {},
-          messageUser.Message,
-          messageUser
+          respMessage.Resp,
+          respMessage
         ))
-      res.send(_.uniqBy(messagesUser, messageUser => messageUser.MessageId))
+      res.send(_.uniqBy(respsMessage, respMessage => respMessage.RespId))
     } catch (err) {
       res.status(500).send({
-        err: 'An error has occured while trying to get the Message User'
+        err: 'An error has occured while trying to get the resp message'
       })
     }
   },
   async post(req, res) {
     try {
-      const UserId = req.user.id
-      const { MessageId } = req.body
-      const messageUser = await MessageUser.create({
+      const { MessageId, RespId } = req.body
+      const respMessage = await RespMessage.create({
         MessageId: MessageId,
-        UserId: UserId
+        RespId: RespId
       })
-      res.send(messageUser)
+      res.send(respMessage)
     } catch (err) {
       res.status(500).send({
-        err: 'An error has occured while trying to create the message for the user'
+        err: 'An error has occured while trying to create the resp message'
       })
     }
   },
   async delete(req, res) {
     try {
-      const UserId = req.user.id
-      const { messageUserId } = req.params
-
-      const messageuser = await MessageUser.findOne({
+      const { respMessageId } = req.params
+      const respmessage = await RespMessage.findOne({
         where: {
-          id: messageUserId,
-          UserId: UserId
+          id: respMessageId
         }
       })
-      if (!messageuser) {
+      if (!respmessage) {
         return res.status(403).send({
-          error: 'you do not have access to this vlabuser'
+          error: 'you do not have access to this resp message'
         })
       }
-      await messageuser.destroy()
-      res.send(messageuser)
+      await respmessage.destroy()
+      res.send(respmessage)
     } catch (err) {
       res.status(500).send({
-        err: 'An error has occured while trying to delete the message User'
+        err: 'An error has occured while trying to delete the resp message'
       })
     }
   }

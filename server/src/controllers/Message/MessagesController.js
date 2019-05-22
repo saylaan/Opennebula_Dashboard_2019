@@ -16,12 +16,6 @@ module.exports = {
             user: true
           }
         })
-      } else if (value == 3) {
-        messages = await Message.findAll({
-          where: {
-            admin: true,
-          }
-        })
       }
       res.send(_.uniqBy(messages))
     } catch (err) {

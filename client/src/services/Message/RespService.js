@@ -7,8 +7,8 @@ export default { // Hitting the end point register
   get(respId) {
     return Api().get(`resp/${respId}`)
   },
-  post(respId, resp) {
-    return Api().post(`resp/${respId}`, resp)
+  post(resp) {
+    return Api().post(`resp`, resp)
   },
   delete(respId) {
     return Api().delete(`resp/${respId}`)

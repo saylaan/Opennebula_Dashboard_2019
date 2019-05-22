@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>
+  <v-layout class="mt-5" justify-center>
     <v-flex xs6 elevation-24>
       <panel title="Message FAQ" v-if="!isUserLoggedIn">
         <form>
@@ -92,7 +92,7 @@
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on">help</v-icon>
                 </template>
-                The name of the company must be valid
+                The purpose must be valid logic
               </v-tooltip>
             </template>
             <template v-slot:append>
@@ -169,7 +169,7 @@ export default {
         (d.getMonth() + 1) +
         "/" +
         d.getFullYear() +
-        " at" +
+        " at " +
         d.getHours() +
         ":" +
         d.getMinutes();

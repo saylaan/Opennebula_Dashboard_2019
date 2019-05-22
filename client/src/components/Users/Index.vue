@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin" row justify-center wrap>
+  <v-layout class="mt-5" v-if="isUserLoggedIn && admin" row justify-center wrap>
     <v-flex xs6 class="ml-1">
       <Users-search-panel/>
     </v-flex>
