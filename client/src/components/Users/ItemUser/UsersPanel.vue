@@ -27,7 +27,7 @@
                   params: {
                     userId: props.item.id}
                  }"
-            >View Vlab</v-btn>
+            >View User</v-btn>
         </template>
       </v-data-table>
     </panel>

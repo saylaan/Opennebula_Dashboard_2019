@@ -1,12 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
   const Vlab = sequelize.define('Vlab', {
-    title: DataTypes.STRING,
+    idopennebula: DataTypes.INTEGER,
+    ownername: DataTypes.STRING,
+    groupname: DataTypes.STRING,
     name: DataTypes.STRING,
-    time: DataTypes.STRING,
-    vlabImage: DataTypes.STRING,
+    nameparse: DataTypes.STRING,
+    vlanid: DataTypes.INTEGER,
     active: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    dayleft: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     }
   })
 

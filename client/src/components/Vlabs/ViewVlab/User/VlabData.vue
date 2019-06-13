@@ -3,20 +3,20 @@
       <v-layout align-center justify-center row>
         <v-flex xs3 class="vlab-title">
           <h5>
-            Vlab name :
-            {{vlab.title}}
+            Name:
+            {{vlab.name}}
           </h5>
         </v-flex>
         <v-flex xs5 class="vlab-name">
           <h5>
-            Company name :
-            {{vlab.name}}
+            Owner:
+            {{vlab.ownername}}
           </h5>
         </v-flex>
         <v-flex xs2 class="vlab-time">
           <h5>
-            Day left :
-            {{ needCredential(vlab.time) }}
+            Day left:
+            {{ needCredential(vlab.dayleft) }}
           </h5>
         </v-flex>
         <v-flex xs2 class="vlab-time">

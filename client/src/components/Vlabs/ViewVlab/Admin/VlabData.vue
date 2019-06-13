@@ -1,22 +1,22 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Vlab view">
     <v-layout row align-center justify-center>
-        <v-flex xs2 class="vlab-title">
+       <v-flex xs3 class="vlab-title">
           <h5>
-            Vlab name :
-            {{vlab.title}}
-          </h5>
-        </v-flex>
-        <v-flex xs3 class="vlab-name">
-          <h5>
-            Company name :
+            Name:
             {{vlab.name}}
           </h5>
         </v-flex>
-        <v-flex xs3 class="vlab-time">
+        <v-flex xs5 class="vlab-name">
           <h5>
-            Day left :
-            {{ needCredential(vlab.time) }}
+            Owner:
+            {{vlab.ownername}}
+          </h5>
+        </v-flex>
+        <v-flex xs2 class="vlab-time">
+          <h5>
+            Day left:
+            {{ needCredential(vlab.dayleft) }}
           </h5>
         </v-flex>
         <v-flex xs2 class="vlab-time">

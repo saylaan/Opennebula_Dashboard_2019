@@ -49,6 +49,13 @@ export default {
         this.vlabvms = (await VmVlabService.index({
           VlabId: this.vlab.id
         })).data;
+        for (let i = 0, j = 0; i !== this.vlabvms.length; i++) {
+          var count = (this.vlabvms[i].type.match(/_/g) || []).length
+          if (count >= 1) {
+            this.vlabvms.splice(i, 1)
+            i--
+          }
+        }
       } catch (err) {
         console.log(err);
       }
@@ -61,8 +68,15 @@ export default {
       this.vlabvms = (await VmVlabService.index({
         VlabId: this.vlab.id
       })).data;
+      for (let i = 0, j = 0; i !== this.vlabvms.length; i++) {
+        var count = (this.vlabvms[i].type.match(/_/g) || []).length
+        if (count >= 1) {
+          this.vlabvms.splice(i, 1)
+          i--
+        }
+      }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
 };

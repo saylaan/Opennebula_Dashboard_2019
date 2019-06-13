@@ -1,5 +1,5 @@
-const Promise = require('bluebird')
-const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs')) // store password using bcrypt
+const Bluebird = require('bluebird')
+const bcrypt = Bluebird.promisifyAll(require('bcrypt-nodejs')) // store password using bcrypt
 
 module.exports = (sequelize, DataTypes) => {
   // creation of the table into the DB
@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     companyname: DataTypes.STRING,
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
+    username: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
       unique: true // really important for one data / no more
@@ -25,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     emailactive: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    dayleft: {
+      type: DataTypes.INTEGER,
+      defaultValue: null
     }
   })
 

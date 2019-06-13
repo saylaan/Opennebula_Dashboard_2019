@@ -58,8 +58,8 @@ module.exports = {
           error: 'you do not have access to this sipvlab'
         })
       }
-      await sipVlab.destroy()
-      res.send(urlvlab)
+      await urlVlab.destroy()
+      res.send(urlVlab)
     } catch (err) {
       res.status(500).send({
         err: 'An erro has occured while trying to delte the sip of the vlab'

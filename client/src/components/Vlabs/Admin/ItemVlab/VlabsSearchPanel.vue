@@ -1,6 +1,6 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Search">
-    <v-text-field label="Search by company, name, days left" v-model="search"></v-text-field>
+    <v-text-field label="Search by owner name, vlab name and days left" v-model="search"></v-text-field>
   </panel>
 </template>
 

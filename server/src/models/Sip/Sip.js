@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     login: DataTypes.STRING,
     passwd: DataTypes.STRING,
+    vlabname: DataTypes.STRING,
     active: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

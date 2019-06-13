@@ -6,6 +6,7 @@
     "password": "12345678",
     "companyname": "Sermes",
     "purpose": "enterprise",
+    "username": "geoffroy",
     "admin": true,
     "active": true,
     "emailactive": false  
@@ -17,6 +18,7 @@
     "password": "12345678",
     "companyname": "ALE",
     "purpose": "testing",
+    "username": "frank",
     "admin": true,
     "active": true,
     "emailactive": false  
@@ -28,6 +30,7 @@
     "password": "12345678",
     "companyname": "test",
     "purpose": "enterprise",
+    "username": "testname",
     "active": true,
     "emailactive": true
   },
@@ -38,6 +41,18 @@
     "password": "12345678",
     "companyname": "other",
     "purpose": "enterprise",
+    "username": "other",
     "emailactive": true
+  },
+  {
+    "lastname": "Yves",
+    "firstname": "Dupont",
+    "email": "yves@gmail.com",
+    "password": "12345678",
+    "companyname": "ALE",
+    "purpose": "enterprise",
+    "username": "yves",
+    "emailactive": true,
+    "active": true
   }
 ]

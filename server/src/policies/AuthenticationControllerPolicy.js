@@ -6,6 +6,7 @@ module.exports = { // looking if data pass or fail
             companyname: Joi.string(),
             firstname: Joi.string(),
             lastname: Joi.string(),
+            username: Joi.string(),
             email: Joi.string().email(),
             password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$')),
             purpose: Joi.string()
@@ -27,6 +28,11 @@ module.exports = { // looking if data pass or fail
                 case 'lastname':
                     res.status(400).send({
                         error: 'You must provide a valid last name'
+                    })
+                    break;
+                case 'username':
+                    res.status(400).send({
+                        error: 'You must provide a valid username'
                     })
                     break;
                 case 'email':

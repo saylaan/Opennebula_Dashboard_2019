@@ -1,6 +1,6 @@
 import Api from '@/services/Api'
 
-export default { // Hitting the end point register
+export default {
   index(search) {
     return Api().get('users', {
       params: {

@@ -15,9 +15,9 @@
       </v-btn> -->
       <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabs">
         <template v-slot:items="props">
-          <td class="text-xs-right">{{props.item.title}}</td>
           <td class="text-xs-right">{{props.item.name}}</td>
-          <td class="text-xs-right">{{needCredential(props.item.time)}}</td>
+          <td class="text-xs-right">{{props.item.ownername}}</td>
+          <td class="text-xs-right">{{needCredential(props.item.dayleft)}}</td>
           <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
                       <v-btn
               class="grey darken-1 font-weight-bold"
@@ -41,16 +41,16 @@ export default {
     return {
       headers: [
         {
-          text: "Name",
-          value: "title"
-        },
-        {
-          text: "CompanyName",
+          text: "Vlab name",
           value: "name"
         },
         {
-          text: "TimeLeft",
-          value: "time"
+          text: "Owner name",
+          value: "ownername"
+        },
+        {
+          text: "Day left",
+          value: "dayleft"
         },
         {
           text: "Active",

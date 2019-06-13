@@ -2,8 +2,8 @@
   <panel v-if="isUserLoggedIn" title="Vlab user logs">
     <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabuserlogs">
       <template v-slot:items="props">
-        <td class="text-xs-right">{{props.item.title}}</td>
         <td class="text-xs-right">{{props.item.name}}</td>
+        <td class="text-xs-right">{{props.item.ownername}}</td>
       </template>
     </v-data-table>
   </panel>
@@ -18,12 +18,12 @@ export default {
     return {
       headers: [
         {
-          text: "VlabName",
-          value: "title"
+          text: "Vlab name",
+          value: "name"
         },
         {
-          text: "CompanyName",
-          value: "name"
+          text: "Owner name",
+          value: "ownername"
         }
       ],
       pagination: {
