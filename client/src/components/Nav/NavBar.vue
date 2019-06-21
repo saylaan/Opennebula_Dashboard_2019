@@ -99,6 +99,15 @@ export default {
       require: true
     }
   },
+  watch: {
+    async getUserView() {
+      try {
+        this.userview = (await UserService.getUser(this.user.id)).data;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
   methods: {
     isMini() {
       if (this.drawer.mini) {

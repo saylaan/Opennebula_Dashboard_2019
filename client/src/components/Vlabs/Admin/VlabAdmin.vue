@@ -1,29 +1,31 @@
 <template>
-  <v-layout class="mt-5" v-if="isUserLoggedIn && admin">
-    <v-flex xs6 v-if="isUserLoggedIn">
+  <v-layout class="mt-5" v-if="isUserLoggedIn && admin" xs6 justify-center align-center>
+    <!-- <v-flex xs6 v-if="isUserLoggedIn">
       <vlabs-users/>
       <vlabs-users-logs class="mt-2"/>
-    </v-flex>
-    <v-flex
+    </v-flex> -->
+    <!-- <v-flex
       :class="{
           xs12: !isUserLoggedIn,
           xs6: isUserLoggedIn
         }"
       class="ml-2"
-    >
-      <vlabs-search-panel/>
+    > -->
+      <!-- <vlabs-search-panel/> -->
+      <v-flex xs9>
       <vlabs-panel class="mt-2"/>
-    </v-flex>
+      </v-flex>
+    <!-- </v-flex> -->
   </v-layout>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import VlabsPanel from "./ItemVlab/VlabsPanel";
-import VlabsSearchPanel from "./ItemVlab/VlabsSearchPanel";
+// import VlabsSearchPanel from "./ItemVlab/VlabsSearchPanel";
 import VlabService from "@/services/Vlab/VlabService";
-import VlabsUsers from "./ItemVlab/VlabsUsers";
-import VlabsUsersLogs from "./ItemVlab/VlabsUsersLogs";
+// import VlabsUsers from "./ItemVlab/VlabsUsers";
+// import VlabsUsersLogs from "./ItemVlab/VlabsUsersLogs";
 
 export default {
   data() {
@@ -38,10 +40,10 @@ export default {
     this.vlabs = (await VlabService.getAllVlabs()).data;
   },
   components: {
-    VlabsPanel,
-    VlabsSearchPanel,
-    VlabsUsers,
-    VlabsUsersLogs
+    VlabsPanel
+    // VlabsSearchPanel,
+    // VlabsUsers,
+    // VlabsUsersLogs
   },
   props: {
     main: {

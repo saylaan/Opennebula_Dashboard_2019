@@ -1,9 +1,9 @@
 [
   {
     "userid": 3,
-    "lastname": "Testname",
-    "firstname": "testname",
-    "email": "testing@gmail.com",
+    "lastname": "Dupont",
+    "firstname": "Yves",
+    "email": "yves@gmail.com",
     "message": "Bonjour, je souhaites avoir un OXE",
     "purpose": "need of a new device",
     "user": true,
@@ -11,9 +11,9 @@
   },
   {
     "userid": 3,
-    "lastname": "Testname",
-    "firstname": "testname",
-    "email": "testing@gmail.com",
+    "lastname": "Dupont",
+    "firstname": "Yves",
+    "email": "yves@gmail.com",
     "message": "Bonjour, je souhaites avoir plus de credential",
     "purpose": "Need of credentials",
     "date": "2019/01/10 10:00",

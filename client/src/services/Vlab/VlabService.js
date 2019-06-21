@@ -14,7 +14,7 @@ export default { // Hitting the end point register
   getVlab(vlabId) {
     return Api().get(`vlabs/${vlabId}`)
   },
-  put(vlab) {
-    return Api().put(`vlabs/${vlab.id}`)
+  put(vlab, vlabId) {
+    return Api().put(`vlabs/${vlabId}`, vlab)
   }
 }

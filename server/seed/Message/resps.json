@@ -19,18 +19,18 @@
   },
   {
     "userid": 3,
-    "lastname": "Testname",
-    "firstname": "testname",
-    "email": "testing@gmail.com",
+    "lastname": "Dupont",
+    "firstname": "Yves",
+    "email": "yves@gmail.com",
     "message": "C'est très performant comme web app",
     "user": true,
     "date": "2019/02/10 at 11:00"
   },
   {
     "userid": 3,
-    "lastname": "Testname",
-    "firstname": "testname",
-    "email": "testing@gmail.com",
+    "lastname": "Dupont",
+    "firstname": "Yves",
+    "email": "yves@gmail.com",
     "message": "Vous avez pu répondre très rapidement à ma demande",
     "user": true,
     "date": "2018/12/24 at 9:00"

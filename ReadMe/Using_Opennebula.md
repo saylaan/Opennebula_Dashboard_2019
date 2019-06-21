@@ -108,6 +108,8 @@ vnet.delRange(range, callback) ++
 vnet.freeRange(range, callback) -+
 vnet.reserve(template, callback) -+
 vnet.rename(name, callback) +-
+vnet.chown(owner, callback) --
+vnet.chgrp(group, callback) --
 
 <!-- Maybe not use =========================================================================
 one.createCluster(name, callback) --
@@ -155,8 +157,6 @@ template.chmod(user_use, user_manage, user_admin, group_use, group_manage, group
 vnet.updateRange(template, callback) --
 vnet.hold(template, callback) --
 vnet.release(template, callback) --
-vnet.chown(owner, callback) --
-vnet.chgrp(group, callback) --
 vnet.chmod(user_use, user_manage, user_admin, group_use, group_manage, group_admin, other_use, other_manage, other_admin, callback) -- -->
 
 <!-- No Use ================================================================================

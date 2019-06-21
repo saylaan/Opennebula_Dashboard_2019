@@ -1,25 +1,25 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Vlab view">
     <v-layout row align-center justify-center>
-       <v-flex xs3 class="vlab-title">
+       <v-flex xs3 class="mr-1 vlab-title">
           <h5>
             Name:
-            {{vlab.name}}
+            {{vlab.nameparse}}
           </h5>
         </v-flex>
-        <v-flex xs5 class="vlab-name">
+        <v-flex xs3 class="mr-1 vlab-name">
           <h5>
             Owner:
             {{vlab.ownername}}
           </h5>
         </v-flex>
-        <v-flex xs2 class="vlab-time">
+        <v-flex xs3 class="mr-1 vlab-time">
           <h5>
             Day left:
             {{ needCredential(vlab.dayleft) }}
           </h5>
         </v-flex>
-        <v-flex xs2 class="vlab-time">
+        <v-flex xs3 class="mr-1 vlab-time">
           <h5>
             Active :
             {{vlab.active? 'OK' : 'KO'}}
@@ -37,6 +37,14 @@
                   }
                  }"
           >Edit</v-btn> -->
+          <v-layout column justify-center align-center>
+          <v-select v-if="isUserLoggedIn && !this.vlabuser"
+            :items="users"
+            item-text="username"
+            v-model="userassign"
+            label="User available"
+            outline>
+          </v-select>
           <v-btn
             v-if="isUserLoggedIn && !this.vlabuser"
             class="grey darken-1 font-weight-bold"
@@ -47,6 +55,7 @@
             class="grey darken-1 font-weight-bold"
             @click="deleteUser"
           >Delete User</v-btn>
+          </v-layout>
         </v-flex>
     </v-layout>
   </panel>
@@ -55,48 +64,99 @@
 <script>
 import { mapState } from "vuex";
 import VlabUserService from "@/services/Vlab/VlabUserService";
+import UserService from "@/services/User/UserService";
+import VlabService from "@/services/Vlab/VlabService";
 
 export default {
   computed: {
-    ...mapState(["isUserLoggedIn", "user", "admin"])
+    ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
-  props: ["vlab"],
+  // props: ["vlab"],
   data() {
     return {
-      vlabuser: null
+      vlabuser: null,
+      users: [],
+      userassign: null,
+      vlab: null
     };
   },
   watch: {
-    async vlab() {
-      if (!this.isUserLoggedIn) {
-        return;
-      }
-      try {
-        const vlabusers = (await VlabUserService.getVlabUsers({
-          VlabId: this.vlab.id
-        })).data;
-        if (vlabusers.length) {
-          this.vlabuser = vlabusers[0];
-        }
-      } catch (err) {
-        console.log(err);
-      }
+    async watcher() {
+      const vlabId = this.route.params.vlabId;
+      this.vlab = (await VlabService.getVlab(vlabId)).data
+    }
+  },
+  async mounted() {
+    try {
+      const vlabId = this.route.params.vlabId;
+      this.vlab = (await VlabService.getVlab(vlabId)).data
+    } catch (err) {
+      console.log(err)
+    }
+    try {
+      this.users = (await UserService.index()).data
+    } catch (err) {
+      console.log(err)
+    }
+    try {
+      const vlabId = this.route.params.vlabId;
+      this.vlabuser = (await VlabUserService.getVlabUser(vlabId)).data;
+    } catch (err) {
+      console.log(err);
     }
   },
   methods: {
     async setUser() {
       try {
+        let id = 0
+        for (var j = 0; j !== this.users.length; j++) {
+          if (this.users[j].username === this.userassign) {
+            id = this.users[j].id
+          }
+        }
         this.vlabuser = (await VlabUserService.post({
-          VlabId: this.vlab.id
+          VlabId: this.vlab.id,
+          UserId: id
         })).data;
+        const vlabId = this.route.params.vlabId;
+        this.vlab = (await VlabService.getVlab(vlabId)).data
+        await VlabService.put({
+          idopennebula: this.vlab.idopennebula,
+          ownername: this.userassign,
+          groupename: this.vlab.groupname,
+          name: this.vlab.name,
+          nameparse: this.vlab.nameparse,
+          vlanid: this.vlab.vlanid,
+          active: this.vlab.active,
+          dayleft: this.vlab.dayleft
+        }, vlabId)
+        this.vlab = (await VlabService.getVlab(vlabId)).data
       } catch (err) {
         console.log(err);
       }
     },
     async deleteUser() {
       try {
+        let id = 0
+        for (var j = 0; j !== this.users.length; j++) {
+          if (this.users[j].username === this.vlab.ownername) {
+            id = this.users[j].id
+          }
+        }
         this.vlabuser = await VlabUserService.delete(this.vlabuser.id);
         this.vlabuser = null;
+        const vlabId = this.route.params.vlabId;
+        await VlabService.put({
+          idopennebula: this.vlab.idopennebula,
+          ownername: "oneadmin",
+          groupename: this.vlab.groupname,
+          name: this.vlab.name,
+          nameparse: this.vlab.nameparse,
+          vlanid: this.vlab.vlanid,
+          active: this.vlab.active,
+          dayleft: this.vlab.dayleft
+        }, vlabId)
+        this.vlab = (await VlabService.getVlab(vlabId)).data
       } catch (err) {
         console.log(err);
       }

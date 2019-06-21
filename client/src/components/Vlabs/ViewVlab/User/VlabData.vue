@@ -4,22 +4,22 @@
         <v-flex xs3 class="vlab-title">
           <h5>
             Name:
-            {{vlab.name}}
+            {{vlab.nameparse}}
           </h5>
         </v-flex>
-        <v-flex xs5 class="vlab-name">
+        <v-flex xs3 class="vlab-name ml-1">
           <h5>
             Owner:
             {{vlab.ownername}}
           </h5>
         </v-flex>
-        <v-flex xs2 class="vlab-time">
+        <v-flex xs3 class="vlab-time ml-1">
           <h5>
             Day left:
             {{ needCredential(vlab.dayleft) }}
           </h5>
         </v-flex>
-        <v-flex xs2 class="vlab-time">
+        <v-flex xs3 class="vlab-time ml-1">
           <h5>
             Active :
             {{vlab.active? 'OK' : 'KO'}}
@@ -32,32 +32,43 @@
 <script>
 import { mapState } from "vuex";
 import VlabUserService from "@/services/Vlab/VlabUserService";
+import VlabService from '@/services/Vlab/VlabService'
 
 export default {
   computed: {
-    ...mapState(["isUserLoggedIn", "user", "admin"])
+    ...mapState(["isUserLoggedIn", "route", "user", "admin"])
   },
-  props: ["vlab"],
   data() {
     return {
-      vlabuser: null
+      vlabuser: null,
+      vlab: null
     };
   },
   watch: {
+    async watcher() {
+      const vlabId = this.route.params.vlabId;
+      this.vlab = (await VlabService.getVlab(vlabId)).data
+    },
     async vlab() {
       if (!this.isUserLoggedIn) {
         return;
       }
       try {
-        const vlabusers = (await VlabUserService.getVlabUsers({
-          VlabId: this.vlab.id
-        })).data;
-        if (vlabusers.length) {
-          this.vlabuser = vlabusers[0];
-        }
+        const vlabId = this.route.params.vlabId;
+        const vlabuser = (await VlabUserService.getVlabUser(vlabId)).data;
       } catch (err) {
         console.log(err);
       }
+    }
+  },
+  async mounted() {
+    const vlabId = this.route.params.vlabId;
+    this.vlab = (await VlabService.getVlab(vlabId)).data
+    try {
+      const vlabId = this.route.params.vlabId;
+      const vlabuser = (await VlabUserService.getVlabUser(vlabId)).data;
+    } catch (err) {
+      console.log(err);
     }
   },
   methods: {

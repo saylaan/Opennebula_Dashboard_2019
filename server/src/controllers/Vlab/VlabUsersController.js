@@ -3,9 +3,10 @@ const {
   Vlab
 } = require('../../models')
 const _ = require('lodash')
+const openneb = require('../../opennebula/openneb')
 
 module.exports = {
-  async getVlabUsers(req, res) {
+  async index(req, res) {
     try {
       const UserId = req.user.id
       const { VlabId } = req.query
@@ -36,9 +37,24 @@ module.exports = {
       })
     }
   },
+  async getVlabUser(req, res) {
+    try {
+      const vlabuser = await VlabUser.findByPk(req.params.vlabId)
+      if (!vlabuser) {
+        return res.status(403).send({
+          error: 'The vlabuser does not exist'
+        })
+      }
+      res.send(vlabuser)
+    } catch (err) {
+      res.status(500).send({
+        err: 'An error has occured while trying to get the vlabuser'
+      })
+    }
+  },
   async post(req, res) {
     try {
-      const UserId = req.user.id
+      const { UserId } = req.body
       const { VlabId } = req.body
       const vlabuser = await VlabUser.findOne({
         where: {
@@ -64,13 +80,10 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      const UserId = req.user.id
       const { vlabuserId } = req.params
-
       const vlabuser = await VlabUser.findOne({
         where: {
-          id: vlabuserId,
-          UserId: UserId
+          id: vlabuserId
         }
       })
       if (!vlabuser) {

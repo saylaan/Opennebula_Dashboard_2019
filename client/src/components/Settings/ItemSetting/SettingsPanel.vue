@@ -1,5 +1,7 @@
 <template>
+  <v-layout class="mt-3" justify-center>
   <panel v-if="isUserLoggedIn" title="Setting">
+    <form>
     <v-text-field
       v-if="admin"
       label="Company name"
@@ -168,11 +170,13 @@
           <v-switch v-if="admin" large color="red" v-model="adminview.emailactive" label="Active message by email"></v-switch>
             </v-flex>
           </v-layout>
-    <v-layout class="mt-3" justify-center>
-    <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save Setting</v-btn>
-    <v-btn elevation-24  large @click="discardSettings()" class="grey darken-1 font-weight-bold">Discard Setting</v-btn>
+    <v-layout class="mt-3 mb-4" justify-center>
+    <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save</v-btn>
+    <v-btn elevation-24 large @click="discardSettings()" class="grey darken-1 font-weight-bold">Discard</v-btn>
     </v-layout>
+    </form>
   </panel>
+  </v-layout>
 </template>
 
 <script>

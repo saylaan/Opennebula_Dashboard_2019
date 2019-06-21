@@ -5,7 +5,7 @@ const delay = (time, callback) => {
 }
 
 const populateDB = async () => {
-  delay(5, () => {
+  delay(10, () => {
       openneb.getInfoUsers()
       openneb.getInfoVms()
       openneb.getInfoVNets()

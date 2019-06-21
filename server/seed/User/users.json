@@ -24,27 +24,6 @@
     "emailactive": false  
   },
   {
-    "lastname": "Testname",
-    "firstname": "testname",
-    "email": "testing@gmail.com",
-    "password": "12345678",
-    "companyname": "test",
-    "purpose": "enterprise",
-    "username": "testname",
-    "active": true,
-    "emailactive": true
-  },
-  {
-    "lastname": "other",
-    "firstname": "other",
-    "email": "other@gmail.com",
-    "password": "12345678",
-    "companyname": "other",
-    "purpose": "enterprise",
-    "username": "other",
-    "emailactive": true
-  },
-  {
     "lastname": "Yves",
     "firstname": "Dupont",
     "email": "yves@gmail.com",

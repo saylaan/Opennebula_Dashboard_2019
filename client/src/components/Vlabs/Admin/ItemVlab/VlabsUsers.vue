@@ -38,7 +38,7 @@ export default {
   },
   async mounted() {
     if (this.isUserLoggedIn) {
-      this.vlabusers = (await VlabUserService.getVlabUsers()).data;
+      this.vlabusers = (await VlabUserService.index()).data;
     }
   }
 };

@@ -1,13 +1,13 @@
 <template>
   <panel v-if="isUserLoggedIn" title="Vm Info">
     <v-flex class="vlab">
-      <h2>Active Vm : {{ activeVms }}</h2>
+      <h2>Active Vm : {{ activevms }}</h2>
       <br>
       <br>
-      <h2>Unactive Vm : {{ totalVms - activeVms }}</h2>
+      <h2>Unactive Vm : {{ totalvms - activevms }}</h2>
       <br>
       <br>
-      <h2>Total Vm : {{ totalVms }}</h2>
+      <h2>Total Vm : {{ totalvms }}</h2>
     </v-flex>
   </panel>
 </template>
@@ -20,10 +20,10 @@ import VlabUserService from "@/services/Vlab/VlabUserService";
 export default {
   data() {
     return {
-      vms: null,
-      vlabs: null,
-      totalVms: 0,
-      activeVms: 0
+      vmvlabs: null,
+      vlabusers: null,
+      totalvms: 0,
+      activevms: 0
     };
   },
   computed: {
@@ -33,15 +33,15 @@ export default {
     "$route.query.find": {
       immediate: true,
       async handler() {
-        this.vlabs = (await VlabUserService.getVlabUsers()).data;
-        for (var i = 0; i !== this.vlabs.length; i++) {
-          this.vms = (await VmVlabService.index({
-            VlabId: this.vlabs[i].id
+        this.vlabusers = (await VlabUserService.index()).data;
+        for (var i = 0; i !== this.vlabusers.length; i++) {
+          this.vmvlabs = (await VmVlabService.index({
+            VlabId: this.vlabusers[i].id
           })).data;
-          for (var j = 0; j !== this.vms.length; j++) {
-            this.totalVms++;
-            if (this.vms[j].active) {
-              this.activeVms++;
+          for (var j = 0; j !== this.vmvlabs.length; j++) {
+            this.totalvms++;
+            if (this.vmvlabs[j].active) {
+              this.activevms++;
             }
           }
         }

@@ -1,23 +1,25 @@
 <template>
-  <v-layout class="mt-5" column v-if="isUserLoggedIn && admin">
-    <v-layout justify-center>
-      <v-flex xs8>
-        <vlab-data :vlab="vlab"/>
-      </v-flex>
-    </v-layout>
-    <v-layout row justify-center class="ml-1 mt-2">
+  <v-layout class="mt-5" v-if="isUserLoggedIn && admin" justify-center row>
+    <v-flex xs6>
+    <v-layout column justify-center class="mt-2">
       <v-flex xs6>
+        <vlab-data/>
+      </v-flex>
+      <v-flex xs6 class="mt-2">
         <vlab-vm/>
       </v-flex>
-      <v-flex xs6 class="ml-2">
+    </v-layout>
+    </v-flex>
+    <v-flex xs6>
+    <v-layout column justify-center class="mt-2 ml-2">
+      <v-flex xs6>
         <vlab-url/>
       </v-flex>
-    </v-layout>
-    <v-layout>
-      <v-flex xs6 class="mt-2 ml-1">
+      <v-flex xs6 class="mt-2">
         <vlab-sip/>
       </v-flex>
     </v-layout>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -31,11 +33,6 @@ import VlabService from "@/services/Vlab/VlabService";
 import VlabUserLogService from "@/services/Vlab/VlabUserLogService";
 
 export default {
-  data() {
-    return {
-      vlab: {}
-    };
-  },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },

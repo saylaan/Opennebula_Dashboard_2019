@@ -19,6 +19,7 @@
           <td class="text-xs-right">{{props.item.ownername}}</td>
           <td class="text-xs-right">{{needCredential(props.item.dayleft)}}</td>
           <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
+          <v-layout justify-center>
                       <v-btn
               class="grey darken-1 font-weight-bold"
               :to="{
@@ -27,6 +28,7 @@
                     vlabId: props.item.id}
                  }"
             >View Vlab</v-btn>
+          </v-layout>
         </template>
       </v-data-table>
     </panel>

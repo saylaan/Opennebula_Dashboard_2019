@@ -17,7 +17,7 @@ const {
   Sip,
   SipUser,
   SipVlab
-} = require('./models')
+} = require('../models')
 const Promise = require('bluebird')
 
 const getInfoVms = async () => {
@@ -67,12 +67,78 @@ const getInfoVms = async () => {
 // USER != Vm BUT THEY ARE LINK
 const getInfoUsers = async () => {
   try {
-    await one.getUsers((err, data) => {
+    await one.getUsers(async (err, data) => {
       const jsonDataUser = JSON.parse(JSON.stringify(data))
+      let users = await UserOpenNebula.findAll()
+      for (let n = 0; n !== users.length; n++) {
+        let j = 0;
+        let isIn = false;
+        for (; j !== jsonDataUser.length; j++) {
+          if (users[n].idopennebula.toString() === jsonDataUser[j].ID) {
+            isIn = true
+            break;
+          }
+        }
+        if (!isIn) {
+          await UserUserOn.findOne({
+            where: {
+              UserOpenNebulaId: users[n].id
+            }
+          }).then(async useruseron => {
+            if (useruseron) {
+              await User.findOne({
+                where: {
+                  id: useruseron.UserId
+                }
+              }).then(async user => {
+                if (user) {
+                  await VmUser.findAll({
+                    where: {
+                      UserId: user.id
+                    }
+                  }).then(vmusers => {
+                    vmusers.forEach(async vmuser => {
+                      await vmuser.destroy()
+                    })
+                  })
+                  await SipUser.findAll({
+                    where: {
+                      UserId: user.id
+                    }
+                  }).then(sipusers => {
+                    sipusers.forEach(async sipuser => {
+                      await sipuser.destroy()
+                    })
+                  })
+                  await UrlUser.findAll({
+                    where: {
+                      UserId: user.id
+                    }
+                  }).then(urlusers => {
+                    urlusers.forEach(async urluser => {
+                      await urluser.destroy()
+                    })
+                  })
+                  await VlabUser.findAll({
+                    where: {
+                      UserId: user.id
+                    }
+                  }).then(vlabusers => {
+                    vlabusers.forEach(async vlabuser => {
+                      await vlabuser.destroy()
+                    })
+                  })
+                }
+              })
+              await useruseron.destroy()
+            }
+          })
+          await users[n].destroy()
+        }
+      }
       sequelize.sync().then(async function () {
         await Promise.all(
           jsonDataUser.map(user => {
-            // console.log(user)
             const newUser = {
               idopennebula: user.ID,
               groupname: user.GNAME,
@@ -82,7 +148,7 @@ const getInfoUsers = async () => {
             }
             UserOpenNebula.findOne({
               where: {
-                idopennebula: newUser.idopennebula
+                idopennebula: user.ID,
               }
             }).then(async user => {
               if (!user) {
@@ -108,7 +174,6 @@ const getInfoUsers = async () => {
                     }
                   }
                 }
-
               }
             })
           })
@@ -123,8 +188,118 @@ const getInfoUsers = async () => {
 // TODO : USER lINK TO SIP URL VLAB VM (IF ALREADY EXIST LINK TO)
 const getInfoVNets = async () => {
   try {
-    await one.getVNets((err, data) => {
+    await one.getVNets(async (err, data) => {
       const jsonDataVnet = JSON.parse(JSON.stringify(data))
+      let vlabs = await Vlab.findAll()
+      for (let n = 0; n !== vlabs.length; n++) {
+        let j = 0;
+        let isIn = false;
+        for (; j !== jsonDataVnet.length; j++) {
+          if (vlabs[n].idopennebula.toString() === jsonDataVnet[j].ID) {
+            isIn = true
+            break;
+          }
+        }
+        if (!isIn) {
+          await VmVlab.findAll({ // Delete all SIP / SIPVLAB / SIPUSER
+            where: {
+              VlabId: vlabs[n].id
+            }
+          }).then(async vmvlabs =>{
+            if (vmvlabs) {
+              vmvlabs.forEach(async vmvlab => {
+                if (vmvlab) {
+                  await VmUser.findOne({
+                    where: {
+                      VmId: vmvlab.VmId
+                    }
+                  }).then(async vmuser => {
+                    if (vmuser) {
+                      await vmuser.destroy()
+                    }
+                  })
+                  const id = vmvlab.VmId
+                  await vmvlab.destroy()
+                  await Vm.findOne({
+                    where: {
+                      id: id
+                    }
+                  }).then(async vm => {
+                    if (vm) {
+                      await vm.destroy()
+                    }
+                  })
+                }
+              })
+            }
+          })
+          await SipVlab.findAll({ // Delete all SIP / SIPVLAB / SIPUSER
+            where: {
+              VlabId: vlabs[n].id
+            }
+          }).then(async sipvlabs =>{
+            if (sipvlabs) {
+              sipvlabs.forEach(async sipvlab => {
+                if (sipvlab) {
+                  await SipUser.findOne({
+                    where: {
+                      SipId: sipvlab.SipId
+                    }
+                  }).then(async sipuser => {
+                    if (sipuser) {
+                      await sipuser.destroy()
+                    }
+                  })
+                  const id = sipvlab.SipId
+                  await sipvlab.destroy()
+                  await Sip.findOne({
+                    where: {
+                      id: id
+                    }
+                  }).then(async sip => {
+                    if (sip) {
+                      await sip.destroy()
+                    }
+                  })
+                }
+              })
+            }
+          })
+          await UrlVlab.findAll({ // Delete all URL / URLVLAB / URLUSER
+            where: {
+              VlabId: vlabs[n].id
+            }
+          }).then(async urlvlabs =>{
+            if (urlvlabs) {
+              urlvlabs.forEach(async urlvlab => {
+                if (urlvlab) {
+                  await UrlUser.findOne({
+                    where: {
+                      UrlId: urlvlab.UrlId
+                    }
+                  }).then(async urluser => {
+                    if (urluser) {
+                      await urluser.destroy()
+                    }
+                  })
+                  const id = urlvlab.UrlId
+                  await urlvlab.destroy()
+                  await Url.findOne({
+                    where: {
+                      id: id
+                    }
+                  }).then(async url => {
+                    if (url) {
+                      await url.destroy()
+                    }
+                  })
+                }
+              })
+            }
+          })
+          await vlabs[n].destroy()
+        }
+      }
       sequelize.sync().then(async function () {
         await Promise.all(
           jsonDataVnet.map(vlab => {
@@ -157,6 +332,7 @@ const getInfoVNets = async () => {
             for (var i = 0; i != vlab.length; i++) {
               for (var j = 0; j != vm.length; j++) {
                 if (vlab[i].nameparse === vm[j].name) {
+                  console.log(vlab[i].nameparse, vm[j].name)
                   await VmVlab.findOne({
                     where: {
                       VlabId: vlab[i].id,
@@ -293,7 +469,7 @@ const getInfoVNets = async () => {
                       }
                     })
                     vmvlabs.forEach(async vmvlab => {
-                      await VmVlab.create({
+                      await VmUser.create({
                         UserId: users[n].id,
                         VmId: vmvlab.VmId
                       })

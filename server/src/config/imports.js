@@ -2,9 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser') // process json data
 const cors = require('cors')
 const morgan = require('morgan')
-const config = require('./config/config')
-const openneb = require('./openneb')
-const dbopenneb = require('./dbopenneb')
+const config = require('./config')
+const openneb = require('../opennebula/openneb')
+const dbopenneb = require('../opennebula/dbopenneb')
 
 const imports = {
   express: express,

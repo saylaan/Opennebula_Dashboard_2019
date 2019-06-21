@@ -61,11 +61,12 @@ export default {
           email: this.email,
           password: this.password
         });
+        console.log(response.user)
         this.$store.dispatch("setAdmin", response.data.user.admin);
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
         this.$store.dispatch("setDark", true);
-        this.$store.dispatch("setGrad", "to top right, #07090C, #232321");
+        this.$store.dispatch("setGrad", "to top right, #FFFFFF, #ECE9E6");
         this.$router.push({
           name: "dashboard"
         });

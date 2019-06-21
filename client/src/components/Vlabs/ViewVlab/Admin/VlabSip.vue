@@ -19,6 +19,7 @@
           <td class="text-xs-right">{{props.item.name}}</td>
           <td class="text-xs-right">{{props.item.login}}</td>
           <td class="text-xs-right">{{props.item.passwd}}</td>
+          <v-layout justify-center>
           <v-btn
             class="grey darken-1 font-weight-bold"
             :to="{
@@ -28,6 +29,7 @@
                 }
         }"
           >Edit</v-btn>
+          </v-layout>
         </template>
       </v-data-table>
   </panel>

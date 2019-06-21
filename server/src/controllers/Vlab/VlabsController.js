@@ -1,4 +1,6 @@
-const { Vlab } = require('../../models')
+const { Vlab,
+  UserOpenNebula } = require('../../models')
+const openneb = require('../../opennebula/openneb')
 
 module.exports = {
   async getAllVlabs(req, res) {
@@ -63,6 +65,16 @@ module.exports = {
       const vlab = await Vlab.update(req.body, {
         where: {
           id: req.params.vlabId
+        }
+      })
+      const UserOn = await UserOpenNebula.findAll();
+      const vnet = await openneb.one.getVNet(req.body.idopennebula)
+      UserOn.forEach(async useron => {
+        if (useron.username === req.body.ownername) {
+          console.log('Is EXISTING IN DB')
+          await vnet.chown(useron.idopennebula, (err, data) => {
+            console.log("Changing user on opennebula done")
+          })
         }
       })
       res.send(vlab)

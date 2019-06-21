@@ -20,14 +20,16 @@
           <td class="text-xs-right">{{props.item.lastname}}</td>
           <td class="text-xs-right">{{props.item.firstname}}</td>
           <td class="text-xs-right">{{props.item.purpose}}</td>
+          <v-layout justify-center>
                       <v-btn
               class="grey darken-1 font-weight-bold"
               :to="{
-                  name: 'user',
+                  name: 'edit-user',
                   params: {
                     userId: props.item.id}
                  }"
-            >View User</v-btn>
+            >Edit User</v-btn>
+          </v-layout>
         </template>
       </v-data-table>
     </panel>

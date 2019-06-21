@@ -31,7 +31,7 @@ export default {
     "$route.query.find": {
       immediate: true,
       async handler() {
-        this.vlabs = (await VlabUserService.getVlabUsers()).data;
+        this.vlabs = (await VlabUserService.index()).data;
         for (var i = 0; i !== this.vlabs.length; i++) {
           this.totalVlabs++;
           if (this.vlabs[i].active) {
