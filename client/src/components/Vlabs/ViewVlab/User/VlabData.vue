@@ -1,25 +1,19 @@
 <template>
   <panel v-if="isUserLoggedIn" title="Vlab view">
       <v-layout align-center justify-center row>
-        <v-flex xs3 class="vlab-title">
+        <v-flex xs4 offset-xs1 class="vlab-title">
           <h5>
             Name:
             {{vlab.nameparse}}
           </h5>
         </v-flex>
-        <v-flex xs3 class="vlab-name ml-1">
-          <h5>
-            Owner:
-            {{vlab.ownername}}
-          </h5>
-        </v-flex>
-        <v-flex xs3 class="vlab-time ml-1">
+        <v-flex xs4 class="vlab-name ml-1">
           <h5>
             Day left:
             {{ needCredential(vlab.dayleft) }}
           </h5>
         </v-flex>
-        <v-flex xs3 class="vlab-time ml-1">
+        <v-flex xs4 class="vlab-time ml-1">
           <h5>
             Active :
             {{vlab.active? 'OK' : 'KO'}}

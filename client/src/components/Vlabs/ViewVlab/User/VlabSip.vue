@@ -51,7 +51,7 @@ export default {
   watch: {
     async vlabsip() {
       try {
-        this.vlabsips = (await SipVlabService.index({
+        this.vlabsips = (await SipUserService.index({
           VlabId: this.vlab.id
         })).data;
       } catch (err) {

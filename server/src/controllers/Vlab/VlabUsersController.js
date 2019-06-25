@@ -1,6 +1,15 @@
 const {
   VlabUser,
-  Vlab
+  Vlab,
+  Vm,
+  VmVlab,
+  VmUser,
+  Sip,
+  SipVlab,
+  SipUser,
+  Url,
+  UrlVlab,
+  UrlUser
 } = require('../../models')
 const _ = require('lodash')
 const openneb = require('../../opennebula/openneb')
@@ -71,6 +80,90 @@ module.exports = {
         VlabId: VlabId,
         UserId: UserId
       })
+      await VmVlab.findAll({ // FOR THE VM ASSIGN
+        where: {
+          VlabId: VlabId
+        }
+      }).then(async (vmvlabs) => {
+        vmvlabs.forEach(async (vmvlab) => {
+          await Vm.findAll({
+            where: {
+              id: vmvlab.VmId
+            }
+          }).then(async (vms) => {
+            vms.forEach(async (vm) => {
+              const isvm = await VmUser.findOne({
+                where: {
+                  UserId: UserId,
+                  VmId: vm.id
+                }
+              })
+              if (!isvm) {
+                await VmUser.create({
+                  UserId: UserId,
+                  VmId: vm.id
+                })
+              }
+            })
+          })
+        })
+      })
+      await SipVlab.findAll({ // FOR THE SIP ASSIGN
+        where: {
+          VlabId: VlabId
+        }
+      }).then(async (sipvlabs) => {
+        sipvlabs.forEach(async (sipvlab) => {
+          await Sip.findAll({
+            where: {
+              id: sipvlab.SipId
+            }
+          }).then(async (sips) => {
+            sips.forEach(async (sip) => {
+              const issip = await SipUser.findOne({
+                where: {
+                  UserId: UserId,
+                  sipId: sip.id
+                }
+              })
+              if (!issip) {
+                await SipUser.create({
+                  UserId: UserId,
+                  SipId: sip.id
+                })
+              }
+            })
+          })
+        })
+      })
+      await UrlVlab.findAll({ // FOR THE URL ASSIGN
+        where: {
+          VlabId: VlabId
+        }
+      }).then(async (urlvlabs) => {
+        urlvlabs.forEach(async (urlvlab) => {
+          await Url.findAll({
+            where: {
+              id: urlvlab.UrlId
+            }
+          }).then(async (urls) => {
+            urls.forEach(async (url) => {
+              const isurl = await UrlUser.findOne({
+                where: {
+                  UserId: UserId,
+                  urlId: url.id
+                }
+              })
+              if (!isurl) {
+                await UrlUser.create({
+                  UserId: UserId,
+                  UrlId: url.id
+                })
+              }
+            })
+          })
+        })
+      })
       res.send(newVlabUser)
     } catch (err) {
       res.status(500).send({
@@ -91,6 +184,81 @@ module.exports = {
           error: 'you do not have access to this vlabuser'
         })
       }
+      await VmVlab.findAll({ // FOR THE VM DEASSIGN
+        where: {
+          VlabId: vlabuser.VlabId
+        }
+      }).then(async (vmvlabs) => {
+        vmvlabs.forEach(async (vmvlab) => {
+          await Vm.findAll({
+            where: {
+              id: vmvlab.VmId
+            }
+          }).then(async (vms) => {
+            vms.forEach(async (vm) => {
+              const isvm = await VmUser.findOne({
+                where: {
+                  UserId: vlabuser.UserId,
+                  VmId: vm.id
+                }
+              })
+              if (isvm) {
+                await isvm.destroy()
+              }
+            })
+          })
+        })
+      })
+      await SipVlab.findAll({ // FOR THE SIP DEASSIGN
+        where: {
+          VlabId: vlabuser.VlabId
+        }
+      }).then(async (sipvlabs) => {
+        sipvlabs.forEach(async (sipvlab) => {
+          await Sip.findAll({
+            where: {
+              id: sipvlab.SipId
+            }
+          }).then(async (sips) => {
+            sips.forEach(async (sip) => {
+              const issip = await SipUser.findOne({
+                where: {
+                  UserId: vlabuser.UserId,
+                  sipId: sip.id
+                }
+              })
+              if (issip) {
+                await issip.destroy()
+              }
+            })
+          })
+        })
+      })
+      await UrlVlab.findAll({ // FOR THE URL DEASSIGN
+        where: {
+          VlabId: vlabuser.VlabId
+        }
+      }).then(async (urlvlabs) => {
+        urlvlabs.forEach(async (urlvlab) => {
+          await Url.findAll({
+            where: {
+              id: urlvlab.UrlId
+            }
+          }).then(async (urls) => {
+            urls.forEach(async (url) => {
+              const isurl = await UrlUser.findOne({
+                where: {
+                  UserId: vlabuser.UserId,
+                  urlId: url.id
+                }
+              })
+              if (isurl) {
+                await isurl.destroy()
+              }
+            })
+          })
+        })
+      })
       await vlabuser.destroy()
       res.send(vlabuser)
     } catch (err) {

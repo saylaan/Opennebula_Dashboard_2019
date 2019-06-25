@@ -1,5 +1,7 @@
 const { Vlab,
-  UserOpenNebula } = require('../../models')
+  UserOpenNebula,
+  Vm,
+  VmVlab } = require('../../models')
 const openneb = require('../../opennebula/openneb')
 
 module.exports = {
@@ -68,14 +70,40 @@ module.exports = {
         }
       })
       const UserOn = await UserOpenNebula.findAll();
-      const vnet = await openneb.one.getVNet(req.body.idopennebula)
-      UserOn.forEach(async useron => {
-        if (useron.username === req.body.ownername) {
-          console.log('Is EXISTING IN DB')
-          await vnet.chown(useron.idopennebula, (err, data) => {
-            console.log("Changing user on opennebula done")
-          })
+      const vmsvlab = await VmVlab.findAll({
+        where: {
+          VlabId: req.params.vlabId
         }
+      })
+      vmsvlab.forEach(async vmvlab => {
+        const vm = await Vm.findOne({
+          where: {
+            id: vmvlab.VmId
+          }
+        })
+        const vmon = await openneb.one.getVM(vm.idopennebula)
+        UserOn.forEach(async useron => {
+          if (useron.username === req.body.ownername) {
+            console.log('Is EXISTING IN DB')
+            const newVm = {
+              idopennebula: vm.idopennebula,
+              ownername: useron.username,
+              groupname: vm.groupname,
+              name: vm.name,
+              type: vm.type,
+              active: vm.active
+            }
+            await Vm.update(newVm, {
+              where: {
+                id: vm.id
+              }
+            })
+            await vmon.chown(useron.idopennebula, (err, data) => {
+              console.log("Changing user on opennebula done")
+              console.log(data)
+            })
+          }
+        })
       })
       res.send(vlab)
     } catch (err) {
