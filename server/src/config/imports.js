@@ -5,6 +5,8 @@ const morgan = require('morgan')
 const config = require('./config')
 const openneb = require('../opennebula/openneb')
 const dbopenneb = require('../opennebula/dbopenneb')
+const cookieSession = require('cookie-session')
+const LocalStrategy = require('passport-local').Strategy
 
 const imports = {
   express: express,
@@ -13,7 +15,9 @@ const imports = {
   morgan: morgan,
   config: config,
   openneb: openneb,
-  dbopenneb: dbopenneb
+  dbopenneb: dbopenneb,
+  cookieSession: cookieSession,
+  LocalStrategy: LocalStrategy
 }
 
 module.exports = imports

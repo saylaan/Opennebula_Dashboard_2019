@@ -20,6 +20,7 @@
     "npm": "^6.9.0",
     "sweetalert2": "^8.11.1",
     "vue": "^2.5.2",
+    "vue-cookies": "^1.5.13",
     "vue-recaptcha": "^1.1.1",
     "vue-router": "^3.0.1",
     "vuetify": "^1.5.6",
