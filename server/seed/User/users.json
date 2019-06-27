@@ -1,27 +1,51 @@
 [
   {
-    "lastname": "HUCK",
+    "lastname": "Huck",
     "firstname": "Geoffroy",
-    "email": "gtest@gmail.com",
+    "email": "geoffroy.huck@al-enterprise.com",
     "password": "12345678",
-    "companyname": "Sermes",
-    "purpose": "enterprise",
+    "companyname": "ALE",
+    "purpose": "Admin",
     "username": "geoffroy",
     "admin": true,
     "active": true,
-    "emailactive": false  
+    "emailactive": false
   },
   {
-    "lastname": "GADOT",
+    "lastname": "Gadot",
     "firstname": "Frank",
-    "email": "ftest@gmail.com",
+    "email": "frank.gadot@al-enterprise.com",
     "password": "12345678",
     "companyname": "ALE",
-    "purpose": "testing",
+    "purpose": "Admin",
     "username": "frank",
     "admin": true,
     "active": true,
-    "emailactive": false  
+    "emailactive": false
+  },
+  {
+    "lastname": "Chevert",
+    "firstname": "Thierry",
+    "email": "thierry.chevert@al-enterprise.com",
+    "password": "12345678",
+    "companyname": "ALE",
+    "purpose": "Admin",
+    "username": "frank",
+    "admin": true,
+    "active": true,
+    "emailactive": false
+  },
+  {
+    "lastname": "Himmi",
+    "firstname": "Rachid",
+    "email": "rachid.himmi@al-enterprise.com",
+    "password": "12345678",
+    "companyname": "ALE",
+    "purpose": "Admin",
+    "username": "rachid",
+    "admin": true,
+    "active": true,
+    "emailactive": false
   },
   {
     "lastname": "Yves",
