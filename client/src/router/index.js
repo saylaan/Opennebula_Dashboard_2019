@@ -19,7 +19,7 @@ import ViewVlab from '@/components/Vlabs/ViewVlab/Index'
 import Users from '@/components/Users/Index'
 import CreateUser from '@/components/Users/Manage/CreateUser'
 import EditUser from '@/components/Users/Manage/EditUser'
-import ViewUser from '@/components/Users/ViewUser/index'
+import ViewUser from '@/components/Users/ViewUser/Index'
 
 import CreateUrl from '@/components/Vlabs/ViewVlab/Admin/Manage/CreateUrl'
 import EditUrl from '@/components/Vlabs/ViewVlab/Admin/Manage/EditUrl'
