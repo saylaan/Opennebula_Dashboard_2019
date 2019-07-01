@@ -6,17 +6,17 @@
         <vlab-data/>
       </v-flex>
       <v-flex xs6 class="mt-2">
-        <vlab-vm/>
+        <vlab-sip/>
       </v-flex>
     </v-layout>
     </v-flex>
     <v-flex xs6>
     <v-layout column justify-center class="mt-2 ml-2">
       <v-flex xs6>
-        <vlab-url/>
+        <vlab-urls/>
       </v-flex>
       <v-flex xs6 class="mt-2">
-        <vlab-sip/>
+        <vlab-vm/>
       </v-flex>
     </v-layout>
     </v-flex>

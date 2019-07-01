@@ -419,7 +419,7 @@ const getInfoVNets = async () => {
                 if (!tmpUrl) {
                   let tmpUrlVnc = await Url.create({
                     name: "VNC Access",
-                    url: "http://" + vlab[i].nameparse.toLowerCase() + "-ale.aapp",
+                    url: "https://" + vlab[i].nameparse.toLowerCase() + "-ale.aapp",
                     log: "user",
                     password: "XXXXX", // make random password
                     active: false

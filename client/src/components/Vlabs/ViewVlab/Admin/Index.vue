@@ -6,7 +6,7 @@
         <vlab-data/>
       </v-flex>
       <v-flex xs6 class="mt-2">
-        <vlab-vm/>
+        <vlab-sip/>
       </v-flex>
     </v-layout>
     </v-flex>
@@ -16,7 +16,7 @@
         <vlab-url/>
       </v-flex>
       <v-flex xs6 class="mt-2">
-        <vlab-sip/>
+        <vlab-vm/>
       </v-flex>
     </v-layout>
     </v-flex>

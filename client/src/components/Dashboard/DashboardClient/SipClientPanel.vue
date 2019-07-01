@@ -1,11 +1,10 @@
 <template>
   <panel v-if="isUserLoggedIn" title="SIP">
-    <v-data-table :headers:="headers" :pagination.sync="pagination" :items="usersips">
+    <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="usersips">
       <template v-slot:items="props">
-        <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
-        <td class="text-xs-right">{{props.item.name}}</td>
-        <td class="text-xs-right">{{props.item.login}}</td>
-        <td class="text-xs-right">{{props.item.passwd}}</td>
+        <td class="text-xs-left">{{props.item.name}}</td>
+        <td class="text-xs-left">{{props.item.login}}</td>
+        <td class="text-xs-left">{{props.item.passwd}}</td>
       </template>
     </v-data-table>
   </panel>
@@ -20,10 +19,6 @@ export default {
   data() {
     return {
       headers: [
-        {
-          text: "Active",
-          value: "active"
-        },
         {
           text: "Name",
           value: "name"

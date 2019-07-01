@@ -1,6 +1,7 @@
 <template>
   <div @mouseover="isMini()">
   <v-navigation-drawer
+      :width="170"
       v-model="drawer.model"
       :permanent="drawer.type === 'permanent'"
       :temporary="drawer.type === 'temporary'"
@@ -13,17 +14,8 @@
       :dark="dark"
   >
     <v-list>
-      <v-list-tile class="accent" @click="navToSetting({name: 'settings'})">
-        <v-list-tile-avatar>
-          <img src="https://via.placeholder.com/150">
-        </v-list-tile-avatar>
-        <v-list-tile-title class="title font-weight-medium">{{userview.lastname}} {{userview.firstname}}</v-list-tile-title>
-      </v-list-tile>
-    </v-list>
-    <v-divider></v-divider>
-    <v-list>
       <v-list-tile class="mt-3" title="test" @click="navToDashboard({name: 'dashboard'})"
-      :class="active.one">
+      :class="drawer.active.one">
         <v-list-tile-action>
           <v-icon x-large>dashboard</v-icon>
         </v-list-tile-action>
@@ -32,7 +24,7 @@
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile class="mt-2" @click="navToVlab({name: 'vlabs'})"
-      :class="active.two">
+      :class="drawer.active.two">
         <v-list-tile-action>
           <v-icon x-large>settings_system_daydream</v-icon>
         </v-list-tile-action>
@@ -41,7 +33,7 @@
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile class="mt-2" v-if="admin" @click="navToUser({name: 'users'})"
-      :class="active.three">
+      :class="drawer.active.three">
         <v-list-tile-action>
           <v-icon x-large>people</v-icon>
         </v-list-tile-action>
@@ -50,7 +42,7 @@
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile class="mt-2" @click="navToSetting({name: 'settings'})"
-      :class="active.four">
+      :class="drawer.active.four">
         <v-list-tile-action>
           <v-icon x-large>settings</v-icon>
         </v-list-tile-action>
@@ -76,20 +68,6 @@ import { mapState } from "vuex";
 import UserService from "@/services/User/UserService";
 
 export default {
-  data() {
-    return {
-      userview: {
-        firstname: 'none',
-        lastname: 'none'
-      },
-      active: {
-        one: null,
-        two: null,
-        three: null,
-        four: null
-      }
-    };
-  },
   computed: {
     ...mapState(["user", "isUserLoggedIn", "admin", "dark"])
   },
@@ -115,31 +93,31 @@ export default {
       }
     },
     navToDashboard(route) {
-      this.active.one = "primary"
-      this.active.two = null
-      this.active.three = null
-      this.active.four = null
+      this.drawer.active.one = "primary"
+      this.drawer.active.two = null
+      this.drawer.active.three = null
+      this.drawer.active.four = null
       this.$router.push(route);
     },
     navToVlab(route) {
-      this.active.one = null
-      this.active.two = "primary"
-      this.active.three = null
-      this.active.four = null
+      this.drawer.active.one = null
+      this.drawer.active.two = "primary"
+      this.drawer.active.three = null
+      this.drawer.active.four = null
       this.$router.push(route);
     },
     navToUser(route) {
-      this.active.one = null
-      this.active.two = null
-      this.active.three = "primary"
-      this.active.four = null
+      this.drawer.active.one = null
+      this.drawer.active.two = null
+      this.drawer.active.three = "primary"
+      this.drawer.active.four = null
       this.$router.push(route);
     },
     navToSetting(route) {
-      this.active.one = null
-      this.active.two = null
-      this.active.three = null
-      this.active.four = "primary"
+      this.drawer.active.one = null
+      this.drawer.active.two = null
+      this.drawer.active.three = null
+      this.drawer.active.four = "primary"
       this.$router.push(route);
     }
   },
@@ -154,4 +132,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

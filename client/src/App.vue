@@ -28,9 +28,15 @@ export default {
       drawer: {
         model: null,
         type: 'permanent',
-        clipped: false,
+        clipped: true,
         floating: true,
-        mini: true
+        mini: true,
+        active: {
+          one: null,
+          two: null,
+          three: null,
+          four: null
+        }
       },
       footer: {
         inset: true

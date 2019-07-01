@@ -13,13 +13,14 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-      <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlaburls">
+      <v-data-table :headers="headers" :pagination.sync="pagination" :items="vlaburls" hide-actions>
         <template v-slot:items="props">
-          <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
-          <td class="text-xs-right">{{props.item.name}}</td>
-          <td class="text-xs-right">{{props.item.url}}</td>
-          <td class="text-xs-right">{{props.item.log}}</td>
-          <td class="text-xs-right">{{props.item.password}}</td>
+          <td class="text-xs-left">{{props.item.name}}</td>
+          <td>
+          <a class="text-xs-left" :href="props.item.url">{{props.item.url}}</a>
+          </td>
+          <td class="text-xs-left">{{props.item.log}}</td>
+          <td class="text-xs-left">{{props.item.password}}</td>
           <v-btn
             class="grey darken-1 font-weight-bold"
             :to="{
@@ -44,8 +45,8 @@ export default {
     return {
       headers: [
         {
-          text: "Active",
-          value: "active"
+          text: "Type",
+          value: "type"
         },
         {
           text: "Url",

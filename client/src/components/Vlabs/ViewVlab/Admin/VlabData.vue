@@ -1,31 +1,11 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Vlab view">
-    <v-layout row align-center justify-center>
-       <v-flex xs3 class="mr-1 vlab-title">
-          <h5>
-            Name:
-            {{vlab.nameparse}}
-          </h5>
-        </v-flex>
-        <v-flex xs3 class="mr-1 vlab-name">
-          <h5>
-            Owner:
-            {{vlab.ownername}}
-          </h5>
-        </v-flex>
-        <v-flex xs3 class="mr-1 vlab-time">
-          <h5>
-            Day left:
-            {{ needCredential(vlab.dayleft) }}
-          </h5>
-        </v-flex>
-        <v-flex xs3 class="mr-1 vlab-time">
-          <h5>
-            Active :
-            {{vlab.active? 'OK' : 'KO'}}
-          </h5>
-        </v-flex>
-        <v-flex xs2>
+    <v-data-table :headers:="headers" hide-actions :pagination.sync="pagination" :items="vlab">
+      <template v-slot:items="props">
+        <td class="text-xs-left">{{props.item.nameparse}}</td>
+        <td class="text-xs-left">{{props.item.ownername}}</td>
+        <td class="text-xs-left">{{props.item.active ? 'OK' : 'KO'}}</td>
+        <td class="text-xs-left">{{needCredential(props.item.dayleft)}}</td>
           <!-- <v-btn
             class="grey darken-1 font-weight-bold"
             :to="{
@@ -37,7 +17,7 @@
                   }
                  }"
           >Edit</v-btn> -->
-          <v-layout column justify-center align-center>
+          <!-- <v-layout column justify-center align-center>
           <v-select v-if="isUserLoggedIn && !this.vlabuser"
             :items="users"
             item-text="username"
@@ -55,9 +35,9 @@
             class="grey darken-1 font-weight-bold"
             @click="deleteUser"
           >Delete User</v-btn>
-          </v-layout>
-        </v-flex>
-    </v-layout>
+          </v-layout> -->
+      </template>
+    </v-data-table>
   </panel>
 </template>
 
@@ -74,27 +54,50 @@ export default {
   // props: ["vlab"],
   data() {
     return {
+      headers: [
+        {
+          text: 'Name vlab',
+          value: 'nameparse'
+        },
+        {
+          text: 'Owner Name',
+          value: 'ownername'
+        },
+        {
+          text: 'Active',
+          value: 'active'
+        },
+        {
+          text: 'Credentials',
+          value: 'dayleft'
+        }
+      ],
+      pagination: {
+        sortBy: "createAt",
+        descending: true
+      },
       vlabuser: null,
       users: [],
       userassign: null,
-      vlab: null
+      vlab: []
     };
-  },
-  watch: {
-    async watcher() {
-      const vlabId = this.route.params.vlabId;
-      this.vlab = (await VlabService.getVlab(vlabId)).data
-    }
   },
   async mounted() {
     try {
       const vlabId = this.route.params.vlabId;
-      this.vlab = (await VlabService.getVlab(vlabId)).data
+      this.vlab[0] = (await VlabService.getVlab(vlabId)).data
+      console.log(this.vlab)
     } catch (err) {
       console.log(err)
     }
     try {
       this.users = (await UserService.index()).data
+      for (let i = 0, j = 0; i !== this.users.length; i++) {
+        if (this.users[i].admin) {
+          this.users.splice(i, 1)
+          i--
+        }
+      }
     } catch (err) {
       console.log(err)
     }

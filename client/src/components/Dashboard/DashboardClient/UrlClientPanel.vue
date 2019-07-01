@@ -1,12 +1,13 @@
 <template>
   <panel v-if="isUserLoggedIn" title="URL">
-    <v-data-table :headers:="headers" :pagination.sync="pagination" :items="userurls">
+    <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="userurls">
       <template v-slot:items="props">
-        <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
-        <td class="text-xs-right">{{props.item.name}}</td>
-        <td class="text-xs-right">{{props.item.url}}</td>
-        <td class="text-xs-right">{{props.item.log}}</td>
-        <td class="text-xs-right">{{props.item.password}}</td>
+        <td class="text-xs-left">{{props.item.name}}</td>
+          <td>
+          <a class="text-xs-left" :href="props.item.url">{{props.item.url}}</a>
+          </td>
+        <td class="text-xs-left">{{props.item.log}}</td>
+        <td class="text-xs-left">{{props.item.password}}</td>
       </template>
     </v-data-table>
   </panel>
@@ -22,8 +23,8 @@ export default {
     return {
       headers: [
         {
-          text: "Active",
-          value: "active"
+          text: "Type",
+          value: "type"
         },
         {
           text: "Url",

@@ -13,12 +13,11 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-      <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabsips">
+      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabsips">
         <template v-slot:items="props">
-          <td class="text-xs-right">{{props.item.active ? 'OK': 'KO'}}</td>
-          <td class="text-xs-right">{{props.item.name}}</td>
-          <td class="text-xs-right">{{props.item.login}}</td>
-          <td class="text-xs-right">{{props.item.passwd}}</td>
+          <td class="text-xs-left">{{props.item.name}}</td>
+          <td class="text-xs-left">{{props.item.login}}</td>
+          <td class="text-xs-left">{{props.item.passwd}}</td>
           <v-layout justify-center>
           <v-btn
             class="grey darken-1 font-weight-bold"
@@ -44,10 +43,6 @@ export default {
   data() {
     return {
       headers: [
-        {
-          text: "Active",
-          value: "active"
-        },
         {
           text: "Name",
           value: "name"
@@ -90,6 +85,7 @@ export default {
       this.vlabsips = (await SipVlabService.index({
         VlabId: this.vlab.id
       })).data;
+      console.log(this.vlabsips)
     } catch (err) {
       console.log(err);
     }

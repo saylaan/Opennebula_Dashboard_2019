@@ -10,6 +10,16 @@
       @click="mainNav({name: 'home'})"
     >
     <v-spacer></v-spacer>
+    <v-toolbar-items v-if="isUserLoggedIn">
+         <v-list>
+      <v-list-tile @click="navToSetting({name: 'settings'})">
+        <v-list-tile-avatar>
+          <img src="https://via.placeholder.com/150">
+        </v-list-tile-avatar>
+        <v-list-tile-title class="title font-weight-medium">{{userview.firstname}} {{userview.lastname}}</v-list-tile-title>
+      </v-list-tile>
+    </v-list> 
+    </v-toolbar-items>
     <v-toolbar-items v-if="!admin">
       <v-btn flat :to="{name: 'message'}">
         <v-icon grey x-large>email</v-icon>
@@ -27,10 +37,41 @@
 
 <script>
 import { mapState } from "vuex";
+import UserService from "@/services/User/UserService"
 
 export default {
+  data() {
+    return {
+      userview: {
+        firstname: 'none',
+        lastname: 'none'
+      }
+    }
+  },
+  props: {
+    drawer: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     ...mapState(["user", "isUserLoggedIn", "dark", "admin"])
+  },
+  watch: {
+    async getUserView() {
+      try {
+        this.userview = (await UserService.getUser(this.user.id)).data;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
+  async mounted() {
+    try {
+      this.userview = (await UserService.getUser(this.user.id)).data;
+    } catch (err) {
+      console.log(err);
+    }
   },
   methods: {
     logout() {
@@ -48,12 +89,13 @@ export default {
       } else if (this.isUserLoggedIn) {
         this.$router.push('dashboard')
       }
-    }
-  },
-  props: {
-    drawer: {
-      type: Object,
-      required: true
+    },
+    async navToSetting(route) {
+      this.drawer.active.one = null
+      this.drawer.active.two = null
+      this.drawer.active.three = null
+      this.drawer.active.four = "primary"
+      this.$router.push(route);
     }
   }
 };

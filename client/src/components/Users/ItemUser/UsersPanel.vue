@@ -14,12 +14,12 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-      <v-data-table :headers:="headers" :pagination.sync="pagination" :items="users">
+      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="users">
         <template v-slot:items="props">
-          <td class="text-xs-right">{{props.item.companyname}}</td>
-          <td class="text-xs-right">{{props.item.lastname}}</td>
-          <td class="text-xs-right">{{props.item.firstname}}</td>
-          <td class="text-xs-right">{{props.item.purpose}}</td>
+          <td class="text-xs-left">{{props.item.companyname}}</td>
+          <td class="text-xs-left">{{props.item.lastname}}</td>
+          <td class="text-xs-left">{{props.item.firstname}}</td>
+          <td class="text-xs-left">{{props.item.purpose}}</td>
           <v-layout justify-center>
                       <v-btn
               class="grey darken-1 font-weight-bold"
@@ -45,12 +45,12 @@ export default {
     return {
       headers: [
         {
-          text: "CompanyName",
-          value: "companyname"
+          text: "Company",
+          value: "company"
         },
         {
           text: "Lastname",
-          vlaue: "lastname"
+          value: "lastname"
         },
         {
           text: "Firstname",

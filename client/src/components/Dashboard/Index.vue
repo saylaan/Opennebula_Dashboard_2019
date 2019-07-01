@@ -32,7 +32,7 @@
             <url-client-panel/>
           </v-flex>
           <v-flex xs6 class="mt-2">
-            <messages-client-panel/>
+            <sip-client-panel/>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -42,7 +42,7 @@
             <vlab-client-panel/>
           </v-flex>
           <v-flex xs6 class="mt-2">
-            <sip-client-panel/>
+            <messages-client-panel/>
           </v-flex>
         </v-layout>
       </v-flex>
