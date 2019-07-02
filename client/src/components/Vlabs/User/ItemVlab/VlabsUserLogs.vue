@@ -1,9 +1,9 @@
 <template>
   <panel v-if="isUserLoggedIn" title="Vlab user logs">
-    <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabuserlogs">
+    <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabuserlogs">
       <template v-slot:items="props">
-        <td class="text-xs-right">{{props.item.name}}</td>
-        <td class="text-xs-right">{{props.item.ownername}}</td>
+        <td class="text-xs-left">{{props.item.name}}</td>
+        <td class="text-xs-left">{{changeDate(props.item.createdAt)}}</td>
       </template>
     </v-data-table>
   </panel>
@@ -22,8 +22,8 @@ export default {
           value: "name"
         },
         {
-          text: "Owner name",
-          value: "ownername"
+          text: "Date",
+          value: "date"
         }
       ],
       pagination: {
@@ -39,6 +39,11 @@ export default {
   async mounted() {
     if (this.isUserLoggedIn) {
       this.vlabuserlogs = (await VlabUserLogService.index()).data;
+    }
+  },
+  methods: {
+    changeDate(time) {
+      return (time.substring(0, 10))
     }
   }
 };

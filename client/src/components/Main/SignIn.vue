@@ -1,6 +1,6 @@
 <template>
   <v-layout class="mt-5" justify-center>
-    <v-flex elevation-24 xs6 v-if="!$store.state.isUserLoggedIn">
+    <v-flex elevation-24 xs6 v-if="!isUserLoggedIn">
       <panel title="Sign in">
         <form name="sandbox-form" autocomplete="off">
           <v-text-field class="mt-5" label="Email" v-model="email" outline clearable>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import AuthenticationService from "@/services/Authen/AuthenticationService";
 import Swal from 'sweetalert2'
 
@@ -54,6 +55,9 @@ export default {
       require: true
     }
   },
+  computed: {
+    ...mapState(["isUserLoggedIn"])
+  },
   methods: {
     async signin() {
       try {
@@ -61,7 +65,6 @@ export default {
           email: this.email,
           password: this.password
         });
-        console.log(response.user)
         this.$store.dispatch("setAdmin", response.data.user.admin);
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);

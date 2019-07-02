@@ -13,10 +13,7 @@
     <v-toolbar-items v-if="isUserLoggedIn">
          <v-list>
       <v-list-tile @click="navToSetting({name: 'settings'})">
-        <v-list-tile-avatar>
-          <img src="https://via.placeholder.com/150">
-        </v-list-tile-avatar>
-        <v-list-tile-title class="title font-weight-medium">{{userview.firstname}} {{userview.lastname}}</v-list-tile-title>
+        <v-list-tile-title class="title font-weight-medium">{{this.user.lastname}} {{this.user.firstname}}</v-list-tile-title>
       </v-list-tile>
     </v-list> 
     </v-toolbar-items>
@@ -42,10 +39,6 @@ import UserService from "@/services/User/UserService"
 export default {
   data() {
     return {
-      userview: {
-        firstname: 'none',
-        lastname: 'none'
-      }
     }
   },
   props: {
@@ -61,6 +54,7 @@ export default {
     async getUserView() {
       try {
         this.userview = (await UserService.getUser(this.user.id)).data;
+        console.log('watch userview', this.userview)
       } catch (err) {
         console.log(err);
       }
@@ -74,7 +68,7 @@ export default {
     }
   },
   methods: {
-    logout() {
+    async logout() {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
       this.$store.dispatch("setDark", false);

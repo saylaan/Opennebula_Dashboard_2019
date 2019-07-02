@@ -1,10 +1,9 @@
 <template>
   <panel v-if="isUserLoggedIn" title="Vlabs User">
-    <v-data-table :headers:="headers" :pagination.sync="pagination" :items="vlabusers">
+    <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabusers">
       <template v-slot:items="props">
-        <td class="text-xs-right">{{props.item.name}}</td>
-        <td class="text-xs-right">{{props.item.ownername}}</td>
-        <td class="text-xs-right">
+        <td class="text-xs-left">{{props.item.name}}</td>
+        <td class="text-xs-left">{{props.item.ownername}}</td>
           <v-btn
             class="grey darken-1 font-weight-bold"
             :to="{
@@ -13,7 +12,6 @@
                     vlabId: props.item.VlabId}
                  }"
           >View Vlab</v-btn>
-        </td>
       </template>
     </v-data-table>
   </panel>
@@ -55,4 +53,5 @@ export default {
 </script>
 
 <style>
+
 </style>

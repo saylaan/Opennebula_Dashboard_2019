@@ -413,7 +413,7 @@ const getInfoVNets = async () => {
                 }
                 let tmpUrl = await Url.findOne({
                   where: {
-                    url: "http://" + vlab[i].nameparse.toLowerCase() + "-ale.aapp"
+                    url: "https://" + vlab[i].nameparse.toLowerCase() + "-ale.aapp"
                   }
                 })
                 if (!tmpUrl) {

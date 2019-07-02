@@ -1,11 +1,21 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Vlab view">
-    <v-data-table :headers:="headers" hide-actions :pagination.sync="pagination" :items="vlab">
-      <template v-slot:items="props">
-        <td class="text-xs-left">{{props.item.nameparse}}</td>
-        <td class="text-xs-left">{{props.item.ownername}}</td>
-        <td class="text-xs-left">{{props.item.active ? 'OK' : 'KO'}}</td>
-        <td class="text-xs-left">{{needCredential(props.item.dayleft)}}</td>
+    <v-divider></v-divider>
+    <v-layout class="vlab" row>
+      <v-flex xs3>
+        <div>{{vlab.nameparse}}</div>
+      </v-flex>
+      <v-flex xs3>
+        <div>{{vlab.ownername}}</div>
+      </v-flex>
+      <v-flex xs2>
+        <div>{{vlab.active ? 'OK' : 'KO'}}</div>
+      </v-flex>
+      <v-flex xs4>
+        <div>{{needCredential(vlab.dayleft)}}</div>
+      </v-flex>
+    </v-layout>
+    <v-divider></v-divider>
           <!-- <v-btn
             class="grey darken-1 font-weight-bold"
             :to="{
@@ -17,7 +27,7 @@
                   }
                  }"
           >Edit</v-btn> -->
-          <!-- <v-layout column justify-center align-center>
+          <v-layout class="mt-3 mb-3" column justify-center align-center>
           <v-select v-if="isUserLoggedIn && !this.vlabuser"
             :items="users"
             item-text="username"
@@ -35,9 +45,7 @@
             class="grey darken-1 font-weight-bold"
             @click="deleteUser"
           >Delete User</v-btn>
-          </v-layout> -->
-      </template>
-    </v-data-table>
+          </v-layout>
   </panel>
 </template>
 
@@ -51,42 +59,18 @@ export default {
   computed: {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
-  // props: ["vlab"],
   data() {
     return {
-      headers: [
-        {
-          text: 'Name vlab',
-          value: 'nameparse'
-        },
-        {
-          text: 'Owner Name',
-          value: 'ownername'
-        },
-        {
-          text: 'Active',
-          value: 'active'
-        },
-        {
-          text: 'Credentials',
-          value: 'dayleft'
-        }
-      ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       vlabuser: null,
       users: [],
       userassign: null,
-      vlab: []
+      vlab: {}
     };
   },
   async mounted() {
     try {
       const vlabId = this.route.params.vlabId;
-      this.vlab[0] = (await VlabService.getVlab(vlabId)).data
-      console.log(this.vlab)
+      this.vlab = (await VlabService.getVlab(vlabId)).data
     } catch (err) {
       console.log(err)
     }
@@ -177,19 +161,8 @@ export default {
 <style scoped>
 .vlab {
   padding: 20px;
-  height: 200px;
   overflow: hidden;
+  min-width: 200px;
 }
 
-.vlab-title {
-  font-size: 20px;
-}
-
-.vlab-name {
-  font-size: 20px;
-}
-
-.vlab-time {
-  font-size: 20px;
-}
 </style>

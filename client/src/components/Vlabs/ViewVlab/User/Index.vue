@@ -13,7 +13,7 @@
     <v-flex xs6>
     <v-layout column justify-center class="mt-2 ml-2">
       <v-flex xs6>
-        <vlab-urls/>
+        <vlab-url/>
       </v-flex>
       <v-flex xs6 class="mt-2">
         <vlab-vm/>

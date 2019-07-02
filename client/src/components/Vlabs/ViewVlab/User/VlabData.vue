@@ -1,25 +1,21 @@
 <template>
-  <panel v-if="isUserLoggedIn" title="Vlab view">
-      <v-layout align-center justify-center row>
-        <v-flex xs4 offset-xs1 class="vlab-title">
-          <h5>
-            Name:
-            {{vlab.nameparse}}
-          </h5>
-        </v-flex>
-        <v-flex xs4 class="vlab-name ml-1">
-          <h5>
-            Day left:
-            {{ needCredential(vlab.dayleft) }}
-          </h5>
-        </v-flex>
-        <v-flex xs4 class="vlab-time ml-1">
-          <h5>
-            Active :
-            {{vlab.active? 'OK' : 'KO'}}
-          </h5>
-        </v-flex>
-      </v-layout>
+  <panel v-if="isUserLoggedIn && !admin" title="Vlab view">
+    <v-divider></v-divider>
+    <v-layout class="vlab" row>
+      <v-flex xs3>
+        <div>{{vlab.nameparse}}</div>
+      </v-flex>
+      <v-flex xs3>
+        <div>{{vlab.ownername}}</div>
+      </v-flex>
+      <v-flex xs2>
+        <div>{{vlab.active ? 'OK' : 'KO'}}</div>
+      </v-flex>
+      <v-flex xs4>
+        <div>{{needCredential(vlab.dayleft)}}</div>
+      </v-flex>
+    </v-layout>
+    <v-divider></v-divider>
   </panel>
 </template>
 
@@ -35,7 +31,7 @@ export default {
   data() {
     return {
       vlabuser: null,
-      vlab: null
+      vlab: {}
     };
   },
   watch: {
@@ -96,19 +92,8 @@ export default {
 <style scoped>
 .vlab {
   padding: 20px;
-  height: 200px;
   overflow: hidden;
+  min-width: 200px;
 }
 
-.vlab-title {
-  font-size: 20px;
-}
-
-.vlab-name {
-  font-size: 20px;
-}
-
-.vlab-time {
-  font-size: 20px;
-}
 </style>

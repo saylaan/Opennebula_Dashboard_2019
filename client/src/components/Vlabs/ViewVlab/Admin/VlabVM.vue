@@ -46,11 +46,11 @@ export default {
           value: "active"
         },
         {
-          text: "Vm name",
+          text: "Name",
           value: "name"
         },
         {
-          text: "vm type",
+          text: "Type",
           value: "type"
         }
       ],

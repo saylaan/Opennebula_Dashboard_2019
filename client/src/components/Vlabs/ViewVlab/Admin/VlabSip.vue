@@ -85,7 +85,6 @@ export default {
       this.vlabsips = (await SipVlabService.index({
         VlabId: this.vlab.id
       })).data;
-      console.log(this.vlabsips)
     } catch (err) {
       console.log(err);
     }

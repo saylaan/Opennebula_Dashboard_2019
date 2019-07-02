@@ -10,9 +10,13 @@ export default new Vuex.Store({ // for keeping tracking of state
     createPersistedState()
   ],
   state: {
-    token: null,
+    token: {},
     user: null,
-    type: null,
+    userdata: {
+      firstname: 'none',
+      lastname: 'none'
+    },
+    type: {},
     isUserLoggedIn: false,
     admin: false,
     dark: false,

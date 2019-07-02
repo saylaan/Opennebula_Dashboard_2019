@@ -1,5 +1,5 @@
 <template>
-  <div @mouseover="isMini()">
+  <v-layout column @mouseover="isMini()">
   <v-navigation-drawer
       :width="170"
       v-model="drawer.model"
@@ -50,6 +50,7 @@
           <v-list-tile-title>Settings</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-spacer></v-spacer>
       <v-list-tile v-if="!admin" class="info mt-5" href="http://vlab.aapp.al-enterprise.com/doku.php">
         <v-list-tile-action>
           <v-icon x-large>help</v-icon>
@@ -60,7 +61,7 @@
       </v-list-tile>
     </v-list>
   </v-navigation-drawer>
-</div>
+</v-layout>
 </template>
 
 <script>
