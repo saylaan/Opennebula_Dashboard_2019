@@ -1,9 +1,9 @@
 const generator = require('generate-password')
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
-  'http://vlab.ale-aapp.com:2633/RPC2')
+  'http://10.1.2.150:2633/RPC2')
 const { exec } = require('child_process')
-const http = require('http')
+const request = require('request')
 
 const {
   Url,
@@ -37,27 +37,49 @@ module.exports = {
     })*/
   },
   async pwdSIP(sip) { // REQUEST HTTPS
-    const url = "http://o2g-" 
-    + sip.vlabname.toLowerCase() 
-    //+ ".ale-aapp.com/api/rest/"
-    + ".ale-aapp.com/api/rest/authenticate?version=1.0"
-
-    console.log('IIIIIIIIIIMMMMMMMMMMMMMMMMM HERRRRRRRRRREEEEEE')
-    console.log('IIIIIIIIIIMMMMMMMMMMMMMMMMM HERRRRRRRRRREEEEEE')
-    console.log(url, url, url)
-    console.log('IIIIIIIIIIMMMMMMMMMMMMMMMMM HERRRRRRRRRREEEEEE')
-    console.log('IIIIIIIIIIMMMMMMMMMMMMMMMMM HERRRRRRRRRREEEEEE')
-    console.log('IIIIIIIIIIMMMMMMMMMMMMMMMMM HERRRRRRRRRREEEEEE')
-    await http.get(url, (res) => {
-      console.log('statusCode:', res.statusCode)
-      console.log('headers:', res.headers)
-      
-      res.on('data', (d) => {
-        process.stdout.write(d)
-      })
-    }).on('error', (e) => {
-      console.error(e)
+    const urlAuthen = "https://o2g-" 
+    + sip.vlabname.toUpperCase() 
+    //+ ".ale-aapp.com/api/"
+    + ".ale-aapp.com"
+    const pathAuth = "/api/rest/authenticate?version=1.0"
+    const username = "admin"
+    const passwd = "none"
+    
+    const options = {
+      url : urlAuthen,
+      path: pathAuth,
+      method: 'GET',
+      port: 443,
+      headers: {
+        'Authorization': 'Basic' + new Buffer(username + ':' + passwd)
+        .toString('base64')
+      }
+    }
+    request.get(options, (err, res, html) => {
+      if (err) {
+        console.log(err)
+        return
+      }
+      console.log(res)
     })
+    console.log('IMMMM HEREEEEEEEE!!!')
+    console.log('IMMMM HEREEEEEEEE!!!')
+    console.log(urlAuthen)
+    console.log('IMMMM HEREEEEEEEE!!!')
+    console.log('IMMMM HEREEEEEEEE!!!')
+    console.log('IMMMM HEREEEEEEEE!!!')
+
+
+
+    // https.get(url, (res) => {
+    //   console.log('statusCode:', res.statusCode)
+    //   console.log('headers:', res.headers)
+    //   res.on('data', (d) => {
+    //     process.stdout.write(d)
+    //   })
+    // }).on('error', (e) => {
+    //   console.error(e)
+    // })
     // console.log('new password sip', sip.passwd)
     // console.log('new password sip', sip.passwd)
   }
