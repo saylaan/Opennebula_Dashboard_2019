@@ -23,7 +23,7 @@
           <v-list-tile-title>Dashboard</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile class="mt-2" @click="navToVlab({name: 'vlabs'})"
+      <v-list-tile v-if="admin || (isUserLoggedIn && nbvlab > 1)" class="mt-2" @click="navToVlab({name: 'vlabs'})"
       :class="drawer.active.two">
         <v-list-tile-action>
           <v-icon x-large>settings_system_daydream</v-icon>
@@ -66,25 +66,15 @@
 
 <script>
 import { mapState } from "vuex";
-import UserService from "@/services/User/UserService";
 
 export default {
   computed: {
-    ...mapState(["user", "isUserLoggedIn", "admin", "dark"])
+    ...mapState(["user", "isUserLoggedIn", "nbvlab", "admin", "dark"])
   },
   props: {
     drawer: {
       type: Object,
       require: true
-    }
-  },
-  watch: {
-    async getUserView() {
-      try {
-        this.userview = (await UserService.getUser(this.user.id)).data;
-      } catch (err) {
-        console.log(err);
-      }
     }
   },
   methods: {
@@ -120,13 +110,6 @@ export default {
       this.drawer.active.three = null
       this.drawer.active.four = "primary"
       this.$router.push(route);
-    }
-  },
-  async mounted() {
-    try {
-      this.userview = (await UserService.getUser(this.user.id)).data;
-    } catch (err) {
-      console.log(err);
     }
   }
 };

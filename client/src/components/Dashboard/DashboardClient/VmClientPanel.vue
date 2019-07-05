@@ -1,60 +1,74 @@
 <template>
-  <panel v-if="isUserLoggedIn" title="Vm Info">
-    <v-flex class="vlab">
-      <h2>Active Vm : {{ activevms }}</h2>
-      <br>
-      <br>
-      <h2>Unactive Vm : {{ totalvms - activevms }}</h2>
-      <br>
-      <br>
-      <h2>Total Vm : {{ totalvms }}</h2>
-    </v-flex>
+  <panel v-if="isUserLoggedIn" title="VM">
+      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vmusers">
+        <template v-slot:items="props">
+          <td class="text-xs-left">{{props.item.active ? 'OK': 'KO'}}</td>
+          <td class="text-xs-left">{{props.item.name}}</td>
+          <td class="text-xs-left">{{props.item.type}}</td>
+        </template>
+      </v-data-table>
   </panel>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import VmVlabService from "@/services/Vm/VmVlabService";
-import VlabUserService from "@/services/Vlab/VlabUserService";
+import VmUserService from "@/services/Vm/VmUserService";
 
 export default {
   data() {
     return {
-      vmvlabs: null,
-      vlabusers: null,
-      totalvms: 0,
-      activevms: 0
+      headers: [
+        {
+          text: "Active",
+          value: "active"
+        },
+        {
+          text: "Name",
+          value: "name"
+        },
+        {
+          text: "Type",
+          value: "type"
+        }
+      ],
+      pagination: {
+        sortBy: "createAt",
+        descending: true
+      },
+      vmusers: []
     };
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user"])
+    ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
   watch: {
-    "$route.query.find": {
-      immediate: true,
-      async handler() {
-        this.vlabusers = (await VlabUserService.index()).data;
-        for (var i = 0; i !== this.vlabusers.length; i++) {
-          this.vmvlabs = (await VmVlabService.index({
-            VlabId: this.vlabusers[i].id
-          })).data;
-          for (var j = 0; j !== this.vmvlabs.length; j++) {
-            this.totalvms++;
-            if (this.vmvlabs[j].active) {
-              this.activevms++;
-            }
-          }
-        }
+    async vlabvm() {
+      try {
+        this.vmusers = (await VmUserService.index()).data;
+      } catch (err) {
+        console.log(err);
       }
+    }
+  },
+  async mounted() {
+    try {
+      this.vmusers = (await VmUserService.index()).data;
+    } catch (err) {
+      console.log(err);
     }
   }
 };
 </script>
 
 <style scoped>
-.vlab {
-  padding: 20px;
+textarea {
+  width: 80%;
+  font-family: monospace;
+  border: none;
   height: 200px;
-  overflow: hidden;
+  border-style: none;
+  border-color: transparent;
+  overflow: auto;
+  padding: 20px;
 }
 </style>

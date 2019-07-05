@@ -1,52 +1,77 @@
 <template>
-  <panel v-if="isUserLoggedIn" title="Vlab Info">
-    <v-layout justify-center>
-      <h2>Active Vlab : {{ activeVlab ? 'OK' : 'KO' }}</h2>
-    </v-layout>
-      <!-- <br>
-      <br> -->
-      <!-- <h2>Unactive Vlab : {{ totalVlabs - activeVlab }}</h2>
-      <br>
-      <br>
-      <h2>Total Vlab : {{ totalVlabs }}</h2> -->
+  <panel v-if="isUserLoggedIn && !admin" title="Vlab">
+      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabuser">
+        <template v-slot:items="props">
+          <td class="text-xs-left">{{props.item.nameparse}}</td>
+          <td class="text-xs-left">{{needCredential(props.item.dayleft)}}</td>
+          <td class="text-xs-left">{{props.item.active ? 'OK': 'KO'}}</td>
+        </template>
+      </v-data-table>
   </panel>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import VlabUserService from "@/services/Vlab/VlabUserService";
+import VlabService from '@/services/Vlab/VlabService'
 
 export default {
+  computed: {
+    ...mapState(["isUserLoggedIn", "route", "user", "admin"])
+  },
   data() {
     return {
-      vlabs: null,
-      totalVlabs: 0,
-      activeVlab: 0
+      headers: [
+        {
+          text: "Name",
+          value: "nameparse"
+        },
+        {
+          text: "Dayleft",
+          value: "dayleft"
+        },
+        {
+          text: "Active",
+          value: "active"
+        }
+      ],
+      pagination: {
+        sortBy: "createAt",
+        descending: true
+      },
+      vlabuser: []
     };
   },
-  computed: {
-    ...mapState(["isUserLoggedIn", "user"])
-  },
   watch: {
-    "$route.query.find": {
-      immediate: true,
-      async handler() {
-        this.vlabs = (await VlabUserService.index()).data;
-        for (var i = 0; i !== this.vlabs.length; i++) {
-          this.totalVlabs++;
-          if (this.vlabs[i].active) {
-            this.activeVlab++;
-          }
-        }
+    async vlab() {
+      if (!this.isUserLoggedIn) {
+        return;
       }
+      try {
+        this.vlabuser = (await VlabUserService.index()).data;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  },
+  async mounted() {
+    try {
+      this.vlabuser = (await VlabUserService.index()).data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  methods: {
+    needCredential(time) {
+      if (time <= 1) {
+        return "Need credential";
+      }
+      return time;
     }
   }
 };
 </script>
 
 <style scoped>
-.vlab {
-  padding: 20px;
-  overflow: hidden;
-}
+
 </style>

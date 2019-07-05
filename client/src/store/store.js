@@ -20,9 +20,13 @@ export default new Vuex.Store({ // for keeping tracking of state
     isUserLoggedIn: false,
     admin: false,
     dark: false,
-    grad: 'to top right, #5D29A9, #CBC8D0'
+    grad: 'to top right, #5D29A9, #CBC8D0',
+    nbvlab: 0
   },
   mutations: {
+    setNbVlab(state, nbvlab) {
+      state.nbvlab = nbvlab
+    },
     setType(state, type) {
       if (type) {
         state.type = type
@@ -64,6 +68,9 @@ export default new Vuex.Store({ // for keeping tracking of state
     }
   },
   actions: {
+    setNbVlab({ commit }, nbvlab) {
+      commit('setNbVlab', nbvlab)
+    },
     setType({ commit }, type) {
       commit('setType', type)
     },

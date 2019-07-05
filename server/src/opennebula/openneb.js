@@ -19,6 +19,8 @@ const {
   SipVlab
 } = require('../models')
 const Promise = require('bluebird')
+const generator = require('generate-password')
+const handlingPwd = require('../password/HandlingPwd')
 
 const getInfoVms = async () => {
   try {
@@ -413,24 +415,36 @@ const getInfoVNets = async () => {
                 }
                 let tmpUrl = await Url.findOne({
                   where: {
-                    url: "https://" + vlab[i].nameparse.toLowerCase() + "-ale.aapp"
+                    vlabname: vlab[i].nameparse.toLowerCase()
                   }
                 })
                 if (!tmpUrl) {
                   let tmpUrlVnc = await Url.create({
                     name: "VNC Access",
-                    url: "https://" + vlab[i].nameparse.toLowerCase() + "-ale.aapp",
-                    log: "user",
-                    password: "XXXXX", // make random password
+                    vlabname: vlab[i].nameparse.toLowerCase(),
+                    url: "https://vlab.ale-aapp.com",
+                    urltype: 'vnc',
+                    log: vlab[i].nameparse.toLowerCase(),
+                    password: generator.generate({
+                      length: 8,
+                      numbers: true
+                    }),
                     active: false
                   })
+                  await handlingPwd.pwdVNC(tmpUrlVnc) // CHANGE PASSWORD VNC
                   let tmpUrlO2g = await Url.create({
                     name: "O2G Access",
-                    url: "https://o2g-vlab50.ale-aapp.com/",
+                    vlabname: 'o2g',
+                    urltype: vlab[i].nameparse.toLowerCase(),
+                    url: "https://o2g-" + vlab[i].nameparse.toLowerCase() + ".ale-aapp.com/",
                     log: "admin",
-                    password: "XXXXXX", // make random password
+                    password: generator.generate({
+                      length: 6,
+                      numbers: true
+                    }),
                     active: false
                   })
+                  await handlingPwd.pwd02G(tmpUrlO2g) // CHANGE PASSWORD O2G
                   let urlVlab = await UrlVlab.findOne({
                     where: {
                       VlabId: vlab[i].id,
@@ -468,10 +482,14 @@ const getInfoVNets = async () => {
                     sip = await Sip.create({
                         name: "100" + k,
                         login: "100" + k,
-                        passwd: "XXXX", // make random password when user assign
+                        passwd: generator.generate({
+                          length: 4,
+                          numbers: true
+                        }),
                         vlabname: vlab[i].nameparse,
                         active: false,
                       })
+                    //await handlingPwd.pwdSIP(sip) // CHANGE PASSWORD SIP
                   }
                   let sipVlab = await SipVlab.findOne({
                     where: {

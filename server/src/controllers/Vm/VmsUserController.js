@@ -7,10 +7,10 @@ const _ = require('lodash')
 module.exports = {
   async index(req, res) {
     try {
-      const VlabId = req.user.id
-      const vmsUser = await VmVlab.findAll({
+      const UserId = req.user.id
+      const vmsUser = await VmUser.findAll({
         where: {
-          VlabId: VlabId
+          UserId: UserId
         },
         include: [
           {

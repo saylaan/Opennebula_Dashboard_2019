@@ -23,23 +23,23 @@
       </v-flex>
     </v-layout>
     <v-layout class="mt-5" v-if="isUserLoggedIn && !admin" justify-center row>
-      <!-- <v-flex xs6 class="ml-1 mt-2">
-            <vm-client-panel/>
-      </v-flex>-->
             <v-flex xs6>
         <v-layout column justify-center class="mt-2">
           <v-flex xs6>
+            <vlab-client-panel/>
+          </v-flex>
+          <v-flex xs6 class="mt-2">
             <url-client-panel/>
           </v-flex>
           <v-flex xs6 class="mt-2">
-            <sip-client-panel/>
+            <vm-client-panel/>
           </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs6>
         <v-layout column justify-center class="mt-2 ml-2">
           <v-flex xs6>
-            <vlab-client-panel/>
+            <sip-client-panel/>
           </v-flex>
           <v-flex xs6 class="mt-2">
             <messages-client-panel/>
@@ -57,6 +57,8 @@ import UsersPanel from "./DashboardAdmin/UsersPanel";
 import MessagesFromClientPanel from "./DashboardAdmin/MessagesFromClientPanel";
 import MessagesFaqPanel from "./DashboardAdmin/MessagesFAQPanel";
 import MessagesClientPanel from "./DashboardClient/MessagesClientPanel";
+import TotalVlabClientPanel from "./DashboardClient/TotalVlabClientPanel";
+import TotalVmClientPanel from "./DashboardClient/TotalVmClientPanel";
 import VlabClientPanel from "./DashboardClient/VlabClientPanel";
 import VmClientPanel from "./DashboardClient/VmClientPanel";
 import UrlClientPanel from "./DashboardClient/UrlClientPanel";
@@ -72,6 +74,8 @@ export default {
     MessagesFromClientPanel,
     MessagesFaqPanel,
     MessagesClientPanel,
+    TotalVlabClientPanel,
+    TotalVmClientPanel,
     VlabClientPanel,
     VmClientPanel,
     UrlClientPanel,

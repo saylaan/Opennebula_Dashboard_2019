@@ -12,7 +12,8 @@ const {
   UrlUser
 } = require('../../models')
 const _ = require('lodash')
-const openneb = require('../../opennebula/openneb')
+const handlingPwd = require('../../password/HandlingPwd')
+const generator = require('generate-password')
 
 module.exports = {
   async index(req, res) {
@@ -221,6 +222,22 @@ module.exports = {
             }
           }).then(async (sips) => {
             sips.forEach(async (sip) => {
+              const newSip = {
+                name: sip.name,
+                login: sip.login,
+                passwd: generator.generate({
+                  length: 4,
+                  numbers: true
+                }),
+                vlabname: sip.vlabname,
+                active: sip.active
+              }
+              await handlingPwd.pwdSIP(newSip) // CHANGE SIP O2G
+              await Sip.update(newSip, {
+                where: {
+                  id: sip.id
+                }
+              })
               const issip = await SipUser.findOne({
                 where: {
                   UserId: vlabuser.UserId,
@@ -246,6 +263,33 @@ module.exports = {
             }
           }).then(async (urls) => {
             urls.forEach(async (url) => {
+              const newUrl = {
+                name: url.name,
+                log: url.log,
+                urltype: url.urltype,
+                password: "none",
+                vlabname: url.vlabname,
+                active: url.active
+              }
+              if (url.name === "VNC Access") {
+                newUrl.password = await generator.generate({
+                  length: 8,
+                  numbers: true
+                })
+                newUrl.log = url.vlabname
+                await handlingPwd.pwdVNC(newUrl) // CHANGE VNC
+              } else if (url.name === "O2G Access") {
+                newUrl.password = await generator.generate({
+                  length: 6,
+                  numbers: true
+                })
+                await handlingPwd.pwd02G(newUrl) // CHANGE O2G
+              }
+              await Url.update(newUrl, {
+                where: {
+                  id: url.id
+                }
+              })
               const isurl = await UrlUser.findOne({
                 where: {
                   UserId: vlabuser.UserId,

@@ -39,6 +39,7 @@
 <script>
 import { mapState } from "vuex";
 import AuthenticationService from "@/services/Authen/AuthenticationService";
+import VlabUserService from "@/services/Vlab/VlabUserService"
 import Swal from 'sweetalert2'
 
 export default {
@@ -56,7 +57,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["isUserLoggedIn"])
+    ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   methods: {
     async signin() {
@@ -65,25 +66,38 @@ export default {
           email: this.email,
           password: this.password
         });
+        this.$store.dispatch("setUser", response.data.user);
         this.$store.dispatch("setAdmin", response.data.user.admin);
         this.$store.dispatch("setToken", response.data.token);
-        this.$store.dispatch("setUser", response.data.user);
         this.$store.dispatch("setDark", true);
         this.$store.dispatch("setGrad", "to top right, #FFFFFF, #ECE9E6");
-        this.$router.push({
-          name: "dashboard"
-        });
-        Swal.fire({
-          position: 'top-end',
-          type: 'success',
-          title: 'You sign in with email : ',
-          text: this.email,
-          showConfirmButton: false,
-          timer: 2000
-        })
       } catch (error) {
         this.error = error.response.data.error;
       }
+      if (!this.admin) {
+        try {
+          const vlabuser = await VlabUserService.index()
+          this.$store.dispatch("setNbVlab", vlabuser.data.length)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      this.$router.push({
+        name: "dashboard"
+      });
+      Swal.fire({
+        position: 'top-end',
+        type: 'success',
+        title: 'You sign in with email : ',
+        text: this.email,
+        showConfirmButton: false,
+        timer: 2000
+      })
+      // TODO : MAKE THIS DRAWER ACTIVE IN VUEX STORE
+      // this.drawer.active.one = "primary"
+      // this.drawer.active.two = null
+      // this.drawer.active.three = null
+      // this.drawer.active.four = null
     }
   }
 };
