@@ -4,12 +4,14 @@ const one = new Opennebula('geoffroy:2961Sailaan1992!',
   'http://10.1.2.150:2633/RPC2')
 const { exec } = require('child_process')
 const request = require('request')
-
+const https = require('https')
 const {
   Url,
   Sip,
   UserOpenNebula
 } = require('../models')
+const http = require('http')
+
 
 module.exports = {
   async pwdVNC(vnc) { // Opennebula change
@@ -37,30 +39,30 @@ module.exports = {
     })*/
   },
   async pwdSIP(sip) { // REQUEST HTTPS
-    const urlAuthen = "https://o2g-" 
-    + sip.vlabname.toUpperCase() 
-    //+ ".ale-aapp.com/api/"
-    + ".ale-aapp.com"
-    const pathAuth = "/api/rest/authenticate?version=1.0"
-    const username = "admin"
-    const passwd = "none"
-    
-    const options = {
-      url : urlAuthen,
+    let urlAuthen = "o2g-" + sip.vlabname.toUpperCase() + ".ale-aapp.com"
+    let pathAuth = "/api/rest/authenticate?version=1.0"
+    let username = "admin"
+    let passwd = "none"
+    http.get({
+      host : urlAuthen,
       path: pathAuth,
       method: 'GET',
-      port: 443,
+      port: 80,
       headers: {
         'Authorization': 'Basic' + new Buffer(username + ':' + passwd)
         .toString('base64')
       }
-    }
-    request.get(options, (err, res, html) => {
-      if (err) {
-        console.log(err)
-        return
-      }
-      console.log(res)
+    }, (res) => {
+      let body = ""
+      res.on('data', (data) => {
+     	body += data
+      })
+      res.on('end', () => {
+	console.log(body)
+      })
+      res.on('error', (e) => {
+        console.log('error: ', e.message)
+      })
     })
     console.log('IMMMM HEREEEEEEEE!!!')
     console.log('IMMMM HEREEEEEEEE!!!')
@@ -70,7 +72,7 @@ module.exports = {
     console.log('IMMMM HEREEEEEEEE!!!')
 
 
-
+    /* TESTING HTTPS DONT WORK */
     // https.get(url, (res) => {
     //   console.log('statusCode:', res.statusCode)
     //   console.log('headers:', res.headers)
