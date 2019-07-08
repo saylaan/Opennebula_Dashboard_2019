@@ -1,6 +1,6 @@
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
-  'http://10.1.2.150:2633/RPC2')
+  'https://vlab.ale-aapp.com:2633/RPC2')
 const {
   sequelize,
   User, // NO CARE

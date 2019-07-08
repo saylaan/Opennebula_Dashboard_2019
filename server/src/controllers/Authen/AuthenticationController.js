@@ -2,7 +2,7 @@ const { User } = require('../../models')
 const jwt = require('jsonwebtoken') // for token authen
 const config = require('../../config/config')
 const Promise = require('bluebird')
-const bcrypt = require('bcrypt')
+//const bcrypt = require('bcrypt')
 
 function jwtSignUser(user) { // Override the function who sign a user obj using jwt library to get back a token
   const ONE_WEEK = 60 * 60 * 24 * 7
