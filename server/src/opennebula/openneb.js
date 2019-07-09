@@ -444,6 +444,7 @@ const getInfoVNets = async () => {
                     }),
                     active: false
                   })
+                  await handlingPwd.pwdO2GSIP(tmpUrlO2g)
                   let urlVlab = await UrlVlab.findOne({
                     where: {
                       VlabId: vlab[i].id,
@@ -468,6 +469,8 @@ const getInfoVNets = async () => {
                       UrlId: tmpUrlO2g.id
                     })
                   }
+                }
+                await setTimeout(async () => {
                   for (var k = 1; k != 6; k++) {
                     let sip = await Sip.findOne({
                       where: {
@@ -487,7 +490,7 @@ const getInfoVNets = async () => {
                           vlabname: vlab[i].nameparse,
                           active: false,
                         })
-                      await handlingPwd.pwdO2GSIP(sip, tmpUrlO2g) // CHANGE PASSWORD SIP
+                      await handlingPwd.pwdSIP(sip) // CHANGE PASSWORD SIP
                     }
                     let sipVlab = await SipVlab.findOne({
                       where: {
@@ -502,7 +505,7 @@ const getInfoVNets = async () => {
                       })
                     }
                   }
-                }
+                }, 150000)
                 let users = await User.findAll({
                   where: {
                     admin: false

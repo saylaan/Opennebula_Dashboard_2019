@@ -27,7 +27,7 @@ module.exports = {
       })
     }
   },
-  async pwdO2GSIP(sip, o2g) { // REQUEST HTTPS
+  async pwdO2G(o2g) { // Request O2G ADMIN CHANGE PASSWORD
     const cmdSSH = "ssh oneadmin@10.1.2.150 /var/lib/one/scripts/changeO2Gpasswd.sh "
     + o2g.urltype + " " + o2g.password
     await exec(cmdSSH, (err, stdout, stderr) => {
@@ -37,44 +37,44 @@ module.exports = {
       }
       console.log(stdout)
     })
+  },
+  async pwdSIP(sip) { // REQUEST HTTPS
     const url = await Url.findOne({
       where: {
         urltype: sip.vlabname.toLowerCase()
       }
     })
-    await setTimeout(async () => {
-      let urlAuthen = "o2g-" + sip.vlabname.toLowerCase() + ".ale-aapp.com"
-      let pathAuth = "/api/rest/authenticate?version=1.0"
-      let username = "admin"
-      let passwd = url.password
-      await http.get({
-        host : urlAuthen,
-        path: pathAuth,
-        method: 'GET',
-        port: 80,
-        headers: {
-          'Authorization': 'Basic' + new Buffer(username + ':' + passwd)
-          .toString('base64')
-        }
-      }, (res) => {
-        let body = ""
-        res.on('data', (data) => {
-         body += data
-        })
-        res.on('end', () => {
-          console.log(body)
-        })
-        res.on('error', (e) => {
-          console.log('error: ', e.message)
-        })
+    let urlAuthen = "o2g-" + sip.vlabname.toLowerCase() + ".ale-aapp.com"
+    let pathAuth = "/api/rest/authenticate?version=1.0"
+    let username = "admin"
+    let passwd = url.password
+    await http.get({
+      host : urlAuthen,
+      path: pathAuth,
+      method: 'GET',
+      port: 80,
+      headers: {
+        'Authorization': 'Basic' + new Buffer(username + ':' + passwd)
+        .toString('base64')
+      }
+    }, (res) => {
+      let body = ""
+      res.on('data', (data) => {
+       body += data
       })
-      console.log('IMMMM HEREEEEEEEE!!!')
-      console.log('IMMMM HEREEEEEEEE!!!')
-      console.log(urlAuthen)
-      console.log('IMMMM HEREEEEEEEE!!!')
-      console.log('IMMMM HEREEEEEEEE!!!')
-      console.log('IMMMM HEREEEEEEEE!!!')
-    }, 60000)
+      res.on('end', () => {
+        console.log(body)
+      })
+      res.on('error', (e) => {
+        console.log('error: ', e.message)
+      })
+    })
+    console.log('IMMMM HEREEEEEEEE!!!')
+    console.log('IMMMM HEREEEEEEEE!!!')
+    console.log(urlAuthen)
+    console.log('IMMMM HEREEEEEEEE!!!')
+    console.log('IMMMM HEREEEEEEEE!!!')
+    console.log('IMMMM HEREEEEEEEE!!!')
     console.log("The timeout has finished without any trouble")
   }
 }
