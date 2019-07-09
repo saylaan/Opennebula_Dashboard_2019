@@ -468,39 +468,39 @@ const getInfoVNets = async () => {
                       UrlId: tmpUrlO2g.id
                     })
                   }
-                }
-                for (var k = 1; k != 6; k++) {
-                  let sip = await Sip.findOne({
-                    where: {
-                      name: "100" + k,
-                      login: "100" + k,
-                      vlabname: vlab[i].nameparse
-                    }
-                  })
-                  if (!sip) {
-                    sip = await Sip.create({
+                  for (var k = 1; k != 6; k++) {
+                    let sip = await Sip.findOne({
+                      where: {
                         name: "100" + k,
                         login: "100" + k,
-                        passwd: generator.generate({
-                          length: 4,
-                          numbers: true
-                        }),
-                        vlabname: vlab[i].nameparse,
-                        active: false,
-                      })
-                    await handlingPwd.pwdO2GSIP(sip, tmpUrlO2g) // CHANGE PASSWORD SIP
-                  }
-                  let sipVlab = await SipVlab.findOne({
-                    where: {
-                      VlabId: vlab[i].id,
-                      SipId: sip.id
-                    }
-                  })
-                  if (!sipVlab) {
-                    await SipVlab.create({
-                      VlabId: vlab[i].id,
-                      SipId: sip.id
+                        vlabname: vlab[i].nameparse
+                      }
                     })
+                    if (!sip) {
+                      sip = await Sip.create({
+                          name: "100" + k,
+                          login: "100" + k,
+                          passwd: generator.generate({
+                            length: 4,
+                            numbers: true
+                          }),
+                          vlabname: vlab[i].nameparse,
+                          active: false,
+                        })
+                      await handlingPwd.pwdO2GSIP(sip, tmpUrlO2g) // CHANGE PASSWORD SIP
+                    }
+                    let sipVlab = await SipVlab.findOne({
+                      where: {
+                        VlabId: vlab[i].id,
+                        SipId: sip.id
+                      }
+                    })
+                    if (!sipVlab) {
+                      await SipVlab.create({
+                        VlabId: vlab[i].id,
+                        SipId: sip.id
+                      })
+                    }
                   }
                 }
                 let users = await User.findAll({
