@@ -489,16 +489,11 @@ const getInfoVNets = async () => {
                         vlabname: vlab[i].nameparse,
                         active: false,
                       })
-                    setTimeout(async (sip) => {
-                      console.log('The timeout is finished')
-                    }, 150000).then(async () => {
-                      await handlingPwd.pwdSIP(sip)
-                    })
-                  }
-                  let sipVlab = await SipVlab.findOne({
-                    where: {
-                      VlabId: vlab[i].id,
-                      SipId: sip.id
+                    }
+                    let sipVlab = await SipVlab.findOne({
+                      where: {
+                        VlabId: vlab[i].id,
+                        SipId: sip.id
                     }
                   })
                   if (!sipVlab) {
@@ -508,6 +503,13 @@ const getInfoVNets = async () => {
                     })
                   }
                 }
+                let sips = await Sip.findAll()
+                sips.forEach((sip) => {
+                  setTimeout(async () => {
+                    await handlingPwd.pwdSIP(sip)
+                  }, 150000)
+                })
+                // HERE MAYBE ? 
                 let users = await User.findAll({
                   where: {
                     admin: false
