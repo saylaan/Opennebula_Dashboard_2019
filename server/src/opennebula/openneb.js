@@ -470,45 +470,41 @@ const getInfoVNets = async () => {
                     })
                   }
                 }
-                try {
-                  setTimeout(async () => {
-                    for (var k = 1; k != 6; k++) {
-                      let sip = await Sip.findOne({
-                        where: {
-                          name: "100" + k,
-                          login: "100" + k,
-                          vlabname: vlab[i].nameparse
-                        }
-                      })
-                      if (!sip) {
-                        sip = await Sip.create({
-                            name: "100" + k,
-                            login: "100" + k,
-                            passwd: generator.generate({
-                              length: 4,
-                              numbers: true
-                            }),
-                            vlabname: vlab[i].nameparse,
-                            active: false,
-                          })
-                        await handlingPwd.pwdSIP(sip) // CHANGE PASSWORD SIP
-                      }
-                      let sipVlab = await SipVlab.findOne({
-                        where: {
-                          VlabId: vlab[i].id,
-                          SipId: sip.id
-                        }
-                      })
-                      if (!sipVlab) {
-                        await SipVlab.create({
-                          VlabId: vlab[i].id,
-                          SipId: sip.id
-                        })
-                      }
+                for (var k = 1; k != 6; k++) {
+                  let sip = await Sip.findOne({
+                    where: {
+                      name: "100" + k,
+                      login: "100" + k,
+                      vlabname: vlab[i].nameparse
                     }
-                  }, 120000)
-                } catch (err) {
-                  console.log(err)
+                  })
+                  if (!sip) {
+                    sip = await Sip.create({
+                        name: "100" + k,
+                        login: "100" + k,
+                        passwd: generator.generate({
+                          length: 4,
+                          numbers: true
+                        }),
+                        vlabname: vlab[i].nameparse,
+                        active: false,
+                      })
+                    setTimeout(async () => {
+                      await handlingPwd.pwdSIP(sip) // CHANGE PASSWORD SIP
+                    }, 120000)
+                  }
+                  let sipVlab = await SipVlab.findOne({
+                    where: {
+                      VlabId: vlab[i].id,
+                      SipId: sip.id
+                    }
+                  })
+                  if (!sipVlab) {
+                    await SipVlab.create({
+                      VlabId: vlab[i].id,
+                      SipId: sip.id
+                    })
+                  }
                 }
                 let users = await User.findAll({
                   where: {
