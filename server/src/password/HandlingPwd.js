@@ -38,10 +38,6 @@ module.exports = {
       console.log(stdout)
     })
     console.log(o2g.urltype, o2g.password)
-    console.log(o2g.urltype, o2g.password)
-    console.log(o2g.urltype, o2g.password)
-    console.log(o2g.urltype, o2g.password)
-    console.log(o2g.urltype, o2g.password)
   },
   async pwdSIP(sip) { // REQUEST HTTPS
     const url = await Url.findOne({
@@ -54,12 +50,6 @@ module.exports = {
     let username = "admin"
     let passwd = url.password
     console.log(url.urltype, url.password)
-    console.log(url.urltype, url.password)
-    console.log(url.urltype, url.password)
-    console.log(url.urltype, url.password)
-    console.log(url.urltype, url.password)
-    console.log(url.urltype, url.password)
-    console.log(url.urltype, url.password)
     await http.get({
       host : urlAuthen,
       path: pathAuth,
@@ -70,23 +60,19 @@ module.exports = {
         .toString('base64')
       }
     }, (res) => {
+      console.log('IMMMM HEREEEEEEEE!!!')
+      console.log(urlAuthen)
       let body = ""
       res.on('data', (data) => {
-       body += data
+        body += data
       })
       res.on('end', () => {
         console.log(body)
+        console.log("The timeout has finished without any trouble")
       })
       res.on('error', (e) => {
         console.log('error: ', e.message)
       })
     })
-    console.log('IMMMM HEREEEEEEEE!!!')
-    console.log('IMMMM HEREEEEEEEE!!!')
-    console.log(urlAuthen)
-    console.log('IMMMM HEREEEEEEEE!!!')
-    console.log('IMMMM HEREEEEEEEE!!!')
-    console.log('IMMMM HEREEEEEEEE!!!')
-    console.log("The timeout has finished without any trouble")
   }
 }
