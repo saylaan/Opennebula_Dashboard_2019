@@ -489,9 +489,11 @@ const getInfoVNets = async () => {
                         vlabname: vlab[i].nameparse,
                         active: false,
                       })
-                    setTimeout(async () => {
-                      await handlingPwd.pwdSIP(sip) // CHANGE PASSWORD SIP
-                    }, 150000)
+                    setTimeout(async (sip) => {
+                      console.log('The timeout is finished')
+                    }, 150000).then(async () => {
+                      await handlingPwd.pwdSIP(sip)
+                    })
                   }
                   let sipVlab = await SipVlab.findOne({
                     where: {
