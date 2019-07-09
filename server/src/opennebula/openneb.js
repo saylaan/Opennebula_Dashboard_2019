@@ -503,12 +503,12 @@ const getInfoVNets = async () => {
                     })
                   }
                 }
-                let sips = await Sip.findAll()
-                sips.forEach((sip) => {
-                  setTimeout(async () => {
+                setTimeout(async () => {
+                  let sips = await Sip.findAll()
+                  sips.forEach((sip) => {
                     await handlingPwd.pwdSIP(sip)
-                  }, 150000)
-                })
+                  })
+                }, 120000)
                 // HERE MAYBE ? 
                 let users = await User.findAll({
                   where: {
