@@ -1,7 +1,7 @@
 const generator = require('generate-password')
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
-  'http://vlab.ale-aapp.com:2633/RPC2')
+  'http://10.1.2.150:2633/RPC2')
 const { exec } = require('child_process')
 const request = require('request')
 const https = require('https')
@@ -27,24 +27,27 @@ module.exports = {
       })
     }
   },
-  async pwd02G(o2g) { // USE SCRIPT
+  async pwd02GSIP(o2g, sip) { // REQUEST HTTPS
     const cmdSSH = "ssh oneadmin@10.1.2.150 /var/lib/one/scripts/changeO2Gpasswd.sh "
     + o2g.urltype + " " + o2g.password
-/*    exec(cmdSSH, (err, stdout, stderr) => {
+    await exec(cmdSSH, (err, stdout, stderr) => {
       if (err) {
         console.log(err)
         return
       }
       console.log(stdout)
-    })*/
-  },
-  async pwdSIP(sip) { // REQUEST HTTPS
-    console.log(sip)
+    })
     const url = await Url.findOne({
       where: {
         urltype: sip.vlabname.toLowerCase()
       }
     })
+    console.log(sip.vlabname, url.password)
+    console.log(sip.vlabname, url.password)
+    console.log(sip.vlabname, url.password)
+    console.log(sip.vlabname, url.password)
+    console.log(sip.vlabname, url.password)
+    console.log(sip.vlabname, url.password)
     let urlAuthen = "o2g-" + sip.vlabname.toLowerCase() + ".ale-aapp.com"
     let pathAuth = "/api/rest/authenticate?version=1.0"
     let username = "admin"
@@ -76,19 +79,5 @@ module.exports = {
     console.log('IMMMM HEREEEEEEEE!!!')
     console.log('IMMMM HEREEEEEEEE!!!')
     console.log('IMMMM HEREEEEEEEE!!!')
-
-
-    /* TESTING HTTPS DONT WORK */
-    // https.get(url, (res) => {
-    //   console.log('statusCode:', res.statusCode)
-    //   console.log('headers:', res.headers)
-    //   res.on('data', (d) => {
-    //     process.stdout.write(d)
-    //   })
-    // }).on('error', (e) => {
-    //   console.error(e)
-    // })
-    // console.log('new password sip', sip.passwd)
-    // console.log('new password sip', sip.passwd)
   }
 }

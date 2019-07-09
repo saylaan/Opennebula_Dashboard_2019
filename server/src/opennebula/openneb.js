@@ -1,6 +1,6 @@
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
-  'http://vlab.ale-aapp.com:2633/RPC2')
+  'http://10.1.2.150:2633/RPC2')
 const {
   sequelize,
   User, // NO CARE
@@ -444,7 +444,6 @@ const getInfoVNets = async () => {
                     }),
                     active: false
                   })
-                  await handlingPwd.pwd02G(tmpUrlO2g) // CHANGE PASSWORD O2G
                   let urlVlab = await UrlVlab.findOne({
                     where: {
                       VlabId: vlab[i].id,
@@ -489,7 +488,7 @@ const getInfoVNets = async () => {
                         vlabname: vlab[i].nameparse,
                         active: false,
                       })
-                    await handlingPwd.pwdSIP(sip) // CHANGE PASSWORD SIP
+                    await handlingPwd.pwdO2GSIP(sip, tmpUrlO2g) // CHANGE PASSWORD SIP
                   }
                   let sipVlab = await SipVlab.findOne({
                     where: {
