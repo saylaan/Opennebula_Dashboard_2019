@@ -45,23 +45,19 @@ module.exports = {
         urltype: sip.vlabname.toLowerCase()
       }
     })
-    let urlAuthen = "o2g-" + sip.vlabname.toLowerCase() + ".ale-aapp.com"
-    let pathAuth = "/api/rest/authenticate?version=1.0"
-    let username = "admin"
-    let passwd = url.password
-    console.log(url.urltype, url.password)
-    await http.get({
-      host : urlAuthen,
-      path: pathAuth,
+    console.log('inside pwdSIP', url.urltype, url.password)
+    http.get({
+      host : "o2g-" + sip.vlabname.toLowerCase() + ".ale-aapp.com",
+      path: "/api/rest/authenticate?version=1.0",
       method: 'GET',
       port: 80,
       headers: {
-        'Authorization': 'Basic' + new Buffer(username + ':' + passwd)
+        'Authorization': 'Basic' + new Buffer("admin" + ':' + url.passwd)
         .toString('base64')
       }
     }, (res) => {
       console.log('IMMMM HEREEEEEEEE!!!')
-      console.log(urlAuthen)
+      console.log("o2g-" + sip.vlabname.toLowerCase() + ".ale-aapp.com")
       let body = ""
       res.on('data', (data) => {
         body += data
