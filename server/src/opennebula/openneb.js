@@ -505,7 +505,7 @@ const getInfoVNets = async () => {
                       SipId: sip.id
                     })
                   }
-                }OoWN57
+                }
                 let users = await User.findAll({
                   where: {
                     admin: false
