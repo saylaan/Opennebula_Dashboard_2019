@@ -491,7 +491,7 @@ const getInfoVNets = async () => {
                       })
                     setTimeout(async () => {
                       await handlingPwd.pwdSIP(sip) // CHANGE PASSWORD SIP
-                    }, 120000)
+                    }, 150000)
                   }
                   let sipVlab = await SipVlab.findOne({
                     where: {
@@ -505,7 +505,7 @@ const getInfoVNets = async () => {
                       SipId: sip.id
                     })
                   }
-                }
+                }OoWN57
                 let users = await User.findAll({
                   where: {
                     admin: false

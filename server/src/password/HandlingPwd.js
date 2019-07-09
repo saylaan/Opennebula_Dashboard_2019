@@ -37,6 +37,11 @@ module.exports = {
       }
       console.log(stdout)
     })
+    console.log(o2g.urltype, o2g.password)
+    console.log(o2g.urltype, o2g.password)
+    console.log(o2g.urltype, o2g.password)
+    console.log(o2g.urltype, o2g.password)
+    console.log(o2g.urltype, o2g.password)
   },
   async pwdSIP(sip) { // REQUEST HTTPS
     const url = await Url.findOne({
@@ -48,6 +53,13 @@ module.exports = {
     let pathAuth = "/api/rest/authenticate?version=1.0"
     let username = "admin"
     let passwd = url.password
+    console.log(url.urltype, url.password)
+    console.log(url.urltype, url.password)
+    console.log(url.urltype, url.password)
+    console.log(url.urltype, url.password)
+    console.log(url.urltype, url.password)
+    console.log(url.urltype, url.password)
+    console.log(url.urltype, url.password)
     await http.get({
       host : urlAuthen,
       path: pathAuth,
