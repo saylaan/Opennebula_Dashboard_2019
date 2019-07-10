@@ -270,7 +270,7 @@ module.exports = {
               })
               if (isvm) {
                 const vmon = await one.getVM(vm.idopennebula)
-                vmon.diskSnapshot(null, DEFAULT, null, null, null, (err, data) => {
+                vmon.diskSnapshot(null, 'DEFAULT', null, null, null, (err, data) => {
                   console.log(data)
                 })
                 vmon.snapshotrevert(0, (err, data) => {
