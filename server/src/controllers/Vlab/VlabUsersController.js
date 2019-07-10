@@ -270,7 +270,11 @@ module.exports = {
               })
               if (isvm) {
                 const vmon = await one.getVM(vm.idopennebula)
-                vmon.snapshotrevert(0, (err, data) => {
+		console.log(vmon)
+                await vmon.info((err, data) => {
+		  console.log(data.VM.TEMPLATE)
+		})
+		vmon.snapshotrevert(0, (err, data) => {
                   if (err) {
                     console.log(err)
                   } else {
