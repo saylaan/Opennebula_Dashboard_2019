@@ -210,26 +210,26 @@ module.exports = {
           })
         })
       })
-      // setTimeout(async () => {
-      //   await SipVlab.findAll({
-      //     where: {
-      //       vlabId: VlabId
-      //     },
-      //     include: [
-      //       {
-      //         model: Sip
-      //       }
-      //     ]
-      //   })
-      //   .map(sipVlab => sipVlab.toJSON())
-      //   .map(sipVlab => _.extend(
-      //     {},
-      //     sipVlab.Sip,
-      //     sipVlab
-      //   )).then(async (sips) => {
-      //     // await handlingPwd.pwdSIP(sips)
-      //   })
-      // }, 120000)
+      setTimeout(async () => {
+        await SipVlab.findAll({
+          where: {
+            vlabId: VlabId
+          },
+          include: [
+            {
+              model: Sip
+            }
+          ]
+        })
+        .map(sipVlab => sipVlab.toJSON())
+        .map(sipVlab => _.extend(
+          {},
+          sipVlab.Sip,
+          sipVlab
+        )).then(async (sips) => {
+          // await handlingPwd.pwdSIP(sips)
+        })
+      }, 120000)
       res.send(newVlabUser)
     } catch (err) {
       res.status(500).send({
@@ -270,12 +270,13 @@ module.exports = {
               })
               if (isvm) {
                 const vmon = await one.getVM(vm.idopennebula)
-                vmon.diskSnapshot(null, DEFAULT, null, null, null, (err, data) => {
-                  console.log(data)
-                })
                 vmon.snapshotrevert(0, (err, data) => {
-                  console.log('The snapshotrevert has been process')
-                  console.log(data)
+                  if (err) {
+                    console.log(err)
+                  } else {
+                    console.log('The snapshotrevert has been process')
+                    console.log(data)
+                  }
                 })
                 await isvm.destroy()
               }
