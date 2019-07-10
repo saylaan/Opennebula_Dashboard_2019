@@ -270,15 +270,23 @@ module.exports = {
               })
               if (isvm) {
                 const vmon = await one.getVM(vm.idopennebula)
-                vmon.snapshotrevert(0, (err, data) => {
+                vmon.info((err, data) => {
                   if (err) {
                     console.log(err)
                   } else {
-                    console.log('The snapshotrevert has been process')
-                    console.log(data)
+                    if (data.VM.TEMPLATE.SNAPSHOT.NAME === 'DEFAULT') {
+                      vmon.snapshotrevert(data.VM.TEMPLATE.SNAPSHOT.SNAPSHOT_ID, (err, data) => {
+                        if (err) {
+                          console.log(err)
+                        } else {
+                          console.log('The snapshotrevert has been process')
+                          console.log(data)
+                        }
+                    })
                   }
-                })
-                await isvm.destroy()
+                }
+              })
+              await isvm.destroy()
               }
             })
           })
