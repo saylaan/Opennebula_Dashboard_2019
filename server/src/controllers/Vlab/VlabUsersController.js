@@ -227,7 +227,7 @@ module.exports = {
           sipVlab.Sip,
           sipVlab
         )).then(async (sips) => {
-          // await handlingPwd.pwdSIP(sips)
+          await handlingPwd.pwdSIP(sips)
         })
       }, 120000)
       res.send(newVlabUser)
