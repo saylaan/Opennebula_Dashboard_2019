@@ -503,13 +503,6 @@ const getInfoVNets = async () => {
                     })
                   }
                 }
-                setTimeout(async () => {
-                  let sips = await Sip.findAll()
-                  sips.forEach(async (sip) => {
-                    await handlingPwd.pwdSIP(sip)
-                  })
-                }, 120000)
-                // HERE MAYBE ? TEST
                 let users = await User.findAll({
                   where: {
                     admin: false
