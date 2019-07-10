@@ -19,8 +19,6 @@ const {
   SipVlab
 } = require('../models')
 const Promise = require('bluebird')
-const generator = require('generate-password')
-const handlingPwd = require('../password/HandlingPwd') // test
 
 const getInfoVms = async () => {
   try {
@@ -425,26 +423,18 @@ const getInfoVNets = async () => {
                     url: "https://vlab.ale-aapp.com",
                     urltype: 'vnc',
                     log: vlab[i].nameparse.toLowerCase(),
-                    password: generator.generate({
-                      length: 8,
-                      numbers: true
-                    }),
+                    password: "default",
                     active: false
                   })
-                  await handlingPwd.pwdVNC(tmpUrlVnc) // CHANGE PASSWORD VNC
                   let tmpUrlO2g = await Url.create({
                     name: "O2G Access",
                     vlabname: 'o2g',
                     urltype: vlab[i].nameparse.toLowerCase(),
                     url: "https://o2g-" + vlab[i].nameparse.toLowerCase() + ".ale-aapp.com/",
                     log: "admin",
-                    password: generator.generate({
-                      length: 6,
-                      numbers: true
-                    }),
+                    password: "default",
                     active: false
                   })
-                  await handlingPwd.pwdO2G(tmpUrlO2g)
                   let urlVlab = await UrlVlab.findOne({
                     where: {
                       VlabId: vlab[i].id,
@@ -482,10 +472,7 @@ const getInfoVNets = async () => {
                     sip = await Sip.create({
                         name: "100" + k,
                         login: "100" + k,
-                        passwd: generator.generate({
-                          length: 4,
-                          numbers: true
-                        }),
+                        passwd: "default",
                         vlabname: vlab[i].nameparse,
                         active: false,
                       })
