@@ -262,7 +262,6 @@ module.exports = {
             }
           }).then(async (vms) => {
             vms.forEach(async (vm) => {
-              console.log(vm)
               const isvm = await VmUser.findOne({
                 where: {
                   UserId: vlabuser.UserId,
@@ -270,6 +269,8 @@ module.exports = {
                 }
               })
               if (isvm) {
+                const vmon = await one.getVM(vm.idopennebula)
+                console.log(vmon)
                 await isvm.destroy()
               }
             })
