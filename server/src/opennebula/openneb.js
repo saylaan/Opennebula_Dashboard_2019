@@ -20,7 +20,7 @@ const {
 } = require('../models')
 const Promise = require('bluebird')
 const generator = require('generate-password')
-const handlingPwd = require('../password/HandlingPwd')
+const handlingPwd = require('../password/HandlingPwd') // test
 
 const getInfoVms = async () => {
   try {
