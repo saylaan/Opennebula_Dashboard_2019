@@ -39,15 +39,16 @@ module.exports = {
     })
     console.log(o2g.urltype, o2g.password)
   },
-  async pwdSIP(sip) { // REQUEST HTTPS
+  async pwdSIP(sips) { // REQUEST HTTPS
+    console.log(sips)
     const url = await Url.findOne({
       where: {
-        urltype: sip.vlabname.toLowerCase()
+        urltype: sips[0].vlabname.toLowerCase()
       }
     })
     console.log('inside pwdSIP', url.urltype, url.password)
     http.get({
-      host : "o2g-" + sip.vlabname.toLowerCase() + ".ale-aapp.com",
+      host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
       path: "/api/rest/authenticate?version=1.0",
       method: 'GET',
       port: 80,
@@ -57,7 +58,7 @@ module.exports = {
       }
     }, (res) => {
       console.log('IMMMM HEREEEEEEEE!!!')
-      console.log("o2g-" + sip.vlabname.toLowerCase() + ".ale-aapp.com")
+      console.log("o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
       let body = ""
       res.on('data', (data) => {
         body += data
@@ -72,3 +73,11 @@ module.exports = {
     })
   }
 }
+
+                // setTimeout(async () => {
+                //   let sips = await Sip.findAll()
+                //   sips.forEach(async (sip) => {
+                //     await handlingPwd.pwdSIP(sip)
+                //   })
+                // }, 120000)
+                // HERE MAYBE ? TEST

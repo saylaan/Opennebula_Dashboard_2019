@@ -14,6 +14,9 @@ const {
 const _ = require('lodash')
 const handlingPwd = require('../../password/HandlingPwd')
 const generator = require('generate-password')
+const Opennebula = require('opennebula')
+const one = new Opennebula('geoffroy:2961Sailaan1992!',
+  'http://10.1.2.150:2633/RPC2')
 
 module.exports = {
   async index(req, res) {
@@ -62,7 +65,7 @@ module.exports = {
       })
     }
   },
-  async post(req, res) {
+  async post(req, res) { // GENERATE PASSWORD - DO REQUEST OPENNEBULA / O2G - ASSIGN VLAB
     try {
       const { UserId } = req.body
       const { VlabId } = req.body
@@ -109,34 +112,6 @@ module.exports = {
           })
         })
       })
-      await SipVlab.findAll({ // FOR THE SIP ASSIGN
-        where: {
-          VlabId: VlabId
-        }
-      }).then(async (sipvlabs) => {
-        sipvlabs.forEach(async (sipvlab) => {
-          await Sip.findAll({
-            where: {
-              id: sipvlab.SipId
-            }
-          }).then(async (sips) => {
-            sips.forEach(async (sip) => {
-              const issip = await SipUser.findOne({
-                where: {
-                  UserId: UserId,
-                  sipId: sip.id
-                }
-              })
-              if (!issip) {
-                await SipUser.create({
-                  UserId: UserId,
-                  SipId: sip.id
-                })
-              }
-            })
-          })
-        })
-      })
       await UrlVlab.findAll({ // FOR THE URL ASSIGN
         where: {
           VlabId: VlabId
@@ -149,6 +124,33 @@ module.exports = {
             }
           }).then(async (urls) => {
             urls.forEach(async (url) => {
+              const newUrl = {
+                name: url.name,
+                log: url.log,
+                urltype: url.urltype,
+                password: "default",
+                vlabname: url.vlabname,
+                active: url.active
+              }
+              if (url.name === "VNC Access") {
+                newUrl.password = await generator.generate({
+                  length: 8,
+                  numbers: true
+                })
+                newUrl.log = url.vlabname
+                await handlingPwd.pwdVNC(newUrl) // CHANGE VNC
+              } else if (url.name === "O2G Access") {
+                newUrl.password = await generator.generate({
+                  length: 6,
+                  numbers: true
+                })
+                await handlingPwd.pwdO2G(newUrl) // CHANGE O2G
+              }
+              await Url.update(newUrl, {
+                where: {
+                  id: url.id
+                }
+              })
               const isurl = await UrlUser.findOne({
                 where: {
                   UserId: UserId,
@@ -165,6 +167,69 @@ module.exports = {
           })
         })
       })
+      await SipVlab.findAll({ // FOR THE SIP ASSIGN
+        where: {
+          VlabId: VlabId
+        }
+      }).then(async (sipvlabs) => {
+        sipvlabs.forEach(async (sipvlab) => {
+          await Sip.findAll({
+            where: {
+              id: sipvlab.SipId
+            }
+          }).then(async (sips) => {
+            sips.forEach(async (sip) => {
+              const newSip = {
+                name: sip.name,
+                login: sip.login,
+                passwd: generator.generate({
+                  length: 4,
+                  numbers: true
+                }),
+                vlabname: sip.vlabname,
+                active: sip.active
+              }
+              await Sip.update(newSip, {
+                where: {
+                  id: sip.id
+                }
+              })
+              const issip = await SipUser.findOne({
+                where: {
+                  UserId: UserId,
+                  sipId: sip.id
+                }
+              })
+              if (!issip) {
+                await SipUser.create({
+                  UserId: UserId,
+                  SipId: sip.id
+                })
+              }
+            })
+          })
+        })
+      })
+      setTimeout(async () => {
+        await SipVlab.findAll({
+          where: {
+            vlabId: VlabId
+          },
+          include: [
+            {
+              model: Sip
+            }
+          ]
+        })
+        .map(sipVlab => sipVlab.toJSON())
+        .map(sipVlab => _.extend(
+          {},
+          sipVlab.Sip,
+          sipVlab
+        )).then(async (sips) => {
+          await handlingPwd.pwdSIP(sips)
+        })
+      }, 120000)
       res.send(newVlabUser)
     } catch (err) {
       res.status(500).send({
@@ -172,7 +237,7 @@ module.exports = {
       })
     }
   },
-  async delete(req, res) {
+  async delete(req, res) { // DEASSIGN VLAB AND RESTORE SNAPSHOT
     try {
       const { vlabuserId } = req.params
       const vlabuser = await VlabUser.findOne({
@@ -197,6 +262,7 @@ module.exports = {
             }
           }).then(async (vms) => {
             vms.forEach(async (vm) => {
+              // SNAPSHOT VM HERE FOR ALL VM
               const isvm = await VmUser.findOne({
                 where: {
                   UserId: vlabuser.UserId,
@@ -225,14 +291,10 @@ module.exports = {
               const newSip = {
                 name: sip.name,
                 login: sip.login,
-                passwd: generator.generate({
-                  length: 4,
-                  numbers: true
-                }),
+                passwd: "default",
                 vlabname: sip.vlabname,
                 active: sip.active
               }
-              await handlingPwd.pwdSIP(newSip) // CHANGE SIP O2G
               await Sip.update(newSip, {
                 where: {
                   id: sip.id
@@ -267,23 +329,9 @@ module.exports = {
                 name: url.name,
                 log: url.log,
                 urltype: url.urltype,
-                password: "none",
+                password: "default",
                 vlabname: url.vlabname,
                 active: url.active
-              }
-              if (url.name === "VNC Access") {
-                newUrl.password = await generator.generate({
-                  length: 8,
-                  numbers: true
-                })
-                newUrl.log = url.vlabname
-                await handlingPwd.pwdVNC(newUrl) // CHANGE VNC
-              } else if (url.name === "O2G Access") {
-                newUrl.password = await generator.generate({
-                  length: 6,
-                  numbers: true
-                })
-                await handlingPwd.pwd02G(newUrl) // CHANGE O2G
               }
               await Url.update(newUrl, {
                 where: {
