@@ -53,7 +53,7 @@ module.exports = {
       method: 'GET',
       port: 80,
       headers: {
-        'Authorization': 'Basic' + new Buffer("admin" + ':' + url.passwd)
+        'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
         .toString('base64')
       }
     }, (res) => {
@@ -64,6 +64,7 @@ module.exports = {
         body += data
       })
       res.on('end', () => {
+        console.log('TESSTTT')
         console.log('TESSTTT')
         console.log('TESSTTT')
         console.log('TESSTTT')

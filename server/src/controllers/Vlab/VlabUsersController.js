@@ -210,26 +210,26 @@ module.exports = {
           })
         })
       })
-      setTimeout(async () => {
-        await SipVlab.findAll({
-          where: {
-            vlabId: VlabId
-          },
-          include: [
-            {
-              model: Sip
-            }
-          ]
-        })
-        .map(sipVlab => sipVlab.toJSON())
-        .map(sipVlab => _.extend(
-          {},
-          sipVlab.Sip,
-          sipVlab
-        )).then(async (sips) => {
-          await handlingPwd.pwdSIP(sips)
-        })
-      }, 120000)
+      // setTimeout(async () => {
+      //   await SipVlab.findAll({
+      //     where: {
+      //       vlabId: VlabId
+      //     },
+      //     include: [
+      //       {
+      //         model: Sip
+      //       }
+      //     ]
+      //   })
+      //   .map(sipVlab => sipVlab.toJSON())
+      //   .map(sipVlab => _.extend(
+      //     {},
+      //     sipVlab.Sip,
+      //     sipVlab
+      //   )).then(async (sips) => {
+      //     // await handlingPwd.pwdSIP(sips)
+      //   })
+      // }, 120000)
       res.send(newVlabUser)
     } catch (err) {
       res.status(500).send({
@@ -262,7 +262,7 @@ module.exports = {
             }
           }).then(async (vms) => {
             vms.forEach(async (vm) => {
-              // SNAPSHOT VM HERE FOR ALL VM
+              console.log(vm)
               const isvm = await VmUser.findOne({
                 where: {
                   UserId: vlabuser.UserId,
