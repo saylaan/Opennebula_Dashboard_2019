@@ -50,7 +50,7 @@ module.exports = {
     console.log('inside pwdSIP', url.urltype, url.password)
     console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
     let options = {
-      hostname : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
+      host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
       path: "/api/rest",
       method: 'GET',
       port: 443,
@@ -58,24 +58,20 @@ module.exports = {
       //   'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
       //   .toString('base64')
       // },
-      //rejectUnauthorized: false
+      // rejectUnauthorized: false
     }
-    let body = ""
-    http.get(options, (res) => {
+    https.get(options, (res) => {
+      let body = ""
       res.on('data', (data) => {
         body += data
       })
       res.on('end', () => {
-        if (body) {
-          console.log(body)
-          console.log('Trying to authenticate to the server ...')
-        }
+        console.log(body)
       })
       res.on('error', (e) => {
         console.log('error: ', e.message)
       })
     })
-    
     // console.log('inside pwdSIP', url.urltype, url.password)
     // console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
     // let options = {
