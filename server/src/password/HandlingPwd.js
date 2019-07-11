@@ -38,6 +38,10 @@ module.exports = {
       console.log(stdout)
     })
     console.log(o2g.urltype, o2g.password)
+    console.log(o2g.urltype, o2g.password)
+    console.log(o2g.urltype, o2g.password)
+    console.log(o2g.urltype, o2g.password)
+    console.log(o2g.urltype, o2g.password)
   },
   async pwdSIP(sips) { // REQUEST HTTPS
     console.log(sips)
