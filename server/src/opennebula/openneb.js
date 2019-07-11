@@ -1,6 +1,6 @@
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
-  'http://10.1.2.150:2633/RPC2')
+  'http://vlab.ale-aapp.com:2633/RPC2')
 const {
   sequelize,
   User, // NO CARE
@@ -420,7 +420,7 @@ const getInfoVNets = async () => {
                   let tmpUrlVnc = await Url.create({
                     name: "VNC Access",
                     vlabname: vlab[i].nameparse.toLowerCase(),
-                    url: "https://vlab.ale-aapp.com",
+                    url: "http://vlab.ale-aapp.com:9869",
                     urltype: 'vnc',
                     log: vlab[i].nameparse.toLowerCase(),
                     password: "default",
