@@ -59,13 +59,13 @@
     "active": true
   },
   {
-    "lastname": "Luc",
-    "firstname": "Besson",
-    "email": "luc@gmail.com",
+    "lastname": "Muths",
+    "firstname": "Christian",
+    "email": "christian.muths@al-enterprise.com",
     "password": "12345678",
     "companyname": "ALE",
     "purpose": "enterprise",
-    "username": "luc",
+    "username": "christian",
     "emailactive": true,
     "active": true
   }
