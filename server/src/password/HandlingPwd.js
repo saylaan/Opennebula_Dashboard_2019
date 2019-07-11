@@ -21,7 +21,7 @@ module.exports = {
         if (useron.username === vnc.vlabname) {
           const tmpuser = await one.getUser(useron.idopennebula)
           await tmpuser.passwd(vnc.password, (err, data) => {
-            console.log(data)
+            console.log("The password of vlab.ale-aapp.com has been changed", data)
           })
         }
       })
@@ -37,11 +37,7 @@ module.exports = {
       }
       console.log(stdout)
     })
-    console.log(o2g.urltype, o2g.password)
-    console.log(o2g.urltype, o2g.password)
-    console.log(o2g.urltype, o2g.password)
-    console.log(o2g.urltype, o2g.password)
-    console.log(o2g.urltype, o2g.password)
+    console.log('Change the password of : ', o2g.urltype, ' with : ', o2g.password)
   },
   async pwdSIP(sips) { // REQUEST HTTPS
     console.log(sips)
@@ -68,34 +64,34 @@ module.exports = {
       res.on('end', () => {
         if (body) {
           console.log(body)
-          const login = "admin:" + url.password
-          console.log('inside pwdSIP', url.urltype, url.password)
-          console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
-          let options = {
-            host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
-            path: "/api/rest/authenticate?version=1.0",
-            method: 'GET',
-            port: 443,
-            headers: {
-              'Authorization': 'Basic' + login.toString('base64')
-            },
-            rejectUnauthorized: false
-          }
-          console.log(options.headers)
-          https.get(options, (res) => {
-            console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
-            let body = ""
-            res.on('data', (data) => {
-              body += data
-            })
-            res.on('end', () => {
-              console.log(body)
-              console.log("The Authentification has finished without any trouble")
-            })
-            res.on('error', (e) => {
-              console.log('error: ', e.message)
-            })
-          })
+          // const login = "admin:" + url.password
+          // console.log('Got answer from o2g ', url.urltype, url.password)
+          // console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+          // let options = {
+          //   host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
+          //   path: "/api/rest/authenticate?version=1.0",
+          //   method: 'GET',
+          //   port: 443,
+          //   headers: {
+          //     'Authorization': 'Basic' + login.toString('base64')
+          //   },
+          //   rejectUnauthorized: false
+          // }
+          // console.log(options.headers)
+          // https.get(options, (res) => {
+          //   console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+          //   let body = ""
+          //   res.on('data', (data) => {
+          //     body += data
+          //   })
+          //   res.on('end', () => {
+          //     console.log(body)
+          //     console.log("The Authentification has finished without any trouble")
+          //   })
+          //   res.on('error', (e) => {
+          //     console.log('error: ', e.message)
+          //   })
+          // })
         }
       })
       res.on('error', (e) => {

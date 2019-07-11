@@ -74,7 +74,7 @@ const getInfoVms = async () => {
             const isVM = vm.NAME.search('VLAB')
             if (isVM != -1) {
               let state = false;
-              if (vm.STATE == 3) { // STATE == 3 => RUNNING
+              if (vm.STATE == 3) { // STATE == 3 => RUNNING LET
                 state = true
               }
               const typeIndex = vm.NAME.indexOf('-') // Getting name of the type of device (O2G / OXE / OMS)

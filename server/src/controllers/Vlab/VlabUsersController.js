@@ -229,7 +229,7 @@ module.exports = {
         )).then(async (sips) => {
           await handlingPwd.pwdSIP(sips)
         })
-      }, 120000)
+      }, 110000)
       res.send(newVlabUser)
     } catch (err) {
       res.status(500).send({
