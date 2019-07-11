@@ -47,11 +47,13 @@ module.exports = {
       }
     })
     console.log('inside pwdSIP', url.urltype, url.password)
-    http.get({
+    https.request({
       host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
       path: "/api/rest/authenticate?version=1.0",
       method: 'GET',
-      port: 80,
+      port: 443,
+      requestUnauthorized: false,
+      insecure: true,
       headers: {
         'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
         .toString('base64')

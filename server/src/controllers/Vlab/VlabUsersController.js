@@ -274,8 +274,9 @@ module.exports = {
                   if (err) {
                     console.log(err)
                   } else {
+                    console.log(data.VM.TEMPLATE.SNAPSHOT)
                     if (data.VM.TEMPLATE.SNAPSHOT.NAME === 'DEFAULT') {
-                      vmon.snapshotrevert(data.VM.TEMPLATE.SNAPSHOT.SNAPSHOT_ID, (err, data) => {
+                      vmon.snapshotrevert(parseInt(data.VM.TEMPLATE.SNAPSHOT.SNAPSHOT_ID, 10), (err, data) => {
                         if (err) {
                           console.log(err)
                         } else {
