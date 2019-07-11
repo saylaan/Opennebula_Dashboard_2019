@@ -56,28 +56,29 @@ module.exports = {
       port: 443,
       //rejectUnauthorized: false
     }
-    await http.get(options, (res) => {
+    await https.request(options, (res) => {
       let body = ""
       res.on('data', (data) => {
         body += data
       })
       res.on('end', async () => {
         if (body) {
+          console.log(body)
           console.log('Trying to authenticate to the server O2G....')
           console.log('inside pwdSIP', url.urltype, url.password)
           console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
-          let options = {
-            host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
+          options = {
+            hostname : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
             path: "/api/rest/authenticate?version=1.0",
             method: 'GET',
             port: 443,
             headers: {
-              'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password, 'utf-8')
+              'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
               .toString('base64')
             },
             rejectUnauthorized: false
           }
-          http.get(options, (res) => {
+          await https.request(options, (res) => {
             console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
             let body = ""
             res.on('data', (data) => {
