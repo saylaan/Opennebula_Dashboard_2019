@@ -5,13 +5,13 @@ const one = new Opennebula('geoffroy:2961Sailaan1992!',
 const { exec } = require('child_process')
 const request = require('request')
 const https = require('https')
+const http = require('http')
+const _ = require('lodash')
 const {
   Url,
   Sip,
   UserOpenNebula
 } = require('../models')
-const http = require('http')
-const _ = require('lodash')
 
 module.exports = {
   async pwdVNC(vnc) { // Opennebula change
@@ -47,7 +47,8 @@ module.exports = {
       }
     })
     console.log('inside pwdSIP', url.urltype, url.password)
-    https.get({
+    console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+    const options = {
       host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
       path: "/api/rest/authenticate?version=1.0",
       method: 'GET',
@@ -55,22 +56,16 @@ module.exports = {
       headers: {
         'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
         .toString('base64')
-      }
-    }, (res) => {
-      console.log('IMMMM HEREEEEEEEE!!!')
-      console.log("o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+      },
+      rejectUnauthorized: false
+    }
+    https.get(options, (res) => {
+      console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
       let body = ""
       res.on('data', (data) => {
         body += data
       })
       res.on('end', () => {
-        console.log('TESSTTT')
-        console.log('TESSTTT')
-        console.log('TESSTTT')
-        console.log('TESSTTT')
-        console.log('TESSTTT')
-        console.log('TESSTTT')
-        console.log('TESSTTT')
         console.log(body)
         console.log("The timeout has finished without any trouble")
       })
