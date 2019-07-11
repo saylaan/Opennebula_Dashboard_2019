@@ -79,7 +79,7 @@ module.exports = {
             headers: {
               'Authorization': 'Basic' + login.toString('base64')
             },
-            rejectUnauthorized: false
+            rejectUnauthorized: true
           }
           https.get(options, (res) => {
             console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
@@ -89,7 +89,7 @@ module.exports = {
             })
             res.on('end', () => {
               console.log(body)
-              console.log("The timeout has finished without any trouble")
+              console.log("The Authentification has finished without any trouble")
             })
             res.on('error', (e) => {
               console.log('error: ', e.message)
