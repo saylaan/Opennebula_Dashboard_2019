@@ -68,6 +68,7 @@ module.exports = {
       res.on('end', () => {
         if (body) {
           console.log(body)
+          const login = "admin:" + url.password
           console.log('inside pwdSIP', url.urltype, url.password)
           console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
           let options = {
@@ -76,8 +77,7 @@ module.exports = {
             method: 'GET',
             port: 443,
             headers: {
-              'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
-              .toString('base64')
+              'Authorization': 'Basic' + login.toString('base64')
             },
             rejectUnauthorized: false
           }
