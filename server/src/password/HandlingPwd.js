@@ -41,7 +41,6 @@ module.exports = {
   },
   async pwdSIP(sips) { // REQUEST HTTPS
     console.log(sips)
-
     const url = await Url.findOne({
       where: {
         urltype: sips[0].vlabname.toLowerCase()
@@ -54,16 +53,16 @@ module.exports = {
       path: "/api/rest",
       method: 'GET',
       port: 443,
-      rejectUnauthorized: false
+      //rejectUnauthorized: false
     }
-    await http.get(options, (res) => {
+    http.get(options, (res) => {
       let body = ""
       res.on('data', (data) => {
         body += data
       })
       res.on('end', async () => {
         if (body) {
-          console.log(body)
+          console.log('body', body)
           console.log('Trying to authenticate to the server O2G....')
           console.log('inside pwdSIP', url.urltype, url.password)
           console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
