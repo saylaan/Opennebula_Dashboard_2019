@@ -41,6 +41,7 @@ module.exports = {
   },
   async pwdSIP(sips) { // REQUEST HTTPS
     console.log(sips)
+
     const url = await Url.findOne({
       where: {
         urltype: sips[0].vlabname.toLowerCase()
@@ -48,31 +49,56 @@ module.exports = {
     })
     console.log('inside pwdSIP', url.urltype, url.password)
     console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
-    const options = {
+    let options = {
       host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
-      path: "/api/rest/authenticate?version=1.0",
+      path: "/api/rest/",
       method: 'GET',
       port: 443,
-      headers: {
-        'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
-        .toString('base64')
-      },
-      rejectUnauthorized: false
+      // headers: {
+      //   'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
+      //   .toString('base64')
+      // },
+      // rejectUnauthorized: false
     }
     https.get(options, (res) => {
-      console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
       let body = ""
       res.on('data', (data) => {
         body += data
       })
       res.on('end', () => {
         console.log(body)
-        console.log("The timeout has finished without any trouble")
       })
       res.on('error', (e) => {
         console.log('error: ', e.message)
       })
     })
+    // console.log('inside pwdSIP', url.urltype, url.password)
+    // console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+    // let options = {
+    //   host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
+    //   path: "/api/rest/authenticate?version=1.0",
+    //   method: 'GET',
+    //   port: 443,
+    //   headers: {
+    //     'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
+    //     .toString('base64')
+    //   },
+    //   rejectUnauthorized: false
+    // }
+    // https.get(options, (res) => {
+    //   console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+    //   let body = ""
+    //   res.on('data', (data) => {
+    //     body += data
+    //   })
+    //   res.on('end', () => {
+    //     console.log(body)
+    //     console.log("The timeout has finished without any trouble")
+    //   })
+    //   res.on('error', (e) => {
+    //     console.log('error: ', e.message)
+    //   })
+    // })
   }
 }
 
