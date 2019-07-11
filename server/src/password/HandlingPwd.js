@@ -66,39 +66,41 @@ module.exports = {
         body += data
       })
       res.on('end', () => {
-        console.log(body)
+        if (body) {
+          console.log(body)
+          console.log('inside pwdSIP', url.urltype, url.password)
+          console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+          let options = {
+            host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
+            path: "/api/rest/authenticate?version=1.0",
+            method: 'GET',
+            port: 443,
+            headers: {
+              'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
+              .toString('base64')
+            },
+            rejectUnauthorized: false
+          }
+          https.get(options, (res) => {
+            console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+            let body = ""
+            res.on('data', (data) => {
+              body += data
+            })
+            res.on('end', () => {
+              console.log(body)
+              console.log("The timeout has finished without any trouble")
+            })
+            res.on('error', (e) => {
+              console.log('error: ', e.message)
+            })
+          })
+        }
       })
       res.on('error', (e) => {
         console.log('error: ', e.message)
       })
     })
-    // console.log('inside pwdSIP', url.urltype, url.password)
-    // console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
-    // let options = {
-    //   host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
-    //   path: "/api/rest/authenticate?version=1.0",
-    //   method: 'GET',
-    //   port: 443,
-    //   headers: {
-    //     'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
-    //     .toString('base64')
-    //   },
-    //   rejectUnauthorized: false
-    // }
-    // https.get(options, (res) => {
-    //   console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
-    //   let body = ""
-    //   res.on('data', (data) => {
-    //     body += data
-    //   })
-    //   res.on('end', () => {
-    //     console.log(body)
-    //     console.log("The timeout has finished without any trouble")
-    //   })
-    //   res.on('error', (e) => {
-    //     console.log('error: ', e.message)
-    //   })
-    // })
   }
 }
 
