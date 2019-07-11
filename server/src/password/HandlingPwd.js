@@ -61,7 +61,7 @@ module.exports = {
       //rejectUnauthorized: false
     }
     let body = ""
-    await http.get(options, (res) => {
+    http.get(options, (res) => {
       res.on('data', (data) => {
         body += data
       })
