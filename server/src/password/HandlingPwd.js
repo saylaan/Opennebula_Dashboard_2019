@@ -64,34 +64,34 @@ module.exports = {
       res.on('end', () => {
         if (body) {
           console.log(body)
-          // const login = "admin:" + url.password
-          // console.log('Got answer from o2g ', url.urltype, url.password)
-          // console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
-          // let options = {
-          //   host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
-          //   path: "/api/rest/authenticate?version=1.0",
-          //   method: 'GET',
-          //   port: 443,
-          //   headers: {
-          //     'Authorization': 'Basic' + login.toString('base64')
-          //   },
-          //   rejectUnauthorized: false
-          // }
-          // console.log(options.headers)
-          // https.get(options, (res) => {
-          //   console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
-          //   let body = ""
-          //   res.on('data', (data) => {
-          //     body += data
-          //   })
-          //   res.on('end', () => {
-          //     console.log(body)
-          //     console.log("The Authentification has finished without any trouble")
-          //   })
-          //   res.on('error', (e) => {
-          //     console.log('error: ', e.message)
-          //   })
-          // })
+          const login = "admin:" + url.password
+          console.log('Got answer from o2g ', url.urltype, url.password)
+          console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+          let options = {
+            host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
+            path: "/api/rest/authenticate?version=1.0",
+            method: 'GET',
+            port: 443,
+            headers: {
+              'Authorization': 'Basic' + login.toString('base64')
+            },
+            rejectUnauthorized: false
+          }
+          console.log(options.headers)
+          https.get(options, (res) => {
+            console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+            let body = ""
+            res.on('data', (data) => {
+              body += data
+            })
+            res.on('end', () => {
+              console.log(body)
+              console.log("The Authentification has finished without any trouble")
+            })
+            res.on('error', (e) => {
+              console.log('error: ', e.message)
+            })
+          })
         }
       })
       res.on('error', (e) => {
