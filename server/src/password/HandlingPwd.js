@@ -54,7 +54,7 @@ module.exports = {
       path: "/api/rest",
       method: 'GET',
       port: 443,
-      //rejectUnauthorized: false
+      rejectUnauthorized: false
     }
     await https.request(options, (res) => {
       let body = ""
