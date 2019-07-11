@@ -1,7 +1,7 @@
 const generator = require('generate-password')
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
-  'http://10.1.2.150:2633/RPC2')
+  'http://vlab.ale-aapp.com:2633/RPC2')
 const { exec } = require('child_process')
 const request = require('request')
 const https = require('https')
@@ -54,10 +54,6 @@ module.exports = {
       path: "/api/rest",
       method: 'GET',
       port: 443,
-      // headers: {
-      //   'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
-      //   .toString('base64')
-      // },
       rejectUnauthorized: false
     }
     https.get(options, (res) => {
@@ -79,8 +75,9 @@ module.exports = {
             headers: {
               'Authorization': 'Basic' + login.toString('base64')
             },
-            rejectUnauthorized: true
+            rejectUnauthorized: false
           }
+          console.log(options.headers)
           https.get(options, (res) => {
             console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
             let body = ""
