@@ -56,7 +56,7 @@ module.exports = {
       port: 443,
       rejectUnauthorized: false
     }
-    await https.request(options, (res) => {
+    await http.get(options, (res) => {
       let body = ""
       res.on('data', (data) => {
         body += data
@@ -78,7 +78,7 @@ module.exports = {
             },
             rejectUnauthorized: false
           }
-          console.log(headers)
+          console.log(options.headers)
           // await https.request(options, (res) => {
           //   console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
           //   let body = ""
