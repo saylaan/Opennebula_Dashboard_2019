@@ -58,7 +58,7 @@ module.exports = {
       //   'Authorization': 'Basic' + new Buffer("admin" + ':' + url.password)
       //   .toString('base64')
       // },
-      // rejectUnauthorized: false
+      rejectUnauthorized: false
     }
     https.get(options, (res) => {
       let body = ""
