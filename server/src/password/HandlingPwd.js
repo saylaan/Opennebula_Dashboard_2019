@@ -102,7 +102,7 @@ module.exports = {
                 headers : {
                   'Content-Length': Buffer.byteLength(data, 'utf-8'),
                   'Content-Type': 'application/json',
-                  'Set-Cookie': 'AlcUserId=' + cookie
+                  'Cookie': cookie
                 },
                 rejectUnauthorized: false
               }
