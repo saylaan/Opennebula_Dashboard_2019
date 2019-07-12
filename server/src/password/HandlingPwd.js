@@ -64,7 +64,6 @@ module.exports = {
       res.on('end', () => {
         if (body) {
           console.log(body)
-          const login = "admin:" + url.password
           console.log('Got answer from o2g ', url.urltype, url.password)
           console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
           let options = {
@@ -73,11 +72,11 @@ module.exports = {
             method: 'GET',
             port: 443,
             headers: {
-              'Authorization': 'Basic' + login.toString('base64')
+              'Authorization': 'Basic ' + new Buffer('admin:' + url.password).toString('base64')
             },
             rejectUnauthorized: false
           }
-          console.log(options.headers)
+          console.log('Basic auth token', options.headers)
           https.get(options, (res) => {
             console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
             let body = ""
@@ -86,7 +85,25 @@ module.exports = {
             })
             res.on('end', () => {
               console.log(body)
+              console.log(body.credential)
+              const cookie = body.credential
               console.log("The Authentification has finished without any trouble")
+              const session = {
+                'applicationName': 'PBXSession'
+              }
+              let options = {
+                host: "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
+                path: "/api/rest/1.0/sessions",
+                method: 'POST',
+                port: 443,
+                headers : {
+                  'Content': json_encode(session),
+                  'Content-Type': 'application/json',
+                  'Content-Length': data.length,
+                  'Cookie': 'AlcUserId=' + cookie
+                },
+                
+              }
             })
             res.on('error', (e) => {
               console.log('error: ', e.message)
