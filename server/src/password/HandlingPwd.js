@@ -84,27 +84,24 @@ module.exports = {
               body += data
             })
             res.on('end', () => {
-              console.log(body)
               const bodyArray = body.split(" ")
               let cookie = bodyArray[4]
               cookie = cookie.substr(1, cookie.length - 4)
-              console.log('cookie', cookie)
               console.log("The Authentification has finished without any trouble")
               const data = JSON.stringify({
                 applicationName: 'ChangeSIP'
               })
-              console.log(data)
               let options = {
                 host: "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
                 path: "/api/rest/1.0/sessions",
                 method: 'POST',
                 port: 443,
+                rejectUnauthorized: false,
                 headers : {
                   'Content-Length': Buffer.byteLength(data, 'utf-8'),
                   'Content-Type': 'application/json',
                   'Cookie': cookie
-                },
-                rejectUnauthorized: false
+                }
               }
               console.log(options.headers)
               https.get(options, (res) => {
