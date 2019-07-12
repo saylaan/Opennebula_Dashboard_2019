@@ -99,7 +99,6 @@ module.exports = {
                 headers : {
                   'Content': JSON.stringify(session),
                   'Content-Type': 'application/json',
-                  'Content-Length': data.length,
                   'Cookie': 'AlcUserId=' + cookie
                 },
                 
