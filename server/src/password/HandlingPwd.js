@@ -87,7 +87,7 @@ module.exports = {
               console.log(body)
               const bodyArray = body.split(" ")
               let cookie = bodyArray[4]
-              cookie.substr(4, cookie.length - 5)
+              cookie = cookie.substr(1, cookie.length - 2)
               console.log('cookie', cookie)
               console.log("The Authentification has finished without any trouble")
               const session = {
