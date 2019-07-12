@@ -103,8 +103,19 @@ module.exports = {
                   'Content-Type': 'application/json',
                   'Cookie': 'AlcUserId=' + cookie
                 },
-                
               }
+              https.get(options, (res) => {
+                console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
+                let body = ""
+                res.on('data', (data) => {
+                  body += data
+                })
+                res.on('end', () => {
+                  console.log(body)
+                })
+                res.on('error', (e) => {
+                  console.log('error: ', e.message)
+                })
             })
             res.on('error', (e) => {
               console.log('error: ', e.message)
