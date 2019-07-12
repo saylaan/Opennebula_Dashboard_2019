@@ -1,7 +1,7 @@
 const https = require('https')
 
 const test = async function() { // REQUEST HTTPS
-  console.log('inside pwdSIP', "vlab20", "ix1c0SJcEu")
+  console.log('inside pwdSIP', "vlab20", "geoff")
   console.log("https://o2g-" + "vlab20" + ".ale-aapp.com")
   let options = {
     host : "o2g-" + "vlab20" + ".ale-aapp.com",
@@ -18,14 +18,14 @@ const test = async function() { // REQUEST HTTPS
     res.on('end', () => {
       if (body) {
         console.log(body)
-        console.log('Got answer from o2g ', "vlab20", "ix1c0SJcEu")
+        console.log('Got answer from o2g ', "vlab20", "geoff")
         let options = {
           host : "o2g-" + "vlab20" + ".ale-aapp.com",
           path: "/api/rest/authenticate?version=1.0",
           method: 'GET',
           port: 443,
           headers: {
-            'Authorization': 'Basic ' + new Buffer('admin:' + "ix1c0SJcEu").toString('base64')
+            'Authorization': 'Basic ' + new Buffer('admin:' + "geoff").toString('base64')
           },
           rejectUnauthorized: false
         }
