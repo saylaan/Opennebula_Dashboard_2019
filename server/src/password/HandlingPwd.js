@@ -93,6 +93,7 @@ module.exports = {
               const session = {
                 applicationName: 'ChangeSIP'
               }
+              console.log(session)
               let options = {
                 host: "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
                 path: "/api/rest/1.0/sessions",
@@ -100,11 +101,12 @@ module.exports = {
                 port: 443,
                 headers : {
                   'content': JSON.stringify(session),
-                  'Content-Type': 'application/json',
+                  'Content-type': 'application/json',
                   'Cookie': 'AlcUserId=' + cookie
                 },
                 rejectUnauthorized: false
               }
+              console.log(options.headers)
               https.get(options, (res) => {
                 console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
                 let body = ""
