@@ -101,7 +101,7 @@ module.exports = {
                   "Content-Type": "application/json",
                   "Cookie": "AlcUserId=" + cookie
                 },
-                rejectUnauthorized: false
+                rejectUnauthorized: false // TEST
               }
               console.log(options.headers)
               https.get(options, (res) => {
