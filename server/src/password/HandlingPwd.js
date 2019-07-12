@@ -100,7 +100,8 @@ module.exports = {
                   "Content-Length": Buffer.byteLength(data, "utf-8"),
                   "Content-Type": "application/json",
                   "Cookie": "AlcUserId=" + cookie
-                }
+                },
+                rejectUnauthorized: false
               }
               console.log(options.headers)
               https.get(options, (res) => {
