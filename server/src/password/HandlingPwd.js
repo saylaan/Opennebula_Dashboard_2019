@@ -90,18 +90,18 @@ module.exports = {
               cookie = cookie.substr(1, cookie.length - 4)
               console.log('cookie', cookie)
               console.log("The Authentification has finished without any trouble")
-              const session = {
+              const data = JSON.stringify({
                 applicationName: 'ChangeSIP'
-              }
-              console.log(session)
+              })
+              console.log(data)
               let options = {
                 host: "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
                 path: "/api/rest/1.0/sessions",
                 method: 'POST',
                 port: 443,
                 headers : {
-                  'content': JSON.stringify(session),
-                  'Content-type': 'application/json',
+                  'Content-Length': Buffer.byteLength(data, 'utf-8'),
+                  'Content-Type': 'application/json',
                   'Cookie': 'AlcUserId=' + cookie
                 },
                 rejectUnauthorized: false
