@@ -91,7 +91,7 @@ module.exports = {
               console.log('cookie', cookie)
               console.log("The Authentification has finished without any trouble")
               const session = {
-                applicationName: 'PBXSession'
+                applicationName: 'ChangeSIP'
               }
               let options = {
                 host: "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
@@ -99,10 +99,11 @@ module.exports = {
                 method: 'POST',
                 port: 443,
                 headers : {
-                  'Content': JSON.stringify(session),
+                  'content': JSON.stringify(session),
                   'Content-Type': 'application/json',
                   'Cookie': 'AlcUserId=' + cookie
                 },
+                rejectUnauthorized: false
               }
               https.get(options, (res) => {
                 console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
