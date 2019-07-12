@@ -144,7 +144,7 @@ module.exports = {
                   length: 6,
                   numbers: true
                 })
-                await handlingPwd.pwdO2G(newUrl) // CHANGE O2G
+                await handlingPwd.pwdO2G(newUrl) // CCHANGE O2G
               }
               await Url.update(newUrl, {
                 where: {
