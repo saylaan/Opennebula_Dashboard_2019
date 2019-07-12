@@ -96,7 +96,6 @@ module.exports = {
                 path: "/api/rest/1.0/sessions",
                 method: "POST",
                 port: 443,
-                rejectUnauthorized: false,
                 headers : {
                   "Content-Length": Buffer.byteLength(data, "utf-8"),
                   "Content-Type": "application/json",
