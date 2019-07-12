@@ -85,8 +85,9 @@ module.exports = {
             })
             res.on('end', () => {
               console.log(body)
-              console.log(body[0])
-              const cookie = body.credential
+              const jsonBody = JSON.stringify(body)
+              const cookie = jsonBody[1]
+              console.log(cookie)
               console.log("The Authentification has finished without any trouble")
               const session = {
                 applicationName: 'PBXSession'
