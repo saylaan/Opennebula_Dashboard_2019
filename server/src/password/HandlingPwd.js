@@ -63,6 +63,7 @@ module.exports = {
       })
       res.on('end', () => {
         if (body) {
+          console.log(body)
           console.log('Got answer from o2g ', url.urltype, url.password)
           let options = {
             host : "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
@@ -81,6 +82,7 @@ module.exports = {
               body += data
             })
             res.on('end', () => {
+              console.log(body)
               const bodyArray = body.split(" ")
               let cookie = bodyArray[4]
               cookie = cookie.substr(1, cookie.length - 4)
