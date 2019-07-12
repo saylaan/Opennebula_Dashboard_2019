@@ -84,24 +84,27 @@ module.exports = {
               body += data
             })
             res.on('end', () => {
+              console.log(body)
               const bodyArray = body.split(" ")
               let cookie = bodyArray[4]
               cookie = cookie.substr(1, cookie.length - 4)
+              console.log('cookie', cookie)
               console.log("The Authentification has finished without any trouble")
-              const data = JSON.stringify({
-                "applicationName": "ChangeSIP"
+              const session = JSON.stringify({
+                applicationName: 'ChangeSIP'
               })
+              console.log(session)
               let options = {
                 host: "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
                 path: "/api/rest/1.0/sessions",
-                method: "POST",
+                method: 'POST',
                 port: 443,
                 headers : {
-                  "Content-Length": Buffer.byteLength(data, "utf-8"),
-                  "Content-Type": "application/json",
-                  "Cookie": "AlcUserId=" + cookie
+                  'Content-Length': session.length,
+                  'Content-Type': 'application/json',
+                  'Cookie': 'AlcUserId=' + cookie
                 },
-                rejectUnauthorized: false // TEST
+                rejectUnauthorized: false
               }
               console.log(options.headers)
               https.get(options, (res) => {
@@ -111,7 +114,6 @@ module.exports = {
                   body += data
                 })
                 res.on('end', () => {
-                  console.log('Finished connecting to session....')
                   console.log(body)
                 })
                 res.on('error', (e) => {
