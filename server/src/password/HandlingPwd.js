@@ -90,23 +90,20 @@ module.exports = {
               cookie = cookie.substr(1, cookie.length - 4)
               console.log('cookie', cookie)
               console.log("The Authentification has finished without any trouble")
-              const session = JSON.stringify({
-                applicationName: 'ChangeSIP'
-              })
-              console.log(session)
+              const session = {
+                applicationName: 'PBXSession'
+              }
               let options = {
                 host: "o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com",
                 path: "/api/rest/1.0/sessions",
                 method: 'POST',
                 port: 443,
                 headers : {
-                  'Content-Length': session.length,
+                  'Content': JSON.stringify(session),
                   'Content-Type': 'application/json',
                   'Cookie': 'AlcUserId=' + cookie
                 },
-                rejectUnauthorized: false
               }
-              console.log(options.headers)
               https.get(options, (res) => {
                 console.log("https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com")
                 let body = ""
@@ -129,7 +126,7 @@ module.exports = {
       res.on('error', (e) => {
         console.log('error: ', e.message)
       })
-      })
+    })
     })
   }
 }
