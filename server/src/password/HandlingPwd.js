@@ -102,7 +102,7 @@ module.exports = {
                 headers : {
                   'Content-Length': Buffer.byteLength(data, 'utf-8'),
                   'Content-Type': 'application/json',
-                  'Cookie': 'AlcUserId=' + cookie
+                  'Set-Cookie': 'AlcUserId=' + cookie
                 },
                 rejectUnauthorized: false
               }
@@ -114,6 +114,7 @@ module.exports = {
                   body += data
                 })
                 res.on('end', () => {
+                  console.log('Finished connecting to session....')
                   console.log(body)
                 })
                 res.on('error', (e) => {
