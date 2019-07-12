@@ -127,7 +127,7 @@ module.exports = {
         console.log('error: ', e.message)
       })
     })
-  }
+  })
 }
 
                 // setTimeout(async () => {
