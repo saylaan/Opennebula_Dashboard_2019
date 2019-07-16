@@ -19,7 +19,6 @@ const test = async function() { // REQUEST HTTPS
     res.on('end', () => {
       if (body) {
         console.log(body)
-        console.log('Got answer from o2g ', "vlab20", "GEOFF")
         let options = {
           host : "o2g-" + "vlab30" + ".ale-aapp.com",
           path: "/api/rest/authenticate?version=1.0",
@@ -46,10 +45,11 @@ const test = async function() { // REQUEST HTTPS
               method: 'POST',
               port: 443,
               headers: {
-		'Content-Type': 'application/json',
-                'Set-Cookie': "AlcUserId=" + bodyJSON.credential
+                'Content-Type': 'application/json',
+                'Set-Cookie': "AlcUserId=" + bodyJSON.credential,
+                'Authorization': 'Basic ' + new Buffer('admin:' + "GEOFF").toString('base64')
               },
-	      body: data,
+              body: data,
               rejectUnauthorized: false
             }
             console.log(options)
