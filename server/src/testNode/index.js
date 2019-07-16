@@ -1,10 +1,11 @@
 const https = require('https')
+const http = require('http')
 
 const test = async function() { // REQUEST HTTPS
-  console.log('inside pwdSIP', "vlab20", "geoff")
+  console.log('inside pwdSIP', "vlab20", "GEOFF")
   console.log("https://o2g-" + "vlab20" + ".ale-aapp.com")
   let options = {
-    host : "o2g-" + "vlab20" + ".ale-aapp.com",
+    host : "o2g-" + "vlab30" + ".ale-aapp.com",
     path: "/api/rest",
     method: 'GET',
     port: 443,
@@ -18,14 +19,14 @@ const test = async function() { // REQUEST HTTPS
     res.on('end', () => {
       if (body) {
         console.log(body)
-        console.log('Got answer from o2g ', "vlab20", "geoff")
+        console.log('Got answer from o2g ', "vlab20", "GEOFF")
         let options = {
-          host : "o2g-" + "vlab20" + ".ale-aapp.com",
+          host : "o2g-" + "vlab30" + ".ale-aapp.com",
           path: "/api/rest/authenticate?version=1.0",
           method: 'GET',
           port: 443,
           headers: {
-            'Authorization': 'Basic ' + new Buffer('admin:' + "geoff").toString('base64')
+            'Authorization': 'Basic ' + new Buffer('admin:' + "GEOFF").toString('base64')
           },
           rejectUnauthorized: false
         }
@@ -36,24 +37,19 @@ const test = async function() { // REQUEST HTTPS
             body += data
           })
           res.on('end', () => {
-            console.log(body)
-            const bodyArray = body.split(" ")
-            let cookie = bodyArray[4]
-            cookie = cookie.substr(1, cookie.length - 4)
+            let bodyJSON = JSON.parse(body)
             console.log("The Authentification has finished without any trouble")
-            const session = {
-              applicationName: 'PBXSession'
-            }
+            const data = JSON.stringify({'applicationName': 'PBXSession'})
             let options = {
-              host: "o2g-" + "vlab20" + ".ale-aapp.com",
+              host: "o2g-" + "vlab30" + ".ale-aapp.com",
               path: "/api/rest/1.0/sessions",
               method: 'POST',
               port: 443,
-              headers : {
-                'Content': JSON.stringify(session),
-                'Content-Type': 'application/json',
-                'Cookie': 'AlcUserId=' + cookie
+              headers: {
+		'Content-Type': 'application/json',
+                'Set-Cookie': "AlcUserId=" + bodyJSON.credential
               },
+	      body: data,
               rejectUnauthorized: false
             }
             console.log(options)
