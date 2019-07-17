@@ -185,9 +185,9 @@ export default {
           this.$router.push({
             name: "home"
           });
-      }
-      } catch (error) {
-        this.error = error.response.data.error;
+        } catch (error) {
+          this.error = error.response.data.error;
+        }
       }
     }
   },
