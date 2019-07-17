@@ -157,8 +157,9 @@ export default {
       images: {
         sample: require("../../assets/o2g.png")
       },
-      msg: "Welcome to Portal Vlab",
+      msg: "DSPP Free Sandbox",
       about: "What about our solution?",
+      more: "This Sandbox is provided for free with a pre-configuration of the virtual machines (today OXE and O2G) and must be used as it is. It is for test purpose to help you acquire expertise on the ALE APIs and develop your 3rd party application/solution integrated with OXE connected to Rainbow. If you need specific assistance or a Sandbox with specific configuration, please contact us at dspp@al-enterprise.com",
       steps: [
         {
           step: "1",

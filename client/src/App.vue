@@ -10,7 +10,7 @@
     </v-content>
     </v-jumbotron>
     <v-footer :dark="dark" :inset="footer.inset" app>
-      <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
+      <span class="px-3">&copy; Copyright {{new Date().getFullYear()}} ALE International, ALE USA Inc. / Tous droits réservés dans tous les pays </span>
     </v-footer>
   </v-app>
 </template>

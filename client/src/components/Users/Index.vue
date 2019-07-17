@@ -1,8 +1,8 @@
 <template>
   <v-layout class="mt-5" v-if="isUserLoggedIn && admin" row justify-center wrap>
-    <v-flex xs9 class="ml-1">
+    <!-- <v-flex xs9 class="ml-1">
       <Users-search-panel/>
-    </v-flex>
+    </v-flex> -->
     <v-flex xs9 class="ml-1 mt-2">
       <users-panel/>
     </v-flex>

@@ -4,7 +4,12 @@
     app 
     absolute
     :dark="dark">
-    <img
+    <img v-if="!isUserLoggedIn"
+      src="../../assets/ALELogo.jpg"
+      aspect-ratio="1"
+      @click="mainNav({name: 'home'})"
+    >
+    <img v-if="isUserLoggedIn"
       src="../../assets/LogoALE.png"
       aspect-ratio="1"
       @click="mainNav({name: 'home'})"
