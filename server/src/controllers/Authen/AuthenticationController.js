@@ -15,6 +15,7 @@ module.exports = {
   async register(req, res) {
     try {
       const user = await User.create(req.body)
+      console.log(user)
       const userJson = user.toJSON()
       console.log(user)
       // let hashPwd

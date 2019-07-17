@@ -5,7 +5,7 @@ const test = async function() { // REQUEST HTTPS
   console.log('inside pwdSIP', "vlab20", "GEOFF")
   console.log("https://o2g-" + "vlab20" + ".ale-aapp.com")
   let options = {
-    host : "o2g-" + "vlab30" + ".ale-aapp.com",
+    hostname : "o2g-" + "vlab30" + ".ale-aapp.com",
     path: "/api/rest",
     method: 'GET',
     port: 443,
@@ -20,7 +20,7 @@ const test = async function() { // REQUEST HTTPS
       if (body) {
         console.log(body)
         let options = {
-          host : "o2g-" + "vlab30" + ".ale-aapp.com",
+          hostname : "o2g-" + "vlab30" + ".ale-aapp.com",
           path: "/api/rest/authenticate?version=1.0",
           method: 'GET',
           port: 443,
@@ -36,19 +36,21 @@ const test = async function() { // REQUEST HTTPS
             body += data
           })
           res.on('end', () => {
+            console.log(body)
             let bodyJSON = JSON.parse(body)
             console.log("The Authentification has finished without any trouble")
-            const data = JSON.stringify({'applicationName': 'PBXSession'})
+            const data = JSON.stringify({
+              "applicationName": "PBXSessions"
+            })
             let options = {
               host: "o2g-" + "vlab30" + ".ale-aapp.com",
               path: "/api/rest/1.0/sessions",
               method: 'POST',
               port: 443,
               headers: {
-
+                'Authorization': 'Basic ' + new Buffer('admin:' + "GEOFF").toString('base64'),
                 'Content-Type': 'application/json',
-                'Set-Cookie': "AlcUserId=" + bodyJSON.credential,
-                'Authorization': 'Basic ' + new Buffer('admin:' + "GEOFF").toString('base64')
+                'Set-Cookie': "AlcUserId=" + bodyJSON.credential
               },
               body: data,
               rejectUnauthorized: false
