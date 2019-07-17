@@ -159,36 +159,36 @@ export default {
       username: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      // confirmPassword: "",
       purpose: "",
       error: null
     };
   },
   methods: {
     async register() {
-      if (password === confirmPassword) {
-        try {
-          await AuthenticationService.register({
-            companyname: this.companyname,
-            firstname: this.firstname,
-            lastname: this.lastname,
-            email: this.email,
-            password: this.password,
-            purpose: this.purpose,
-            username: this.username
-          });
-          Swal.fire({
-            type: 'success',
-            title: 'Registration Successfull',
-            text: 'You can logged in but you won\'t have access to any vlab'
-          })
-          this.$router.push({
-            name: "home"
-          });
-        } catch (error) {
-          this.error = error.response.data.error;
-        }
+      // if (password === confirmPassword) {
+      try {
+        await AuthenticationService.register({
+          companyname: this.companyname,
+          firstname: this.firstname,
+          lastname: this.lastname,
+          email: this.email,
+          password: this.password,
+          purpose: this.purpose,
+          username: this.username
+        });
+        Swal.fire({
+          type: 'success',
+          title: 'Registration Successfull',
+          text: 'You can logged in but you won\'t have access to any vlab'
+        })
+        this.$router.push({
+          name: "home"
+        });
+      } catch (error) {
+        this.error = error.response.data.error;
       }
+      // }
     }
   },
   components: {
