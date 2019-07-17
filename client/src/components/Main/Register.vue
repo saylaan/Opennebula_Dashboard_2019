@@ -136,6 +136,7 @@ export default {
       username: "",
       email: "",
       password: "",
+      confirmPassword: "",
       purpose: "",
       error: null
     };

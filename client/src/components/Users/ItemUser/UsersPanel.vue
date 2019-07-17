@@ -14,7 +14,7 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-      <v-data-table :headers="headers" hide-actions  :items="users">
+      <v-data-table :headers="headers" hide-actions :items="users">
         <template v-slot:items="props">
           <td class="text-xs-left">{{props.item.companyname}}</td>
           <td class="text-xs-left">{{props.item.lastname}}</td>
