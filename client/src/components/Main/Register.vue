@@ -155,7 +155,7 @@ export default {
         Swal.fire({
           type: 'success',
           title: 'Registration Successfull',
-          text: 'Just wait the acceptation from the admin... check your email later'
+          text: 'You can logged in but you won\'t have access to any vlab'
         })
         this.$router.push({
           name: "home"

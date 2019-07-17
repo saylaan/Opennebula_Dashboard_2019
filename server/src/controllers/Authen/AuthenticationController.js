@@ -16,18 +16,18 @@ module.exports = {
     try {
       const user = await User.create(req.body)
       const userJson = user.toJSON()
-      let hashPwd
-      bcrypt.hash(userJson.password, 10, (err, hash) => {
-        hashPwd = hash
-      })
-      console.log(hashPwd)
-      console.log(hashPwd)
-      console.log(hashPwd)
-      console.log(hashPwd)
-      console.log(hashPwd)
-      console.log(hashPwd)
-      console.log(hashPwd)
-      console.log(hashPwd)
+      // let hashPwd
+      // bcrypt.hash(userJson.password, 10, (err, hash) => {
+      //   hashPwd = hash
+      // })
+      // console.log(hashPwd)
+      // console.log(hashPwd)
+      // console.log(hashPwd)
+      // console.log(hashPwd)
+      // console.log(hashPwd)
+      // console.log(hashPwd)
+      // console.log(hashPwd)
+      // console.log(hashPwd)
       res.send({
         user: userJson,
         token: jwtSignUser(tmpUser)
