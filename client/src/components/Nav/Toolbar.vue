@@ -6,7 +6,7 @@
     :dark="dark">
     <img v-if="!isUserLoggedIn"
       src="../../assets/ALELogo.jpg"
-      aspect-ratio="1"
+      aspect-ratio="0.9"
       @click="mainNav({name: 'home'})"
     >
     <img v-if="isUserLoggedIn"

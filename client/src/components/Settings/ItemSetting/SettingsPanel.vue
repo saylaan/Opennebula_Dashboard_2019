@@ -125,6 +125,30 @@
         </v-fade-transition>
       </template>
     </v-text-field>
+    <br>
+    <v-text-field
+      v-if="admin"
+      label="Password"
+      v-model="adminview.confirmPassword"
+      type="password"
+      :rules="[required]"
+      outline
+      clearable
+    >
+      <template v-slot:prepend>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">help</v-icon>
+          </template>
+          Your password must contain at least 8 characters
+        </v-tooltip>
+      </template>
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>https</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field>
     <v-text-field
       outline
       clearable
@@ -149,7 +173,31 @@
       </template>
     </v-text-field>
     <br>
-          <v-textarea label="Purpose" type="purpose" v-model="userview.purpose" outline clearable>
+    <v-text-field
+      outline
+      clearable
+      v-if="!admin"
+      label="Password"
+      v-model="userview.confirmPassword"
+      type="password"
+      :rules="[required]"
+    >
+      <template v-slot:prepend>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">help</v-icon>
+          </template>
+          Your password must contain at least 8 characters
+        </v-tooltip>
+      </template>
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>https</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field>
+    <br>
+          <!-- <v-textarea label="Purpose" type="purpose" v-model="userview.purpose" outline clearable>
             <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -163,13 +211,13 @@
                 <v-icon>notes</v-icon>
               </v-fade-transition>
             </template>
-          </v-textarea>
-          <v-layout justify-center>
+          </v-textarea> -->
+          <!-- <v-layout justify-center>
             <v-flex xs6>
           <v-switch v-if="!admin" large color="red" v-model="userview.emailactive" label="Active message by email"></v-switch>
           <v-switch v-if="admin" large color="red" v-model="adminview.emailactive" label="Active message by email"></v-switch>
             </v-flex>
-          </v-layout>
+          </v-layout> -->
     <v-layout class="mt-3 mb-4" justify-center>
     <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save</v-btn>
     <v-btn elevation-24 large @click="discardSettings()" class="grey darken-1 font-weight-bold">Discard</v-btn>
@@ -188,8 +236,8 @@ export default {
     return {
       userview: {
         password: null,
-        purpose: null,
-        emailactive: false
+        confirmPassword: null
+        // emailactive: false
       },
       adminview: {
         companyname: null,
@@ -197,8 +245,9 @@ export default {
         lastname: null,
         email: null,
         password: null,
-        purpose: null,
-        emailactive: false
+        confirmPassword: null
+        // purpose: null,
+        // emailactive: false
       },
       error: null,
       required: value => !!value || "Required."
@@ -248,9 +297,10 @@ export default {
       try {
         if (!this.admin) {
           this.userview = (await UserService.getUser(this.user.id)).data;
-          console.log(this.userview)
+          this.userview.confirmPassword = this.userview.password
         } else {
           this.adminview = (await UserService.getUser(this.user.id)).data;
+          this.adminview.confirmPassword = this.adminview.password
         }
       } catch (err) {
         console.log(err);
@@ -261,8 +311,10 @@ export default {
     try {
       if (!this.admin) {
         this.userview = (await UserService.getUser(this.user.id)).data;
+        this.userview.confirmPassword = this.userview.password
       } else {
         this.adminview = (await UserService.getUser(this.user.id)).data;
+        this.adminview.confirmPassword = this.adminview.password
       }
     } catch (err) {
       console.log(err);

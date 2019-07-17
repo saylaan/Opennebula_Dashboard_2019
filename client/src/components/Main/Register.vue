@@ -90,6 +90,29 @@
             </template>
           </v-text-field>
           <br>
+          <v-text-field
+            label="Password"
+            type="password"
+            v-model="confirmPassword"
+            autocomplete="new-password"
+            outline
+            clearable
+          >
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Your password must be the same
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>https</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
+          <br>
           <v-textarea label="Purpose" type="purpose" v-model="purpose" outline clearable>
             <template v-slot:prepend>
               <v-tooltip bottom>
@@ -143,24 +166,26 @@ export default {
   },
   methods: {
     async register() {
-      try {
-        await AuthenticationService.register({
-          companyname: this.companyname,
-          firstname: this.firstname,
-          lastname: this.lastname,
-          email: this.email,
-          password: this.password,
-          purpose: this.purpose,
-          username: this.username
-        });
-        Swal.fire({
-          type: 'success',
-          title: 'Registration Successfull',
-          text: 'You can logged in but you won\'t have access to any vlab'
-        })
-        this.$router.push({
-          name: "home"
-        });
+      if (password === confirmPassword) {
+        try {
+          await AuthenticationService.register({
+            companyname: this.companyname,
+            firstname: this.firstname,
+            lastname: this.lastname,
+            email: this.email,
+            password: this.password,
+            purpose: this.purpose,
+            username: this.username
+          });
+          Swal.fire({
+            type: 'success',
+            title: 'Registration Successfull',
+            text: 'You can logged in but you won\'t have access to any vlab'
+          })
+          this.$router.push({
+            name: "home"
+          });
+      }
       } catch (error) {
         this.error = error.response.data.error;
       }
