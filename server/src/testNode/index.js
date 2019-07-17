@@ -29,7 +29,7 @@ const test = async function() { // REQUEST HTTPS
           },
           rejectUnauthorized: false
         }
-        console.log('Basic auth token', options.headers)
+	console.log(options)
         https.get(options, (res) => {
           let body = ""
           res.on('data', (data) => {

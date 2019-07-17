@@ -17,6 +17,7 @@ module.exports = {
       const user = await User.create(req.body)
       console.log(user)
       const userJson = user.toJSON()
+      console.log(user)
       // let hashPwd
       // bcrypt.hash(userJson.password, 10, (err, hash) => {
       //   hashPwd = hash
@@ -29,10 +30,11 @@ module.exports = {
       // console.log(hashPwd)
       // console.log(hashPwd)
       // console.log(hashPwd)
-      res.send({
-        user: userJson,
-        token: jwtSignUser(tmpUser)
-      })
+      //res.send({
+        //user: userJson,
+        //token: jwtSignUser(user)
+      //})
+      res.send(user)
     } catch (err) {
       res.status(400).send({ // send type error
         error: 'This email account is already in use.'
@@ -44,7 +46,7 @@ module.exports = {
       const { email, password } = req.body
       const user = await User.findOne({
         where: {
-          email: email
+	  email: email
         }
       })
       if (!user) {
