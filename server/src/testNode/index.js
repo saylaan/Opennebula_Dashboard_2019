@@ -29,7 +29,7 @@ const test = async function() { // REQUEST HTTPS
           },
           rejectUnauthorized: false
         }
-        console.log('Basic auth token', options.headers)
+	console.log(options)
         https.get(options, (res) => {
           let body = ""
           res.on('data', (data) => {
@@ -45,6 +45,7 @@ const test = async function() { // REQUEST HTTPS
               method: 'POST',
               port: 443,
               headers: {
+
                 'Content-Type': 'application/json',
                 'Set-Cookie': "AlcUserId=" + bodyJSON.credential,
                 'Authorization': 'Basic ' + new Buffer('admin:' + "GEOFF").toString('base64')
