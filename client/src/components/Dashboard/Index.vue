@@ -6,9 +6,9 @@
           <v-flex xs6>
             <users-panel/>
           </v-flex>
-          <v-flex xs6 class="mt-2">
+          <!-- <v-flex xs6 class="mt-2">
             <messages-from-client-panel/>
-          </v-flex>
+          </v-flex> -->
         </v-layout>
       </v-flex>
       <v-flex xs6>
@@ -16,9 +16,9 @@
           <v-flex xs6>
             <vlabs-panel/>
           </v-flex>
-          <v-flex xs6 class="mt-2">
+          <!-- <v-flex xs6 class="mt-2">
             <messages-faq-panel/>
-          </v-flex>
+          </v-flex> -->
         </v-layout>
       </v-flex>
     </v-layout>
@@ -41,9 +41,9 @@
           <v-flex xs6>
             <sip-client-panel/>
           </v-flex>
-          <v-flex xs6 class="mt-2">
+          <!-- <v-flex xs6 class="mt-2">
             <messages-client-panel/>
-          </v-flex>
+          </v-flex> -->
         </v-layout>
       </v-flex>
     </v-layout>

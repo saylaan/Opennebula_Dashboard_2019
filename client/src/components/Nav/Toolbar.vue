@@ -27,10 +27,10 @@
     <v-toolbar-items>
       <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'signin'}" class="body-2 font-weight-bold">Sign in</v-btn>
     </v-toolbar-items>
-    <!-- <v-toolbar-items>
-      <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'register'}" class="body-2 font-weight-bold">Register</v-btn>
+    <v-toolbar-items>
+      <!-- <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'register'}" class="body-2 font-weight-bold">Register</v-btn> -->
       <v-btn v-if="isUserLoggedIn" flat @click="logout">Log out</v-btn>
-    </v-toolbar-items> -->
+    </v-toolbar-items>
   </v-toolbar>
 </template>
 
