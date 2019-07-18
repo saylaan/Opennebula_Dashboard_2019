@@ -5,7 +5,7 @@
     absolute
     :dark="dark">
     <v-toolbar-items>
-    <img v-if="!isUserLoggedIn"
+    <img
       src="../../assets/ALELogo.jpg"
       aspect-ratio="0.9"
       @click="mainNav({name: 'home'})"
@@ -83,7 +83,11 @@ export default {
       if (!this.isUserLoggedIn) {
         this.$router.push(route);
       } else if (this.isUserLoggedIn) {
-        this.$router.push('dashboard')
+        if (this.admin) {
+          this.$router.push('vlabs')
+        } else {
+          this.$router.push('dashboard')
+        }
       }
     },
     async navToSetting(route) {
