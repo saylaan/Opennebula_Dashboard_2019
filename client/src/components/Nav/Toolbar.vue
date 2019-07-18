@@ -4,16 +4,13 @@
     app 
     absolute
     :dark="dark">
+    <v-toolbar-items>
     <img v-if="!isUserLoggedIn"
       src="../../assets/ALELogo.jpg"
       aspect-ratio="0.9"
       @click="mainNav({name: 'home'})"
     >
-    <img v-if="isUserLoggedIn"
-      src="../../assets/LogoALE.png"
-      aspect-ratio="1"
-      @click="mainNav({name: 'home'})"
-    >
+    </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items v-if="isUserLoggedIn">
          <v-list>
@@ -30,10 +27,10 @@
     <v-toolbar-items>
       <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'signin'}" class="body-2 font-weight-bold">Sign in</v-btn>
     </v-toolbar-items>
-    <v-toolbar-items>
+    <!-- <v-toolbar-items>
       <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'register'}" class="body-2 font-weight-bold">Register</v-btn>
       <v-btn v-if="isUserLoggedIn" flat @click="logout">Log out</v-btn>
-    </v-toolbar-items>
+    </v-toolbar-items> -->
   </v-toolbar>
 </template>
 

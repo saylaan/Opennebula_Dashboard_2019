@@ -3,7 +3,12 @@
     <v-flex elevation-24 xs6 v-if="!isUserLoggedIn">
       <panel title="Sign in">
         <form name="sandbox-form" autocomplete="on">
-          <v-text-field class="mt-5" label="Email" v-model="email" outline clearable>
+          <v-text-field class="mt-5" 
+            label="Email" 
+            v-model="email" 
+            autocomplete="on"
+            outline 
+            clearable>
             <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>email</v-icon>

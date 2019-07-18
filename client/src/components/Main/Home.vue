@@ -35,8 +35,8 @@
                     depressed
                     large
                     :class="`subheading font-weight-black mx-0 blue-grey--text text--lighten-5 ${steps[0].color}`"
-                    :to="{name: 'register'}"
-                  >START FREE TRIAL NOW</v-btn>
+                    :to="{name: 'signin'}"
+                  >CLick for sign in with your login and password</v-btn>
                 </v-card-title>
               </v-card>
             </v-timeline-item>

@@ -2,15 +2,15 @@
 <v-app id="sandbox">
     <navbar v-if="isUserLoggedIn" v-bind:drawer="drawer"/>
     <toolbar v-bind:drawer="drawer"/>
-    <v-jumbotron :gradient="grad" style="height:100%; overflow:auto;" @click="isMini()">
+    <v-parallax src="./assets/DSPP-banner.jpg" style="height:100%; overflow:auto;" @click="isMini()">
     <v-content>
       <v-container fluid>
         <router-view v:bind:drawer="drawer"></router-view>
       </v-container>
     </v-content>
-    </v-jumbotron>
+    </v-parallax>
     <v-footer :dark="dark" :inset="footer.inset" app>
-      <span class="px-3">&copy; Copyright {{new Date().getFullYear()}} ALE International, ALE USA Inc. / Tous droits réservés dans tous les pays </span>
+      <span class="px-3">&copy; Copyright {{new Date().getFullYear()}} The Alcatel-Lucent name and logo are trademarks of Nokia used under license by ALE.</span>
     </v-footer>
   </v-app>
 </template>
