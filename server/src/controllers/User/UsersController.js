@@ -1,4 +1,7 @@
 const { User } = require('../../models')
+const Opennebula = require('opennebula')
+const one = new Opennebula('geoffroy:2961Sailaan1992!',
+  'http://10.1.2.150:2633/RPC2')
 
 module.exports = {
   async index(req, res) {
@@ -26,6 +29,15 @@ module.exports = {
   async post(req, res) {
     try {
       const user = await User.create(req.body)
+      console.log(user)
+      one.createUser()
+      const useron = await one.createUser(user.email, user.password, 'core', (err, data) => {
+        console.log('The creation of the user in opennebula has been a success')
+        console.log(data)
+      })
+      console.log(useron)
+      const group = await one.getGroups()
+      console.log(group)
       res.send(user)
     } catch (err) {
       res.status(500).send({

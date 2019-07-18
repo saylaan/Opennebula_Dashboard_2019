@@ -56,6 +56,69 @@
             </template>
           </v-text-field>
         <br>
+          <v-text-field label="Confirm email" type="name" v-model="confirmemail"
+          outline clearable>
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Your email must be the same
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>email</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
+        <br>
+          <v-text-field
+            label="Password"
+            type="password"
+            v-model="userview.password"
+            autocomplete="new-password"
+            outline
+            clearable
+          >
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Your password must contain at least 8 characters
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>https</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
+          <br>
+          <v-text-field
+            label="Confirm password"
+            type="password"
+            v-model="confirmpassword"
+            autocomplete="new-password"
+            outline
+            clearable
+          >
+            <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Your password must be the same
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>https</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-text-field>
+          <br>
           <v-textarea label="Purpose" type="purpose" v-model="userview.purpose"
           outline clearable>
             <template v-slot:prepend>
@@ -91,11 +154,14 @@ import UserService from "@/services/User/UserService"
 export default {
   data() {
     return {
+      confirmpassword: null,
+      confirmemail: null,
       userview: {
         companyname: null,
         firstname: null,
         lastname: null,
         email: null,
+        password: null,
         purpose: null
       },
       error: null,
@@ -111,8 +177,16 @@ export default {
       const areAllFieldsFilledIn = Object.keys(this.userview).every(
         key => !!this.userview[key]
       );
-      if (!areAllFieldsFilledIn) {
+      if (!areAllFieldsFilledIn || !this.confirmemail || !this.confirmpassword) {
         this.error = "Please fill in all the required fields.";
+        return;
+      }
+      if (this.confirmemail !== this.userview.email) {
+        this.error = "The emails don't match"
+        return;
+      }
+      if (this.confirmpassword !== this.userview.password) {
+        this.error = "The passwords don't match"
         return;
       }
       try {

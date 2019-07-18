@@ -1,0 +1,4 @@
+client/build/*
+client/src/services/Api.js
+server/src/app.js
+tabtracker.sqlite

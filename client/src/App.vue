@@ -1,6 +1,20 @@
 <template>
 <v-app id="sandbox">
-    <v-parallax src="./assets/DSPP-banner.jpg" style="height:100%; overflow:auto;" @click="isMini()">
+    <v-img v-if="!isUserLoggedIn" :src="require('@/assets/DSPP-banner.jpg')" height="100%" width="100%">
+    <div @click="isMini()">
+    <toolbar v-bind:drawer="drawer"/>
+    <v-content>
+      <v-container fluid>
+        <router-view v:bind:drawer="drawer"></router-view>
+      </v-container>
+    </v-content>
+    <v-footer :dark="dark" :inset="footer.inset" app>
+      <span class="px-3">&copy; Copyright {{new Date().getFullYear()}} The Alcatel-Lucent name and logo are trademarks of Nokia used under license by ALE.</span>
+    </v-footer>
+    </div>
+    </v-img>
+    <v-img v-if="isUserLoggedIn" :gradiant="grad" height="100%" width="100%">
+    <div @click="isMini()">
     <navbar v-if="isUserLoggedIn" v-bind:drawer="drawer"/>
     <toolbar v-bind:drawer="drawer"/>
     <v-content>
@@ -11,7 +25,8 @@
     <v-footer :dark="dark" :inset="footer.inset" app>
       <span class="px-3">&copy; Copyright {{new Date().getFullYear()}} The Alcatel-Lucent name and logo are trademarks of Nokia used under license by ALE.</span>
     </v-footer>
-    </v-parallax>
+    </div>
+    </v-img>
   </v-app>
 </template>
 

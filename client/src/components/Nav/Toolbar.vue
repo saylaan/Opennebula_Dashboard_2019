@@ -4,12 +4,19 @@
     app 
     absolute
     :dark="dark">
-    <v-toolbar-items>
     <img
-      src="../../assets/ALELogo.jpg"
+      v-if="!isUserLoggedIn"
+      src="../../assets/LogoLoggedOut.png"
       aspect-ratio="0.9"
       @click="mainNav({name: 'home'})"
     >
+    <img
+      v-if="isUserLoggedIn"
+      src="../../assets/LogoLoggedIn.png"
+      aspect-ratio="0.9"
+      @click="mainNav({name: 'home'})"
+    >
+    <v-toolbar-items>
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items v-if="isUserLoggedIn">
@@ -85,7 +92,7 @@ export default {
       } else if (this.isUserLoggedIn) {
         if (this.admin) {
           this.$router.push('vlabs')
-        } else {
+        } else if (!this.admin) {
           this.$router.push('dashboard')
         }
       }

@@ -1,6 +1,7 @@
 <template>
-  <v-layout class="mt-5" justify-center>
-    <v-flex elevation-24 xs6 v-if="!isUserLoggedIn">
+<v-container fluid>
+  <v-layout align-center justify-center>
+    <v-flex fill-height elevation-24 xs6 v-if="!isUserLoggedIn">
       <panel title="Sign in">
         <form name="sandbox-form" autocomplete="on">
           <v-text-field class="mt-5" 
@@ -39,6 +40,7 @@
       </panel>
     </v-flex>
   </v-layout>
+</v-container>
 </template>
 
 <script>
@@ -87,9 +89,15 @@ export default {
           console.log(error)
         }
       }
-      this.$router.push({
-        name: "dashboard"
-      });
+      if (!this.admin) {
+        this.$router.push({
+          name: "dashboard"
+        });
+      } else {
+        this.$router.push({
+          name: "vlabs"
+        });
+      }
       Swal.fire({
         position: 'top-end',
         type: 'success',
