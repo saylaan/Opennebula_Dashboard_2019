@@ -49,7 +49,7 @@ module.exports = {
       const message = await Message.findByPk(req.params.messageId)
       if (!message) {
         return res.status(403).send({
-          error: 'The message does no exist'
+          error: 'The message does not exist'
         })
       }
       res.send(message)

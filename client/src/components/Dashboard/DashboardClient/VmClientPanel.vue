@@ -42,13 +42,29 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
   watch: {
-    async vlabvm() {
+    async vmuser() {
       try {
         this.vmusers = (await VmUserService.index()).data;
       } catch (err) {
         console.log(err);
       }
     }
+    // async vlabvm() {
+    //   try {
+    //     this.vlabvms = (await VmVlabService.index({
+    //       VlabId: this.vlab.id
+    //     })).data;
+    //     for (let i = 0, j = 0; i !== this.vlabvms.length; i++) {
+    //       var count = (this.vlabvms[i].type.match(/_/g) || []).length
+    //       if (count >= 1) {
+    //         this.vlabvms.splice(i, 1)
+    //         i--
+    //       }
+    //     }
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // }
   },
   async mounted() {
     try {
@@ -56,6 +72,22 @@ export default {
     } catch (err) {
       console.log(err);
     }
+    // const vlabId = this.route.params.vlabId;
+    // this.vlab = (await VlabService.getVlab(vlabId)).data;
+    // try {
+    //   this.vlabvms = (await VmVlabService.index({
+    //     VlabId: this.vlab.id
+    //   })).data;
+    //   for (let i = 0, j = 0; i !== this.vlabvms.length; i++) {
+    //     var count = (this.vlabvms[i].type.match(/_/g) || []).length
+    //     if (count >= 1) {
+    //       this.vlabvms.splice(i, 1)
+    //       i--
+    //     }
+    //   }
+    // } catch (err) {
+    //   // console.log(err);
+    // }
   }
 };
 </script>

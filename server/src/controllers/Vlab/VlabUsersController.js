@@ -1,4 +1,5 @@
 const {
+  User,
   VlabUser,
   Vlab,
   Vm,
@@ -132,13 +133,14 @@ module.exports = {
                 vlabname: url.vlabname,
                 active: url.active
               }
-              if (url.name === "VNC Access") {
+              if (url.name === "Vlab Management") {
                 newUrl.password = await generator.generate({
                   length: 8,
                   numbers: true
                 })
-                newUrl.log = url.vlabname
-                await handlingPwd.pwdVNC(newUrl) // CHANGE VNC
+                const usertmp = await User.findByPk(UserId)
+                newUrl.log = usertmp.email
+                await handlingPwd.pwdVNC(newUrl, usertmp) // CHANGE VNC
               } else if (url.name === "O2G Access") {
                 newUrl.password = await generator.generate({
                   length: 6,

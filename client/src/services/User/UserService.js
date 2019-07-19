@@ -19,5 +19,12 @@ export default {
   },
   updateSettings(user) {
     return Api().put(`settings/${user.id}`, user)
+  },
+  delete(userId) {
+    return Api().delete('users', {
+      params: {
+        userId: userId
+      }
+    })
   }
 }

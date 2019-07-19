@@ -217,7 +217,7 @@ const getInfoUsers = async () => {
                 })
                 if (userOn && userSandbox) {
                   for (var i = 0; i != userSandbox.length; i++) {
-                    if (userSandbox[i].username === userOn.username) {
+                    if (userSandbox[i].email === userOn.username) {
                       let useruserOn = await UserUserOn.findOne({
                         where: {
                           UserId: userSandbox[i].id,
@@ -418,11 +418,11 @@ const getInfoVNets = async () => {
                 })
                 if (!tmpUrl) {
                   let tmpUrlVnc = await Url.create({
-                    name: "VNC Access",
+                    name: "Vlab Management",
                     vlabname: vlab[i].nameparse.toLowerCase(),
                     url: "http://vlab.ale-aapp.com:9869",
                     urltype: 'vnc',
-                    log: vlab[i].nameparse.toLowerCase(),
+                    log: 'default',
                     password: "default",
                     active: false
                   })

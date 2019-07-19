@@ -135,8 +135,23 @@
               </v-fade-transition>
             </template>
           </v-textarea>
+        <v-switch large color="red" v-model="userview.admin" label="Set Admin">
+          <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Its for seeting the user to admin
+              </v-tooltip>
+            </template>
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>supervised_user_circle</v-icon>
+              </v-fade-transition>
+            </template>
+        </v-switch>
         <br>
-        <v-layout justify-center>
+        <v-layout justify-center class="mt-2">
         <span class="danger-alert">{{error}}</span>
         <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" 
         @click="create({name: 'users'})">
@@ -157,6 +172,7 @@ export default {
       confirmpassword: null,
       confirmemail: null,
       userview: {
+        admin: false,
         companyname: null,
         firstname: null,
         lastname: null,
@@ -175,7 +191,12 @@ export default {
     async create(route) {
       this.error = null;
       const areAllFieldsFilledIn = Object.keys(this.userview).every(
-        key => !!this.userview[key]
+        key => {
+          if (key === 'admin') {
+            return (true)
+          }
+          return (!!this.userview[key])
+        }
       );
       if (!areAllFieldsFilledIn || !this.confirmemail || !this.confirmpassword) {
         this.error = "Please fill in all the required fields.";

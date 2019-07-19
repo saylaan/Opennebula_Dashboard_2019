@@ -16,4 +16,7 @@ module.exports = (app) => {
   app.post('/users',
     isAuthenticated,
     UsersController.post)
+  app.delete('/users',
+    isAuthenticated,
+    UsersController.delete)
 }

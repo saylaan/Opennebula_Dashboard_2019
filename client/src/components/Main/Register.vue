@@ -35,22 +35,6 @@
             </template>
           </v-text-field>
           <br>
-          <v-text-field label="Username" type="name" v-model="username" outline clearable>
-            <template v-slot:prepend>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on">help</v-icon>
-                </template>
-                The username will be choose for accesing the vlab
-              </v-tooltip>
-            </template>
-            <template v-slot:append>
-              <v-fade-transition leave-absolute>
-                <v-icon>account_box</v-icon>
-              </v-fade-transition>
-            </template>
-          </v-text-field>
-          <br>
           <v-text-field label="Email" type="name" v-model="email" outline clearable>
             <template v-slot:prepend>
               <v-tooltip bottom>
@@ -156,11 +140,11 @@ export default {
       companyname: "",
       firstname: "",
       lastname: "",
-      username: "",
       email: "",
       password: "",
-      // confirmPassword: "",
       purpose: "",
+      confirmemail: "",
+      confirmpassword: "",
       error: null
     };
   },
@@ -174,8 +158,7 @@ export default {
           lastname: this.lastname,
           email: this.email,
           password: this.password,
-          purpose: this.purpose,
-          username: this.username
+          purpose: this.purpose
         });
         Swal.fire({
           type: 'success',

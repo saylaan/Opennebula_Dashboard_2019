@@ -14,7 +14,7 @@
       :dark="dark"
   >
     <v-list>
-      <!-- <v-list-tile class="mt-3" title="test" @click="navToDashboard({name: 'dashboard'})"
+      <v-list-tile v-if="isUserLoggedIn && !admin" class="mt-3" title="test" @click="navToDashboard({name: 'dashboard'})"
       :class="drawer.active.one">
         <v-list-tile-action>
           <v-icon x-large>dashboard</v-icon>
@@ -22,7 +22,7 @@
         <v-list-tile-content>
           <v-list-tile-title>Dashboard</v-list-tile-title>
         </v-list-tile-content>
-      </v-list-tile> -->
+      </v-list-tile>
       <v-list-tile v-if="admin || (isUserLoggedIn && nbvlab > 1)" class="mt-2" @click="navToVlab({name: 'vlabs'})"
       :class="drawer.active.two">
         <v-list-tile-action>

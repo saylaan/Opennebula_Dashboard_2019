@@ -29,19 +29,62 @@ module.exports = {
   async post(req, res) {
     try {
       const user = await User.create(req.body)
-      console.log(user)
-      one.createUser()
-      const useron = await one.createUser(user.email, user.password, 'core', (err, data) => {
-        console.log('The creation of the user in opennebula has been a success')
-        console.log(data)
+      await one.getGroups(async (err, data) => {
+        data.forEach(async element => {
+          if (element.NAME === "users" && !user.admin) {
+            console.log(element.NAME)
+            await one.createUser(user.email, user.password, 'core', async (err, data) => {
+              console.log('The creation of the user in opennebula has been a success')
+              const useron = await one.getUser(data.id)
+              useron.chgrp(parseInt(element.ID, 10), (err, data) => {
+                console.log('The user is set to users')
+                console.log(data)
+              })
+            })
+          } else if (element.NAME === "oneadmin" && user.admin) {
+            console.log(element.NAME)
+            await one.createUser(user.email, user.password, 'core', async (err, data) => {
+              console.log('The creation of the user in opennebula has been a success')
+              const useron = await one.getUser(data.id)
+              useron.chgrp(parseInt(element.ID, 10), (err, data) => {
+                console.log('The user is set to oneadmin')
+                console.log(data)
+              })
+            })
+          }
+        })
       })
-      console.log(useron)
-      const group = await one.getGroups()
-      console.log(group)
       res.send(user)
     } catch (err) {
       res.status(500).send({
         error: 'An error has occured while trying to create a new user'
+      })
+    }
+  },
+  async delete(req, res) {
+    try {
+      const user = await User.findByPk(req.query.userId)
+      console.log('test', user)
+      if (!user) {
+        return res.status(403).send({
+          error: 'The user does not exist'
+        })
+      }
+      await one.getUsers((err, data) => {
+        data.forEach(async element => {
+          if (user.email === element.NAME) {
+            const userdel = await one.getUser(parseInt(element.ID, 10))
+            await userdel.delete(async (err, data) => {
+              console.log(data)
+            })
+            await user.destroy()
+          }
+        })
+      })
+      res.send(user)
+    } catch (err) {
+      res.status(500).send({
+        error: 'An error has occured while trying to delete the user'
       })
     }
   },

@@ -30,7 +30,7 @@
           <v-layout class="mt-3 mb-3" column justify-center align-center>
           <v-select v-if="isUserLoggedIn && !this.vlabuser"
             :items="users"
-            item-text="username"
+            item-text="email"
             v-model="userassign"
             label="User available"
             outline>
@@ -97,7 +97,7 @@ export default {
       try {
         let id = 0
         for (var j = 0; j !== this.users.length; j++) {
-          if (this.users[j].username === this.userassign) {
+          if (this.users[j].email === this.userassign) {
             id = this.users[j].id
           }
         }

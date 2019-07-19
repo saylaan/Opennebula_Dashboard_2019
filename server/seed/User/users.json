@@ -6,7 +6,6 @@
     "password": "12345678",
     "companyname": "ALE",
     "purpose": "Admin",
-    "username": "geoffroy",
     "admin": true,
     "active": true,
     "emailactive": false
@@ -18,7 +17,6 @@
     "password": "12345678",
     "companyname": "ALE",
     "purpose": "Admin",
-    "username": "frank",
     "admin": true,
     "active": true,
     "emailactive": false
@@ -30,7 +28,6 @@
     "password": "12345678",
     "companyname": "ALE",
     "purpose": "Admin",
-    "username": "frank",
     "admin": true,
     "active": true,
     "emailactive": false
@@ -42,7 +39,6 @@
     "password": "12345678",
     "companyname": "ALE",
     "purpose": "Admin",
-    "username": "rachid",
     "admin": true,
     "active": true,
     "emailactive": false
@@ -54,7 +50,6 @@
     "password": "12345678",
     "companyname": "ALE",
     "purpose": "enterprise",
-    "username": "yves",
     "emailactive": true,
     "active": true
   },
@@ -65,7 +60,6 @@
     "password": "12345678",
     "companyname": "ALE",
     "purpose": "enterprise",
-    "username": "christian",
     "emailactive": true,
     "active": true
   }

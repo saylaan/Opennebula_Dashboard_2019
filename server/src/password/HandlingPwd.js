@@ -8,15 +8,16 @@ const _ = require('lodash')
 const axiosSIP = require('./axiosSIP')
 const {
   Url,
+  User,
   UserOpenNebula
 } = require('../models')
 
 module.exports = {
-  async pwdVNC(vnc) { // Opennebula change
-    if (vnc.name === "VNC Access") {
+  async pwdVNC(vnc, user) { // Opennebula change
+    if (vnc.name === "Vlab Management") {
       const userons = await UserOpenNebula.findAll()
       userons.forEach(async useron => {
-        if (useron.username === vnc.vlabname) {
+        if (useron.username === user.email) {
           const tmpuser = await one.getUser(useron.idopennebula)
           await tmpuser.passwd(vnc.password, (err, data) => {
             console.log("The password of vlab.ale-aapp.com has been changed", data)

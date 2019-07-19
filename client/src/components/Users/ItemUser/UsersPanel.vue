@@ -20,15 +20,18 @@
           <td class="text-xs-left">{{props.item.lastname}}</td>
           <td class="text-xs-left">{{props.item.firstname}}</td>
           <td class="text-xs-left">{{props.item.purpose}}</td>
-          <v-layout justify-center>
-                      <v-btn
+          <v-layout row justify-center>
+            <v-btn
               class="grey darken-1 font-weight-bold"
               :to="{
                   name: 'edit-user',
                   params: {
                     userId: props.item.id}
-                 }"
-            >Edit User</v-btn>
+              }"
+           >Edit</v-btn>
+            <v-btn @click="deleteUser(props.item.id)"
+              class="grey darken-1 font-weight-bold"
+            >Delete</v-btn>
           </v-layout>
         </template>
       </v-data-table>
@@ -66,6 +69,16 @@ export default {
         descending: true
       },
       users: []
+    }
+  },
+  methods: {
+    async deleteUser(id) {
+      try {
+        const userdel = (await UserService.delete(id)).data
+        this.users = (await UserService.index()).data;
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   computed: {

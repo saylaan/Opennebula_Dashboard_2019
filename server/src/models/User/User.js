@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     companyname: DataTypes.STRING,
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
-    username: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
       unique: true // really important for one data / no more
