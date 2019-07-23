@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     nameparse: DataTypes.STRING,
     vlanid: DataTypes.INTEGER,
-    active: {
+    assign: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },

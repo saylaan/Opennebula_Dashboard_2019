@@ -1,5 +1,5 @@
 <template>
-<v-container fluid>
+<v-container fluid v-on:keyup.enter="signin">
   <v-layout align-center justify-center>
     <v-flex fill-height elevation-24 xs6 v-if="!isUserLoggedIn">
       <panel title="Sign in">
@@ -93,14 +93,14 @@ export default {
             name: "vlabs"
           });
         }
-        Swal.fire({
-          position: 'top-end',
-          type: 'success',
-          title: 'You sign in with email : ',
-          text: this.email,
-          showConfirmButton: false,
-          timer: 2000
-        })
+        // Swal.fire({
+        //   position: 'top-end',
+        //   type: 'success',
+        //   title: 'You sign in with email : ',
+        //   text: this.email,
+        //   showConfirmButton: false,
+        //   timer: 2000
+        // })
       } catch (error) {
         this.error = error.response.data.error;
         Swal.fire({

@@ -53,16 +53,16 @@ export default new Router({
       name: 'signin',
       component: SignIn
     },
-    {
-      path: '/message',
-      name: 'message',
-      component: Message
-    },
-    {
-      path: '/message/:messageId',
-      name: 'message-view',
-      component: ViewMessage
-    },
+    // {
+    //   path: '/message',
+    //   name: 'message',
+    //   component: Message
+    // },
+    // {
+    //   path: '/message/:messageId',
+    //   name: 'message-view',
+    //   component: ViewMessage
+    // },
     {
       path: '/dashboard',
       name: 'dashboard',

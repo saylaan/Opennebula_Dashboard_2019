@@ -1,5 +1,8 @@
 <template>
   <panel v-if="isUserLoggedIn" title="SIP">
+    <v-layout justify-center>
+    <div v-if="isSip()" class="title">SIP Domain: oxe-{{this.vlabsips[0].vlabname.toLowerCase()}}.ale-aapp.com</div>
+    </v-layout>
       <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabsips">
         <template v-slot:items="props">
           <td class="text-xs-left">{{props.item.name}}</td>
@@ -39,6 +42,15 @@ export default {
       vlabsips: [],
       vlab: null
     };
+  },
+  methods: {
+    isSip() {
+      if (this.vlabsips[0]) {
+        return (true)
+      } else {
+        return false
+      }
+    }
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])

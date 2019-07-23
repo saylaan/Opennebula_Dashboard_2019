@@ -1,10 +1,10 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Total vlab">
     <v-layout class="vlab" column align-center justify-center>
-      <h2>Active Vlab : {{ activeVlabs }}</h2>
+      <h2>Assign Vlab : {{ assignVlabs }}</h2>
       <br>
       <br>
-      <h2>Unactive Vlab : {{ totalVlabs - activeVlabs }}</h2>
+      <h2>Unassign Vlab : {{ totalVlabs - assignVlabs }}</h2>
       <br>
       <br>
       <h2>Total Vlab : {{ totalVlabs }}</h2>
@@ -21,7 +21,7 @@ export default {
     return {
       vlabs: null,
       totalVlabs: 0,
-      activeVlabs: 0
+      assignVlabs: 0
     };
   },
   computed: {
@@ -34,8 +34,8 @@ export default {
         this.vlabs = (await VlabService.getAllVlabs()).data;
         for (var i = 0; i !== this.vlabs.length; i++) {
           this.totalVlabs++;
-          if (this.vlabs[i].active) {
-            this.activeVlabs++;
+          if (this.vlabs[i].assign) {
+            this.assignVlabs++;
           }
         }
       }

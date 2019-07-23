@@ -81,7 +81,7 @@ export default {
     this.vlab = (await VlabService.getVlab(vlabId)).data;
     try {
       this.vlabvms = (await VmVlabService.index({
-        VlabId: this.vlab.id
+        VlabId: this.vlab[0].id
       })).data;
     } catch (err) {
       console.log(err);

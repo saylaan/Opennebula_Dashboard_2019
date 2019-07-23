@@ -1,17 +1,17 @@
 <template>
-  <v-layout class="mt-5" v-if="isUserLoggedIn && admin" justify-center>
+  <v-layout class="mt-5" v-if="isUserLoggedIn && admin" v-on:keyup.enter="create({name: 'users'})" justify-center>
     <v-flex xs6>
       <panel title="Create User">
           <v-text-field class="mt-5" label="Company name" type="name" v-model="userview.companyname" 
           outline clearable>
-            <template v-slot:prepend>
+            <!-- <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on">help</v-icon>
                 </template>
                 The name of the company must be valid
               </v-tooltip>
-            </template>
+            </template> -->
             <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>domain</v-icon>
@@ -41,14 +41,14 @@
           <br>
           <v-text-field label="Email" type="name" v-model="userview.email"
           outline clearable>
-            <template v-slot:prepend>
+            <!-- <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on">help</v-icon>
                 </template>
                 Your email must be valid
               </v-tooltip>
-            </template>
+            </template> -->
             <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>email</v-icon>
@@ -58,14 +58,14 @@
         <br>
           <v-text-field label="Confirm email" type="name" v-model="confirmemail"
           outline clearable>
-            <template v-slot:prepend>
+            <!-- <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on">help</v-icon>
                 </template>
                 Your email must be the same
               </v-tooltip>
-            </template>
+            </template> -->
             <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>email</v-icon>
@@ -81,14 +81,14 @@
             outline
             clearable
           >
-            <template v-slot:prepend>
+            <!-- <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on">help</v-icon>
                 </template>
                 Your password must contain at least 8 characters
               </v-tooltip>
-            </template>
+            </template> -->
             <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>https</v-icon>
@@ -104,14 +104,14 @@
             outline
             clearable
           >
-            <template v-slot:prepend>
+            <!-- <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on">help</v-icon>
                 </template>
                 Your password must be the same
               </v-tooltip>
-            </template>
+            </template> -->
             <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>https</v-icon>
@@ -121,14 +121,14 @@
           <br>
           <v-textarea label="Purpose" type="purpose" v-model="userview.purpose"
           outline clearable>
-            <template v-slot:prepend>
+            <!-- <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on">help</v-icon>
                 </template>
                 Explain for what purpose you need a access to the portal
               </v-tooltip>
-            </template>
+            </template> -->
             <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>notes</v-icon>
@@ -136,14 +136,14 @@
             </template>
           </v-textarea>
         <v-switch large color="red" v-model="userview.admin" label="Set Admin">
-          <template v-slot:prepend>
+          <!-- <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-icon v-on="on">help</v-icon>
                 </template>
                 Its for seeting the user to admin
               </v-tooltip>
-            </template>
+            </template> -->
             <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>supervised_user_circle</v-icon>
@@ -151,7 +151,7 @@
             </template>
         </v-switch>
         <br>
-        <v-layout justify-center class="mt-2">
+        <v-layout justify-center class="mb-4">
         <span class="danger-alert">{{error}}</span>
         <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" 
         @click="create({name: 'users'})">
@@ -226,6 +226,7 @@ export default {
   color: red;
 }
 .padding-input {
-  margin-left: 32px;
+  margin: auto;
+  /* margin-left: 32px; */
 }
 </style>

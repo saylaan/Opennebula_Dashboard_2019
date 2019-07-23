@@ -49,7 +49,11 @@ module.exports = {
   },
   async getVlab(req, res) {
     try {
-      const vlab = await Vlab.findByPk(req.params.vlabId)
+      const vlab = await Vlab.findAll({
+        where: {
+          id: req.params.vlabId
+        }
+      })
       if (!vlab) {
         return res.status(403).send({
           error: 'The vlab does not exist'

@@ -1,7 +1,7 @@
 <template>
-  <v-layout class="mt-3" justify-center>
+  <v-layout justify-center>
   <panel v-if="isUserLoggedIn" title="Setting">
-    <form>
+    <form class="mt-5">
     <v-text-field
       v-if="admin"
       label="Company name"
@@ -10,21 +10,21 @@
       outline
       clearable
     >
-      <template v-slot:prepend>
+      <!-- <template v-slot:prepend>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-icon v-on="on">help</v-icon>
           </template>
           The name of the company must be valid
         </v-tooltip>
-      </template>
+      </template> -->
       <template v-slot:append>
         <v-fade-transition leave-absolute>
           <v-icon>domain</v-icon>
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br>
+    <br v-if="admin">
     <v-text-field
       class="padding-input"
       outline
@@ -40,7 +40,7 @@
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br>
+    <br v-if="admin">
     <v-text-field
       class="padding-input"
       outline
@@ -56,7 +56,7 @@
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br>
+    <br v-if="admin">
     <v-text-field
       outline
       clearable
@@ -65,14 +65,14 @@
       v-model="adminview.email"
       :rules="[required]"
     >
-      <template v-slot:prepend>
+      <!-- <template v-slot:prepend>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-icon v-on="on">help</v-icon>
           </template>
           Your email must be valid
         </v-tooltip>
-      </template>
+      </template> -->
       <template v-slot:append>
         <v-fade-transition leave-absolute>
           <v-icon>email</v-icon>
@@ -101,7 +101,7 @@
         </v-fade-transition>
       </template>
     </v-text-field> -->
-    <br>
+    <br v-if="admin">
     <v-text-field
       v-if="admin"
       label="Password"
@@ -111,21 +111,21 @@
       outline
       clearable
     >
-      <template v-slot:prepend>
+      <!-- <template v-slot:prepend>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-icon v-on="on">help</v-icon>
           </template>
           Your password must contain at least 8 characters
         </v-tooltip>
-      </template>
+      </template> -->
       <template v-slot:append>
         <v-fade-transition leave-absolute>
           <v-icon>https</v-icon>
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br>
+    <br v-if="admin">
     <v-text-field
       v-if="admin"
       label="Password"
@@ -135,14 +135,14 @@
       outline
       clearable
     >
-      <template v-slot:prepend>
+      <!-- <template v-slot:prepend>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-icon v-on="on">help</v-icon>
           </template>
           Your password must contain at least 8 characters
         </v-tooltip>
-      </template>
+      </template> -->
       <template v-slot:append>
         <v-fade-transition leave-absolute>
           <v-icon>https</v-icon>
@@ -158,21 +158,21 @@
       type="password"
       :rules="[required]"
     >
-      <template v-slot:prepend>
+      <!-- <template v-slot:prepend>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-icon v-on="on">help</v-icon>
           </template>
           Your password must contain at least 8 characters
         </v-tooltip>
-      </template>
+      </template> -->
       <template v-slot:append>
         <v-fade-transition leave-absolute>
           <v-icon>https</v-icon>
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br>
+    <br v-if="!admin">
     <v-text-field
       outline
       clearable
@@ -182,21 +182,20 @@
       type="password"
       :rules="[required]"
     >
-      <template v-slot:prepend>
+      <!-- <template v-slot:prepend>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-icon v-on="on">help</v-icon>
           </template>
           Your password must contain at least 8 characters
         </v-tooltip>
-      </template>
+      </template> -->
       <template v-slot:append>
         <v-fade-transition leave-absolute>
           <v-icon>https</v-icon>
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br>
           <!-- <v-textarea label="Purpose" type="purpose" v-model="userview.purpose" outline clearable>
             <template v-slot:prepend>
               <v-tooltip bottom>
@@ -218,7 +217,7 @@
           <v-switch v-if="admin" large color="red" v-model="adminview.emailactive" label="Active message by email"></v-switch>
             </v-flex>
           </v-layout> -->
-    <v-layout class="mt-3 mb-4" justify-center>
+    <v-layout class="mb-4" justify-center>
     <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save</v-btn>
     <v-btn elevation-24 large @click="discardSettings()" class="grey darken-1 font-weight-bold">Discard</v-btn>
     </v-layout>
@@ -325,6 +324,7 @@ export default {
 
 <style scoped>
 .padding-input {
-  margin-left: 32px;
+  margin: auto;
+  /* margin-left: 32px; */
 }
 </style>

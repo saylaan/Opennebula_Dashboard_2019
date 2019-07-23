@@ -4,7 +4,7 @@
       <template v-slot:items="props">
         <td class="text-xs-left">{{props.item.name}}</td>
           <td>
-          <a class="text-xs-left" :href="props.item.url">{{props.item.url}}</a>
+          <a class="text-xs-left" @click="goToUrl(props.item.url)">{{props.item.url}}</a>
           </td>
         <td class="text-xs-left">{{props.item.log}}</td>
         <td class="text-xs-left">{{props.item.password}}</td>
@@ -55,6 +55,11 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    }
+  },
+  methods: {
+    async goToUrl(url) {
+      window.open(url, '_blank')
     }
   },
   async mounted() {

@@ -19,7 +19,7 @@
           <td class="text-xs-left">{{props.item.companyname}}</td>
           <td class="text-xs-left">{{props.item.lastname}}</td>
           <td class="text-xs-left">{{props.item.firstname}}</td>
-          <td class="text-xs-left">{{props.item.purpose}}</td>
+          <td class="text-xs-left">{{isAdmin(props.item.admin)}}</td>
           <v-layout row justify-center>
             <v-btn
               class="grey darken-1 font-weight-bold"
@@ -60,8 +60,8 @@ export default {
           value: "firstname"
         },
         {
-          text: "Purpose",
-          value: "purpose"
+          text: "Status",
+          value: "status"
         }
       ],
       pagination: {
@@ -78,6 +78,13 @@ export default {
         this.users = (await UserService.index()).data;
       } catch (err) {
         console.log(err)
+      }
+    },
+    isAdmin(admin) {
+      if (admin) {
+        return ('admin')
+      } else {
+        return 'user'
       }
     }
   },

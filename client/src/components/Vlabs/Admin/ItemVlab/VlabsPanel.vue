@@ -13,12 +13,13 @@
       >
         <v-icon>add</v-icon>
       </v-btn> -->
-      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabs">
+      <v-data-table :headers="headers" hide-actions :items="vlabs" class="elevation-1">
+        <!-- <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear> -->
         <template v-slot:items="props">
           <td class="text-xs-left">{{props.item.name}}</td>
           <td class="text-xs-left">{{props.item.ownername}}</td>
           <td class="text-xs-left">{{needCredential(props.item.dayleft)}}</td>
-          <td class="text-xs-left">{{props.item.active ? 'OK': 'KO'}}</td>
+          <td class="text-xs-left">{{props.item.assign ? 'YES': 'NO'}}</td>
           <v-layout justify-center>
                       <v-btn
               class="grey darken-1 font-weight-bold"
@@ -55,8 +56,8 @@ export default {
           value: "dayleft"
         },
         {
-          text: "Active",
-          value: "active"
+          text: "Assign",
+          value: "assign"
         }
       ],
       pagination: {
@@ -72,7 +73,7 @@ export default {
   methods: {
     needCredential(time) {
       if (time <= 1) {
-        return "Need credential";
+        return "Need licence";
       }
       return time;
     }
@@ -89,6 +90,7 @@ export default {
 </script>
 
 <style scoped>
+
 .vlab {
   padding: 20px;
   height: 200px;

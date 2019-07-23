@@ -19,22 +19,14 @@
     <v-toolbar-items>
     </v-toolbar-items>
     <v-spacer></v-spacer>
-    <v-toolbar-items v-if="isUserLoggedIn">
-         <v-list>
-      <v-list-tile @click="navToSetting({name: 'settings'})">
-        <v-list-tile-title class="title font-weight-medium">{{this.user.lastname}} {{this.user.firstname}}</v-list-tile-title>
-      </v-list-tile>
-    </v-list> 
+    <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn flat v-if="isUserLoggedIn" @click="navToSetting({name: 'settings'})" class="body-1s font-weight-bold"> {{this.user.lastname}} {{this.user.firstname}}</v-btn>
     </v-toolbar-items>
-    <v-toolbar-items v-if="!admin">
-      <v-btn flat :to="{name: 'message'}">
-        <v-icon grey x-large>email</v-icon>
+    <v-toolbar-items>
+      <v-btn :href="'mailto:support@vlab.aapp.al-enterprise.com?subject=VLAB'" icon flat x-large>
+        <v-icon>email</v-icon>
       </v-btn>
-    </v-toolbar-items>
-    <v-toolbar-items>
       <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'signin'}" class="body-2 font-weight-bold">Sign in</v-btn>
-    </v-toolbar-items>
-    <v-toolbar-items>
       <!-- <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'register'}" class="body-2 font-weight-bold">Register</v-btn> -->
       <v-btn v-if="isUserLoggedIn" flat @click="logout">Log out</v-btn>
     </v-toolbar-items>
@@ -86,7 +78,7 @@ export default {
         name: "home"
       });
     },
-    mainNav(route) {
+    async mainNav(route) {
       if (!this.isUserLoggedIn) {
         this.$router.push(route);
       } else if (this.isUserLoggedIn) {

@@ -7,8 +7,6 @@ const axios = require('axios')
 const _ = require('lodash')
 const axiosSIP = require('./axiosSIP')
 const {
-  Url,
-  User,
   UserOpenNebula
 } = require('../models')
 
@@ -38,8 +36,7 @@ module.exports = {
     })
     console.log('Change the password of : ', o2g.urltype, ' with : ', o2g.password)
   },
-  async pwdSIP(sips) { // REQUEST HTTPS
-    console.log('inside pwdSIP', url.urltype, url.password)
-    let urlO2G = "https://o2g-" + sips[0].vlabname.toLowerCase() + ".ale-aapp.com"
+  async pwdSIP(sips) { // REQUEST HTTP
+    await axiosSIP.changeSip(sips)
   }
 }

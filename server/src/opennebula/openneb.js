@@ -420,7 +420,7 @@ const getInfoVNets = async () => {
                   let tmpUrlVnc = await Url.create({
                     name: "Vlab Management",
                     vlabname: vlab[i].nameparse.toLowerCase(),
-                    url: "http://vlab.ale-aapp.com:9869",
+                    url: "https://vlab.ale-aapp.com",
                     urltype: 'vnc',
                     log: 'default',
                     password: "default",

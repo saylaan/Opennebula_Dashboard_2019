@@ -13,6 +13,9 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
+    <v-layout justify-center>
+    <div v-if="isSip()" class="title">SIP Domain: oxe-{{this.vlabsips[0].vlabname.toLowerCase()}}.ale-aapp.com</div>
+    </v-layout>
       <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabsips">
         <template v-slot:items="props">
           <td class="text-xs-left">{{props.item.name}}</td>
@@ -64,6 +67,15 @@ export default {
       vlab: null
     };
   },
+  methods: {
+    async isSip() {
+      if (this.vlabsips[0]) {
+        return (true)
+      } else {
+        return (false)
+      }
+    }
+  },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
@@ -83,7 +95,7 @@ export default {
     this.vlab = (await VlabService.getVlab(vlabId)).data;
     try {
       this.vlabsips = (await SipVlabService.index({
-        VlabId: this.vlab.id
+        VlabId: this.vlab[0].id
       })).data;
     } catch (err) {
       console.log(err);
