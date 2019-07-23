@@ -34,11 +34,10 @@ const { exec } = require('child_process')
           }
           // /console.log("The authenticate to " + sips[0].vlabname.toLowerCase() + " worked....")
           console.log(stdout)
-          let cmdCURL = "curl -X POST -k -H \"Content-Type: application/json\"" +
-          " -i \"https://o2g-vlab30.ale-aapp.com/api/rest/1.0/sessions\" --data " + "\"{\"applicationName\":\"ChangeSIP\"}\"" + " --cookie coockies.txt --cookie-jar coockies.txt"
+          let cmdCURL = 'curl -X POST -k -H "Content-Type: application/json" -i "https://o2g-vlab30.ale-aapp.com/api/rest/1.0/sessions" --data ' + "'" + '{ "applicationName":"FG" }' + "'" + ' --cookie coockies.txt --cookie-jar coockies.txt'
           console.log(cmdCURL)
           await exec(cmdCURL, async (err, stdout) => {
-            if (err) {
+            if (err) {30
               console.log(err)
               return
             }
@@ -55,7 +54,7 @@ const { exec } = require('child_process')
             //     console.log(sip.passwd)
             //   })
             // })
-            console.log("Change of all password SIP done.....")
+            //console.log("Change of all password SIP done.....")
           })
         })
       }
