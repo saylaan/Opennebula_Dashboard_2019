@@ -12,7 +12,7 @@ const { exec } = require('child_process')
     //   }
     // })
     // console.log('inside pwdSIP', url.urltype, url.password)
-    let urlO2G = "https://o2g-" + "vlab20" + ".ale-aapp.com"
+    let urlO2G = "https://o2g-" + "vlab40" + ".ale-aapp.com"
     axios(urlO2G, {
       httpsAgent: new https.Agent({rejectUnauthorized: false})
     }, {
@@ -22,7 +22,7 @@ const { exec } = require('child_process')
       console.log('############### The connection to ' + urlO2G + ' is working..... ###############')
       if (response.data) {
         console.log(response.data)
-        let basicAuth = "\"Authorization: Basic " + new Buffer('admin:' + "yvbpH3").toString('base64') + "\""
+        let basicAuth = "\"Authorization: Basic " + new Buffer('admin:' + "WAOQN1").toString('base64') + "\""
         let cmdCURL = 'curl -X GET -k -H ' + basicAuth + 
         ' -i "' + urlO2G + '/api/rest/authenticate?version=1.0"' + ' --cookie coockies.txt --cookie-jar coockies.txt';
         console.log("cmdCUrl", cmdCURL)
