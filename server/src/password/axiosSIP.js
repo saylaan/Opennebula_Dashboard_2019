@@ -23,7 +23,7 @@ module.exports = {
       console.log('############### The connection to ' + urlO2G + ' is working..... ###############')
       if (response.data) {
         console.log(response.data)
-        let basicAuth = "\"Authorization: Basic " + new Buffer('admin:' + url.passwd).toString('base64') + "\""
+        let basicAuth = "\"Authorization: Basic " + new Buffer('admin:' + url.password).toString('base64') + "\""
         let cmdCURL = 'curl -X GET -k -H ' + basicAuth + 
         ' -i "' + urlO2G + '/api/rest/authenticate?version=1.0"' + ' --cookie coockies.txt --cookie-jar coockies.txt';
         console.log("cmdCUrl", cmdCURL)
@@ -44,20 +44,18 @@ module.exports = {
             }
             console.log("Success connexion to the session to " + url.urltype + ".....")
             console.log(stdout)
-            let i = 1;
-            await sips.forEach(async (sip, i) => {
-              let sipNb = '100' + i
-              let cmdCURL = 'curl -X PUT -k -H "Content-Type: application/json" -i "https://o2g-vlab30.ale-aapp.com/api/rest/1.0/pbxs/1/instances/Subscriber/"' + sipNb + '/' + ' --data ' +
-              "'" + '{ "attributes":[{"name": "SIP_Passwd","value": [ "' + sip[i - 1].passwd + '" ]}]}' + "'" + ' --cookie coockies.txt --cookie-jar coockies.txt'
+            await sips.forEach(async (sip) => {
+              console.log('sip name', sip.name)
+              let cmdCURL = 'curl -X PUT -k -H "Content-Type: application/json" -i "' + urlO2G + '/api/rest/1.0/pbxs/1/instances/Subscriber/"' + sip.name + '/' + ' --data ' +
+              "'" + '{ "attributes":[{"name": "SIP_Passwd","value": [ "' + sip.passwd + '" ]}]}' + "'" + ' --cookie coockies.txt --cookie-jar coockies.txt'
               await exec(cmdCURL, async (err, stdout) => {
                 if (err) {
                   console.log(err)
                   return
                 }
                 console.log(stdout)
-                console.log(sip.passwd)
               })
-              i++;
+              console.log("The SIP : " + sip.name + " has been changed!")
             })
             console.log("Change of all password SIP done.....")
           })
@@ -70,41 +68,3 @@ module.exports = {
     })
   }
 }
-
-  //   if (response.data) {
-      
-  //   }
-  //   axios.get(url + "/authenticate?version=1.0", {
-  //     httpsAgent: new https.Agent({rejectUnauthorized: false}),
-  //     auth: {
-  //       username: 'admin',
-  //       password: 'GEOFF'
-  //     }
-  //   })
-  //   .then(response => {
-  //     console.log('############### The connection with the login for authenticate worked..... ###############')
-  //     console.log(response.data)
-  //     axios.post(url + "/1.0/sessions", {
-  //       httpsAgent: new https.Agent({rejectUnauthorized: false}),
-  //     }, {
-  //       method: 'post',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Set-Cookie': "AlcUserId=" + response.data.credential,
-  //       },
-  //       data: {
-  //         "applicationName": "PBXSessions"
-  //       }
-  //     })
-  //     .then(response => {
-  //       console.log('############### The connection with the login for authenticate worked..... ###############')
-  //       console.log(response.data)
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //     })
-  //   })
-  //   .catch(error => {
-  //     console.log(error)
-  //   })
-  // })
