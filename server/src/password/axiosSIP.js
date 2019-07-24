@@ -67,6 +67,7 @@ module.exports = {
     })
   }
 }
+<<<<<<< HEAD
 
   //   if (response.data) {
       
@@ -105,3 +106,5 @@ module.exports = {
   //     console.log(error)
   //   })
   // })
+=======
+>>>>>>> 93dc15041cb54e4494194f418f51b307e63c86f8
