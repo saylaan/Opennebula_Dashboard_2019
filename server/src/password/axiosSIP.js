@@ -67,44 +67,5 @@ module.exports = {
     })
   }
 }
-<<<<<<< HEAD
 
-  //   if (response.data) {
-      
-  //   }
-  //   axios.get(url + "/authenticate?version=1.0", {
-  //     httpsAgent: new https.Agent({rejectUnauthorized: false}),
-  //     auth: {
-  //       username: 'admin',
-  //       password: 'GEOFF'
-  //     }
-  //   })
-  //   .then(response => {
-  //     console.log('############### The connection with the login for authenticate worked..... ###############')
-  //     console.log(response.data)
-  //     axios.post(url + "/1.0/sessions", {
-  //       httpsAgent: new https.Agent({rejectUnauthorized: false}),
-  //     }, {
-  //       method: 'post',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Set-Cookie': "AlcUserId=" + response.data.credential,
-  //       },
-  //       data: {
-  //         "applicationName": "PBXSessions"
-  //       }
-  //     })
-  //     .then(response => {
-  //       console.log('############### The connection with the login for authenticate worked..... ###############')
-  //       console.log(response.data)
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //     })
-  //   })
-  //   .catch(error => {
-  //     console.log(error)
-  //   })
-  // })
-=======
->>>>>>> 93dc15041cb54e4494194f418f51b307e63c86f8
+
