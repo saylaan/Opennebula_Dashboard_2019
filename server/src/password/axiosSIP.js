@@ -20,12 +20,12 @@ module.exports = {
       method: 'get'
     })
     .then(async response => {
-      console.log('############### The connection to ' + urlO2G + 'is working..... ###############')
+      console.log('############### The connection to ' + urlO2G + ' is working..... ###############')
       if (response.data) {
         console.log(response.data)
         let basicAuth = "\"Authorization: Basic " + new Buffer('admin:' + url.passwd).toString('base64') + "\""
         let cmdCURL = 'curl -X GET -k -H ' + basicAuth + 
-        ' -i \"' + urlO2G + '/api/rest/authenticate?version=1.0\"' + ' --cookie coockies.txt --cookie-jar coockies.txt';
+        ' -i "' + urlO2G + '/api/rest/authenticate?version=1.0"' + ' --cookie coockies.txt --cookie-jar coockies.txt';
         console.log("cmdCUrl", cmdCURL)
         console.log("Basic ", basicAuth)
         await exec(cmdCURL, async (err, stdout) => {
