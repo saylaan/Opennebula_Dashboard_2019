@@ -37,6 +37,6 @@ module.exports = {
     console.log('Change the password of : ', o2g.urltype, ' with : ', o2g.password)
   },
   async pwdSIP(sips) { // REQUEST HTTP
-    await axiosSIP.changeSip(sips)
+    //await axiosSIP.changeSip(sips)
   }
 }

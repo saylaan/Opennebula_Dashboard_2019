@@ -16,6 +16,7 @@
     </v-btn>
       <v-data-table :headers="headers" hide-actions :items="users">
         <template v-slot:items="props">
+          <td class="text-xs-left">{{props.item.email}}</td>
           <td class="text-xs-left">{{props.item.companyname}}</td>
           <td class="text-xs-left">{{props.item.lastname}}</td>
           <td class="text-xs-left">{{props.item.firstname}}</td>
@@ -47,6 +48,10 @@ export default {
   data () {
     return {
       headers: [
+        {
+          text: "Email",
+          value: "email"
+        },
         {
           text: "Company",
           value: "company"

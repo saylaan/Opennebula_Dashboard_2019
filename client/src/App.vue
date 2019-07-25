@@ -86,11 +86,23 @@ export default {
 }
 
 .active {
-  background: green;
+  background: grey;
+}
+
+.danger-alert {
+  font-size: 18px !important;
+  color: red;
 }
 
 .v-footer {
   opacity: 0.7
+}
+
+table.v-table thead th {
+  font-size: 18px !important;
+}
+table.v-table tbody td {
+  font-size: 16px !important;
 }
 
 </style>

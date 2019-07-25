@@ -32,9 +32,11 @@
             </template>
           </v-text-field>
           <br>
+          <v-layout column justify-center align-center>
           <div class="danger-alert" v-html="error"/>
-          <v-layout justify-center>
+          <v-layout class="mt-2" justify-center align-center>
           <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" @click="signin">Sign in</v-btn>
+          </v-layout>
           </v-layout>
         </form>
       </panel>
@@ -113,10 +115,10 @@ export default {
         })
       }
       // TODO : MAKE THIS DRAWER ACTIVE IN VUEX STORE
-      // this.drawer.active.one = "primary"
-      // this.drawer.active.two = null
-      // this.drawer.active.three = null
-      // this.drawer.active.four = null
+      this.drawer.active.one = "primary"
+      this.drawer.active.two = null
+      this.drawer.active.three = null
+      this.drawer.active.four = null
     }
   }
 };

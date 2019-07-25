@@ -17,23 +17,22 @@
                     class="font-weight-bold"
                     v-text="`${msg}`"
                   ></h2>
-                  <div
-                    v-text="`${more}`">
-                  <a class="font-weight-bold">dspp@al-enterprise.com</a>
+                  <div v-text="`${more}`">{{more}}
                   </div>
+                  <a href="dspp@al-enterprise.com" class="font-weight-bold">dspp@al-enterprise.com</a>
                 </v-card-title>
           </v-card>
         </v-flex>
       <v-layout row align-center justify-center class="mt-5">
-        <v-flex sm6 class="mr-5">
+        <v-flex sm9 class="mr-5">
           <v-timeline>
             <v-timeline-item :color="`${steps[0].color}`" dark large right>
-              <template v-slot:opposite>
+              <!-- <template v-slot:opposite>
                 <span
                   :class="`headline font-weight-bold grey--text text--darken-5`"
                   v-text="`Step ${steps[0].step}`"
                 ></span>
-              </template>
+              </template> -->
               <v-card>
                 <v-card-title :class="`${steps[0].color} justify-center`">
                  <h2
@@ -49,13 +48,13 @@
                 </v-card-title>
               </v-card>
             </v-timeline-item>
-            <v-timeline-item :color="`${steps[1].color}`" fill-dot dark left small>
-              <template v-slot:opposite>
+            <v-timeline-item :color="`${steps[1].color}`" dark left small>
+              <!-- <template v-slot:opposite>
                 <span
                   :class="`headline font-weight-bold grey--text text--darken-5`"
                   v-text="`Step ${steps[1].step}`"
                 ></span>
-              </template>
+              </template> -->
               <v-card>
                 <v-card-title :class="`${steps[1].color} justify-center`">
                   <h2
@@ -67,12 +66,12 @@
             </v-timeline-item>
 
             <v-timeline-item :color="`${steps[2].color}`" dark large right>
-              <template v-slot:opposite>
+              <!-- <template v-slot:opposite>
                 <span
                   :class="`headline font-weight-bold grey--text text--darken-5`"
                   v-text="`Step ${steps[2].step}`"
                 ></span>
-              </template>
+              </template> -->
               <v-card>
                 <v-card-title :class="`${steps[2].color} justify-center`">
                   <h2
@@ -83,24 +82,24 @@
               </v-card>
             </v-timeline-item>
 
-            <v-timeline-item :color="`${steps[3].color}`" dark fill-dot left small>
-              <template v-slot:opposite>
+            <v-timeline-item :color="`${steps[4].color}`" dark left small>
+              <!-- <template v-slot:opposite>
                 <span
-                  :class="`headline font-weight-bold grey--text text--darken-5`"
-                  v-text="`Step ${steps[3].step}`"
+                  :class="`headline font-weight-bold black-text text--darken-5`"
+                  v-text="`Step ${steps[4].step}`"
                 ></span>
-              </template>
+              </template> -->
               <v-card>
-                <v-card-title :class="`${steps[3].color} justify-center`">
+                <v-card-title :class="`${steps[4].color} justify-center`">
                   <h2
                     class="mr-3 font-weight-bold blue-grey--text text--lighten-5"
-                    v-text="`${steps[3].msg}`"
+                    v-text="`${steps[4].msg}`"
                   ></h2>
                 </v-card-title>
               </v-card>
             </v-timeline-item>
 
-            <v-timeline-item :color="`${steps[4].color}`" dark large right>
+            <!-- <v-timeline-item :color="`${steps[4].color}`" dark large right>
               <template v-slot:opposite>
                 <span
                   :class="`headline font-weight-bold grey--text text--darken-5`"
@@ -115,7 +114,7 @@
                   ></h2>
                 </v-card-title>
               </v-card>
-            </v-timeline-item>
+            </v-timeline-item> -->
             <!-- <v-timeline-item :color="`${steps[5].color}`" dark fill-dot left small>
               <template v-slot:opposite>
                 <span
@@ -181,19 +180,19 @@ export default {
         {
           step: "2",
           color: "indigo",
-          msg: "Sign in in the right top corner",
+          msg: "Connect in the right top corner",
           msgbis: "Wait acceptation"
         },
         {
           step: "3",
           color: "teal",
-          msg: "Deployment ready",
+          msg: "Get your working URLs for OXE and O2G and SIP",
           msgbis: "Deployment ready (Check your email)"
         },
         {
-          step: "4",
+          step: "And more...",
           color: "light-green",
-          msg: "Access your URL / SIP from your dashboard ",
+          msg: "Feedbacks - Support",
           msgbis: "Connect to Portal Vlab"
         },
         {

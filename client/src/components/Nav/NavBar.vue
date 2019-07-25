@@ -51,7 +51,7 @@
         </v-list-tile-content>
       </v-list-tile>
       <v-spacer></v-spacer>
-      <v-list-tile v-if="!admin" class="info mt-5" href="http://vlab.aapp.al-enterprise.com/doku.php">
+      <v-list-tile v-if="!admin" class="info mt-5" @click="goToUrl('http://vlab.aapp.al-enterprise.com/doku.php')">
         <v-list-tile-action>
           <v-icon x-large>help</v-icon>
         </v-list-tile-action>
@@ -78,6 +78,9 @@ export default {
     }
   },
   methods: {
+    async goToUrl(url) {
+      window.open(url, '_blank')
+    },
     isMini() {
       if (this.drawer.mini) {
         this.drawer.mini = false
