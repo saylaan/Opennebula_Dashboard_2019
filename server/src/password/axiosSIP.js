@@ -45,7 +45,6 @@ module.exports = {
             console.log("Success connexion to the session to " + url.urltype + ".....")
             console.log(stdout)
             await sips.forEach(async (sip) => {
-              console.log('sip name', sip.name)
               let cmdCURL = 'curl -X PUT -k -H "Content-Type: application/json" -i "' + urlO2G + '/api/rest/1.0/pbxs/1/instances/Subscriber/"' + sip.name + '/' + ' --data ' +
               "'" + '{ "attributes":[{"name": "SIP_Passwd","value": [ "' + sip.passwd + '" ]}]}' + "'" + ' --cookie coockies.txt --cookie-jar coockies.txt'
               await exec(cmdCURL, async (err, stdout) => {
@@ -68,3 +67,5 @@ module.exports = {
     })
   }
 }
+
+
