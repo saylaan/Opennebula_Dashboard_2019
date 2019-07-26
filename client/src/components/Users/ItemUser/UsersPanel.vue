@@ -16,11 +16,12 @@
     </v-btn>
       <v-data-table :headers="headers" hide-actions :items="users">
         <template v-slot:items="props">
-          <td class="text-xs-left">{{props.item.email}}</td>
+          <a :href="'mailto:' + props.item.email + '?subject=INFO'" class="text-xs-left">{{props.item.email}}</a>
           <td class="text-xs-left">{{props.item.companyname}}</td>
           <td class="text-xs-left">{{props.item.lastname}}</td>
           <td class="text-xs-left">{{props.item.firstname}}</td>
           <td class="text-xs-left">{{isAdmin(props.item.admin)}}</td>
+          <td class="text-xs-left">{{isAssign(props.item.dayleft)}}</td>
           <v-layout row justify-center>
             <v-btn
               class="grey darken-1 font-weight-bold"
@@ -30,9 +31,9 @@
                     userId: props.item.id}
               }"
            >Edit</v-btn>
-            <v-btn @click="deleteUser(props.item.id)"
+            <v-btn @click="archiveUser(props.item.id)"
               class="grey darken-1 font-weight-bold"
-            >Delete</v-btn>
+            >Archive</v-btn>
           </v-layout>
         </template>
       </v-data-table>
@@ -43,6 +44,7 @@
 <script>
 import { mapState } from "vuex";
 import UserService from "@/services/User/UserService"
+import Swal from 'sweetalert2'
 
 export default {
   data () {
@@ -67,6 +69,10 @@ export default {
         {
           text: "Status",
           value: "status"
+        },
+        {
+          text: "Assign",
+          value: "assign"
         }
       ],
       pagination: {
@@ -77,10 +83,27 @@ export default {
     }
   },
   methods: {
-    async deleteUser(id) {
+    isAssign(dayleft) {
+      if (dayleft !== 0) {
+        return ('YES')
+      } else {
+        return ('NO')
+      }
+    },
+    async archiveUser(id) {
       try {
-        const userdel = (await UserService.delete(id)).data
-        this.users = (await UserService.index()).data;
+        const {value: opt} = await Swal.fire({
+          title: 'Are you sure you want to delete the User? It will be deleted permanently',
+          input: 'radio',
+          inputOptions: [
+            'Yes',
+            'No'
+          ]
+        })
+        if (opt === "0") {
+          // const userdel = (await UserService.delete(id)).data
+          // this.users = (await UserService.index()).data;
+        }
       } catch (err) {
         console.log(err)
       }
@@ -91,6 +114,9 @@ export default {
       } else {
         return 'user'
       }
+    },
+    async mailTo(email) {
+      return ('mailto:' + email + "?subject=INFO")
     }
   },
   computed: {

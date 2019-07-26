@@ -63,8 +63,7 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      const user = await User.findByPk(req.query.userId)
-      console.log('test', user)
+      const user = await User.findByPk(req.params.userId)
       if (!user) {
         return res.status(403).send({
           error: 'The user does not exist'

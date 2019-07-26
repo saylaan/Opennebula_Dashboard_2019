@@ -18,14 +18,9 @@ export default {
     return Api().put(`users/${user.id}`, user)
   },
   updateSettings(user) {
-    console.log('user', user)
     return Api().put(`settings/${user.id}`, user)
   },
   delete(userId) {
-    return Api().delete('users', {
-      params: {
-        userId: userId
-      }
-    })
+    return Api().delete(`users/${userId}`)
   }
 }

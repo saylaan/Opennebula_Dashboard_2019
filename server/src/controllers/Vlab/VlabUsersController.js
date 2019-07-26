@@ -53,7 +53,11 @@ module.exports = {
   },
   async getVlabUser(req, res) {
     try {
-      const vlabuser = await VlabUser.findByPk(req.params.vlabId)
+      const vlabuser = await VlabUser.findOne({
+        where: {
+          VlabId: req.params.vlabId
+        }
+      })
       if (!vlabuser) {
         return res.status(403).send({
           error: 'The vlabuser does not exist'

@@ -71,6 +71,7 @@ import { mapState } from "vuex";
 import VlabUserService from "@/services/Vlab/VlabUserService";
 import UserService from "@/services/User/UserService";
 import VlabService from "@/services/Vlab/VlabService";
+import Swal from 'sweetalert2'
 
 export default {
   computed: {
@@ -148,6 +149,9 @@ export default {
         })).data;
         const vlabId = this.route.params.vlabId;
         this.vlab = (await VlabService.getVlab(vlabId)).data
+        const newUser = (await UserService.getUser(id)).data
+        newUser.dayleft = this.dayslicence
+        await UserService.put(newUser)
         await VlabService.put({
           idopennebula: this.vlab[0].idopennebula,
           ownername: this.userassign,
@@ -167,10 +171,13 @@ export default {
       try {
         let id = 0
         for (var j = 0; j !== this.users.length; j++) {
-          if (this.users[j].username === this.vlab[0].ownername) {
+          if (this.users[j].email === this.vlab[0].ownername) {
             id = this.users[j].id
           }
         }
+        const newUser = (await UserService.getUser(id)).data
+        newUser.dayleft = 0
+        await UserService.put(newUser)
         this.vlabuser = await VlabUserService.delete(this.vlabuser.id);
         this.vlabuser = null;
         const vlabId = this.route.params.vlabId;
@@ -182,7 +189,7 @@ export default {
           nameparse: this.vlab[0].nameparse,
           vlanid: this.vlab[0].vlanid,
           assign: false,
-          dayleft: this.vlab[0].dayleft
+          dayleft: 0
         }, vlabId)
         this.vlab = (await VlabService.getVlab(vlabId)).data
       } catch (err) {

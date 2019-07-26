@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>
+  <v-layout justify-center v-on:keyup.enter="saveSettings">
   <panel v-if="isUserLoggedIn" title="Setting">
     <form class="mt-5">
     <v-text-field
@@ -244,7 +244,8 @@
     <span class="danger-alert">{{error}}</span>
       <v-layout class="mt-2" justify-center align-center row>
     <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save</v-btn>
-    <v-btn elevation-24 large @click="discardSettings()" class="grey darken-1 font-weight-bold">Discard</v-btn>
+    <v-btn elevation-24 large @click="cancelSettings()" class="grey darken-1 font-weight-bold">Cancel</v-btn>
+    <v-icon @click="undoSettings()">refresh</v-icon>
       </v-layout>
     </v-layout>
     </form>
@@ -255,6 +256,7 @@
 <script>
 import { mapState } from "vuex";
 import UserService from "@/services/User/UserService";
+import Swal from 'sweetalert2'
 
 export default {
   data() {
@@ -305,8 +307,22 @@ export default {
           return;
         }
         try {
-          await UserService.updateSettings(this.adminview);
-          this.$router.push({ name: "vlabs" });
+          const {value: password} = await Swal.fire({
+            title: 'Enter your password',
+            input: 'password',
+            inputPlaceholder: 'Enter your password',
+            inputAttributes: {
+              maxlength: 10,
+              autocapitalize: 'off',
+              autocorrect: 'off'
+            }
+          })
+          if (password === this.user.password) {
+            await UserService.updateSettings(this.adminview);
+            this.$router.push({ name: "vlabs" });
+          } else {
+            this.error = "You entered the wrong password"
+          }
         } catch (err) {
           console.log(err);
         }
@@ -329,14 +345,28 @@ export default {
           return;
         }
         try {
-          await UserService.updateSettings(this.userview);
-          this.$router.push({ name: "dashboard" });
+          const {value: password} = await Swal.fire({
+            title: 'Enter your password',
+            input: 'password',
+            inputPlaceholder: 'Enter your password',
+            inputAttributes: {
+              maxlength: 10,
+              autocapitalize: 'off',
+              autocorrect: 'off'
+            }
+          })
+          if (password === this.user.password) {
+            await UserService.updateSettings(this.userview);
+            this.$router.push({ name: "dashboard" });
+          } else {
+            this.error = "You entered the wrong password"
+          }
         } catch (err) {
           console.log(err);
         }
       }
     },
-    async discardSettings() {
+    async undoSettings() {
       try {
         this.error = null
         if (!this.admin) {
@@ -349,6 +379,13 @@ export default {
         }
       } catch (err) {
         console.log(err);
+      }
+    },
+    async cancelSettings() {
+      if (!admin) {
+        this.$router.push({name: "dashboard"})
+      } else {
+        this.$router.push({name: "vlabs"})
       }
     }
   },

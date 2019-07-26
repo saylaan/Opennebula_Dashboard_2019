@@ -136,12 +136,15 @@
             </template>
           </v-textarea>
         <!-- <br> -->
-        <v-layout class="mb-4" justify-center>
+        <v-layout column class="mb-4" justify-center align-center>
         <span class="danger-alert">{{error}}</span>
+        <v-layout class="mt-2" row justify-center align-center>
         <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
-        @click="save()">Save settings</v-btn>
+        @click="save()">Save</v-btn>
         <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
-        @click="discard()">Discard</v-btn>
+        @click="cancel()">Cancel</v-btn>
+        <v-icon @click="undoEdit()">refresh</v-icon>
+        </v-layout>
         </v-layout>
       </panel>
     </v-flex>
@@ -196,12 +199,15 @@ export default {
         console.log(err);
       }
     },
-    async discard() {
+    async undoEdit() {
       this.error = null
       const userId = this.route.params.userId;
       this.userview = (await UserService.getUser(userId)).data;
       this.confirmpassword = this.userview.password
       this.confirmemail = this.userview.email
+    },
+    async cancel() {
+      this.$router.push({name: 'users'})
     }
   },
   async mounted() {

@@ -16,23 +16,44 @@ export default new Vuex.Store({ // for keeping tracking of state
       firstname: 'none',
       lastname: 'none'
     },
-    type: {},
     isUserLoggedIn: false,
     admin: false,
     dark: false,
     grad: 'to top right, #5D29A9, #CBC8D0',
-    nbvlab: 0
+    nbvlab: 0,
+    active: {
+      one: null,
+      two: null,
+      three: null,
+      four: null
+    }
   },
   mutations: {
+    setActive(state, active) {
+      if (active === 'one') {
+        state.active.one = 'primary'
+        state.active.two = null
+        state.active.three = null
+        state.active.four = null
+      } else if (active === 'two') {
+        state.active.one = null
+        state.active.two = 'primary'
+        state.active.three = null
+        state.active.four = null
+      } else if (active === 'three') {
+        state.active.one = null
+        state.active.two = null
+        state.active.three = 'primary'
+        state.active.four = null
+      } else if (active === 'four') {
+        state.active.one = null
+        state.active.two = null
+        state.active.three = null
+        state.active.four = 'primary'
+      }
+    },
     setNbVlab(state, nbvlab) {
       state.nbvlab = nbvlab
-    },
-    setType(state, type) {
-      if (type) {
-        state.type = type
-      } else {
-        state.type = type
-      }
     },
     setGrad(state, grad) {
       if (grad) {
@@ -71,8 +92,8 @@ export default new Vuex.Store({ // for keeping tracking of state
     setNbVlab({ commit }, nbvlab) {
       commit('setNbVlab', nbvlab)
     },
-    setType({ commit }, type) {
-      commit('setType', type)
+    setActive({ commit }, active) {
+      commit('setActive', active)
     },
     setGrad({ commit }, grad) {
       commit('setGrad', grad)

@@ -15,7 +15,7 @@
   >
     <v-list>
       <v-list-tile v-if="isUserLoggedIn && !admin" class="mt-3" title="test" @click="navToDashboard({name: 'dashboard'})"
-      :class="drawer.active.one">
+      :class="active.one">
         <v-list-tile-action>
           <v-icon x-large>dashboard</v-icon>
         </v-list-tile-action>
@@ -24,7 +24,7 @@
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile v-if="admin || (isUserLoggedIn && nbvlab > 1)" class="mt-2" @click="navToVlab({name: 'vlabs'})"
-      :class="drawer.active.two">
+      :class="active.two">
         <v-list-tile-action>
           <v-icon x-large>settings_system_daydream</v-icon>
         </v-list-tile-action>
@@ -33,7 +33,7 @@
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile class="mt-2" v-if="admin" @click="navToUser({name: 'users'})"
-      :class="drawer.active.three">
+      :class="active.three">
         <v-list-tile-action>
           <v-icon x-large>people</v-icon>
         </v-list-tile-action>
@@ -42,7 +42,7 @@
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile class="mt-2" @click="navToSetting({name: 'settings'})"
-      :class="drawer.active.four">
+      :class="active.four">
         <v-list-tile-action>
           <v-icon x-large>settings</v-icon>
         </v-list-tile-action>
@@ -65,11 +65,12 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["user", "isUserLoggedIn", "nbvlab", "admin", "dark"])
+    ...mapState(["user", "isUserLoggedIn", "nbvlab", "admin", "dark", "active"])
   },
   props: {
     drawer: {
@@ -87,31 +88,19 @@ export default {
       }
     },
     navToDashboard(route) {
-      this.drawer.active.one = "primary"
-      this.drawer.active.two = null
-      this.drawer.active.three = null
-      this.drawer.active.four = null
+      this.$store.dispatch('setActive', 'one')
       this.$router.push(route);
     },
     navToVlab(route) {
-      this.drawer.active.one = null
-      this.drawer.active.two = "primary"
-      this.drawer.active.three = null
-      this.drawer.active.four = null
+      this.$store.dispatch('setActive', 'two')
       this.$router.push(route);
     },
     navToUser(route) {
-      this.drawer.active.one = null
-      this.drawer.active.two = null
-      this.drawer.active.three = "primary"
-      this.drawer.active.four = null
+      this.$store.dispatch('setActive', 'three')
       this.$router.push(route);
     },
     navToSetting(route) {
-      this.drawer.active.one = null
-      this.drawer.active.two = null
-      this.drawer.active.three = null
-      this.drawer.active.four = "primary"
+      this.$store.dispatch('setActive', 'four')
       this.$router.push(route);
     }
   }

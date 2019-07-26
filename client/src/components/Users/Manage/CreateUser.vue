@@ -151,11 +151,16 @@
             </template>
         </v-switch>
         <br>
-        <v-layout justify-center class="mb-4">
+        <v-layout column align-center justify-center class="mb-4">
         <span class="danger-alert">{{error}}</span>
-        <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" 
-        @click="create({name: 'users'})">
-        Create User</v-btn>
+        <v-layout class="mt-2" row justify-center align-center>
+          <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" 
+          @click="create({name: 'users'})">
+          Create</v-btn>
+          <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" 
+          @click="cancel()">
+          Cancel</v-btn>
+        </v-layout>
         </v-layout>
       </panel>
     </v-flex>
@@ -216,6 +221,9 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    async cancel() {
+      this.$router.push({name: 'users'})
     }
   }
 };

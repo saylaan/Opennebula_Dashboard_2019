@@ -45,13 +45,7 @@ export default {
         type: 'permanent',
         clipped: true,
         floating: true,
-        mini: true,
-        active: {
-          one: null,
-          two: null,
-          three: null,
-          four: null
-        }
+        mini: true
       },
       footer: {
         inset: true

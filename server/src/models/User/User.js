@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     dayleft: {
       type: DataTypes.INTEGER,
-      defaultValue: null
+      defaultValue: 0
     }
   })
 

@@ -66,7 +66,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["isUserLoggedIn", "user", "admin"])
+    ...mapState(["isUserLoggedIn", "user", "admin", "active"])
   },
   methods: {
     async signin() {
@@ -79,18 +79,20 @@ export default {
         this.$store.dispatch("setAdmin", response.data.user.admin);
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setDark", true);
-        // this.$store.dispatch("setGrad", "to top right, #FFFFFF, #ECE9E6");
+        this.$store.dispatch("setGrad", "to top right, #FFFFFF, #ECE9E6");
         if (!this.admin) {
           try {
             const vlabuser = await VlabUserService.index()
             this.$store.dispatch("setNbVlab", vlabuser.data.length)
+            this.$store.dispatch("setActive", 'one')
+            this.$router.push({
+              name: "dashboard"
+            });
           } catch (error) {
             console.log(error)
           }
-          this.$router.push({
-            name: "dashboard"
-          });
         } else {
+          this.$store.dispatch("setActive", "two")
           this.$router.push({
             name: "vlabs"
           });
@@ -105,20 +107,16 @@ export default {
         // })
       } catch (error) {
         this.error = error.response.data.error;
-        Swal.fire({
-          position: 'top-end',
-          type: 'error',
-          title: 'Wrong login, please retry',
-          text: this.email,
-          showConfirmButton: false,
-          timer: 2000
-        })
+        // Swal.fire({
+        //   position: 'top-end',
+        //   type: 'error',
+        //   title: 'Wrong login, please retry',
+        //   text: this.email,
+        //   showConfirmButton: false,
+        //   timer: 2000
+        // })
       }
       // TODO : MAKE THIS DRAWER ACTIVE IN VUEX STORE
-      this.drawer.active.one = "primary"
-      this.drawer.active.two = null
-      this.drawer.active.three = null
-      this.drawer.active.four = null
     }
   }
 };
