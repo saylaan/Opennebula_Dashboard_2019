@@ -48,7 +48,7 @@
             :items="licences"
             item-text="licence"
             v-model="dayslicence"
-            label="Days Licence"
+            label="Number of days"
             outline>
           </v-select>
             </v-layout>
@@ -95,11 +95,11 @@ export default {
           value: "ownername"
         },
         {
-          text: "Dayleft",
+          text: "Remaining days",
           value: "dayleft"
         },
         {
-          text: "Assign",
+          text: "Assigned",
           value: "assign"
         }
       ],

@@ -23,7 +23,7 @@
       <v-btn flat v-if="isUserLoggedIn" @click="navToSetting({name: 'settings'})" class="body-1s font-weight-bold"> {{this.user.lastname}} {{this.user.firstname}}</v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
-      <v-btn :href="'mailto:support@vlab.aapp.al-enterprise.com?subject=VLAB'" icon flat x-large>
+      <v-btn v-if="!admin" :href="'mailto:support@vlab.aapp.al-enterprise.com?subject=VLAB'" icon flat x-large>
         <v-icon>email</v-icon>
       </v-btn>
       <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'signin'}" class="body-2 font-weight-bold">Sign in</v-btn>
@@ -49,7 +49,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["user", "isUserLoggedIn", "dark", "admin"])
+    ...mapState(["user", "isUserLoggedIn", "dark", "admin", "active"])
   },
   watch: {
     async getUserView() {
@@ -90,10 +90,7 @@ export default {
       }
     },
     async navToSetting(route) {
-      this.drawer.active.one = null
-      this.drawer.active.two = null
-      this.drawer.active.three = null
-      this.drawer.active.four = "primary"
+      this.$store.dispatch('setActive', 'four')
       this.$router.push(route);
     }
   }

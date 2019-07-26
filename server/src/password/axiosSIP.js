@@ -35,7 +35,7 @@ module.exports = {
           }
           console.log("The authenticate to " + sips[0].vlabname.toLowerCase() + " worked....")
           console.log(stdout)
-          let cmdCURL = 'curl -X POST -k -H "Content-Type: application/json"' + ' -i "' + urlO2G + '/api/rest/1.0/sessions" --data ' + "'" + '{ "applicationName":"FG"}' + "'" + ' --cookie coockies.txt --cookie-jar coockies.txt'
+          let cmdCURL = 'curl -X POST -k -H "Content-Type: application/json"' + ' -i "' + urlO2G + '/api/rest/1.0/sessions" --data ' + "'" + '{ "applicationName":"' + sips[0].vlabname.toLowerCase() + '"}' + "'" + ' --cookie coockies.txt --cookie-jar coockies.txt'
           console.log(cmdCURL)
           await exec(cmdCURL, async (err, stdout) => {
             if (err) {

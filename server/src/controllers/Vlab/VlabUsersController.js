@@ -147,7 +147,7 @@ module.exports = {
                 await handlingPwd.pwdVNC(newUrl, usertmp) // CHANGE VNC
               } else if (url.name === "O2G Access") {
                 newUrl.password = await generator.generate({
-                  length: 6,
+                  length: 8,
                   numbers: true
                 })
                 await handlingPwd.pwdO2G(newUrl) // CCHANGE O2G
@@ -189,7 +189,7 @@ module.exports = {
                 name: sip.name,
                 login: sip.login,
                 passwd: generator.generate({
-                  length: 4,
+                  length: 8,
                   numbers: true
                 }),
                 vlabname: sip.vlabname,

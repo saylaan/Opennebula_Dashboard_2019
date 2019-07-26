@@ -24,7 +24,6 @@
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br v-if="admin">
     <v-text-field
       class="padding-input"
       outline
@@ -40,7 +39,6 @@
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br v-if="admin">
     <v-text-field
       class="padding-input"
       outline
@@ -56,7 +54,6 @@
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br v-if="admin">
     <v-text-field
       outline
       clearable
@@ -79,12 +76,11 @@
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br v-if="admin">
     <v-text-field
       outline
       clearable
       v-if="admin"
-      label="Email"
+      label="Confirm Email"
       v-model="confirmEmail"
       :rules="[required]"
     >
@@ -124,11 +120,9 @@
         </v-fade-transition>
       </template>
     </v-text-field> -->
-    <br v-if="admin">
     <v-text-field
-      v-if="admin"
-      label="Password"
-      v-model="adminview.password"
+      label="Your password"
+      v-model="oldPassword"
       type="password"
       :rules="[required]"
       outline
@@ -148,62 +142,33 @@
         </v-fade-transition>
       </template>
     </v-text-field>
-    <br v-if="admin">
     <v-text-field
-      v-if="admin"
-      label="Password"
+      label="New password"
+      v-model="newPassword"
+      type="password"
+      outline
+      clearable
+    >
+      <!-- <template v-slot:prepend>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">help</v-icon>
+          </template>
+          Your password must contain at least 8 characters
+        </v-tooltip>
+      </template> -->
+      <template v-slot:append>
+        <v-fade-transition leave-absolute>
+          <v-icon>https</v-icon>
+        </v-fade-transition>
+      </template>
+    </v-text-field>
+    <v-text-field
+      outline
+      clearable
+      label="Confirm your new password"
       v-model="confirmPassword"
       type="password"
-      :rules="[required]"
-      outline
-      clearable
-    >
-      <!-- <template v-slot:prepend>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-icon v-on="on">help</v-icon>
-          </template>
-          Your password must contain at least 8 characters
-        </v-tooltip>
-      </template> -->
-      <template v-slot:append>
-        <v-fade-transition leave-absolute>
-          <v-icon>https</v-icon>
-        </v-fade-transition>
-      </template>
-    </v-text-field>
-    <v-text-field
-      outline
-      clearable
-      v-if="!admin"
-      label="Password"
-      v-model="userview.password"
-      type="password"
-      :rules="[required]"
-    >
-      <!-- <template v-slot:prepend>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-icon v-on="on">help</v-icon>
-          </template>
-          Your password must contain at least 8 characters
-        </v-tooltip>
-      </template> -->
-      <template v-slot:append>
-        <v-fade-transition leave-absolute>
-          <v-icon>https</v-icon>
-        </v-fade-transition>
-      </template>
-    </v-text-field>
-    <br v-if="!admin">
-    <v-text-field
-      outline
-      clearable
-      v-if="!admin"
-      label="Password"
-      v-model="confirmPassword"
-      type="password"
-      :rules="[required]"
     >
       <!-- <template v-slot:prepend>
         <v-tooltip bottom>
@@ -273,6 +238,8 @@ export default {
         password: null
         // emailactive: false
       },
+      oldPassword: null,
+      newPassword: null,
       confirmPassword: null,
       confirmEmail: null,
       error: null,
@@ -288,9 +255,10 @@ export default {
       if (this.admin) {
         const areAllFieldsFilledIn = Object.keys(this.adminview).every(
           key => {
-            if (key === 'emailactive' || key === 'active_hash' || key === 'dayleft') {
+            if (key === 'emailactive' || key === 'active_hash' || key === 'dayleft' || key === 'password') {
               return (true)
             }
+            console.log(key)
             return (!!this.adminview[key])
           }
         );
@@ -302,22 +270,15 @@ export default {
           this.error = "The emails don't match"
           return;
         }
-        if (this.confirmPassword !== this.adminview.password) {
-          this.error = "The passwords don't match"
-          return;
+        if (this.confirmPassword && this.newPassword) {
+          if (this.confirmPassword !== this.newPassword) {
+            this.error = "The new passwords don't match"
+            return;
+          }
         }
         try {
-          const {value: password} = await Swal.fire({
-            title: 'Enter your password',
-            input: 'password',
-            inputPlaceholder: 'Enter your password',
-            inputAttributes: {
-              maxlength: 10,
-              autocapitalize: 'off',
-              autocorrect: 'off'
-            }
-          })
-          if (password === this.user.password) {
+          if (this.oldPassword === this.user.password) {
+            this.adminview.password = this.newPassword
             await UserService.updateSettings(this.adminview);
             this.$router.push({ name: "vlabs" });
           } else {
@@ -340,22 +301,15 @@ export default {
           this.error = "Please fill in all the required fields.";
           return;
         }
-        if (this.confirmPassword !== this.userview.password) {
-          this.error = "The passwords don't match"
-          return;
+        if (this.confirmPassword && this.newPassword) {
+          if (this.confirmPassword !== this.newPassword) {
+            this.error = "The new passwords don't match"
+            return;
+          }
         }
         try {
-          const {value: password} = await Swal.fire({
-            title: 'Enter your password',
-            input: 'password',
-            inputPlaceholder: 'Enter your password',
-            inputAttributes: {
-              maxlength: 10,
-              autocapitalize: 'off',
-              autocorrect: 'off'
-            }
-          })
-          if (password === this.user.password) {
+          if (this.oldPassword === this.user.password) {
+            this.userview.password = this.newPassword
             await UserService.updateSettings(this.userview);
             this.$router.push({ name: "dashboard" });
           } else {
@@ -371,10 +325,8 @@ export default {
         this.error = null
         if (!this.admin) {
           this.userview = (await UserService.getUser(this.user.id)).data;
-          this.confirmPassword = this.userview.password
         } else {
           this.adminview = (await UserService.getUser(this.user.id)).data;
-          this.confirmPassword = this.adminview.password
           this.confirmEmail = this.adminview.email
         }
       } catch (err) {
@@ -393,10 +345,8 @@ export default {
     try {
       if (!this.admin) {
         this.userview = (await UserService.getUser(this.user.id)).data;
-        this.confirmPassword = this.userview.password
       } else {
         this.adminview = (await UserService.getUser(this.user.id)).data;
-        this.confirmPassword = this.adminview.password
         this.confirmEmail = this.adminview.email
       }
     } catch (err) {

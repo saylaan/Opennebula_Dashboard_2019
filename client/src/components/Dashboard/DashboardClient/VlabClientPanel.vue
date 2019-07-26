@@ -4,7 +4,7 @@
         <template v-slot:items="props">
           <td class="text-xs-left">{{props.item.nameparse}}</td>
           <td class="text-xs-left">{{needCredential(props.item.dayleft)}}</td>
-          <td class="text-xs-left">{{props.item.assign ? 'OK': 'KO'}}</td>
+          <td class="text-xs-left">{{props.item.assign ? 'YES': 'NO'}} </td>
         </template>
       </v-data-table>
   </panel>
@@ -27,12 +27,12 @@ export default {
           value: "nameparse"
         },
         {
-          text: "Dayleft",
+          text: "Remaining days",
           value: "dayleft"
         },
         {
-          text: "Assign",
-          value: "assign"
+          text: "State",
+          value: "state"
         }
       ],
       pagination: {
