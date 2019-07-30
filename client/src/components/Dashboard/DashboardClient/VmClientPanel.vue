@@ -2,9 +2,9 @@
   <panel v-if="isUserLoggedIn" title="VM">
       <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vmusers">
         <template v-slot:items="props">
-          <td class="text-xs-left">{{props.item.active ? 'OK': 'KO'}}</td>
           <td class="text-xs-left">{{props.item.name}}</td>
           <td class="text-xs-left">{{props.item.type}}</td>
+          <td class="text-xs-left">{{props.item.active ? 'OK': 'KO'}}</td>
         </template>
       </v-data-table>
   </panel>
@@ -19,16 +19,16 @@ export default {
     return {
       headers: [
         {
-          text: "Active",
-          value: "active"
-        },
-        {
-          text: "Name",
-          value: "name"
+          text: "Vlab",
+          value: "vlab"
         },
         {
           text: "Type",
           value: "type"
+        },
+        {
+          text: "Active",
+          value: "active"
         }
       ],
       pagination: {

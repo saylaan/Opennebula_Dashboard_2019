@@ -42,20 +42,22 @@
               </v-fade-transition>
             </template>
           </v-text-field>
-        <br>
-        <v-layout justify-center>
+        <v-layout column class="mb-4" justify-center align-center>
         <span class="danger-alert">{{error}}</span>
+      <v-layout class="mt-2" justify-center align-center row>
         <v-btn
-          elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
+          elevation-24 large class="grey darken-1 font-weight-bold"
           @click="save({name: 'vlab',
             params: {
               vlabId: vlabId
             }
           })"
-        >Save Url</v-btn>
+        >Save</v-btn>
         <v-btn 
-        elevation-24 large class="grey darken-1 mb-4 font-weight-bold" 
-        @click="discard()">Discard</v-btn>
+        elevation-24 large class="grey darken-1 font-weight-bold" 
+        @click="cancel()">Cancel</v-btn>
+        <v-icon @click="undo()">refresh</v-icon>
+      </v-layout>
         </v-layout>
       </panel>
     </v-flex>
@@ -86,6 +88,17 @@ export default {
     ...mapState(["isUserLoggedIn", "route", "user", "admin"])
   },
   methods: {
+    async undo() {
+      try {
+        this.error = null
+        this.url = (await UrlService.getUrl(this.urlId)).data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async cancel() {
+      this.$router.go(-1)
+    },
     async save(route) {
       this.error = null;
       const areAllFieldsFilledIn = Object.keys(this.url).every(
@@ -101,9 +114,6 @@ export default {
       } catch (err) {
         console.log(err);
       }
-    },
-    async discard() {
-      this.url = (await UrlService.getUrl(this.urlId)).data;
     }
   },
   async mounted() {

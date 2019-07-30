@@ -13,6 +13,14 @@ module.exports = (sequelize, DataTypes) => {
     dayleft: {
       type: DataTypes.INTEGER,
       defaultValue: 0
+    },
+    startlicence: {
+      type: DataTypes.STRING,
+      defaultValue: "XX-XX-XX"
+    },
+    endlicence: {
+      type: DataTypes.STRING,
+      defaultValue: "XX-XX-XX"
     }
   })
 

@@ -1,7 +1,7 @@
 <template>
   <v-layout class="mt-5" justify-center>
     <v-flex v-if="isUserLoggedIn && admin" xs6>
-      <panel title="Create Url">
+      <panel title="Create SIP">
         <v-text-field  class="mt-5" label="Name" v-model="sip.name" :rules="[required]"
         outline clearable>
             <template v-slot:append>
@@ -34,17 +34,21 @@
               </v-fade-transition>
             </template>
           </v-text-field>
-        <br>
-        <v-layout justify-center>
+        <v-layout column class="mb-4" justify-center align-center>
         <span class="danger-alert">{{error}}</span>
+      <v-layout class="mt-2" justify-center align-center row>
         <v-btn
-          elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
+          elevation-24 large class="grey darken-1 font-weight-bold"
           @click="create({name: 'vlab',
             params: {
               vlabId: vlabId
             }
           })"
-        >Create Sip</v-btn>
+        >Create</v-btn>
+        <v-btn 
+        elevation-24 large class="grey darken-1 font-weight-bold" 
+        @click="cancel()">Cancel</v-btn>
+      </v-layout>
         </v-layout>
       </panel>
     </v-flex>
@@ -73,6 +77,9 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
   methods: {
+    async cancel() {
+      this.$router.go(-1)
+    },
     async create(route) {
       this.error = null;
       const areAllFieldsFilledIn = Object.keys(this.sip).every(

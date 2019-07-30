@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     needCredential(time) {
-      if (time <= 1) {
+      if (time < 1) {
         return "Need licence";
       }
       return time;

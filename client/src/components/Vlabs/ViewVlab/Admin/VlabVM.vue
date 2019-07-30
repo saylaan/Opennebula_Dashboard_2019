@@ -15,9 +15,9 @@
     </v-btn> -->
       <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabvms">
         <template v-slot:items="props">
-          <td class="text-xs-left">{{props.item.active ? 'OK': 'KO'}}</td>
           <td class="text-xs-left">{{props.item.name}}</td>
           <td class="text-xs-left">{{props.item.type}}</td>
+          <td class="text-xs-left">{{props.item.active ? 'OK': 'KO'}}</td>
           <!-- <v-btn
             class="grey darken-1 font-weight-bold"
             :to="{
@@ -42,16 +42,16 @@ export default {
     return {
       headers: [
         {
-          text: "Active",
-          value: "active"
-        },
-        {
           text: "Name",
           value: "name"
         },
         {
           text: "Type",
           value: "type"
+        },
+        {
+          text: "Active",
+          value: "active"
         }
       ],
       pagination: {

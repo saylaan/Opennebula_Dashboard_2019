@@ -2,6 +2,7 @@ const { User } = require('../../models')
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
   'http://10.1.2.150:2633/RPC2')
+const date = require('date-and-time')
 
 module.exports = {
   async index(req, res) {
@@ -104,6 +105,37 @@ module.exports = {
   },
   async put(req, res) {
     try {
+      if (req.body.dayleft !== 0) {
+        var date = new Date()
+        var endlicence = date.getTime()
+        var datestart = new Date(endlicence)
+        var months = datestart.getMonth() + 1
+        if (parseInt(months, 10) < 10) {
+          months = "0" + months
+        }
+        var days = datestart.getDate()
+        if (parseInt(days, 10) < 10) {
+          days = "0" + days
+        }
+        var startlicence = datestart.getFullYear() + "-" + months + "-" + days
+        var day = parseInt(req.body.dayleft, 10) * 24 * 60 * 60 * 1000
+        endlicence = endlicence + day
+        var newdate = new Date(endlicence)
+        months = newdate.getMonth() + 1
+        if (parseInt(months, 10) < 10) {
+          months = "0" + months
+        }
+        days = newdate.getDate()
+        if (parseInt(days, 10) < 10) {
+          days = "0" + days
+        }
+        endlicence = newdate.getFullYear() + "-" + months + "-" + days
+        req.body.startlicence = startlicence
+        req.body.endlicence = endlicence
+      } else {
+        req.body.startlicence = "XX/XX/XX"
+        req.body.endlicence = "XX/XX/XX"
+      }
       const user = await User.update(req.body, {
         where: {
           id: req.params.userId

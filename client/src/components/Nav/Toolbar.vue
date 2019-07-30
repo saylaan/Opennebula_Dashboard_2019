@@ -23,7 +23,7 @@
       <v-btn flat v-if="isUserLoggedIn" @click="navToSetting({name: 'settings'})" class="body-1s font-weight-bold"> {{this.user.lastname}} {{this.user.firstname}}</v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
-      <v-btn v-if="!admin" :href="'mailto:support@vlab.aapp.al-enterprise.com?subject=VLAB'" icon flat x-large>
+      <v-btn v-if="!admin && isUserLoggedIn" :href="'mailto:support@vlab.aapp.al-enterprise.com?subject=VLAB'" icon flat x-large>
         <v-icon>email</v-icon>
       </v-btn>
       <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'signin'}" class="body-2 font-weight-bold">Sign in</v-btn>

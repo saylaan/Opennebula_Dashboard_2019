@@ -15,7 +15,6 @@ module.exports = {
   async register(req, res) {
     try {
       const user = await User.create(req.body)
-      console.log(user)
       const userJson = user.toJSON()
       console.log(user)
       // let hashPwd
@@ -51,13 +50,13 @@ module.exports = {
       })
       if (!user) {
         return res.status(403).send({
-          error: 'The login information was incorrect'
+          error: 'Invalid credentials'
         })
       }
       const isPasswordValid = await user.comparePassword(password)
       if (!isPasswordValid) {
         return res.status(403).send({
-          error: 'The password information was incorrect'
+          error: 'Invalid credentials'
         })
       }
       const userJson = user.toJSON()

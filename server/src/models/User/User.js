@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    active: {
+    assign: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
@@ -29,6 +29,18 @@ module.exports = (sequelize, DataTypes) => {
     dayleft: {
       type: DataTypes.INTEGER,
       defaultValue: 0
+    },
+    startlicence: {
+      type: DataTypes.STRING,
+      defaultValue: "XX-XX-XX"
+    },
+    endlicence: {
+      type: DataTypes.STRING,
+      defaultValue: "XX-XX-XX"
+    },
+    archive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   })
 

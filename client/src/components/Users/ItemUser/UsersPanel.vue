@@ -71,8 +71,8 @@ export default {
           value: "status"
         },
         {
-          text: "Assign",
-          value: "assign"
+          text: "Assigned",
+          value: "assigned"
         }
       ],
       pagination: {

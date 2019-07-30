@@ -1,6 +1,6 @@
 <template>
   <panel v-if="isUserLoggedIn" title="SIP">
-    <v-btn
+    <!-- <v-btn
       class="grey darken-3"
       slot="action"
       :to="{name: 'create-sip'}"
@@ -12,9 +12,9 @@
       fab
     >
       <v-icon>add</v-icon>
-    </v-btn>
+    </v-btn> -->
     <v-layout justify-center>
-    <div v-if="isSip()" class="title">SIP Domain: oxe-{{this.vlabsips[0].vlabname.toLowerCase()}}.ale-aapp.com</div>
+    <!-- <div v-if="isSip()" class="title">SIP Domain: oxe-{{this.vlabsips[0].vlabname.toLowerCase()}}.ale-aapp.com</div> -->
     </v-layout>
       <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabsips">
         <template v-slot:items="props">
@@ -67,15 +67,15 @@ export default {
       vlab: null
     };
   },
-  methods: {
-    async isSip() {
-      if (this.vlabsips[0]) {
-        return (true)
-      } else {
-        return (false)
-      }
-    }
-  },
+  // methods: {
+  //   async isSip() {
+  //     if (this.vlabsips[0]) {
+  //       return (true)
+  //     } else {
+  //       return (false)
+  //     }
+  //   }
+  // },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },

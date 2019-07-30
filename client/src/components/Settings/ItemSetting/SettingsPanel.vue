@@ -121,7 +121,7 @@
       </template>
     </v-text-field> -->
     <v-text-field
-      label="Your password"
+      label="Current password"
       v-model="oldPassword"
       type="password"
       :rules="[required]"
@@ -210,7 +210,6 @@
       <v-layout class="mt-2" justify-center align-center row>
     <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save</v-btn>
     <v-btn elevation-24 large @click="cancelSettings()" class="grey darken-1 font-weight-bold">Cancel</v-btn>
-    <v-icon @click="undoSettings()">refresh</v-icon>
       </v-layout>
     </v-layout>
     </form>

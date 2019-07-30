@@ -1,8 +1,10 @@
 const { Vlab,
   UserOpenNebula,
   Vm,
-  VmVlab } = require('../../models')
+  VmVlab,
+  VlabUser } = require('../../models')
 const openneb = require('../../opennebula/openneb')
+const datetime = require('date-and-time')
 
 module.exports = {
   async getAllVlabs(req, res) {
@@ -68,47 +70,85 @@ module.exports = {
   },
   async put(req, res) {
     try {
+      if (req.body.dayleft !== 0) {
+        var date = new Date()
+        var endlicence = date.getTime()
+        var datestart = new Date(endlicence)
+        var months = datestart.getMonth() + 1
+        if (parseInt(months, 10) < 10) {
+          months = "0" + months
+        }
+        var days = datestart.getDate()
+        if (parseInt(days, 10) < 10) {
+          days = "0" + days
+        }
+        var startlicence = datestart.getFullYear() + "-" + months + "-" + days
+        var day = parseInt(req.body.dayleft, 10) * 24 * 60 * 60 * 1000
+        endlicence = endlicence + day
+        var newdate = new Date(endlicence)
+        months = newdate.getMonth() + 1
+        if (parseInt(months, 10) < 10) {
+          months = "0" + months
+        }
+        days = newdate.getDate()
+        if (parseInt(days, 10) < 10) {
+          days = "0" + days
+        }
+        endlicence = newdate.getFullYear() + "-" + months + "-" + days
+        req.body.startlicence = startlicence
+        req.body.endlicence = endlicence
+      } else {
+        req.body.startlicence = "XX/XX/XX"
+        req.body.endlicence = "XX/XX/XX"
+      }
       const vlab = await Vlab.update(req.body, {
         where: {
           id: req.params.vlabId
         }
       })
-      const UserOn = await UserOpenNebula.findAll();
-      const vmsvlab = await VmVlab.findAll({
+      const vlabuser = await VlabUser.findOne({
         where: {
           VlabId: req.params.vlabId
         }
       })
-      vmsvlab.forEach(async vmvlab => {
-        const vm = await Vm.findOne({
+      if (!vlabuser) {
+        const UserOn = await UserOpenNebula.findAll();
+        const vmsvlab = await VmVlab.findAll({
           where: {
-            id: vmvlab.VmId
+            VlabId: req.params.vlabId
           }
         })
-        const vmon = await openneb.one.getVM(vm.idopennebula)
-        UserOn.forEach(async useron => {
-          if (useron.username === req.body.ownername) {
-            console.log('Is EXISTING IN DB')
-            const newVm = {
-              idopennebula: vm.idopennebula,
-              ownername: useron.username,
-              groupname: vm.groupname,
-              name: vm.name,
-              type: vm.type,
-              active: vm.active
+        vmsvlab.forEach(async vmvlab => {
+          const vm = await Vm.findOne({
+            where: {
+              id: vmvlab.VmId
             }
-            await Vm.update(newVm, {
-              where: {
-                id: vm.id
+          })
+          const vmon = await openneb.one.getVM(vm.idopennebula)
+          UserOn.forEach(async useron => {
+            if (useron.username === req.body.ownername) {
+              console.log('Is EXISTING IN DB')
+              const newVm = {
+                idopennebula: vm.idopennebula,
+                ownername: useron.username,
+                groupname: vm.groupname,
+                name: vm.name,
+                type: vm.type,
+                active: vm.active
               }
-            })
-            await vmon.chown(useron.idopennebula, (err, data) => {
-              console.log("Changing user on opennebula done")
-              console.log(data)
-            })
-          }
+              await Vm.update(newVm, {
+                where: {
+                  id: vm.id
+                }
+              })
+              await vmon.chown(useron.idopennebula, (err, data) => {
+                console.log("Changing user on opennebula done")
+                console.log(data)
+              })
+            }
+          })
         })
-      })
+      }
       res.send(vlab)
     } catch (err) {
       res.status(500).send({

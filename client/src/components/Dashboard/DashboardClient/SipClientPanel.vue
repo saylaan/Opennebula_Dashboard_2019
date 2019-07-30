@@ -1,7 +1,7 @@
 <template>
   <panel v-if="isUserLoggedIn" title="SIP">
     <v-layout justify-center>
-    <div v-if="isSip()" class="title">SIP Domain: oxe-{{this.usersips[0].vlabname.toLowerCase()}}.ale-aapp.com</div>
+    <div v-if="!isSip()" class="title">SIP Domain: oxe-{{this.usersips[0].vlabname.toLowerCase()}}.ale-aapp.com</div>
     </v-layout>
     <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="usersips">
       <template v-slot:items="props">

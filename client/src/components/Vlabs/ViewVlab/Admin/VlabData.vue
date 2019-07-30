@@ -44,14 +44,16 @@
             label="User available"
             outline>
           </v-select>
-          <v-select v-if="isUserLoggedIn && !this.vlabuser"
-            :items="licences"
-            item-text="licence"
-            v-model="dayslicence"
+          <v-text-field
             label="Number of days"
-            outline>
-          </v-select>
+            v-model="dayslicence"
+            :rules="[required]"
+            outline
+            clearable
+          >
+          </v-text-field>
             </v-layout>
+            <v-layout justify-center align-center>
           <v-btn
             v-if="isUserLoggedIn && !this.vlabuser"
             class="grey darken-1 font-weight-bold"
@@ -60,8 +62,14 @@
           <v-btn
             v-if="isUserLoggedIn && this.vlabuser"
             class="grey darken-1 font-weight-bold"
+            @click="addDays"
+          >Add Days</v-btn>
+          <v-btn
+            v-if="isUserLoggedIn && this.vlabuser"
+            class="grey darken-1 font-weight-bold"
             @click="deleteUser"
           >Delete User</v-btn>
+            </v-layout>
           </v-layout>
   </panel>
 </template>
@@ -79,7 +87,6 @@ export default {
   },
   data() {
     return {
-      licences: [30, 60, 90, 120, 150, 180],
       vlabuser: null,
       users: [],
       userassign: null,
@@ -106,7 +113,8 @@ export default {
       pagination: {
         sortBy: "createAt",
         descending: true
-      }
+      },
+      required: value => !!value || "Required."
     };
   },
   async mounted() {
@@ -135,6 +143,32 @@ export default {
     }
   },
   methods: {
+    async addDays() {
+      let lab = (await VlabService.getVlab(this.vlabuser.VlabId)).data
+      let usertmp = (await UserService.getUser(this.vlabuser.UserId)).data
+      if (usertmp.dayleft !== 0) {
+        usertmp.dayleft = usertmp.dayleft + parseInt(this.dayslicence, 10)
+      } else {
+        usertmp.dayleft = parseInt(this.dayslicence, 10)
+      }
+      if (lab[0].dayleft !== 0) {
+        lab[0].dayleft = lab[0].dayleft + parseInt(this.dayslicence, 10)
+      } else {
+        lab[0].dayleft = parseInt(this.dayslicence, 10)
+      }
+      await UserService.put(usertmp)
+      await VlabService.put({
+        idopennebula: lab[0].idopennebula,
+        ownername: lab[0].ownername,
+        groupename: lab[0].groupname,
+        name: lab[0].name,
+        nameparse: lab[0].nameparse,
+        vlanid: lab[0].vlanid,
+        assign: lab[0].assign,
+        dayleft: lab[0].dayleft
+      }, this.vlabuser.VlabId)
+      this.vlab = (await VlabService.getVlab(this.vlabuser.VlabId)).data
+    },
     async setUser() {
       try {
         let id = 0
@@ -143,14 +177,11 @@ export default {
             id = this.users[j].id
           }
         }
-        this.vlabuser = (await VlabUserService.post({
-          VlabId: this.vlab[0].id,
-          UserId: id
-        })).data;
         const vlabId = this.route.params.vlabId;
         this.vlab = (await VlabService.getVlab(vlabId)).data
         const newUser = (await UserService.getUser(id)).data
-        newUser.dayleft = this.dayslicence
+        newUser.assign = true
+        newUser.dayleft = parseInt(this.dayslicence, 10)
         await UserService.put(newUser)
         await VlabService.put({
           idopennebula: this.vlab[0].idopennebula,
@@ -160,9 +191,14 @@ export default {
           nameparse: this.vlab[0].nameparse,
           vlanid: this.vlab[0].vlanid,
           assign: true,
-          dayleft: this.dayslicence
+          dayleft: parseInt(this.dayslicence, 10)
         }, vlabId)
+        this.vlabuser = (await VlabUserService.post({
+          VlabId: this.vlab[0].id,
+          UserId: id
+        })).data;
         this.vlab = (await VlabService.getVlab(vlabId)).data
+        await document.location.reload(true)
       } catch (err) {
         console.log(err);
       }
@@ -177,6 +213,7 @@ export default {
         }
         const newUser = (await UserService.getUser(id)).data
         newUser.dayleft = 0
+        newUser.assign = false
         await UserService.put(newUser)
         this.vlabuser = await VlabUserService.delete(this.vlabuser.id);
         this.vlabuser = null;
@@ -191,13 +228,14 @@ export default {
           assign: false,
           dayleft: 0
         }, vlabId)
+        await document.location.reload(true)
         this.vlab = (await VlabService.getVlab(vlabId)).data
       } catch (err) {
         console.log(err);
       }
     },
     needCredential(time) {
-      if (time <= 1) {
+      if (time < 1) {
         return "Need credential";
       }
       return time;
