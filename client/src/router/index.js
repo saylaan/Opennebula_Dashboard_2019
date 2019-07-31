@@ -78,11 +78,11 @@ export default new Router({
       name: 'users',
       component: Users
     },
-    {
-      path: '/users/:userId',
-      name: 'user',
-      component: ViewUser
-    },
+    // {
+    //   path: '/users/:userId',
+    //   name: 'user',
+    //   component: ViewUser
+    // },
     {
       path: '/users/create',
       name: 'user-create',

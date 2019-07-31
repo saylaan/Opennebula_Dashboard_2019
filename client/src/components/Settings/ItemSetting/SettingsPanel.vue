@@ -290,7 +290,7 @@ export default {
       } else {
         const areAllFieldsFilledIn = Object.keys(this.userview).every(
           key => {
-            if (key === 'admin' || key === 'companyname' || key === 'firstname' || key === 'lastname' || key === 'email' || key === 'emailactive' || key === 'active_hash' || key === 'dayleft' || key === 'assign' || key === 'archive') {
+            if (key === 'admin' || key === 'companyname' || key === 'firstname' || key === 'lastname' || key === 'email' || key === 'emailactive' || key === 'active_hash' || key === 'dayleft' || key === 'assign' || key === 'startlicence' || key === 'endlicence' || key === 'archive') {
               return (true)
             }
             console.log(key)

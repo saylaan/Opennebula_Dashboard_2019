@@ -1,6 +1,6 @@
 <template>
   <v-layout v-if="isUserLoggedIn && admin" column>
-    <panel title="Users">
+    <panel title="Client">
     <v-btn
       class="grey darken-3"
       slot="action"
@@ -20,8 +20,6 @@
           <td class="text-xs-left">{{props.item.companyname}}</td>
           <td class="text-xs-left">{{props.item.lastname}}</td>
           <td class="text-xs-left">{{props.item.firstname}}</td>
-          <td class="text-xs-left">{{isAdmin(props.item.admin)}}</td>
-          <td class="text-xs-left">{{isAssign(props.item.dayleft)}}</td>
           <v-layout row justify-center>
             <v-btn
               class="grey darken-1 font-weight-bold"
@@ -44,6 +42,8 @@
 <script>
 import { mapState } from "vuex";
 import UserService from "@/services/User/UserService"
+import VlabService from "@/services/Vlab/VlabService"
+import VlabUserService from '@/services/Vlab/VlabUserService'
 import Swal from 'sweetalert2'
 
 export default {
@@ -65,14 +65,6 @@ export default {
         {
           text: "Firstname",
           value: "firstname"
-        },
-        {
-          text: "Status",
-          value: "status"
-        },
-        {
-          text: "Assigned",
-          value: "assigned"
         }
       ],
       pagination: {
@@ -82,18 +74,22 @@ export default {
       users: []
     }
   },
-  methods: {
-    isAssign(dayleft) {
-      if (dayleft !== 0) {
-        return ('YES')
-      } else {
-        return ('NO')
+  async mounted() {
+    this.users = (await UserService.index()).data;
+    for (let i = 0, j = 0; i !== this.users.length; i++) {
+      console.log(this.users.email, this.users[i].admin)
+      console.log(this.users.email, this.users[i].archive)
+      if (!this.users[i].admin) {
+        this.users.splice(i, 1)
+        i--
       }
-    },
+    }
+  },
+  methods: {
     async archiveUser(id) {
       try {
         const {value: opt} = await Swal.fire({
-          title: 'Are you sure you want to delete the User? It will be deleted permanently',
+          title: 'Are you sure you want to archvive the User? It will be deassign',
           input: 'radio',
           inputOptions: [
             'Yes',
@@ -101,18 +97,32 @@ export default {
           ]
         })
         if (opt === "0") {
-          // const userdel = (await UserService.delete(id)).data
-          // this.users = (await UserService.index()).data;
+          const newUser = (await UserService.getUser(id)).data
+          newUser.dayleft = 0
+          newUser.assign = false
+          newUser.archive = true
+          await UserService.put(newUser)
+          let vlabs = (await VlabService.getAllVlabs()).data
+          vlabs.forEach(async vlab => {
+            if (vlab.ownername === newUser.email) {
+              let vlabuser = (await VlabUserService.getVlabUser(vlab.id)).data
+              vlabuser = await VlabUserService.delete(vlabuser.id);
+              await VlabService.put({
+                idopennebula: vlab.idopennebula,
+                ownername: "oneadmin",
+                groupename: vlab.groupname,
+                name: vlab.name,
+                nameparse: vlab.nameparse,
+                vlanid: vlab.vlanid,
+                assign: false,
+                dayleft: 0
+              }, vlab.id)
+              await document.location.reload(true)
+            }
+          })
         }
       } catch (err) {
         console.log(err)
-      }
-    },
-    isAdmin(admin) {
-      if (admin) {
-        return ('admin')
-      } else {
-        return 'user'
       }
     },
     async mailTo(email) {
@@ -121,15 +131,15 @@ export default {
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "admin"])
-  },
-  watch: {
-    "$route.query.find": {
-      immediate: true,
-      async handler(value) {
-        this.users = (await UserService.index(value)).data;
-      }
-    }
   }
+  // watch: {
+  //   "$route.query.find": {
+  //     immediate: true,
+  //     async handler(value) {
+  //       this.users = (await UserService.index(value)).data;
+  //     }
+  //   }
+  // }
 };
 </script>
 

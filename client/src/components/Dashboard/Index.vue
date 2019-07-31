@@ -23,7 +23,7 @@
       </v-flex>
     </v-layout>
     <v-layout class="mt-5" v-if="isUserLoggedIn && !admin" justify-center row>
-            <v-flex xs6>
+      <v-flex xs6>
         <v-layout column justify-center class="mt-2">
           <v-flex xs6>
             <vlab-client-panel/>
