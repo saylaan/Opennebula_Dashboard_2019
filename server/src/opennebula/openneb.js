@@ -54,9 +54,9 @@ const checkLicence = async () => {
                 id: vlabuser.UserId
               }
             }).then(async user => {
-              user.dayleft = user.dayleft - 1
               await User.update({
-                dayleft: user.dayleft - 1
+                dayleft: user.dayleft - 1,
+                archive: true
               }, {
                 where: {
                   id: user.id
