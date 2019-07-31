@@ -77,9 +77,7 @@ export default {
   async mounted() {
     this.users = (await UserService.index()).data;
     for (let i = 0, j = 0; i !== this.users.length; i++) {
-      console.log(this.users.email, this.users[i].admin)
-      console.log(this.users.email, this.users[i].archive)
-      if (!this.users[i].admin) {
+      if (this.users[i].admin === true || this.users[i].archive === true) {
         this.users.splice(i, 1)
         i--
       }
@@ -98,28 +96,30 @@ export default {
         })
         if (opt === "0") {
           const newUser = (await UserService.getUser(id)).data
+          if (newUser.dayleft !== 0) {
+            let vlabs = (await VlabService.getAllVlabs()).data
+            vlabs.forEach(async vlab => {
+              if (vlab.ownername === newUser.email) {
+                let vlabuser = (await VlabUserService.getVlabUser(vlab.id)).data
+                vlabuser = await VlabUserService.delete(vlabuser.id);
+                await VlabService.put({
+                  idopennebula: vlab.idopennebula,
+                  ownername: "oneadmin",
+                  groupename: vlab.groupname,
+                  name: vlab.name,
+                  nameparse: vlab.nameparse,
+                  vlanid: vlab.vlanid,
+                  assign: false,
+                  dayleft: 0
+                }, vlab.id)
+              }
+            })
+          }
           newUser.dayleft = 0
           newUser.assign = false
           newUser.archive = true
           await UserService.put(newUser)
-          let vlabs = (await VlabService.getAllVlabs()).data
-          vlabs.forEach(async vlab => {
-            if (vlab.ownername === newUser.email) {
-              let vlabuser = (await VlabUserService.getVlabUser(vlab.id)).data
-              vlabuser = await VlabUserService.delete(vlabuser.id);
-              await VlabService.put({
-                idopennebula: vlab.idopennebula,
-                ownername: "oneadmin",
-                groupename: vlab.groupname,
-                name: vlab.name,
-                nameparse: vlab.nameparse,
-                vlanid: vlab.vlanid,
-                assign: false,
-                dayleft: 0
-              }, vlab.id)
-              await document.location.reload(true)
-            }
-          })
+          await document.location.reload(true)
         }
       } catch (err) {
         console.log(err)

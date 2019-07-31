@@ -97,7 +97,7 @@ export default {
     async archiveUser(id) {
       try {
         const {value: opt} = await Swal.fire({
-          title: 'Are you sure you want to archvive the User? It will be deassign',
+          title: 'Are you sure you want to unarchive the user or admin?',
           input: 'radio',
           inputOptions: [
             'Yes',
@@ -105,8 +105,12 @@ export default {
           ]
         })
         if (opt === "0") {
-          // const userdel = (await UserService.delete(id)).data
-          // this.users = (await UserService.index()).data;
+          const newUser = (await UserService.getUser(id)).data
+          newUser.dayleft = 0
+          newUser.assign = false
+          newUser.archive = false
+          await UserService.put(newUser)
+          await document.location.reload(true)
         }
       } catch (err) {
         console.log(err)

@@ -75,7 +75,7 @@ export default {
   async mounted() {
     this.users = (await UserService.index()).data;
     for (let i = 0, j = 0; i !== this.users.length; i++) {
-      if (!this.users[i].admin) {
+      if (!this.users[i].admin || this.users[i].archive) {
         this.users.splice(i, 1)
         i--
       }
@@ -85,7 +85,7 @@ export default {
     async archiveUser(id) {
       try {
         const {value: opt} = await Swal.fire({
-          title: 'Are you sure you want to archvive the User? It will be deassign',
+          title: 'Are you sure you want to archvive the Admin?',
           input: 'radio',
           inputOptions: [
             'Yes',
@@ -93,8 +93,12 @@ export default {
           ]
         })
         if (opt === "0") {
-          // const userdel = (await UserService.delete(id)).data
-          // this.users = (await UserService.index()).data;
+          const newUser = (await UserService.getUser(id)).data
+          newUser.dayleft = 0
+          newUser.assign = false
+          newUser.archive = true
+          await UserService.put(newUser)
+          await document.location.reload(true)
         }
       } catch (err) {
         console.log(err)
