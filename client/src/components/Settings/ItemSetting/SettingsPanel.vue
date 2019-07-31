@@ -210,6 +210,7 @@
       <v-layout class="mt-2" justify-center align-center row>
     <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save</v-btn>
     <v-btn elevation-24 large @click="cancelSettings()" class="grey darken-1 font-weight-bold">Cancel</v-btn>
+        <v-icon @click="undoSettings()">refresh</v-icon>
       </v-layout>
     </v-layout>
     </form>
@@ -289,7 +290,7 @@ export default {
       } else {
         const areAllFieldsFilledIn = Object.keys(this.userview).every(
           key => {
-            if (key === 'admin' || key === 'companyname' || key === 'firstname' || key === 'lastname' || key === 'email' || key === 'emailactive' || key === 'active_hash' || key === 'dayleft') {
+            if (key === 'admin' || key === 'companyname' || key === 'firstname' || key === 'lastname' || key === 'email' || key === 'emailactive' || key === 'active_hash' || key === 'dayleft' || key === 'assign') {
               return (true)
             }
             console.log(key)
@@ -324,6 +325,9 @@ export default {
         this.error = null
         if (!this.admin) {
           this.userview = (await UserService.getUser(this.user.id)).data;
+          this.oldPassword = null
+          this.newPassword = null
+          this.confirmPassword = null
         } else {
           this.adminview = (await UserService.getUser(this.user.id)).data;
           this.confirmEmail = this.adminview.email
@@ -333,7 +337,7 @@ export default {
       }
     },
     async cancelSettings() {
-      if (!admin) {
+      if (!this.admin) {
         this.$router.push({name: "dashboard"})
       } else {
         this.$router.push({name: "vlabs"})
