@@ -19,7 +19,7 @@
                   ></h2>
                   <div v-text="`${more}`">{{more}}
                   </div>
-                  <a href="dspp@al-enterprise.com" class="font-weight-bold">dspp@al-enterprise.com</a>
+                  <a href='mailto:dspp@al-enterprise.com?subject=INFO' class="font-weight-bold">dspp@al-enterprise.com</a>
                 </v-card-title>
           </v-card>
         </v-flex>

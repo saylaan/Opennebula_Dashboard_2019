@@ -13,12 +13,12 @@
       >
         <v-icon>add</v-icon>
       </v-btn> -->
-      <v-data-table :headers="headers" hide-actions :items="vlabs" class="elevation-1">
+      <v-data-table :headers="headers" :items="vlabs" class="elevation-1">
         <!-- <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear> -->
         <template v-slot:items="props">
           <td class="text-xs-left">{{props.item.name}}</td>
           <td class="text-xs-left">{{props.item.ownername}}</td>
-          <td class="text-xs-left">{{needCredential(props.item.dayleft)}}</td>
+          <td class="text-xs-left">{{needCredential(props.item.dayleft, props.item.assign)}}</td>
           <td class="text-xs-left">{{props.item.assign ? 'YES': 'NO'}}</td>
           <v-layout justify-center>
                       <v-btn
@@ -52,8 +52,8 @@ export default {
           value: "ownername"
         },
         {
-          text: "Day left",
-          value: "dayleft"
+          text: "Remaining days",
+          value: "remainingdays"
         },
         {
           text: "Assign",
@@ -71,9 +71,9 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   methods: {
-    needCredential(time) {
-      if (time < 1) {
-        return "Need licence";
+    needCredential(time, assign) {
+      if (!assign) {
+        return "-";
       }
       return time;
     }

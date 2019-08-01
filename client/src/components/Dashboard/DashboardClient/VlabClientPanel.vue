@@ -64,7 +64,7 @@ export default {
   methods: {
     needCredential(time) {
       if (time < 1) {
-        return "Need credential";
+        return "0";
       }
       return time;
     }

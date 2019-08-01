@@ -4,7 +4,7 @@
         <template v-slot:items="props">
           <td class="text-xs-left">{{props.item.nameparse}}</td>
           <td class="text-xs-left">{{props.item.ownername}}</td>
-          <td class="text-xs-left">{{needCredential(props.item.dayleft)}}</td>
+          <td class="text-xs-left">{{needCredential(props.item.dayleft, props.item.assign)}}</td>
           <td class="text-xs-left">{{props.item.assign ? 'YES': 'NO'}}</td>
         </template>
       </v-data-table>
@@ -234,9 +234,9 @@ export default {
         console.log(err);
       }
     },
-    needCredential(time) {
-      if (time < 1) {
-        return "Need credential";
+    needCredential(time, assign) {
+      if (!assign) {
+        return "-";
       }
       return time;
     }

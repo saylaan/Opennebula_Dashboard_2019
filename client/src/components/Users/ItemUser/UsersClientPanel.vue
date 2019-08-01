@@ -14,12 +14,12 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-      <v-data-table :headers="headers" hide-actions :items="users">
+      <v-data-table :headers="headers" :items="users">
         <template v-slot:items="props">
           <a :href="'mailto:' + props.item.email + '?subject=INFO'" class="text-xs-left">{{props.item.email}}</a>
           <td class="text-xs-left">{{props.item.companyname}}</td>
-          <td class="text-xs-left">{{props.item.lastname}}</td>
           <td class="text-xs-left">{{props.item.firstname}}</td>
+          <td class="text-xs-left">{{props.item.lastname}}</td>
           <v-layout row justify-center>
             <v-btn
               class="grey darken-1 font-weight-bold"
@@ -59,12 +59,12 @@ export default {
           value: "company"
         },
         {
-          text: "Lastname",
-          value: "lastname"
-        },
-        {
           text: "Firstname",
           value: "firstname"
+        },
+        {
+          text: "Lastname",
+          value: "lastname"
         }
       ],
       pagination: {

@@ -20,7 +20,7 @@
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat v-if="isUserLoggedIn" @click="navToSetting({name: 'settings'})" class="body-1s font-weight-bold"> {{this.user.lastname}} {{this.user.firstname}}</v-btn>
+      <v-btn flat v-if="isUserLoggedIn" @click="navToSetting({name: 'settings'})" class="body-1s font-weight-bold"> {{this.user.firstname}} {{this.user.lastname}}</v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
       <v-btn v-if="!admin && isUserLoggedIn" :href="'mailto:support@vlab.aapp.al-enterprise.com?subject=VLAB'" icon flat x-large>

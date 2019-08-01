@@ -2,6 +2,7 @@ const { Vlab,
   UserOpenNebula,
   Vm,
   VmVlab,
+  VmUser,
   VlabUser } = require('../../models')
 const openneb = require('../../opennebula/openneb')
 const datetime = require('date-and-time')
@@ -124,29 +125,31 @@ module.exports = {
               id: vmvlab.VmId
             }
           })
-          const vmon = await openneb.one.getVM(vm.idopennebula)
-          UserOn.forEach(async useron => {
-            if (useron.username === req.body.ownername) {
-              console.log('Is EXISTING IN DB')
-              const newVm = {
-                idopennebula: vm.idopennebula,
-                ownername: useron.username,
-                groupname: vm.groupname,
-                name: vm.name,
-                type: vm.type,
-                active: vm.active
-              }
-              await Vm.update(newVm, {
-                where: {
-                  id: vm.id
+          if (vm.type.indexOf('_') === -1) {
+            const vmon = await openneb.one.getVM(vm.idopennebula)
+            UserOn.forEach(async useron => {
+              if (useron.username === req.body.ownername) {
+                console.log('Is EXISTING IN DB')
+                const newVm = {
+                  idopennebula: vm.idopennebula,
+                  ownername: useron.username,
+                  groupname: vm.groupname,
+                  name: vm.name,
+                  type: vm.type,
+                  active: vm.active
                 }
-              })
-              await vmon.chown(useron.idopennebula, (err, data) => {
-                console.log("Changing user on opennebula done")
-                console.log(data)
-              })
-            }
-          })
+                await Vm.update(newVm, {
+                  where: {
+                    id: vm.id
+                  }
+                })
+                await vmon.chown(useron.idopennebula, (err, data) => {
+                  console.log("Changing user on opennebula done")
+                  console.log(data)
+                })
+              }
+            })
+          }
         })
       }
       res.send(vlab)

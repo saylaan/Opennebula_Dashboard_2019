@@ -107,7 +107,7 @@ module.exports = {
                   VmId: vm.id
                 }
               })
-              if (!isvm) {
+              if (!isvm && vm.type.indexOf('_') === -1) {
                 await VmUser.create({
                   UserId: UserId,
                   VmId: vm.id
@@ -268,6 +268,39 @@ module.exports = {
             }
           }).then(async (vms) => {
             vms.forEach(async (vm) => {
+              const vmon = await one.getVM(vm.idopennebula)
+              vmon.info((err, data) => {
+                if (err) {
+                  console.log(err)
+                } else {
+                  const temp = JSON.parse(JSON.stringify(data.VM.TEMPLATE.SNAPSHOT))
+                  if (temp[1]) {
+                    for (var i = 0; temp[i] !== undefined; i++) {
+                        if (temp[i].NAME === 'DEFAULT') {
+                          vmon.snapshotrevert(parseInt(temp[i].SNAPSHOT_ID, 10), (err, data) => {
+                            if (err) {
+                              console.log(err)
+                            } else {
+                              console.log('The snapshotrevert has been process')
+                              console.log(data)
+                            }
+                        })
+                      }
+                    }
+                  } else {
+                    if (temp.NAME === 'DEFAULT') {
+                      vmon.snapshotrevert(parseInt(temp.SNAPSHOT_ID, 10), (err, data) => {
+                        if (err) {
+                          console.log(err)
+                        } else {
+                          console.log('The snapshotrevert has been process')
+                          console.log(data)
+                        }
+                      })
+                    }
+                  }
+                }
+              })
               const isvm = await VmUser.findOne({
                 where: {
                   UserId: vlabuser.UserId,
@@ -275,25 +308,7 @@ module.exports = {
                 }
               })
               if (isvm) {
-                const vmon = await one.getVM(vm.idopennebula)
-                vmon.info((err, data) => {
-                  if (err) {
-                    console.log(err)
-                  } else {
-                    console.log(data.VM.TEMPLATE.SNAPSHOT)
-                    if (data.VM.TEMPLATE.SNAPSHOT.NAME === 'DEFAULT') {
-                      vmon.snapshotrevert(parseInt(data.VM.TEMPLATE.SNAPSHOT.SNAPSHOT_ID, 10), (err, data) => {
-                        if (err) {
-                          console.log(err)
-                        } else {
-                          console.log('The snapshotrevert has been process')
-                          console.log(data)
-                        }
-                    })
-                  }
-                }
-              })
-              await isvm.destroy()
+                await isvm.destroy()
               }
             })
           })
