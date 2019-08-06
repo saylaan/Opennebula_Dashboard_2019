@@ -1,26 +1,20 @@
 <template>
-  <v-layout class="mt-5" v-if="isUserLoggedIn && admin" justify-center row>
-    <v-flex xs6>
-    <v-layout column justify-center class="mt-2">
-      <v-flex xs6>
+<v-container fluid grid-list-md justify-center>
+  <v-layout class="mt-5" v-if="isUserLoggedIn && admin" justify-center wrap>
+    <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1">
         <vlab-data/>
       </v-flex>
-      <v-flex xs6 class="mt-2">
+      <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1 ml-1">
         <vlab-sip/>
       </v-flex>
-    </v-layout>
-    </v-flex>
-    <v-flex xs6>
-    <v-layout column justify-center class="mt-2 ml-2">
-      <v-flex xs6>
+      <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1">
         <vlab-url/>
       </v-flex>
-      <v-flex xs6 class="mt-2">
+      <v-flex d-flex fill-height xs12 sm8 md5 class="ml-1 mt-1">
         <vlab-vm/>
       </v-flex>
-    </v-layout>
-    </v-flex>
   </v-layout>
+</v-container>
 </template>
 
 <script>

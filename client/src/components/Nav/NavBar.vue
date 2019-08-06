@@ -1,65 +1,64 @@
 <template>
-  <v-layout column @mouseover="isMini()">
-  <v-navigation-drawer
+  <v-layout @mouseover="isMini()">
+  <v-navigation-drawer 
       :width="170"
       v-model="drawer.model"
       :permanent="drawer.type === 'permanent'"
-      :temporary="drawer.type === 'temporary'"
       :clipped="drawer.clipped"
       :floating="drawer.floating"
       :mini-variant="drawer.mini"
-      absolute
       overflow
       app
       :dark="dark"
   >
     <v-list>
-      <v-list-tile v-if="isUserLoggedIn && !admin" class="mt-3" title="test" @click="navToDashboard({name: 'dashboard'})"
+      <v-list-item v-if="isUserLoggedIn && !admin" class="mt-3" title="test" @click="navToDashboard({name: 'dashboard'})"
       :class="active.one">
-        <v-list-tile-action>
-          <v-icon x-large>dashboard</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>Dashboard</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile v-if="admin || (isUserLoggedIn && nbvlab > 1)" class="mt-2" @click="navToVlab({name: 'vlabs'})"
+        <v-list-item-action>
+          <v-icon>dashboard</v-icon>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>Dashboard</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item v-if="admin || (isUserLoggedIn && nbvlab > 1)" class="mt-2" @click="navToVlab({name: 'vlabs'})"
       :class="active.two">
-        <v-list-tile-action>
-          <v-icon x-large>settings_system_daydream</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>Vlabs</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile class="mt-2" v-if="admin" @click="navToUser({name: 'users'})"
+        <v-list-item-action>
+          <v-icon>settings_system_daydream</v-icon>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>Vlabs</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item class="mt-2" v-if="admin" @click="navToUser({name: 'users'})"
       :class="active.three">
-        <v-list-tile-action>
-          <v-icon x-large>people</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>Users</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile class="mt-2" @click="navToSetting({name: 'settings'})"
+        <v-list-item-action>
+          <v-icon>people</v-icon>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>Users</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item class="mt-2" @click="navToSetting({name: 'settings'})"
       :class="active.four">
-        <v-list-tile-action>
-          <v-icon x-large>settings</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>Settings</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-spacer></v-spacer>
-      <v-list-tile v-if="!admin" class="info mt-5" @click="goToUrl('http://vlab.aapp.al-enterprise.com/doku.php')">
-        <v-list-tile-action>
-          <v-icon x-large>help</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>Help</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        <v-list-item-action>
+          <v-icon>settings</v-icon>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>Settings</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
+    <template v-slot:append>
+      <v-list-item v-if="!admin" class="accent mt-5" @click="goToUrl('http://vlab.aapp.al-enterprise.com/doku.php')">
+        <v-list-item-action>
+          <v-icon x-large>help</v-icon>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>Help</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </template>
   </v-navigation-drawer>
 </v-layout>
 </template>

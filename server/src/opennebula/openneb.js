@@ -35,7 +35,7 @@ const checkLicence = async () => {
         const endlicence = Date.parse(vlab.endlicence)
         const timelicence = endlicence - date
         const nbdays = timelicence / (1000 * 60 * 60 * 24)
-        if (nbdays <= vlab.dayleft - 1) {
+        if (nbdays <= -1) {
         // if (vlab.dayleft - 1 >= nbdays) {
           await Vlab.update({
             dayleft: vlab.dayleft - 1

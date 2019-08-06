@@ -1,7 +1,7 @@
 <template>
-<v-container fluid v-on:keyup.enter="signin">
+<v-container v-on:keyup.enter="signin">
   <v-layout align-center justify-center>
-    <v-flex fill-height elevation-24 xs6 v-if="!isUserLoggedIn">
+    <v-flex elevation-24 xs12 sm8 md4 v-if="!isUserLoggedIn">
       <panel title="Sign in">
         <form name="sandbox-form" autocomplete="on">
           <v-text-field class="mt-5" 
@@ -43,6 +43,7 @@
     </v-flex>
   </v-layout>
 </v-container>
+
 </template>
 
 <script>

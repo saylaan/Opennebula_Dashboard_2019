@@ -1,8 +1,7 @@
 <template>
-  <v-toolbar 
+  <v-app-bar
     :clipped-left="drawer.clipped" 
     app 
-    absolute
     :dark="dark">
     <img
       v-if="!isUserLoggedIn"
@@ -16,21 +15,21 @@
       aspect-ratio="0.9"
       @click="mainNav({name: 'home'})"
     >
-    <v-toolbar-items>
-    </v-toolbar-items>
     <v-spacer></v-spacer>
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat v-if="isUserLoggedIn" @click="navToSetting({name: 'settings'})" class="body-1s font-weight-bold"> {{this.user.firstname}} {{this.user.lastname}}</v-btn>
+    <v-btn v-if="!admin && isUserLoggedIn" :href="'mailto:support@vlab.aapp.al-enterprise.com?subject=VLAB'" icon small x-large>
+      <v-icon>email</v-icon>
+    </v-btn>
+    <v-toolbar-items>
+      <v-btn text v-if="isUserLoggedIn" @click="navToSetting({name: 'settings'})" class="hidden-sm-and-down body-1s font-weight-bold">
+        {{this.user.firstname}} {{this.user.lastname}}
+      </v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
-      <v-btn v-if="!admin && isUserLoggedIn" :href="'mailto:support@vlab.aapp.al-enterprise.com?subject=VLAB'" icon flat x-large>
-        <v-icon>email</v-icon>
-      </v-btn>
-      <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'signin'}" class="body-2 font-weight-bold">Sign in</v-btn>
-      <!-- <v-btn v-if="!isUserLoggedIn" flat :to="{name: 'register'}" class="body-2 font-weight-bold">Register</v-btn> -->
-      <v-btn v-if="isUserLoggedIn" flat @click="logout">Log out</v-btn>
+    <v-btn v-if="!isUserLoggedIn" text :to="{name: 'signin'}" class="body-2 font-weight-bold">Sign in</v-btn>
+    <!-- <v-btn v-if="!isUserLoggedIn" small :to="{name: 'register'}" class="body-2 font-weight-bold">Register</v-btn> -->
+    <v-btn v-if="isUserLoggedIn" text @click="logout" class="body-1s font-weight-bold">Log out</v-btn>
     </v-toolbar-items>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>

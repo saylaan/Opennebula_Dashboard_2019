@@ -1,11 +1,16 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Vlab view">
-      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlab">
-        <template v-slot:items="props">
-          <td class="text-xs-left">{{props.item.nameparse}}</td>
-          <td class="text-xs-left">{{props.item.ownername}}</td>
-          <td class="text-xs-left">{{needCredential(props.item.dayleft, props.item.assign)}}</td>
-          <td class="text-xs-left">{{props.item.assign ? 'YES': 'NO'}}</td>
+      <v-data-table :headers="headers" 
+      hide-default-footer
+      :loading="isData(vlab)"
+      loading-text="No data for the moment"
+      :items-per-page="1"
+      :items="vlab">
+        <template v-slot:item.dayleft="{item}">
+          {{needCredential(item.dayleft, item.assign)}}
+        </template>
+        <template v-slot:item.assign="{item}">
+          <v-chip :color="getWarning(item.dayleft)" text-color="white">{{getTypeWarning(item.dayleft)}}</v-chip>
         </template>
       </v-data-table>
     <!-- <v-divider></v-divider>
@@ -66,7 +71,7 @@
           >Add Days</v-btn>
           <v-btn
             v-if="isUserLoggedIn && this.vlabuser"
-            class="grey darken-1 font-weight-bold"
+            class="grey darken-1 font-weight-bold ml-2"
             @click="deleteUser"
           >Delete User</v-btn>
             </v-layout>
@@ -93,27 +98,11 @@ export default {
       vlab: [],
       dayslicence: 30,
       headers: [
-        {
-          text: "Name",
-          value: "nameparse"
-        },
-        {
-          text: "Owner name",
-          value: "ownername"
-        },
-        {
-          text: "Remaining days",
-          value: "dayleft"
-        },
-        {
-          text: "Assigned",
-          value: "assign"
-        }
+        {text: "Name", value: "nameparse"},
+        {text: "Owner name", value: "ownername"},
+        {text: "Remaining days", value: "dayleft", align: "center"},
+        {text: "", value: "assign"}
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       required: value => !!value || "Required."
     };
   },
@@ -143,6 +132,37 @@ export default {
     }
   },
   methods: {
+    needCredential(time, assign) {
+      if (!assign) {
+        return "-";
+      }
+      return time;
+    },
+    getWarning(time) {
+      if (time < 3) {
+        return 'red'
+      } else if (time >= 3 && time < 7) {
+        return 'orange'
+      } else {
+        return 'green'
+      }
+    },
+    isData(vlabs) {
+      if (vlabs) {
+        return (false)
+      } else {
+        return (true)
+      }
+    },
+    getTypeWarning(time) {
+      if (time < 3) {
+        return 'High'
+      } else if (time >= 3 && time < 7) {
+        return 'Medium'
+      } else {
+        return 'Low'
+      }
+    },
     async addDays() {
       let lab = (await VlabService.getVlab(this.vlabuser.VlabId)).data
       let usertmp = (await UserService.getUser(this.vlabuser.UserId)).data
@@ -168,6 +188,7 @@ export default {
         dayleft: lab[0].dayleft
       }, this.vlabuser.VlabId)
       this.vlab = (await VlabService.getVlab(this.vlabuser.VlabId)).data
+      await document.location.reload(true)
     },
     async setUser() {
       try {
@@ -233,22 +254,11 @@ export default {
       } catch (err) {
         console.log(err);
       }
-    },
-    needCredential(time, assign) {
-      if (!assign) {
-        return "-";
-      }
-      return time;
     }
   }
 };
 </script>
 
 <style scoped>
-.vlab {
-  padding: 20px;
-  overflow: hidden;
-  min-width: 200px;
-}
 
 </style>

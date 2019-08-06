@@ -1,11 +1,13 @@
 <template>
   <panel v-if="isUserLoggedIn && !admin" title="Vlab">
       <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabuser">
-        <template v-slot:items="props">
+        <!-- <template v-slot:items="props">
           <td class="text-xs-left">{{props.item.nameparse}}</td>
           <td class="text-xs-left">{{needCredential(props.item.dayleft)}}</td>
-          <td class="text-xs-left">{{props.item.assign ? 'YES': 'NO'}} </td>
-        </template>
+        </template> -->
+          <tempalte v-slot:item.dayleft="{ item }">
+          <v-chip class="ma-2" text-color="white" :color="getWarning(item.dayleft)"></v-chip>
+          </tempalte>"
       </v-data-table>
   </panel>
 </template>
@@ -67,6 +69,15 @@ export default {
         return "0";
       }
       return time;
+    },
+    getWarning(time) {
+      if (time <= 3) {
+        return "red"
+      } else if (time > 3 && time <= 7) {
+        return "orange"
+      } else {
+        return "green"
+      }
     }
   }
 };

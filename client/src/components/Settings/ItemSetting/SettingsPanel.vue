@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center v-on:keyup.enter="saveSettings">
+  <v-layout v-on:keyup.enter="saveSettings">
   <panel v-if="isUserLoggedIn" title="Setting">
     <form class="mt-5">
     <v-text-field
@@ -209,7 +209,7 @@
     <span class="danger-alert">{{error}}</span>
       <v-layout class="mt-2" justify-center align-center row>
     <v-btn elevation-24 large @click="saveSettings()" class="grey darken-1 font-weight-bold">Save</v-btn>
-    <v-btn elevation-24 large @click="cancelSettings()" class="grey darken-1 font-weight-bold">Cancel</v-btn>
+    <v-btn elevation-24 large @click="cancelSettings()" class="grey darken-1 font-weight-bold ml-1">Cancel</v-btn>
         <v-icon @click="undoSettings()">refresh</v-icon>
       </v-layout>
     </v-layout>
