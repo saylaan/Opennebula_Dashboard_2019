@@ -3,4 +3,5 @@ client/src/services/Api.js
 server/src/app.js
 server/src/password/axiosSIP.js
 server/src/password/HandlingPwd.js
+server/seed
 tabtracker.sqlite
