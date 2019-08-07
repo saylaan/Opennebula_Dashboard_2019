@@ -1,6 +1,7 @@
 <template>
   <panel v-if="isUserLoggedIn && admin" title="Vlab view">
-      <v-data-table :headers="headers" 
+      <v-data-table
+      :headers="headers" 
       hide-default-footer
       :loading="isData(vlab)"
       loading-text="No data for the moment"
@@ -10,7 +11,7 @@
           {{needCredential(item.dayleft, item.assign)}}
         </template>
         <template v-slot:item.assign="{item}">
-          <v-chip :color="getWarning(item.dayleft)" text-color="white">{{getTypeWarning(item.dayleft)}}</v-chip>
+          <v-chip :color="getWarning(item.dayleft)" text-color="white"></v-chip>
         </template>
       </v-data-table>
     <!-- <v-divider></v-divider>
@@ -152,15 +153,6 @@ export default {
         return (false)
       } else {
         return (true)
-      }
-    },
-    getTypeWarning(time) {
-      if (time < 3) {
-        return 'High'
-      } else if (time >= 3 && time < 7) {
-        return 'Medium'
-      } else {
-        return 'Low'
       }
     },
     async addDays() {

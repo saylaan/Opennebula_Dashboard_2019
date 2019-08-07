@@ -13,11 +13,17 @@
     >
       <v-icon>add</v-icon>
     </v-btn> -->
-      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabvms">
-        <template v-slot:items="props">
-          <td class="text-xs-left">{{props.item.name}}</td>
-          <td class="text-xs-left">{{props.item.type}}</td>
-          <td class="text-xs-left">{{props.item.active ? 'OK': 'KO'}}</td>
+      <v-data-table
+        :headers="headers"
+        hide-default-footer
+        :loading="isData(vlabvms)"
+        loading-text="No data for the moment"
+        :items-per-page="10"
+        :items="vlabvms"
+        class="elevation-12">
+          <template v-slot:item.active="{item}">
+            <p>{{item.active ? 'OK': 'KO'}}</p>
+          </template>
           <!-- <v-btn
             class="grey darken-1 font-weight-bold"
             :to="{
@@ -27,7 +33,6 @@
                 }
         }"
           >Edit</v-btn> -->
-        </template>
       </v-data-table>
   </panel>
 </template>
@@ -41,29 +46,25 @@ export default {
   data() {
     return {
       headers: [
-        {
-          text: "Name",
-          value: "name"
-        },
-        {
-          text: "Type",
-          value: "type"
-        },
-        {
-          text: "Active",
-          value: "active"
-        }
+        {text: "Name", value: "name"},
+        {text: "Type", value: "type", align: "center"},
+        {text: "Active", value: "active", align: "center"}
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       vlabvms: [],
       vlab: null
     };
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
+  },
+  methods: {
+    isData(data) {
+      if (data) {
+        return (false)
+      } else {
+        return (true)
+      }
+    }
   },
   watch: {
     async vlabvm() {
@@ -91,14 +92,5 @@ export default {
 </script>
 
 <style scoped>
-textarea {
-  width: 80%;
-  font-family: monospace;
-  border: none;
-  height: 200px;
-  border-style: none;
-  border-color: transparent;
-  overflow: auto;
-  padding: 20px;
-}
+
 </style>

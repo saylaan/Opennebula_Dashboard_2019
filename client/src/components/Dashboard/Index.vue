@@ -23,16 +23,16 @@
       </v-flex>
     </v-layout> -->
     <v-layout class="mt-5" v-if="isUserLoggedIn && !admin" justify-center wrap>
-          <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1">
+          <v-flex fill-height xs12 sm10 md5 d-flex class="mt-1">
             <vlab-client-panel/>
           </v-flex>
-          <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1 ml-1">
+          <v-flex fill-height xs12 sm10 md5 d-flex class="mt-1 ml-1">
             <url-client-panel/>
           </v-flex>
-          <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1">
+          <v-flex fill-height xs12 sm10 md5 d-flex class="mt-1">
             <vm-client-panel/>
           </v-flex>
-      <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1 ml-1">
+      <v-flex fill-height xs12 sm10 md5 d-flex class="mt-1 ml-1">
             <sip-client-panel/>
           <!-- <v-flex xs6 class="mt-2">
             <messages-client-panel/>

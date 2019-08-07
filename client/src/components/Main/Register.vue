@@ -1,6 +1,6 @@
 <template>
-  <v-layout class="mt-5" justify-center>
-    <v-flex elevation-24 xs6 v-if="!$store.state.isUserLoggedIn">
+  <v-layout class="mt-5" justify-center align-center>
+    <v-flex elevation-24 xs12 sm8 md6  v-if="!$store.state.isUserLoggedIn">
       <panel title="Register">
         <form name="sandbox-form" autocomplete="off">
           <v-text-field class="mt-5" label="Company name" type="name" v-model="companyname" outline clearable>

@@ -1,29 +1,38 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin" column>
+  <v-layout justify-center>
+    <v-flex xs12 md10>
     <panel title="Archive">
-      <v-data-table :headers="headers" :items="users">
-        <template v-slot:items="props">
-          <a :href="'mailto:' + props.item.email + '?subject=INFO'" class="text-xs-left">{{props.item.email}}</a>
-          <td class="text-xs-left">{{props.item.companyname}}</td>
-          <td class="text-xs-left">{{props.item.firstname}}</td>
-          <td class="text-xs-left">{{props.item.lastname}}</td>
-          <td class="text-xs-left">{{isAdmin(props.item.admin)}}</td>
-          <v-layout row justify-center>
+      <v-data-table
+        :headers="headers" 
+        :items-per-page="10"
+        :loading="isData(users)" 
+        loading-text="No data for the moment"
+        class="elevation-12"
+        :items="users">
+          <template v-slot:item.email="{item}">
+          <a :href="'mailto:' + item.email + '?subject=INFO'" class="text-xs-left">{{item.email}}</a>
+          </template>
+          <template v-slot:item.admin="{item}">
+          <p class="text-xs-left">{{isAdmin(item.admin)}}</p>
+          </template>
+          <template v-slot:item.id="{item}">
+          <v-layout row align-center justify-center>
             <v-btn
-              class="grey darken-1 font-weight-bold"
+              class="grey darken-1 font-weight-bold ml-1 mt-1"
               :to="{
                   name: 'edit-user',
                   params: {
-                    userId: props.item.id}
+                    userId: item.id}
               }"
            >Edit</v-btn>
-            <v-btn @click="archiveUser(props.item.id)"
-              class="grey darken-1 font-weight-bold"
+            <v-btn @click="archiveUser(item.id)"
+              class="grey darken-1 font-weight-bold ml-1 mt-1 "
             >Unarchive</v-btn>
           </v-layout>
-        </template>
+          </template>
       </v-data-table>
     </panel>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -36,31 +45,13 @@ export default {
   data () {
     return {
       headers: [
-        {
-          text: "Email",
-          value: "email"
-        },
-        {
-          text: "Company",
-          value: "company"
-        },
-        {
-          text: "Firstname",
-          value: "firstname"
-        },
-        {
-          text: "Lastname",
-          value: "lastname"
-        },
-        {
-          text: "Status",
-          value: "status"
-        }
+        {text: "Email", value: "email", sortable: false, align: "center"},
+        {text: "Company", value: "companyname", align: "center"},
+        {text: "Firstname", value: "firstname", align: "center"},
+        {text: "Lastname", value: "lastname", align: "center"},
+        {text: "Status", value: "status", align: "center"},
+        {text: "", value: "id"}
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       users: []
     }
   },
@@ -74,6 +65,13 @@ export default {
     }
   },
   methods: {
+    isData(data) {
+      if (data) {
+        return (false)
+      } else {
+        return (true)
+      }
+    },
     isAssign(dayleft) {
       if (dayleft !== 0) {
         return ('YES')

@@ -1,11 +1,16 @@
 <template>
   <panel v-if="isUserLoggedIn" title="VM">
-      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vmusers">
-        <template v-slot:items="props">
-          <td class="text-xs-left">{{props.item.name}}</td>
-          <td class="text-xs-left">{{props.item.type}}</td>
-          <td class="text-xs-left">{{props.item.active ? 'OK': 'KO'}}</td>
-        </template>
+      <v-data-table
+        :headers="headers"
+        hide-default-footer
+        :loading="isData(vmusers)"
+        loading-text="No data for the moment"
+        :items-per-page="10"
+        :items="vmusers"
+        class="elevation-12">
+          <template v-slot:item.active="{item}">
+            <p>{{item.active ? 'OK': 'KO'}}</p>
+          </template>
       </v-data-table>
   </panel>
 </template>
@@ -18,25 +23,21 @@ export default {
   data() {
     return {
       headers: [
-        {
-          text: "Vlab",
-          value: "vlab"
-        },
-        {
-          text: "Type",
-          value: "type"
-        },
-        {
-          text: "Active",
-          value: "active"
-        }
+        {text: "Name", value: "name", align: "left", sortable: false},
+        {text: "Type", value: "type", align: "center"},
+        {text: "Active", value: "active", align: "center"}
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       vmusers: []
     };
+  },
+  methods: {
+    isData(vlabs) {
+      if (vlabs) {
+        return (false)
+      } else {
+        return (true)
+      }
+    }
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
