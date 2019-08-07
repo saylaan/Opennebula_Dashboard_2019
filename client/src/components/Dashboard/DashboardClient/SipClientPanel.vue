@@ -26,7 +26,7 @@ export default {
       headers: [
         {text: "Name", value: "name", sortable: false, align: "left"},
         {text: "Login", value: "login", align: "center"},
-        {text: "Password", value: "passwd", align: "center"},
+        {text: "Password", value: "passwd", align: "center"}
       ],
       usersips: []
     };
