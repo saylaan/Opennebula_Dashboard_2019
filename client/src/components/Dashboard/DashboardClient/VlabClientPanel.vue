@@ -1,13 +1,18 @@
 <template>
   <panel v-if="isUserLoggedIn && !admin" title="Vlab">
-      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabuser">
-        <!-- <template v-slot:items="props">
-          <td class="text-xs-left">{{props.item.nameparse}}</td>
-          <td class="text-xs-left">{{needCredential(props.item.dayleft)}}</td>
-        </template> -->
-          <tempalte v-slot:item.dayleft="{ item }">
-          <v-chip class="ma-2" text-color="white" :color="getWarning(item.dayleft)"></v-chip>
-          </tempalte>"
+      <v-data-table
+        :headers="headers" 
+        hide-default-footer
+        :loading="isData(vlabuser)"
+        loading-text="No data for the moment"
+        :items-per-page="1"
+        :items="vlabuser">
+        <template v-slot:item.dayleft="{item}">
+          {{needCredential(item.dayleft, item.assign)}}
+        </template>
+        <template v-slot:item.assign="{item}">
+          <v-chip :color="getWarning(item.dayleft)" text-color="white"></v-chip>
+        </template>
       </v-data-table>
   </panel>
 </template>
@@ -24,23 +29,11 @@ export default {
   data() {
     return {
       headers: [
-        {
-          text: "Name",
-          value: "nameparse"
-        },
-        {
-          text: "Remaining days",
-          value: "dayleft"
-        },
-        {
-          text: "State",
-          value: "state"
-        }
+        {text: "Name", value: "nameparse", align: "left", sortable: false},
+        {text: "Owner name", value: "ownername", align: "center"},
+        {text: "Remaining days", value: "dayleft", align: "center"},
+        {text: "", value: "assign", align: "center"}
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       vlabuser: []
     };
   },
@@ -64,6 +57,13 @@ export default {
     }
   },
   methods: {
+    isData(vlabs) {
+      if (vlabs) {
+        return (false)
+      } else {
+        return (true)
+      }
+    },
     needCredential(time) {
       if (time < 1) {
         return "0";

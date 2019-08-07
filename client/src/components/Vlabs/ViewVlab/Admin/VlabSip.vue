@@ -16,11 +16,15 @@
     <v-layout justify-center>
     <!-- <div v-if="isSip()" class="title">SIP Domain: oxe-{{this.vlabsips[0].vlabname.toLowerCase()}}.ale-aapp.com</div> -->
     </v-layout>
-      <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="vlabsips">
-        <template v-slot:items="props">
-          <td class="text-xs-left">{{props.item.name}}</td>
-          <td class="text-xs-left">{{props.item.login}}</td>
-          <td class="text-xs-left">{{props.item.passwd}}</td>
+      <v-data-table
+       :headers="headers"
+       hide-default-footer
+       :loading="isData(vlabsips)"
+       loading-text="No data for the moment"
+       :items-per-page="10"
+       :items="vlabsips"
+       class="elevation-12">
+        <template v-slot:item.id="props">
           <v-layout justify-center>
           <v-btn
             class="grey darken-1 font-weight-bold"
@@ -29,7 +33,7 @@
                 params : {
                     sipId: props.item.id
                 }
-        }"
+          }"
           >Edit</v-btn>
           </v-layout>
         </template>
@@ -46,36 +50,24 @@ export default {
   data() {
     return {
       headers: [
-        {
-          text: "Name",
-          value: "name"
-        },
-        {
-          text: "Login",
-          value: "login"
-        },
-        {
-          text: "Password",
-          value: "passwd"
-        }
+        {text: "Name", value: "name", sortable: false, align: "left"},
+        {text: "Login", value: "login", align: "center"},
+        {text: "Password", value: "passwd", align: "center"},
+        {text: "", value: "id", align: "center"}
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       vlabsips: [],
       vlab: null
     };
   },
-  // methods: {
-  //   async isSip() {
-  //     if (this.vlabsips[0]) {
-  //       return (true)
-  //     } else {
-  //       return (false)
-  //     }
-  //   }
-  // },
+  methods: {
+    isData(data) {
+      if (data) {
+        return (false)
+      } else {
+        return (true)
+      }
+    }
+  },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
@@ -105,14 +97,5 @@ export default {
 </script>
 
 <style scoped>
-textarea {
-  width: 80%;
-  font-family: monospace;
-  border: none;
-  height: 200px;
-  border-style: none;
-  border-color: transparent;
-  overflow: auto;
-  padding: 20px;
-}
+
 </style>

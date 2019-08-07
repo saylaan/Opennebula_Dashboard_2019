@@ -1,7 +1,8 @@
 <template>
-  <v-layout v-if="isUserLoggedIn && admin" column>
+  <v-layout justify-center>
+    <v-flex xs12 md10>
     <panel title="Client">
-    <v-btn
+   <v-btn
       class="grey darken-3"
       slot="action"
       :to="{name: 'user-create'}"
@@ -14,31 +15,39 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-      <v-data-table :headers="headers" :items="users">
-        <template v-slot:items="props">
-          <a :href="'mailto:' + props.item.email + '?subject=INFO'" class="text-xs-left">{{props.item.email}}</a>
-          <td class="text-xs-left">{{props.item.companyname}}</td>
-          <td class="text-xs-left">{{props.item.firstname}}</td>
-          <td class="text-xs-left">{{props.item.lastname}}</td>
-          <v-layout row justify-center>
+      <v-data-table
+        :headers="headers" 
+        :items-per-page="5"
+        :loading="isData(users)" 
+        loading-text="No data for the moment"
+        class="elevation-12"
+        :items="users">
+          <template v-slot:item.email="{item}">
+          <a :href="'mailto:' + item.email + '?subject=INFO'" class="text-xs-left">{{item.email}}</a>
+          </template>
+          <template v-slot:item.dayleft="{ item }">
+          <v-chip class="ma-2" text-color="white" :color="getWarning(item.dayleft)"></v-chip>
+          </template>"
+          <template v-slot:item.id="{item}">
+            <v-layout row align-center justify-center>
             <v-btn
-              class="grey darken-1 font-weight-bold"
+              class="grey darken-1 font-weight-bold ml-1 mt-1"
               :to="{
                   name: 'edit-user',
                   params: {
-                    userId: props.item.id}
+                    userId: item.id}
               }"
            >Edit</v-btn>
-            <v-btn @click="archiveUser(props.item.id)"
-              class="grey darken-1 font-weight-bold"
+            <v-btn @click="archiveUser(item.id)"
+              class="grey darken-1 font-weight-bold ml-1 mt-1"
             >Archive</v-btn>
-          </v-layout>
-        </template>
+            </v-layout>
+          </template>
       </v-data-table>
     </panel>
+    </v-flex>
   </v-layout>
 </template>
-
 <script>
 import { mapState } from "vuex";
 import UserService from "@/services/User/UserService"
@@ -50,27 +59,13 @@ export default {
   data () {
     return {
       headers: [
-        {
-          text: "Email",
-          value: "email"
-        },
-        {
-          text: "Company",
-          value: "company"
-        },
-        {
-          text: "Firstname",
-          value: "firstname"
-        },
-        {
-          text: "Lastname",
-          value: "lastname"
-        }
+        {text: "Email", value: "email", sortable: false, align: "center"},
+        {text: "Company", value: "companyname", align: "center"},
+        {text: "Firstname", value: "firstname", align: "center"},
+        {text: "Lastname", value: "lastname", align: "center"},
+        {text: "Remaining days", value: "dayleft", align: "center"},
+        {text: "", value: "id"}
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       users: []
     }
   },
@@ -84,6 +79,22 @@ export default {
     }
   },
   methods: {
+    getWarning(time) {
+      if (time <= 3) {
+        return "red"
+      } else if (time > 3 && time <= 7) {
+        return "orange"
+      } else {
+        return "green"
+      }
+    },
+    isData(data) {
+      if (data) {
+        return (false)
+      } else {
+        return (true)
+      }
+    },
     async archiveUser(id) {
       try {
         const {value: opt} = await Swal.fire({
@@ -144,25 +155,5 @@ export default {
 </script>
 
 <style scoped>
-.user {
-  padding: 20px;
-  height: 100px;
-  overflow: hidden;
-}
 
-.user-companyname {
-  font-size: 20px;
-}
-
-.user-firstname {
-  font-size: 20px;
-}
-
-.user-lastname {
-  font-size: 20px;
-}
-
-.user-purpose {
-  font-size: 20px;
-}
 </style>

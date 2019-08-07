@@ -1,5 +1,7 @@
 <template>
   <v-layout v-on:keyup.enter="saveSettings">
+    <v-flex xs12 md10>
+
   <panel v-if="isUserLoggedIn" title="Setting">
     <form class="mt-5">
     <v-text-field
@@ -215,6 +217,7 @@
     </v-layout>
     </form>
   </panel>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -360,8 +363,4 @@ export default {
 
 <style scoped>
 
-.padding-input {
-  margin: auto;
-  /* margin-left: 32px; */
-}
 </style>

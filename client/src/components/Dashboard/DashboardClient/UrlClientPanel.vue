@@ -1,15 +1,28 @@
 <template>
   <panel v-if="isUserLoggedIn" title="URL">
-    <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="userurls">
-      <template v-slot:items="props">
-        <td class="text-xs-left">{{props.item.name}}</td>
-          <td>
-          <a class="text-xs-left" @click="goToUrl(props.item.url)">{{props.item.url}}</a>
-          </td>
-        <td class="text-xs-left">{{props.item.log}}</td>
-        <td class="text-xs-left">{{props.item.password}}</td>
-      </template>
-    </v-data-table>
+      <v-data-table 
+       :headers="headers"
+       hide-default-footer
+       :loading="isData(userurls)"
+       loading-text="No data for the moment"
+       :items-per-page="10"
+       :items="userurls"
+       class="elevation-12">
+        <template v-slot:item.url="{item}">
+        <a @click="goToUrl(item.url)">{{item.url}}</a>
+        </template>
+        <template v-slot:item.id="{item}">
+        <v-btn
+          class="grey darken-1 font-weight-bold"
+          :to="{
+              name: `edit-url`,
+              params : {
+              urlId: item.id
+          }
+        }"
+        >Edit</v-btn>
+        </template>
+      </v-data-table>
   </panel>
 </template>
 
@@ -22,27 +35,11 @@ export default {
   data() {
     return {
       headers: [
-        {
-          text: "Type",
-          value: "type"
-        },
-        {
-          text: "Url",
-          value: "url"
-        },
-        {
-          text: "Login",
-          value: "log"
-        },
-        {
-          text: "Password",
-          value: "password"
-        }
+        {text: "Name", value: "name", align: "left", sortable: false},
+        {text: "Url", value: "url", align: "center"},
+        {text: "Login", value: "log", align: "center"},
+        {text: "Password", value: "password", align: "center"}
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       userurls: []
     };
   },
@@ -59,6 +56,13 @@ export default {
     }
   },
   methods: {
+    isData(vlabs) {
+      if (vlabs) {
+        return (false)
+      } else {
+        return (true)
+      }
+    },
     async goToUrl(url) {
       window.open(url, '_blank')
     }

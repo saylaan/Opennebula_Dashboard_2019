@@ -13,23 +13,27 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-      <v-data-table :headers="headers" :pagination.sync="pagination" :items="vlaburls" hide-actions>
-        <template v-slot:items="props">
-          <td class="text-xs-left">{{props.item.name}}</td>
-          <td>
-          <a class="text-xs-left" @click="goToUrl(props.item.url)">{{props.item.url}}</a>
-          </td>
-          <td class="text-xs-left">{{props.item.log}}</td>
-          <td class="text-xs-left">{{props.item.password}}</td>
-          <v-btn
-            class="grey darken-1 font-weight-bold"
-            :to="{
-                name: `edit-url`,
-                params : {
-                    urlId: props.item.id
-                }
+      <v-data-table 
+       :headers="headers"
+       hide-default-footer
+       :loading="isData(vlaburls)"
+       loading-text="No data for the moment"
+       :items-per-page="10"
+       :items="vlaburls"
+       class="elevation-12">
+        <template v-slot:item.url="{item}">
+        <a @click="goToUrl(item.url)">{{item.url}}</a>
+        </template>
+        <template v-slot:item.id="{item}">
+        <v-btn
+          class="grey darken-1 font-weight-bold"
+          :to="{
+              name: `edit-url`,
+              params : {
+              urlId: item.id
+          }
         }"
-          >Edit</v-btn>
+        >Edit</v-btn>
         </template>
       </v-data-table>
   </panel>
@@ -44,27 +48,12 @@ export default {
   data() {
     return {
       headers: [
-        {
-          text: "Type",
-          value: "type"
-        },
-        {
-          text: "Url",
-          value: "url"
-        },
-        {
-          text: "Login",
-          value: "log"
-        },
-        {
-          text: "Password",
-          value: "password"
-        }
+        {text: "Name", value: "name", align: "left", sortable: false},
+        {text: "Url", value: "url", align: "center"},
+        {text: "Login", value: "log", align: "center"},
+        {text: "Password", value: "password", align: "center"},
+        {text: "", value: "id"}
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       vlaburls: [],
       vlab: null
     };
@@ -84,6 +73,13 @@ export default {
     }
   },
   methods: {
+    isData(data) {
+      if (data) {
+        return (false)
+      } else {
+        return (true)
+      }
+    },
     async goToUrl(url) {
       window.open(url, '_blank')
     }
@@ -103,14 +99,5 @@ export default {
 </script>
 
 <style scoped>
-textarea {
-  width: 80%;
-  font-family: monospace;
-  border: none;
-  height: 200px;
-  border-style: none;
-  border-color: transparent;
-  overflow: auto;
-  padding: 20px;
-}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <v-layout class="mt-5" v-if="isUserLoggedIn && admin" justify-center>
-    <v-flex xs6>
+    <v-flex xs12 sm8 md4>
       <panel title="Edit url">
         <v-text-field class="mt-5" label="Name" v-model="url.name" :rules="[required]"
         outline clearable>
@@ -54,7 +54,7 @@
           })"
         >Save</v-btn>
         <v-btn 
-        elevation-24 large class="grey darken-1 font-weight-bold" 
+        elevation-24 large class="grey darken-1 font-weight-bold ml-1" 
         @click="cancel()">Cancel</v-btn>
         <v-icon @click="undo()">refresh</v-icon>
       </v-layout>

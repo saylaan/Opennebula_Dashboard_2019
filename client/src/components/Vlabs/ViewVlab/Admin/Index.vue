@@ -1,16 +1,16 @@
 <template>
 <v-container fluid grid-list-md justify-center>
   <v-layout class="mt-5" v-if="isUserLoggedIn && admin" justify-center wrap>
-    <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1">
+    <v-flex fill-height xs12 sm10 md5 d-flex class="mt-1">
         <vlab-data/>
       </v-flex>
-      <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1 ml-1">
+      <v-flex fill-height xs12 sm10 md5 d-flex class="mt-1 ml-1">
         <vlab-sip/>
       </v-flex>
-      <v-flex fill-height xs12 sm8 md5 d-flex class="mt-1">
+      <v-flex fill-height xs12 sm10 md5 d-flex class="mt-1">
         <vlab-url/>
       </v-flex>
-      <v-flex d-flex fill-height xs12 sm8 md5 class="ml-1 mt-1">
+      <v-flex d-flex fill-height xs12 sm10 md5 class="ml-1 mt-1">
         <vlab-vm/>
       </v-flex>
   </v-layout>

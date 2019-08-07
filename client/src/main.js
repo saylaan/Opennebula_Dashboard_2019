@@ -2,7 +2,6 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import 'es6-promise/auto';
 import 'babel-polyfill'
-// es6Promise.polyfill();
 import Vue from 'vue'
 import App from './App'
 import router from './router'

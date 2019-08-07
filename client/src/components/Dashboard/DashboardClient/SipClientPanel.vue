@@ -1,15 +1,17 @@
 <template>
   <panel v-if="isUserLoggedIn" title="SIP">
     <v-layout justify-center>
-    <div v-if="!isSip()" class="title">SIP Domain: oxe-{{this.usersips[0].vlabname.toLowerCase()}}.ale-aapp.com</div>
+    <div v-if="isSip()" class="title">SIP Domain: oxe-{{this.usersips[0].vlabname.toLowerCase()}}.ale-aapp.com</div>
     </v-layout>
-    <v-data-table :headers="headers" hide-actions :pagination.sync="pagination" :items="usersips">
-      <template v-slot:items="props">
-        <td class="text-xs-left">{{props.item.name}}</td>
-        <td class="text-xs-left">{{props.item.login}}</td>
-        <td class="text-xs-left">{{props.item.passwd}}</td>
-      </template>
-    </v-data-table>
+      <v-data-table
+       :headers="headers"
+       hide-default-footer
+       :loading="isData(usersips)"
+       loading-text="No data for the moment"
+       :items-per-page="10"
+       :items="usersips"
+       class="elevation-12">
+      </v-data-table>
   </panel>
 </template>
 
@@ -22,23 +24,10 @@ export default {
   data() {
     return {
       headers: [
-        {
-          text: "Name",
-          value: "name"
-        },
-        {
-          text: "Login",
-          value: "login"
-        },
-        {
-          text: "Password",
-          value: "passwd"
-        }
+        {text: "Name", value: "name", sortable: false, align: "left"},
+        {text: "Login", value: "login", align: "center"},
+        {text: "Password", value: "passwd", align: "center"},
       ],
-      pagination: {
-        sortBy: "createAt",
-        descending: true
-      },
       usersips: []
     };
   },
@@ -55,6 +44,13 @@ export default {
     }
   },
   methods: {
+    isData(vlabs) {
+      if (vlabs) {
+        return (false)
+      } else {
+        return (true)
+      }
+    },
     async isSip() {
       if (this.usersips[0]) {
         return (true)
