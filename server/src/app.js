@@ -42,10 +42,17 @@ const server = imports.https.createServer(options, app)
 sequelize.sync() // sync sequelize with the server {force : true} = deleting all data
   .then(() => imports.dbopenneb.populateDB())
   .then(() => {
+<<<<<<< HEAD
+    // app.listen(imports.config.portHttps, imports.config.ip) // Adding the ip for change domain for production    
+    // app.listen(imports.config.portHttps)
+    // app.listen(imports.config.portHttp)
+    server.listen(imports.config.portHttps, imports.config.ip)
+=======
     //app.listen(imports.config.portHttps, imports.config.ip) // Adding the ip for change domain for production    
     //app.listen(imports.config.portHttps)
     app.listen(imports.config.portHttp)
    //  server.listen(imports.config.portHttps, imports.config.ip)
+>>>>>>> 2fdb144c59c00c648ee36ed9ad406962fd529763
     console.log('####################### END INIT DB #######################\n\n')
     console.log(`Server started on port ${imports.config.portHttp}... let's start working...`)
   })
