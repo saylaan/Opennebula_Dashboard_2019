@@ -1,18 +1,17 @@
 <template>
   <panel v-if="isUserLoggedIn" title="SIP">
-    <!-- <v-btn
+    <v-btn
       class="grey darken-3"
       slot="action"
-      :to="{name: 'create-sip'}"
+      @click="resetPassword()"
       light
       medium
       absolute
       right
       middle
-      fab
     >
-      <v-icon>add</v-icon>
-    </v-btn> -->
+      Reset Password
+    </v-btn>
     <v-layout justify-center>
     <!-- <div v-if="isSip()" class="title">SIP Domain: oxe-{{this.vlabsips[0].vlabname.toLowerCase()}}.ale-aapp.com</div> -->
     </v-layout>
@@ -24,7 +23,7 @@
        :items-per-page="10"
        :items="vlabsips"
        class="elevation-12">
-        <template v-slot:item.id="props">
+        <!-- <template v-slot:item.id="props">
           <v-layout justify-center>
           <v-btn
             class="grey darken-1 font-weight-bold"
@@ -36,7 +35,7 @@
           }"
           >Edit</v-btn>
           </v-layout>
-        </template>
+        </template>-->
       </v-data-table>
   </panel>
 </template>
@@ -44,6 +43,7 @@
 <script>
 import { mapState } from "vuex";
 import SipVlabService from "@/services/Sip/SipVlabService";
+import SipService from "@/services/Sip/SipService";
 import VlabService from "@/services/Vlab/VlabService";
 
 export default {
@@ -52,14 +52,21 @@ export default {
       headers: [
         {text: "Name", value: "name", sortable: false, align: "left"},
         {text: "Login", value: "login", align: "center"},
-        {text: "Password", value: "passwd", align: "center"},
-        {text: "", value: "id", align: "center"}
+        {text: "Password", value: "passwd", align: "center"}
+        // {text: "", value: "id", align: "center"}
       ],
       vlabsips: [],
       vlab: null
     };
   },
   methods: {
+    async resetPassword() {
+      try {
+        await SipService.changePwd(this.vlabsips)
+      } catch (err) {
+        console.log(err)
+      }
+    },
     isData(data) {
       if (data) {
         return (false)

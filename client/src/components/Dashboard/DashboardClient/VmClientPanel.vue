@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       headers: [
-        {text: "Name", value: "name", align: "left", sortable: false},
+        {text: "Vlab", value: "name", align: "left", sortable: false},
         {text: "Type", value: "type", align: "center"},
         {text: "Active", value: "active", align: "center"}
       ],
@@ -76,14 +76,5 @@ export default {
 </script>
 
 <style scoped>
-textarea {
-  width: 80%;
-  font-family: monospace;
-  border: none;
-  height: 200px;
-  border-style: none;
-  border-color: transparent;
-  overflow: auto;
-  padding: 20px;
-}
+
 </style>

@@ -80,11 +80,11 @@ export default {
         })
         if (opt === "0") {
           const newUser = (await UserService.getUser(id)).data
-          newUser.dayleft = 0
           newUser.assign = false
-          newUser.archive = true
           await UserService.put(newUser)
-          await document.location.reload(true)
+          setTimeout(async () => {
+            await document.location.reload(true)
+          }, 3000)
         }
       } catch (err) {
         console.log(err)

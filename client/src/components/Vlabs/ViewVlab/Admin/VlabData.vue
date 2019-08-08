@@ -117,7 +117,7 @@ export default {
     try {
       this.users = (await UserService.index()).data
       for (let i = 0, j = 0; i !== this.users.length; i++) {
-        if (this.users[i].admin) {
+        if (this.users[i].admin || this.users[i].archive) {
           this.users.splice(i, 1)
           i--
         }
@@ -211,7 +211,9 @@ export default {
           UserId: id
         })).data;
         this.vlab = (await VlabService.getVlab(vlabId)).data
-        await document.location.reload(true)
+        setTimeout(async () => {
+          await document.location.reload(true)
+        }, 3000)
       } catch (err) {
         console.log(err);
       }
@@ -241,7 +243,9 @@ export default {
           assign: false,
           dayleft: 0
         }, vlabId)
-        await document.location.reload(true)
+        setTimeout(async () => {
+          await document.location.reload(true)
+        }, 3000)
         this.vlab = (await VlabService.getVlab(vlabId)).data
       } catch (err) {
         console.log(err);

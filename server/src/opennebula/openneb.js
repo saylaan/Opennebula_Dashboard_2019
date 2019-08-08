@@ -1,6 +1,7 @@
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
   'http://vlab.ale-aapp.com:2633/RPC2')
+const handlingPwd = require('../password/HandlingPwd')
 const {
   sequelize,
   User, // NO CARE
@@ -19,13 +20,24 @@ const {
   SipVlab
 } = require('../models')
 const Promise = require('bluebird')
+const winston = require('winston')
+// const log = require('../logs/log')
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  defaultMeta: { service: 'user-service'},
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error'}),
+    new winston.transports.File({ filename: 'combined.log'})
+  ]
+})
 
 const checkLicence = async () => {
   console.log("CHECKING ALL LICENCES BEGAN....")
   try {
     var date = new Date()
     date = date.getTime()
-    console.log(date)
     await Vlab.findAll({
       where: {
         assign: true
@@ -34,9 +46,12 @@ const checkLicence = async () => {
       vlabs.forEach(async vlab => {
         const endlicence = Date.parse(vlab.endlicence)
         const timelicence = endlicence - date
-        const nbdays = timelicence / (1000 * 60 * 60 * 24)
-        if (nbdays <= -1) {
-        // if (vlab.dayleft - 1 >= nbdays) {
+        const nbdays = timelicence / (1000 * 60 * 60 * 24) // reduce days by one if nb days < vlab.dayleft - 1
+        if (nbdays < vlab.dayleft - 1) {
+          logger.info('reducing days remaining')
+          logger.info(nbdays)
+          logger.info(vlab.dayleft)
+          logger.info(vlab)
           await Vlab.update({
             dayleft: vlab.dayleft - 1
           }, {
@@ -62,7 +77,11 @@ const checkLicence = async () => {
                   id: user.id
                 }
               })
-              if (vlab.dayleft <= 0) {
+              if (vlab.dayleft <= -1) {
+                logger.info('deleting vlab from the user')
+                logger.info(nbdays)
+                logger.info(vlab.dayleft)
+                logger.info(vlab)
                 await User.update({
                   dayleft: 0,
                   assign: false,
@@ -188,6 +207,21 @@ const checkLicence = async () => {
                           password: "default",
                           vlabname: url.vlabname,
                           active: url.active
+                        }
+                        if (url.name === "Vlab Management") {
+                          newUrl.password = await generator.generate({
+                            length: 8,
+                            numbers: true
+                          })
+                          const usertmp = await User.findByPk(vlabuser.UserId)
+                          newUrl.log = usertmp.email
+                          await handlingPwd.pwdVNC(newUrl, usertmp)
+                        }  else if (url.name === "O2G Access") {
+                          newUrl.password = await generator.generate({
+                            length: 8,
+                            numbers: true
+                          })
+                          await handlingPwd.pwdO2G(newUrl) // CCHANGE O2G
                         }
                         await Url.update(newUrl, {
                           where: {

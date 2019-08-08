@@ -15,5 +15,9 @@ export default {
   },
   put(urlId) {
     return Api().put(`url/${urlId}`)
+  },
+  changePwd(urlId) {
+    console.log(urlId)
+    return Api().put(`vlab/${urlId}`)
   }
 }

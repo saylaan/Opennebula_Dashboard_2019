@@ -15,5 +15,9 @@ export default {
   },
   put(sipId) {
     return Api().put(`sip/${sipId}`)
+  },
+  changePwd(sips) {
+    console.log(sips)
+    return Api().put('sip', sips)
   }
 }
