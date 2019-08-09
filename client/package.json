@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "es6-promise": "^4.2.8",
+    "generate-password": "^1.4.2",
     "install": "^0.12.2",
     "lodash": "^4.17.11",
     "npm": "^6.9.0",

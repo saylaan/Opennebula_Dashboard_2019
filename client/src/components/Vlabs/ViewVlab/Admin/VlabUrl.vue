@@ -69,8 +69,11 @@ export default {
   watch: {
     async vlaburl() {
       try {
+        await UrlService.changePwd(url.id)
+        const vlabId = this.route.params.vlabId;
+        this.vlab = (await VlabService.getVlab(vlabId)).data;
         this.vlaburls = (await UrlVlabService.index({
-          VlabId: this.vlab.id
+          VlabId: this.vlab[0].id
         })).data;
       } catch (err) {
         console.log(err);
@@ -81,6 +84,15 @@ export default {
     async resetUrl(url) {
       try {
         await UrlService.changePwd(url.id)
+        const vlabId = this.route.params.vlabId;
+        this.vlab = (await VlabService.getVlab(vlabId)).data;
+        try {
+          this.vlaburls = (await UrlVlabService.index({
+            VlabId: this.vlab[0].id
+          })).data;
+        } catch (err) {
+          console.log(err)
+        }
       } catch (err) {
         console.log(err)
       }

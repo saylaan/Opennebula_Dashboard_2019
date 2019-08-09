@@ -157,7 +157,7 @@
           <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" 
           @click="create({name: 'users'})">
           Create</v-btn>
-          <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold" 
+          <v-btn elevation-24 large class="grey darken-1 ml-1 mb-4 font-weight-bold" 
           @click="cancel()">
           Cancel</v-btn>
         </v-layout>
@@ -170,6 +170,7 @@
 <script>
 import { mapState } from "vuex";
 import UserService from "@/services/User/UserService"
+import generator from "generate-password"
 
 export default {
   data() {
@@ -224,6 +225,18 @@ export default {
     },
     async cancel() {
       this.$router.push({name: 'users'})
+    }
+  },
+  async mounted() {
+    try {
+      this.userview.password = await generator.generate({
+        length: 8,
+        numbers: true
+      })
+      console.log(this.userview.password)
+      this.confirmpassword = this.userview.password
+    } catch (err) {
+      console.log(err);
     }
   }
 };

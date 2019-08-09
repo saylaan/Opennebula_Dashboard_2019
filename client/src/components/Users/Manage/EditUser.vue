@@ -141,7 +141,7 @@
         <v-layout class="mt-2" row justify-center align-center>
         <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
         @click="save()">Save</v-btn>
-        <v-btn elevation-24 large class="grey darken-1 mb-4 font-weight-bold"
+        <v-btn elevation-24 large class="grey darken-1 ml-1 mb-4 font-weight-bold"
         @click="cancel()">Cancel</v-btn>
         <v-icon @click="undoEdit()">refresh</v-icon>
         </v-layout>

@@ -2,6 +2,7 @@ const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
   'http://vlab.ale-aapp.com:2633/RPC2')
 const handlingPwd = require('../password/HandlingPwd')
+const generator = require('generate-password')
 const {
   sequelize,
   User, // NO CARE
@@ -104,7 +105,6 @@ const checkLicence = async () => {
               id: user.id
             }
           })
-          await vlabuser.destroy()
           await VmVlab.findAll({ // FOR THE VM DEASSIGN
             where: {
               VlabId: vlabuser.VlabId
@@ -214,7 +214,7 @@ const checkLicence = async () => {
                 urls.forEach(async (url) => {
                   const newUrl = {
                     name: url.name,
-                    log: url.log,
+                    log: 'admin',
                     urltype: url.urltype,
                     password: "default",
                     vlabname: url.vlabname,
@@ -226,14 +226,7 @@ const checkLicence = async () => {
                       numbers: true
                     })
                     const usertmp = await User.findByPk(vlabuser.UserId)
-                    newUrl.log = usertmp.email
                     await handlingPwd.pwdVNC(newUrl, usertmp)
-                  }  else if (url.name === "O2G Access") {
-                    newUrl.password = await generator.generate({
-                      length: 8,
-                      numbers: true
-                    })
-                    await handlingPwd.pwdO2G(newUrl) // CCHANGE O2G
                   }
                   await Url.update(newUrl, {
                     where: {

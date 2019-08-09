@@ -180,7 +180,9 @@ export default {
         dayleft: lab[0].dayleft
       }, this.vlabuser.VlabId)
       this.vlab = (await VlabService.getVlab(this.vlabuser.VlabId)).data
-      await document.location.reload(true)
+      setTimeout(async () => {
+        await document.location.reload(true)
+      }, 3000)
     },
     async setUser() {
       try {

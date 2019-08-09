@@ -16,4 +16,7 @@ module.exports = (app) => {
     app.post('/url',
         isAuthenticated,
         UrlsController.post)
+    app.put('/vlab/:urlId',
+        isAuthenticated,
+        UrlsController.changePwd)
 }
