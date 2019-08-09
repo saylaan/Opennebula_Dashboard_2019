@@ -70,198 +70,207 @@ const checkLicence = async () => {
               }
             }).then(async user => {
               await User.update({
-                dayleft: user.dayleft - 1,
-                archive: true
+                dayleft: user.dayleft - 1
               }, {
                 where: {
                   id: user.id
                 }
               })
-              if (vlab.dayleft <= -1) {
-                logger.info('deleting vlab from the user')
-                logger.info(nbdays)
-                logger.info(vlab.dayleft)
-                logger.info(vlab)
-                await User.update({
-                  dayleft: 0,
-                  assign: false,
-                  startlicence: "XX-XX-XX",
-                  endlicence: "XX-XX-XX"
-                }, {
-                  where: {
-                    id: user.id
-                  }
-                })
-                await vlabuser.destroy()
-                await VmVlab.findAll({ // FOR THE VM DEASSIGN
-                  where: {
-                    VlabId: vlabuser.VlabId
-                  }
-                }).then(async (vmvlabs) => {
-                  vmvlabs.forEach(async (vmvlab) => {
-                    await Vm.findAll({
-                      where: {
-                        id: vmvlab.VmId
-                      }
-                    }).then(async (vms) => {
-                      vms.forEach(async (vm) => {
-                        const vmon = await one.getVM(vm.idopennebula)
-                        vmon.info((err, data) => {
-                          if (err) {
-                            console.log(err)
-                          } else {
-                            const temp = JSON.parse(JSON.stringify(data.VM.TEMPLATE.SNAPSHOT))
-                            if (temp[1]) {
-                              for (var i = 0; temp[i] !== undefined; i++) {
-                                  if (temp[i].NAME === 'DEFAULT') {
-                                    vmon.snapshotrevert(parseInt(temp[i].SNAPSHOT_ID, 10), (err, data) => {
-                                      if (err) {
-                                        console.log(err)
-                                      } else {
-                                        console.log('The snapshotrevert has been process')
-                                        console.log(data)
-                                      }
-                                  })
-                                }
-                              }
-                            } else {
-                              if (temp.NAME === 'DEFAULT') {
-                                vmon.snapshotrevert(parseInt(temp.SNAPSHOT_ID, 10), (err, data) => {
-                                  if (err) {
-                                    console.log(err)
-                                  } else {
-                                    console.log('The snapshotrevert has been process')
-                                    console.log(data)
-                                  }
-                                })
-                              }
-                            }
-                          }
-                        })
-                        const isvm = await VmUser.findOne({
-                          where: {
-                            UserId: vlabuser.UserId,
-                            VmId: vm.id
-                          }
-                        })
-                        if (isvm) {
-                          await isvm.destroy()
-                        }
-                      })
-                    })
-                  })
-                })
-                await SipVlab.findAll({ // FOR THE SIP DEASSIGN
-                  where: {
-                    VlabId: vlabuser.VlabId
-                  }
-                }).then(async (sipvlabs) => {
-                  sipvlabs.forEach(async (sipvlab) => {
-                    await Sip.findAll({
-                      where: {
-                        id: sipvlab.SipId
-                      }
-                    }).then(async (sips) => {
-                      sips.forEach(async (sip) => {
-                        const newSip = {
-                          name: sip.name,
-                          login: sip.login,
-                          passwd: "default",
-                          vlabname: sip.vlabname,
-                          active: sip.active
-                        }
-                        await Sip.update(newSip, {
-                          where: {
-                            id: sip.id
-                          }
-                        })
-                        const issip = await SipUser.findOne({
-                          where: {
-                            UserId: vlabuser.UserId,
-                            sipId: sip.id
-                          }
-                        })
-                        if (issip) {
-                          await issip.destroy()
-                        }
-                      })
-                    })
-                  })
-                })
-                await UrlVlab.findAll({ // FOR THE URL DEASSIGN
-                  where: {
-                    VlabId: vlabuser.VlabId
-                  }
-                }).then(async (urlvlabs) => {
-                  urlvlabs.forEach(async (urlvlab) => {
-                    await Url.findAll({
-                      where: {
-                        id: urlvlab.UrlId
-                      }
-                    }).then(async (urls) => {
-                      urls.forEach(async (url) => {
-                        const newUrl = {
-                          name: url.name,
-                          log: url.log,
-                          urltype: url.urltype,
-                          password: "default",
-                          vlabname: url.vlabname,
-                          active: url.active
-                        }
-                        if (url.name === "Vlab Management") {
-                          newUrl.password = await generator.generate({
-                            length: 8,
-                            numbers: true
-                          })
-                          const usertmp = await User.findByPk(vlabuser.UserId)
-                          newUrl.log = usertmp.email
-                          await handlingPwd.pwdVNC(newUrl, usertmp)
-                        }  else if (url.name === "O2G Access") {
-                          newUrl.password = await generator.generate({
-                            length: 8,
-                            numbers: true
-                          })
-                          await handlingPwd.pwdO2G(newUrl) // CCHANGE O2G
-                        }
-                        await Url.update(newUrl, {
-                          where: {
-                            id: url.id
-                          }
-                        })
-                        const isurl = await UrlUser.findOne({
-                          where: {
-                            UserId: vlabuser.UserId,
-                            urlId: url.id
-                          }
-                        })
-                        if (isurl) {
-                          await isurl.destroy()
-                        }
-                      })
-                    })
-                  })
-                })
-                await vlabuser.destroy()
-                await Vlab.update({
-                  idopennebula: vlab.idopennebula,
-                  ownername: "oneadmin",
-                  groupename: vlab.groupname,
-                  name: vlab.name,
-                  nameparse: vlab.nameparse,
-                  vlanid: vlab.vlanid,
-                  assign: false,
-                  dayleft: 0,
-                  startlicence: "XX-XX-XX",
-                  endlicence: "XX-XX-XX"
-                }, {
-                  where: {
-                    id: vlab.id
-                  }
-                })
-                console.log("CHECKING ALL LICENCES HAS FINISHED....")
-              }
             })
           })
+        } else if (vlab.dayleft <= -1) {
+          logger.info('deleting vlab from the user')
+          logger.info(nbdays)
+          logger.info(vlab.dayleft)
+          logger.info(vlab)
+          const vlabuser = await VlabUser.findOne({
+            where: {
+              VlabId: vlab.id
+            }
+          })
+          const user = await User.findOne({
+              where: {
+                id: vlabuser.UserId
+              }
+          })
+          await User.update({
+            dayleft: 0,
+            assign: false,
+            archive: true,
+            startlicence: "XX-XX-XX",
+            endlicence: "XX-XX-XX"
+          }, {
+            where: {
+              id: user.id
+            }
+          })
+          await vlabuser.destroy()
+          await VmVlab.findAll({ // FOR THE VM DEASSIGN
+            where: {
+              VlabId: vlabuser.VlabId
+            }
+          }).then(async (vmvlabs) => {
+            vmvlabs.forEach(async (vmvlab) => {
+              await Vm.findAll({
+                where: {
+                  id: vmvlab.VmId
+                }
+              }).then(async (vms) => {
+                vms.forEach(async (vm) => {
+                  const vmon = await one.getVM(vm.idopennebula)
+                  vmon.info((err, data) => {
+                    if (err) {
+                      console.log(err)
+                    } else {
+                      const temp = JSON.parse(JSON.stringify(data.VM.TEMPLATE.SNAPSHOT))
+                      if (temp[1]) {
+                        for (var i = 0; temp[i] !== undefined; i++) {
+                            if (temp[i].NAME === 'DEFAULT') {
+                              vmon.snapshotrevert(parseInt(temp[i].SNAPSHOT_ID, 10), (err, data) => {
+                                if (err) {
+                                  console.log(err)
+                                } else {
+                                  console.log('The snapshotrevert has been process')
+                                  console.log(data)
+                                }
+                            })
+                          }
+                        }
+                      } else {
+                        if (temp.NAME === 'DEFAULT') {
+                          vmon.snapshotrevert(parseInt(temp.SNAPSHOT_ID, 10), (err, data) => {
+                            if (err) {
+                              console.log(err)
+                            } else {
+                              console.log('The snapshotrevert has been process')
+                              console.log(data)
+                            }
+                          })
+                        }
+                      }
+                    }
+                  })
+                  const isvm = await VmUser.findOne({
+                    where: {
+                      UserId: vlabuser.UserId,
+                      VmId: vm.id
+                    }
+                  })
+                  if (isvm) {
+                    await isvm.destroy()
+                  }
+                })
+              })
+            })
+          })
+          await SipVlab.findAll({ // FOR THE SIP DEASSIGN
+            where: {
+              VlabId: vlabuser.VlabId
+            }
+          }).then(async (sipvlabs) => {
+            sipvlabs.forEach(async (sipvlab) => {
+              await Sip.findAll({
+                where: {
+                  id: sipvlab.SipId
+                }
+              }).then(async (sips) => {
+                sips.forEach(async (sip) => {
+                  const newSip = {
+                    name: sip.name,
+                    login: sip.login,
+                    passwd: "default",
+                    vlabname: sip.vlabname,
+                    active: sip.active
+                  }
+                  await Sip.update(newSip, {
+                    where: {
+                      id: sip.id
+                    }
+                  })
+                  const issip = await SipUser.findOne({
+                    where: {
+                      UserId: vlabuser.UserId,
+                      sipId: sip.id
+                    }
+                  })
+                  if (issip) {
+                    await issip.destroy()
+                  }
+                })
+              })
+            })
+          })
+          await UrlVlab.findAll({ // FOR THE URL DEASSIGN
+            where: {
+              VlabId: vlabuser.VlabId
+            }
+          }).then(async (urlvlabs) => {
+            urlvlabs.forEach(async (urlvlab) => {
+              await Url.findAll({
+                where: {
+                  id: urlvlab.UrlId
+                }
+              }).then(async (urls) => {
+                urls.forEach(async (url) => {
+                  const newUrl = {
+                    name: url.name,
+                    log: url.log,
+                    urltype: url.urltype,
+                    password: "default",
+                    vlabname: url.vlabname,
+                    active: url.active
+                  }
+                  if (url.name === "Vlab Management") {
+                    newUrl.password = await generator.generate({
+                      length: 8,
+                      numbers: true
+                    })
+                    const usertmp = await User.findByPk(vlabuser.UserId)
+                    newUrl.log = usertmp.email
+                    await handlingPwd.pwdVNC(newUrl, usertmp)
+                  }  else if (url.name === "O2G Access") {
+                    newUrl.password = await generator.generate({
+                      length: 8,
+                      numbers: true
+                    })
+                    await handlingPwd.pwdO2G(newUrl) // CCHANGE O2G
+                  }
+                  await Url.update(newUrl, {
+                    where: {
+                      id: url.id
+                    }
+                  })
+                  const isurl = await UrlUser.findOne({
+                    where: {
+                      UserId: vlabuser.UserId,
+                      urlId: url.id
+                    }
+                  })
+                  if (isurl) {
+                    await isurl.destroy()
+                  }
+                })
+              })
+            })
+          })
+          await vlabuser.destroy()
+          await Vlab.update({
+            idopennebula: vlab.idopennebula,
+            ownername: "oneadmin",
+            groupename: vlab.groupname,
+            name: vlab.name,
+            nameparse: vlab.nameparse,
+            vlanid: vlab.vlanid,
+            assign: false,
+            dayleft: 0,
+            startlicence: "XX-XX-XX",
+            endlicence: "XX-XX-XX"
+          }, {
+            where: {
+              id: vlab.id
+            }
+          })
+          console.log("CHECKING ALL LICENCES HAS FINISHED....")
         }
       })
     })
