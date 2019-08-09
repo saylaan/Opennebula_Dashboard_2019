@@ -29,15 +29,15 @@ app.use(imports.express.static(publicRoot)) // For production (use of the build 
 require('./policies/passport') // this is for passport authen
 require('./routes')(app) // attach all the different endpoint to the apps
 
-app.use(function(req,resp,next){
-    if (req.headers['x-forwarded-proto'] == 'http') {
-       return resp.redirect(301, 'https://' + req.headers.host + '/');
-    } else {
-       return next();
-    }
- });
+// app.use(function(req,resp,next){
+//     if (req.headers['x-forwarded-proto'] == 'http') {
+//        return resp.redirect(301, 'https://' + req.headers.host + '/');
+//     } else {
+//        return next();
+//     }
+//  });
 
-const server = imports.https.createServer(options, app)
+// const server = imports.https.createServer(options, app)
 
 sequelize.sync() // sync sequelize with the server {force : true} = deleting all data
   .then(() => imports.dbopenneb.populateDB())

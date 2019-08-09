@@ -25,7 +25,7 @@
                     userId: item.id}
               }"
            >Edit</v-btn>
-            <v-btn @click="archiveUser(item.id)"
+            <v-btn @click="unarchiveUser(item.id)"
               class="grey darken-1 font-weight-bold ml-1 mt-1 "
             >Unarchive</v-btn>
           </v-layout>
@@ -79,7 +79,7 @@ export default {
         return ('NO')
       }
     },
-    async archiveUser(id) {
+    async unarchiveUser(id) { // ASSIGN VLAB IF WE WANT!
       try {
         const {value: opt} = await Swal.fire({
           title: 'Are you sure you want to unarchive the user or admin?',
@@ -91,11 +91,11 @@ export default {
         })
         if (opt === "0") {
           const newUser = (await UserService.getUser(id)).data
-          newUser.dayleft = 0
-          newUser.assign = false
           newUser.archive = false
           await UserService.put(newUser)
-          await document.location.reload(true)
+          setTimeout(async () => {
+            await document.location.reload(true)
+          }, 3000)
         }
       } catch (err) {
         console.log(err)

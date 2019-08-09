@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       headers: [
-        {text: "Name", value: "name"},
+        {text: "Vlab", value: "name", align: "center", sortable: false},
         {text: "Type", value: "type", align: "center"},
         {text: "Active", value: "active", align: "center"}
       ],

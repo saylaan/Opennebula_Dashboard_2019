@@ -25,7 +25,7 @@
         <a @click="goToUrl(item.url)">{{item.url}}</a>
         </template>
         <template v-slot:item.id="{item}">
-        <v-btn
+        <!-- <v-btn
           class="grey darken-1 font-weight-bold"
           :to="{
               name: `edit-url`,
@@ -33,7 +33,11 @@
               urlId: item.id
           }
         }"
-        >Edit</v-btn>
+        >Edit</v-btn> -->
+        <v-btn
+          class="grey darken-1 font-weight-bold"
+          @click="resetUrl(item)"
+        >Reset Password</v-btn>
         </template>
       </v-data-table>
   </panel>
@@ -42,6 +46,7 @@
 <script>
 import { mapState } from "vuex";
 import UrlVlabService from "@/services/Url/UrlVlabService";
+import UrlService from "@/services/Url/UrlService";
 import VlabService from "@/services/Vlab/VlabService";
 
 export default {
@@ -73,6 +78,13 @@ export default {
     }
   },
   methods: {
+    async resetUrl(url) {
+      try {
+        await UrlService.changePwd(url.id)
+      } catch (err) {
+        console.log(err)
+      }
+    },
     isData(data) {
       if (data) {
         return (false)

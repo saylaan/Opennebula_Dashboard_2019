@@ -25,9 +25,9 @@
           <template v-slot:item.email="{item}">
           <a :href="'mailto:' + item.email + '?subject=INFO'" class="text-xs-left">{{item.email}}</a>
           </template>
-          <template v-slot:item.dayleft="{ item }">
-          <v-chip class="ma-2" text-color="white" :color="getWarning(item.dayleft)"></v-chip>
-          </template>"
+        <template v-slot:item.dayleft="{item}">
+          {{needCredential(item.dayleft, item.assign)}}
+        </template>
           <template v-slot:item.id="{item}">
             <v-layout row align-center justify-center>
             <v-btn
@@ -79,14 +79,11 @@ export default {
     }
   },
   methods: {
-    getWarning(time) {
-      if (time <= 3) {
-        return "red"
-      } else if (time > 3 && time <= 7) {
-        return "orange"
-      } else {
-        return "green"
+    needCredential(time, assign) {
+      if (!assign) {
+        return "-";
       }
+      return time;
     },
     isData(data) {
       if (data) {
@@ -109,11 +106,12 @@ export default {
           const newUser = (await UserService.getUser(id)).data
           if (newUser.dayleft !== 0) {
             let vlabs = (await VlabService.getAllVlabs()).data
-            vlabs.forEach(async vlab => {
+            await vlabs.forEach(async vlab => {
               if (vlab.ownername === newUser.email) {
                 let vlabuser = (await VlabUserService.getVlabUser(vlab.id)).data
-                vlabuser = await VlabUserService.delete(vlabuser.id);
-                await VlabService.put({
+                vlabuser = (await VlabUserService.delete(vlabuser.id)).data;
+                const vlabId = vlab.id
+                const tmp = (await VlabService.put({
                   idopennebula: vlab.idopennebula,
                   ownername: "oneadmin",
                   groupename: vlab.groupname,
@@ -122,7 +120,7 @@ export default {
                   vlanid: vlab.vlanid,
                   assign: false,
                   dayleft: 0
-                }, vlab.id)
+                }, vlabId)).data
               }
             })
           }
@@ -130,7 +128,9 @@ export default {
           newUser.assign = false
           newUser.archive = true
           await UserService.put(newUser)
-          await document.location.reload(true)
+          setTimeout(async () => {
+            await document.location.reload(true)
+          }, 3000)
         }
       } catch (err) {
         console.log(err)

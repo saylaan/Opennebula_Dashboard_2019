@@ -371,6 +371,21 @@ module.exports = {
                 vlabname: url.vlabname,
                 active: url.active
               }
+              if (url.name === "Vlab Management") {
+                newUrl.password = await generator.generate({
+                  length: 8,
+                  numbers: true
+                })
+                const usertmp = await User.findByPk(vlabuser.UserId)
+                newUrl.log = usertmp.email
+                await handlingPwd.pwdVNC(newUrl, usertmp)
+              } else if (url.name === "O2G Access") {
+                newUrl.password = await generator.generate({
+                  length: 8,
+                  numbers: true
+                })
+                await handlingPwd.pwdO2G(newUrl) // CCHANGE O2G
+              }
               await Url.update(newUrl, {
                 where: {
                   id: url.id
