@@ -1,4 +1,6 @@
-const { Url } = require('../../models')
+const { Url, User, UrlUser } = require('../../models')
+const generator = require('generate-password')
+const handlingPwd = require('../../password/HandlingPwd')
 
 module.exports = {
   async index(req, res) {
@@ -39,6 +41,52 @@ module.exports = {
     } catch (err) {
       res.status(500).send({
         error: 'An erro has occured while trying to update the url'
+      })
+    }
+  },
+  async changePwd(req, res) {
+    try {
+      let url = await Url.findByPk(req.params.urlId)
+      let newUrl = {
+        id: url.id,
+        name: url.name,
+        log: 'admin',
+        urltype: url.urltype,
+        password: "default",
+        vlabname: url.vlabname,
+        active: url.active
+      }
+      if (url.name === "Vlab Management") {
+        const urlUser = await UrlUser.findOne({
+          where: {
+            UrlId: req.params.urlId
+          }
+        })
+        if (urlUser) {
+          newUrl.password = await generator.generate({
+            length: 8,
+            numbers: true
+          })
+          const usertmp = await User.findByPk(urlUser.UserId)
+          newUrl.log = usertmp.email
+          await handlingPwd.pwdVNC(newUrl, usertmp)
+        }
+      }  else if (url.name === "O2G Access") {
+        newUrl.password = await generator.generate({
+          length: 8,
+          numbers: true
+        })
+        await handlingPwd.pwdO2G(newUrl) // CCHANGE O2G
+      }
+      url = await Url.update(newUrl, {
+        where: {
+          id: req.params.urlId
+        }
+      })
+      res.send(newUrl)
+    } catch (err) {
+      res.status(500).send({
+        error: 'An erro has occured while trying to update the sip'
       })
     }
   },

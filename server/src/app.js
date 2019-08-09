@@ -2,8 +2,8 @@
 /* Import package */
 const imports = require('./config/imports') // all import for the app
 const { sequelize } = require('./models') // models folder with index.js file who return a sequelize obj
-//const publicRoot = `D:/Users/ghuck2671/Desktop/Geoff/SB/SandboxALE-AAPP_2019/client/dist` // ON WINDOWS
-const publicRoot = `/root/SandboxALE-AAPP_2019/client/dist` // ON LINUX
+// const publicRoot = `D:/Users/ghuck2671/Desktop/Geoff/SB/SandboxALE-AAPP_2019/client/dist` // ON WINDOWS
+// const publicRoot = `/root/SandboxALE-AAPP_2019/client/dist` // ON LINUX
 
 const key = imports.fs.readFileSync(__dirname + '/cert/selfsigned.key') // Certificat
 const cert = imports.fs.readFileSync(__dirname + '/cert/selfsigned.crt')
@@ -24,6 +24,7 @@ app.use(imports.cookieSession({
    keys: ['portal-vlab'],
    maxAge: 24 * 60 * 60 * 1000 // 24 hours
  }))
+<<<<<<< HEAD
 
 app.use(imports.express.static(publicRoot)) // For production (use of the build fodler for vue)
 
@@ -45,8 +46,8 @@ sequelize.sync() // sync sequelize with the server {force : true} = deleting all
   .then(() => {
     // app.listen(imports.config.portHttps, imports.config.ip) // Adding the ip for change domain for production    
     // app.listen(imports.config.portHttps)
-    // app.listen(imports.config.portHttp)
-    server.listen(imports.config.portHttps, imports.config.ip)
+    app.listen(imports.config.portHttp)
+    // server.listen(imports.config.portHttps, imports.config.ip)
     console.log('####################### END INIT DB #######################\n\n')
     console.log(`Server started on port ${imports.config.portHttp}... let's start working...`)
   })

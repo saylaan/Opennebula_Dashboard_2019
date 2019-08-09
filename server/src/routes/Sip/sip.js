@@ -16,4 +16,7 @@ module.exports = (app) => {
     app.post('/sip',
         isAuthenticated,
         SipsController.post)
+    app.put('/sip',
+        isAuthenticated,
+        SipsController.changePwd)
 }

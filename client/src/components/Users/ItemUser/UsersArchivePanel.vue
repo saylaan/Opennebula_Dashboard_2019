@@ -49,7 +49,7 @@ export default {
         {text: "Company", value: "companyname", align: "center"},
         {text: "Firstname", value: "firstname", align: "center"},
         {text: "Lastname", value: "lastname", align: "center"},
-        {text: "Status", value: "status", align: "center"},
+        {text: "Status", value: "admin", align: "center"},
         {text: "", value: "id"}
       ],
       users: []

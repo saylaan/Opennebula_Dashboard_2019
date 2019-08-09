@@ -63,6 +63,15 @@ export default {
     async resetPassword() {
       try {
         await SipService.changePwd(this.vlabsips)
+        const vlabId = this.route.params.vlabId;
+        this.vlab = (await VlabService.getVlab(vlabId)).data;
+        try {
+          this.vlabsips = (await SipVlabService.index({
+            VlabId: this.vlab[0].id
+          })).data;
+        } catch (err) {
+          console.log(err);
+        }
       } catch (err) {
         console.log(err)
       }
@@ -81,6 +90,8 @@ export default {
   watch: {
     async vlabsip() {
       try {
+        const vlabId = this.route.params.vlabId;
+        this.vlab = (await VlabService.getVlab(vlabId)).data;
         this.vlabsips = (await SipVlabService.index({
           VlabId: this.vlab.id
         })).data;

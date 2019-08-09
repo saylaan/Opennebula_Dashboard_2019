@@ -1,4 +1,7 @@
-const { Sip } = require('../../models')
+const { Sip, SipVlab } = require('../../models')
+const handlingPwd = require('../../password/HandlingPwd')
+const generator = require('generate-password')
+const _ = require('lodash')
 
 module.exports = {
   async index(req, res) {
@@ -36,6 +39,55 @@ module.exports = {
         }
       })
       res.send(sip)
+    } catch (err) {
+      res.status(500).send({
+        error: 'An erro has occured while trying to update the sip'
+      })
+    }
+  },
+  async changePwd(req, res) {
+    try {
+      req.body.forEach(async sip => {
+        const newSip = {
+          name: sip.name,
+          login: sip.login,
+          passwd: generator.generate({
+            length: 8,
+            numbers: true
+          }),
+          vlabname: sip.vlabname,
+          active: sip.active
+        }
+        await Sip.update(newSip, {
+          where: {
+            id: sip.id
+          }
+        })
+      })
+      sipVlab = await SipVlab.findOne({
+        where: {
+          SipId: req.body[0].id
+        }
+      })
+      let tmpsips = await SipVlab.findAll({
+        where: {
+          vlabId: sipVlab.VlabId
+        },
+        include: [
+          {
+            model: Sip
+          }
+        ]
+      })
+      .map(sipVlab => sipVlab.toJSON())
+      .map(sipVlab => _.extend(
+        {},
+        sipVlab.Sip,
+        sipVlab
+      )).then(async (sips) => {
+        await handlingPwd.pwdSIP(sips)
+      })
+      res.send(tmpsips)
     } catch (err) {
       res.status(500).send({
         error: 'An erro has occured while trying to update the sip'
