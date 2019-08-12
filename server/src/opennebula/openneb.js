@@ -47,7 +47,18 @@ const checkLicence = async () => {
       vlabs.forEach(async vlab => {
         const endlicence = Date.parse(vlab.endlicence)
         const timelicence = endlicence - date
+        console.log(vlab.name, " timelicence ==> ", timelicence, ' endlicence ==> ', endlicence)
+        console.log(vlab.name, " timelicence ==> ", timelicence, ' endlicence ==> ', endlicence)
+        console.log(vlab.name, " timelicence ==> ", timelicence, ' endlicence ==> ', endlicence)
+        console.log(vlab.name, " timelicence ==> ", timelicence, ' endlicence ==> ', endlicence)
+        console.log(vlab.name, " timelicence ==> ", timelicence, ' endlicence ==> ', endlicence)
+        console.log(`\n\n\n\n\n\n`)
         const nbdays = timelicence / (1000 * 60 * 60 * 24) // reduce days by one if nb days < vlab.dayleft - 1
+        console.log('nbdays ', nbdays, " dayleft => ", vlab.dayleft -1)
+        console.log('nbdays ', nbdays, " dayleft => ", vlab.dayleft -1)
+        console.log('nbdays ', nbdays, " dayleft => ", vlab.dayleft -1)
+        console.log('nbdays ', nbdays, " dayleft => ", vlab.dayleft -1)
+        console.log('nbdays ', nbdays, " dayleft => ", vlab.dayleft -1)
         if (nbdays < vlab.dayleft - 1) {
           logger.info('reducing days remaining')
           logger.info(nbdays)

@@ -105,7 +105,7 @@ module.exports = {
   },
   async put(req, res) {
     try {
-      if (req.body.dayleft !== 0) {
+      if (req.body.dayleft >= 0) {
         var date = new Date()
         var endlicence = date.getTime()
         var datestart = new Date(endlicence)
