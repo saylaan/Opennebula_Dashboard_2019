@@ -24,9 +24,8 @@ app.use(imports.cookieSession({
    keys: ['portal-vlab'],
    maxAge: 24 * 60 * 60 * 1000 // 24 hours
  }))
-<<<<<<< HEAD
 
-app.use(imports.express.static(publicRoot)) // For production (use of the build fodler for vue)
+// app.use(imports.express.static(publicRoot)) // For production (use of the build fodler for vue)
 
 require('./policies/passport') // this is for passport authen
 require('./routes')(app) // attach all the different endpoint to the apps
