@@ -1,6 +1,6 @@
 <template>
 <v-app id="sandbox">
-    <v-img v-if="!isUserLoggedIn" @click="isMini()" :src="require('@/assets/DSPP-banner.jpg')" width="100%">
+    <v-img v-if="!isUserLoggedIn" :src="require('@/assets/DSPP-banner.jpg')" width="100%">
     <toolbar v-bind:drawer="drawer"/>
       <v-container fill-height fluid>
         <router-view v:bind:drawer="drawer"></router-view>
@@ -10,7 +10,7 @@
     </v-footer>
     </v-img>
     <v-img v-if="isUserLoggedIn" @click="isMini()" :gradiant="grad" width="100%">
-    <navbar v-if="isUserLoggedIn" v-bind:drawer="drawer"/>
+    <navbar class="nonePhone" v-if="isUserLoggedIn" v-bind:drawer="drawer"/>
     <toolbar v-bind:drawer="drawer"/>
     <v-content>
       <v-container fluid>
