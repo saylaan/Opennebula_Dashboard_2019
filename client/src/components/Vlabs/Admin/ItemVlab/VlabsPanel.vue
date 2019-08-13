@@ -15,11 +15,17 @@
       >
         <v-icon>add</v-icon>
       </v-btn> -->
+      <v-card>
+      <v-card-title>
+      <v-spacer></v-spacer>
+      <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+      </v-card-title>
       <v-data-table 
       :headers="headers" 
       :items="vlabs" 
       :items-per-page="10"
-      :loading="isData(vlabs)" 
+      :loading="isData(vlabs)"
+      :search="search"
       loading-text="No data for the moment"
       >
         <template v-slot:item.dayleft="{item}">
@@ -36,6 +42,7 @@
             >View Vlab</v-btn>
         </template>
       </v-data-table>
+      </v-card>
     </panel>
   </v-flex>
  </v-layout>
@@ -48,6 +55,7 @@ import VlabService from "@/services/Vlab/VlabService";
 export default {
   data() {
     return {
+      search: '',
       headers: [
         {text: "Vlab name", value: "name", sortable: false, align: "left"},
         {text: "Owner name", value: "ownername"},

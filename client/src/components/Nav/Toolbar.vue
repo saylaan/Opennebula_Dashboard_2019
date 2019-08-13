@@ -100,4 +100,10 @@ export default {
 .v-toolbar {
   opacity: 0.9;
 }
+
+@media screen and (max-width: 720px) {
+  .nonePhone {
+    display: none !important;
+  }
+}
 </style>

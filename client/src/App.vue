@@ -10,7 +10,7 @@
     </v-footer>
     </v-img>
     <v-img v-if="isUserLoggedIn" @click="isMini()" :gradiant="grad" width="100%">
-    <navbar class="nonePhone" v-if="isUserLoggedIn" v-bind:drawer="drawer"/>
+    <navbar v-if="isUserLoggedIn" v-bind:drawer="drawer"/>
     <toolbar v-bind:drawer="drawer"/>
     <v-content>
       <v-container fluid>

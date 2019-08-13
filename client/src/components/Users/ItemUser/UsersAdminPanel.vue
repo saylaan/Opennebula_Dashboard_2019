@@ -2,9 +2,15 @@
   <v-layout justify-center>
     <v-flex xs12 md10>
     <panel title="Admin">
+      <v-card>
+      <v-card-title>
+      <v-spacer></v-spacer>
+      <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+      </v-card-title>
       <v-data-table
         :headers="headers" 
         :items-per-page="5"
+        :search="search"
         :loading="isData(users)" 
         loading-text="No data for the moment"
         class="elevation-12"
@@ -28,6 +34,7 @@
             </v-layout>
           </template>
       </v-data-table>
+      </v-card>
     </panel>
     </v-flex>
   </v-layout>
@@ -41,6 +48,7 @@ import Swal from 'sweetalert2'
 export default {
   data () {
     return {
+      search: '',
       headers: [
         {text: "Email", value: "email", sortable: false, align: "center"},
         {text: "Company", value: "companyname", align: "center"},

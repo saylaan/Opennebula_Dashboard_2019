@@ -33,6 +33,9 @@ import EditSip from '@/components/Vlabs/ViewVlab/Admin/Manage/EditSip'
 Vue.use(Router)
 
 export default new Router({
+  hashbang: false,
+  hash: false,
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -41,13 +44,13 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: 'home'
+      redirect: '/'
     },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-    },
+    // {
+    //   path: '/register',
+    //   name: 'register',
+    //   component: Register
+    // },
     {
       path: '/signin',
       name: 'signin',
@@ -98,21 +101,21 @@ export default new Router({
       name: 'vlabs',
       component: Vlabs
     },
-    {
-      path: '/vlabs/create',
-      name: 'vlab-create',
-      component: CreateVlab
-    },
+    // {
+    //   path: '/vlabs/create',
+    //   name: 'vlab-create',
+    //   component: CreateVlab
+    // },
     {
       path: '/vlabs/:vlabId',
       name: 'vlab',
       component: ViewVlab
     },
-    {
-      path: '/vlabs/:vlabId/edit',
-      name: 'edit-vlab',
-      component: EditVlab
-    },
+    // {
+    //   path: '/vlabs/:vlabId/edit',
+    //   name: 'edit-vlab',
+    //   component: EditVlab
+    // },
     {
       path: '/vlabs/:vlabId/create',
       name: 'create-url',
@@ -122,26 +125,26 @@ export default new Router({
       path: '/vlabs/:vlabId/editUrl/:urlId',
       name: 'edit-url',
       component: EditUrl
-    },
-    {
-      path: '/vlabs/:vlabId/create',
-      name: 'create-vm',
-      component: CreateVm
-    },
-    {
-      path: '/vlabs/:vlabId/editVm/:vmId',
-      name: 'edit-vm',
-      component: EditVm
-    },
-    {
-      path: '/vlabs/:vlabId/create',
-      name: 'create-sip',
-      component: CreateSip
-    },
-    {
-      path: '/vlabs/:vlabId/editSip/:sipId',
-      name: 'edit-sip',
-      component: EditSip
     }
+    // {
+    //   path: '/vlabs/:vlabId/create',
+    //   name: 'create-vm',
+    //   component: CreateVm
+    // },
+    // {
+    //   path: '/vlabs/:vlabId/editVm/:vmId',
+    //   name: 'edit-vm',
+    //   component: EditVm
+    // },
+    // {
+    //   path: '/vlabs/:vlabId/create',
+    //   name: 'create-sip',
+    //   component: CreateSip
+    // },
+    // {
+    //   path: '/vlabs/:vlabId/editSip/:sipId',
+    //   name: 'edit-sip',
+    //   component: EditSip
+    // }
   ]
 })

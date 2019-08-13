@@ -15,12 +15,18 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
+      <v-card>
+      <v-card-title>
+      <v-spacer></v-spacer>
+      <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+      </v-card-title>
       <v-data-table
         :headers="headers" 
         :items-per-page="5"
         :loading="isData(users)" 
         loading-text="No data for the moment"
         class="elevation-12"
+        :search="search"
         :items="users">
           <template v-slot:item.email="{item}">
           <a :href="'mailto:' + item.email + '?subject=INFO'" class="text-xs-left">{{item.email}}</a>
@@ -44,6 +50,7 @@
             </v-layout>
           </template>
       </v-data-table>
+      </v-card>
     </panel>
     </v-flex>
   </v-layout>
@@ -58,6 +65,7 @@ import Swal from 'sweetalert2'
 export default {
   data () {
     return {
+      search: '',
       headers: [
         {text: "Email", value: "email", sortable: false, align: "center"},
         {text: "Company", value: "companyname", align: "center"},

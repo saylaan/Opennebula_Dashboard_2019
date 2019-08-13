@@ -87,7 +87,6 @@ module.exports = {
           error: 'this user already have a this vlab'
         })
       }
-<<<<<<< HEAD
       // const usermail = await User.findByPk(UserId)
       // const transporter = nodemailer.createTransport({
       //   pool: true,
@@ -114,34 +113,6 @@ module.exports = {
       //     console.log('Email sent: ' + info.response)
       //   }
       // })
-=======
-      const usermail = await User.findByPk(UserId)
-      const transporter = nodemailer.createTransport({
-         pool: true,
-         host: "mail.universe-corrupted.com",
-         port: 465,
-         secure: true, // use TLS
-         auth: {
-           user: "support@vlab.dspp.al-enterprise.com",
-           pass: "6JQY^iN(^+7i"
-         }
-       });
-       var mailOpt = {
-         from: 'support@vlab.dspp.al-enterprise.com',
-         to: usermail.email,
-         subject: 'TEST',
-         text: 'IM A TEST TEXT YEAH'
-       }
-       transporter.sendMail(mailOpt, function(error, info) {
-         if (error) {
-           console.log('\n\n\n\n\n\n\n\n\n\n TEST \n\n\n\n\n\n\n\n')
-           console.log(error)
-         } else {
-           console.log('\n\n\n\n\n\n\n\n\n\n TEST \n\n\n\n\n\n\n\n')
-           console.log('Email sent: ' + info.response)
-         }
-       })
->>>>>>> 10eb0f814b81544732fe1768482295b3635f65c8
       const newVlabUser = await VlabUser.create({
         VlabId: VlabId,
         UserId: UserId

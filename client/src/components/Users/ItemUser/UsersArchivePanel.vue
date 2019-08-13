@@ -2,10 +2,16 @@
   <v-layout justify-center>
     <v-flex xs12 md10>
     <panel title="Archive">
+      <v-card>
+      <v-card-title>
+      <v-spacer></v-spacer>
+      <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+      </v-card-title>
       <v-data-table
         :headers="headers" 
         :items-per-page="10"
-        :loading="isData(users)" 
+        :loading="isData(users)"
+        :search="search"
         loading-text="No data for the moment"
         class="elevation-12"
         :items="users">
@@ -13,7 +19,7 @@
           <a :href="'mailto:' + item.email + '?subject=INFO'" class="text-xs-left">{{item.email}}</a>
           </template>
           <template v-slot:item.admin="{item}">
-          <p class="text-xs-left">{{isAdmin(item.admin)}}</p>
+          {{isAdmin(item.admin)}}
           </template>
           <template v-slot:item.id="{item}">
           <v-layout row align-center justify-center>
@@ -31,6 +37,7 @@
           </v-layout>
           </template>
       </v-data-table>
+      </v-card>
     </panel>
     </v-flex>
   </v-layout>
@@ -44,6 +51,7 @@ import Swal from 'sweetalert2'
 export default {
   data () {
     return {
+      search: '',
       headers: [
         {text: "Email", value: "email", sortable: false, align: "center"},
         {text: "Company", value: "companyname", align: "center"},
@@ -103,9 +111,9 @@ export default {
     },
     isAdmin(admin) {
       if (admin) {
-        return ('admin')
+        return ('Admin')
       } else {
-        return 'user'
+        return 'User'
       }
     },
     async mailTo(email) {

@@ -18,3 +18,11 @@
 {"message":28.99990783564815,"level":"info","service":"user-service"}
 {"message":30,"level":"info","service":"user-service"}
 {"message":{"id":5,"idopennebula":43,"ownername":"john@yourcompany.com","groupname":"oneadmin","name":"VLAB10 - 10.100.10.0","nameparse":"VLAB10","vlanid":10,"assign":true,"dayleft":30,"startlicence":"2019-08-12","endlicence":"2019-09-11","createdAt":"2019-08-02T13:33:22.645Z","updatedAt":"2019-08-12T15:57:55.873Z"},"level":"info","service":"user-service"}
+{"message":"reducing days remaining","level":"info","service":"user-service"}
+{"message":-1.3649172106481482,"level":"info","service":"user-service"}
+{"message":0,"level":"info","service":"user-service"}
+{"message":{"id":5,"idopennebula":44,"ownername":"geoffroy.huck@epitech.eu","groupname":"oneadmin","name":"VLAB20 - 10.100.20.0","nameparse":"VLAB20","vlanid":20,"assign":true,"dayleft":0,"startlicence":"2019-08-12","endlicence":"2019-08-12","createdAt":"2019-08-12T08:01:46.268Z","updatedAt":"2019-08-12T10:23:35.488Z"},"level":"info","service":"user-service"}
+{"message":"deleting vlab from the user","level":"info","service":"user-service"}
+{"message":-1.3650329398148149,"level":"info","service":"user-service"}
+{"message":-1,"level":"info","service":"user-service"}
+{"message":{"id":5,"idopennebula":44,"ownername":"geoffroy.huck@epitech.eu","groupname":"oneadmin","name":"VLAB20 - 10.100.20.0","nameparse":"VLAB20","vlanid":20,"assign":true,"dayleft":-1,"startlicence":"2019-08-12","endlicence":"2019-08-12","createdAt":"2019-08-12T08:01:46.268Z","updatedAt":"2019-08-13T08:45:28.973Z"},"level":"info","service":"user-service"}
