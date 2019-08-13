@@ -6,7 +6,7 @@
         <router-view v:bind:drawer="drawer"></router-view>
       </v-container>
     <v-footer :dark="dark" :inset="footer.inset" app>
-      <span class="px-3">&copy; Copyright {{new Date().getFullYear()}} The Alcatel-Lucent name and logo are trademarks of Nokia used under license by ALE.</span>
+      <span class="nonePhone px-3">&copy; Copyright {{new Date().getFullYear()}} The Alcatel-Lucent name and logo are trademarks of Nokia used under license by ALE.</span>
     </v-footer>
     </v-img>
     <v-img v-if="isUserLoggedIn" @click="isMini()" :gradiant="grad" width="100%">
@@ -18,7 +18,7 @@
       </v-container>
     </v-content>
     <v-footer app :dark="dark" :inset="footer.inset">
-      <span class="px-3">&copy; Copyright {{new Date().getFullYear()}} The Alcatel-Lucent name and logo are trademarks of Nokia used under license by ALE.</span>
+      <span class="nonePhone px-3">&copy; Copyright {{new Date().getFullYear()}} The Alcatel-Lucent name and logo are trademarks of Nokia used under license by ALE.</span>
     </v-footer>
     </v-img>
   </v-app>
@@ -91,6 +91,12 @@ table.v-table thead th {
 }
 table.v-table tbody td {
   font-size: 16px !important;
+}
+
+@media screen and (max-width: 720px) {
+  .nonePhone {
+    display: none !important;
+  }
 }
 
 </style>
