@@ -2,7 +2,7 @@ const { User } = require('../../models')
 const jwt = require('jsonwebtoken') // for token authen
 const config = require('../../config/config')
 const Promise = require('bluebird')
-//const bcrypt = require('bcrypt')
+const crypto = require('crypto')
 
 function jwtSignUser(user) { // Override the function who sign a user obj using jwt library to get back a token
   const ONE_WEEK = 60 * 60 * 24 * 7
@@ -16,19 +16,6 @@ module.exports = {
     try {
       const user = await User.create(req.body)
       const userJson = user.toJSON()
-      console.log(user)
-      // let hashPwd
-      // bcrypt.hash(userJson.password, 10, (err, hash) => {
-      //   hashPwd = hash
-      // })
-      // console.log(hashPwd)
-      // console.log(hashPwd)
-      // console.log(hashPwd)
-      // console.log(hashPwd)
-      // console.log(hashPwd)
-      // console.log(hashPwd)
-      // console.log(hashPwd)
-      // console.log(hashPwd)
       //res.send({
         //user: userJson,
         //token: jwtSignUser(user)
@@ -53,7 +40,8 @@ module.exports = {
           error: 'Invalid credentials'
         })
       }
-      const isPasswordValid = await user.comparePassword(password)
+      const hash = crypto.pbkdf2Sync(password, user.salt, 1000, 64, `sha512`).toString(`hex`)
+      const isPasswordValid = user.active_hash === hash
       if (!isPasswordValid) {
         return res.status(403).send({
           error: 'Invalid credentials'

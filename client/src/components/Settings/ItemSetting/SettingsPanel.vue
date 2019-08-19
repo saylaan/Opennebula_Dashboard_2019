@@ -225,11 +225,14 @@
 import { mapState } from "vuex";
 import UserService from "@/services/User/UserService";
 import Swal from 'sweetalert2'
+import crypto from 'crypto'
 
 export default {
   data() {
     return {
       userview: {
+        active_hash: null,
+        salt: null,
         password: null
         // emailactive: false
       },
@@ -238,6 +241,8 @@ export default {
         firstname: null,
         lastname: null,
         email: null,
+        active_hash: null,
+        salt: null,
         password: null
         // emailactive: false
       },
@@ -258,10 +263,9 @@ export default {
       if (this.admin) {
         const areAllFieldsFilledIn = Object.keys(this.adminview).every(
           key => {
-            if (key === 'emailactive' || key === 'active_hash' || key === 'dayleft' || key === 'password') {
+            if (key === 'emailactive' || key === 'active_hash' || key === 'salt' || key === 'dayleft' || key === 'password' || key === 'assign' || key === 'archive') {
               return (true)
             }
-            console.log(key)
             return (!!this.adminview[key])
           }
         );
@@ -280,8 +284,12 @@ export default {
           }
         }
         try {
-          if (this.oldPassword === this.user.password) {
-            this.adminview.password = this.newPassword
+          const hash = crypto.pbkdf2Sync(this.oldPassword, this.user.salt, 1000, 64, `sha512`).toString(`hex`)
+          const isPasswordValid = this.user.active_hash === hash
+          if (isPasswordValid) {
+            this.adminview.salt = crypto.randomBytes(16).toString(`hex`)
+            this.adminview.active_hash = crypto.pbkdf2Sync(this.newPassword, this.adminview.salt,
+              1000, 64, `sha512`).toString(`hex`)
             await UserService.updateSettings(this.adminview);
             this.$router.push({ name: "vlabs" });
           } else {
@@ -293,7 +301,7 @@ export default {
       } else {
         const areAllFieldsFilledIn = Object.keys(this.userview).every(
           key => {
-            if (key === 'admin' || key === 'companyname' || key === 'firstname' || key === 'lastname' || key === 'email' || key === 'emailactive' || key === 'active_hash' || key === 'dayleft' || key === 'assign' || key === 'startlicence' || key === 'endlicence' || key === 'archive') {
+            if (key === 'active_hash' || key === 'salt' || key === 'admin' || key === 'companyname' || key === 'firstname' || key === 'lastname' || key === 'email' || key === 'emailactive' || key === 'active_hash' || key === 'dayleft' || key === 'assign' || key === 'startlicence' || key === 'endlicence' || key === 'archive' || key === 'password') {
               return (true)
             }
             return (!!this.userview[key])
@@ -310,8 +318,12 @@ export default {
           }
         }
         try {
-          if (this.oldPassword === this.user.password) {
-            this.userview.password = this.newPassword
+          const hash = crypto.pbkdf2Sync(this.oldPassword, this.user.salt, 1000, 64, `sha512`).toString(`hex`)
+          const isPasswordValid = this.user.active_hash === hash
+          if (isPasswordValid) {
+            this.userview.salt = crypto.randomBytes(16).toString(`hex`)
+            this.userview.active_hash = crypto.pbkdf2Sync(this.newPassword, this.userview.salt,
+              1000, 64, `sha512`).toString(`hex`)
             await UserService.updateSettings(this.userview);
             this.$router.push({ name: "dashboard" });
           } else {

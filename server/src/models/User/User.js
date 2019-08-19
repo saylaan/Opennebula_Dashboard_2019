@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: DataTypes.STRING,
     active_hash: DataTypes.STRING,
+    salt: DataTypes.STRING,
     purpose: DataTypes.STRING,
     admin: {
       type: DataTypes.BOOLEAN,
@@ -44,12 +45,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   })
 
-  User.prototype.comparePassword = function (password) {
-    return (password === this.password)
-    // return bcrypt.compare(password, this.active_hash)
-  }
-  // User.prototype.hashPassword = function (password) {
-  //   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
-  // }
   return User
 }

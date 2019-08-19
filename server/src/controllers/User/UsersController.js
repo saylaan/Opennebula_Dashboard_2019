@@ -3,6 +3,7 @@ const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
   'http://10.1.2.150:2633/RPC2')
 const date = require('date-and-time')
+const crypto = require('crypto')
 
 module.exports = {
   async index(req, res) {
@@ -30,6 +31,25 @@ module.exports = {
   async post(req, res) {
     try {
       const user = await User.create(req.body)
+      const newUser = {
+        admin: req.body.admin,
+        companyname: req.body.companyname,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: "",
+        purpose: req.body.purpose,
+        active_hash: "",
+        salt: ""
+      }
+      newUser.salt = crypto.randomBytes(16).toString(`hex`)
+      newUser.active_hash = crypto.pbkdf2Sync(req.body.password, newUser.salt,
+        1000, 64, `sha512`).toString(`hex`)
+      await User.update(newUser, {
+        where: {
+          id: user.id
+        }
+      })
       await one.getGroups(async (err, data) => {
         data.forEach(async element => {
           if (element.NAME === "users" && !user.admin) {

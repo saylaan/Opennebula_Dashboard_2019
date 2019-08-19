@@ -1,50 +1,13 @@
 [
   {
-    "lastname": "Huck",
-    "firstname": "Geoffroy",
-    "email": "geoffroy.huck@al-enterprise.com",
-    "password": "12345678",
+    "lastname": "admin",
+    "firstname": "admin",
+    "email": "admin",
+    "password": "ChangeMe123",
     "companyname": "ALE",
-    "purpose": "Admin",
-    "active_hash": "",
-    "admin": true,
-    "assign": false,
-    "emailactive": false
-  },
-  {
-    "lastname": "Gadot",
-    "firstname": "Frank",
-    "email": "frank.gadot@al-enterprise.com",
-    "password": "12345678",
-    "companyname": "ALE",
-    "purpose": "Admin",
-    "active_hash": "",
-    "admin": true,
-    "assign": false,
-    "emailactive": false
-  },
-  {
-    "lastname": "Chevert",
-    "firstname": "Thierry",
-    "email": "thierry.chevert@al-enterprise.com",
-    "password": "12345678",
-    "companyname": "ALE",
-    "purpose": "Admin",
-    "active_hash": "",
-    "admin": true,
-    "assign": false,
-    "emailactive": false
-  },
-  {
-    "lastname": "Himmi",
-    "firstname": "Rachid",
-    "email": "rachid.himmi@al-enterprise.com",
-    "password": "12345678",
-    "companyname": "ALE",
-    "purpose": "Admin",
-    "active_hash": "",
-    "admin": true,
-    "assign": false,
-    "emailactive": false
+    "purpose": "admin",
+    "active_hash": "9552bc7cc97e44c774e4f7a3da9eb34b0348166f18d1e55ca227245355c751195fe84bfd99d7bf64643fc4083241dd48b9bc0516699d371c88da595eeb76a16c",
+    "salt": "7cf01035b119f0e861c3389948b47066",
+    "admin": true
   }
 ]
