@@ -102,7 +102,7 @@ export default {
           newUser.archive = false
           newUser = (await UserService.put(newUser)).data
           setTimeout(async () => {
-            await document.location.reload()
+            await document.location.reload(true)
           }, 3000)
         }
       } catch (err) {

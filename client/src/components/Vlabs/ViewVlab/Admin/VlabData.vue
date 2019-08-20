@@ -181,7 +181,7 @@ export default {
       }, this.vlabuser.VlabId)
       this.vlab = (await VlabService.getVlab(this.vlabuser.VlabId)).data
       setTimeout(async () => {
-        await document.location.reload()
+        await document.location.reload(true)
       }, 3000)
     },
     async setUser() {
@@ -214,7 +214,7 @@ export default {
         })).data;
         this.vlab = (await VlabService.getVlab(vlabId)).data
         setTimeout(async () => {
-          await document.location.reload()
+          await document.location.reload(true)
         }, 3000)
       } catch (err) {
         console.log(err);
@@ -246,7 +246,7 @@ export default {
           dayleft: 0
         }, vlabId)
         setTimeout(async () => {
-          await document.location.reload()
+          await document.location.reload(true)
         }, 3000)
         this.vlab = (await VlabService.getVlab(vlabId)).data
       } catch (err) {
