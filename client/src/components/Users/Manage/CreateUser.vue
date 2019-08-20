@@ -72,8 +72,26 @@
               </v-fade-transition>
             </template>
           </v-text-field>
-        <br>
+          <v-textarea label="Purpose" type="purpose" v-model="userview.purpose"
+          outline clearable>
+            <!-- <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Explain for what purpose you need a access to the portal
+              </v-tooltip>
+            </template> -->
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>notes</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-textarea>
+          <br>
+        <!-- <br> -->
           <!-- <v-text-field
+            v-if="isAdmin()"
             label="Password"
             type="password"
             v-model="userview.password"
@@ -97,6 +115,7 @@
           </v-text-field>
           <br>
           <v-text-field
+            v-if="isAdmin()"
             label="Confirm password"
             type="password"
             v-model="confirmpassword"
@@ -117,24 +136,8 @@
                 <v-icon>https</v-icon>
               </v-fade-transition>
             </template>
-          </v-text-field> -->
-          <br>
-          <v-textarea label="Purpose" type="purpose" v-model="userview.purpose"
-          outline clearable>
-            <!-- <template v-slot:prepend>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on">help</v-icon>
-                </template>
-                Explain for what purpose you need a access to the portal
-              </v-tooltip>
-            </template> -->
-            <template v-slot:append>
-              <v-fade-transition leave-absolute>
-                <v-icon>notes</v-icon>
-              </v-fade-transition>
-            </template>
-          </v-textarea>
+          </v-text-field>
+          <br> -->
         <v-switch large color="red" v-model="userview.admin" label="Set Admin">
           <!-- <template v-slot:prepend>
               <v-tooltip bottom>
@@ -193,6 +196,9 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "admin"])
   },
   methods: {
+    isAdmin() {
+      return (this.userview.admin)
+    },
     async create(route) {
       this.error = null;
       const areAllFieldsFilledIn = Object.keys(this.userview).every(
@@ -203,16 +209,12 @@ export default {
           return (!!this.userview[key])
         }
       );
-      if (!areAllFieldsFilledIn || !this.confirmemail || !this.confirmpassword) {
+      if (!areAllFieldsFilledIn || !this.confirmemail) {
         this.error = "Please fill in all the required fields.";
         return;
       }
       if (this.confirmemail !== this.userview.email) {
         this.error = "The emails don't match"
-        return;
-      }
-      if (this.confirmpassword !== this.userview.password) {
-        this.error = "The passwords don't match"
         return;
       }
       try {
