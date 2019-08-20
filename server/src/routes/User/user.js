@@ -3,6 +3,7 @@ const isAuthenticated = require('../../policies/isAuthenticated')
 
 module.exports = (app) => {
   app.get('/users',
+    isAuthenticated,
     UsersController.index)
   app.get('/users/:userId',
     isAuthenticated,

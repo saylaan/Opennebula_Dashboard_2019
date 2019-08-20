@@ -90,9 +90,6 @@ export default {
           let newUser = (await UserService.getUser(id)).data
           newUser.assign = false
           newUser = (await UserService.put(newUser)).data
-          setTimeout(async () => {
-            await document.location.reload(true)
-          }, 3000)
         }
       } catch (err) {
         console.log(err)
@@ -104,15 +101,18 @@ export default {
   },
   computed: {
     ...mapState(["isUserLoggedIn", "user", "admin"])
+  },
+  watch: {
+    async users() {
+      this.users = (await UserService.index()).data;
+      for (let i = 0, j = 0; i !== this.users.length; i++) {
+        if (!this.users[i].admin || this.users[i].archive) {
+          this.users.splice(i, 1)
+          i--
+        }
+      }
+    }
   }
-  // watch: {
-  //   "$route.query.find": {
-  //     immediate: true,
-  //     async handler(value) {
-  //       this.users = (await UserService.index(value)).data;
-  //     }
-  //   }
-  // }
 };
 </script>
 

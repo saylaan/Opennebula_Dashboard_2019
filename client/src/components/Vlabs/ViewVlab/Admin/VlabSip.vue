@@ -88,16 +88,11 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
   watch: {
-    async vlabsip() {
-      try {
-        const vlabId = this.route.params.vlabId;
-        this.vlab = (await VlabService.getVlab(vlabId)).data;
-        this.vlabsips = (await SipVlabService.index({
-          VlabId: this.vlab.id
-        })).data;
-      } catch (err) {
-        console.log(err);
-      }
+    async vlabsips() {
+      const vlabId = this.route.params.vlabId;
+      this.vlabsips = (await SipVlabService.index({
+        VlabId: vlabId
+      })).data;
     }
   },
   async mounted() {

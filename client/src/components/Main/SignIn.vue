@@ -76,7 +76,6 @@ export default {
           email: this.email,
           password: this.password
         });
-        window.localStorage.setItem('user', JSON.stringify(response.data.user))
         this.$store.dispatch("setUser", response.data.user);
         this.$store.dispatch("setAdmin", response.data.user.admin);
         this.$store.dispatch("setToken", response.data.token);

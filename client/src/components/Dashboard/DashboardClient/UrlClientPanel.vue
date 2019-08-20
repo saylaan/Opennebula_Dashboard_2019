@@ -47,12 +47,8 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
   watch: {
-    async userurl() {
-      try {
-        this.userurls = (await UrlUserService.index()).data;
-      } catch (err) {
-        console.log(err);
-      }
+    async userurls() {
+      this.userurls = (await UrlUserService.index()).data;
     }
   },
   methods: {

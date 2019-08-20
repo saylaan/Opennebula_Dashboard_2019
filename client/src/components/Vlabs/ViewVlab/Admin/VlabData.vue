@@ -107,6 +107,12 @@ export default {
       required: value => !!value || "Required."
     };
   },
+  watch: {
+    async vlab() {
+      const vlabId = this.route.params.vlabId;
+      this.vlab = (await VlabService.getVlab(vlabId)).data
+    }
+  },
   async mounted() {
     try {
       const vlabId = this.route.params.vlabId;
@@ -180,9 +186,6 @@ export default {
         dayleft: lab[0].dayleft
       }, this.vlabuser.VlabId)
       this.vlab = (await VlabService.getVlab(this.vlabuser.VlabId)).data
-      setTimeout(async () => {
-        await document.location.reload(true)
-      }, 3000)
     },
     async setUser() {
       try {
@@ -213,9 +216,6 @@ export default {
           UserId: id
         })).data;
         this.vlab = (await VlabService.getVlab(vlabId)).data
-        setTimeout(async () => {
-          await document.location.reload(true)
-        }, 3000)
       } catch (err) {
         console.log(err);
       }
@@ -245,9 +245,6 @@ export default {
           assign: false,
           dayleft: 0
         }, vlabId)
-        setTimeout(async () => {
-          await document.location.reload(true)
-        }, 3000)
         this.vlab = (await VlabService.getVlab(vlabId)).data
       } catch (err) {
         console.log(err);

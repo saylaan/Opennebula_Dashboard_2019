@@ -35,12 +35,8 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
   watch: {
-    async usersip() {
-      try {
-        this.usersips = (await SipUserService.index()).data;
-      } catch (err) {
-        console.log(err);
-      }
+    async usersips() {
+      this.usersips = (await SipUserService.index()).data;
     }
   },
   methods: {

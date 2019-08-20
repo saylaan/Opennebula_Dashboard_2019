@@ -67,17 +67,11 @@ export default {
     ...mapState(["isUserLoggedIn", "user", "route", "admin"])
   },
   watch: {
-    async vlaburl() {
-      try {
-        await UrlService.changePwd(url.id)
-        const vlabId = this.route.params.vlabId;
-        this.vlab = (await VlabService.getVlab(vlabId)).data;
-        this.vlaburls = (await UrlVlabService.index({
-          VlabId: this.vlab[0].id
-        })).data;
-      } catch (err) {
-        console.log(err);
-      }
+    async vlaburls() {
+      const vlabId = this.route.params.vlabId;
+      this.vlaburls = (await UrlVlabService.index({
+        VlabId: vlabId
+      })).data;
     }
   },
   methods: {

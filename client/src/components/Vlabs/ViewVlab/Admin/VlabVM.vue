@@ -67,14 +67,11 @@ export default {
     }
   },
   watch: {
-    async vlabvm() {
-      try {
-        this.vlabvms = (await VmVlabService.index({
-          VlabId: this.vlab.id
-        })).data;
-      } catch (err) {
-        console.log(err);
-      }
+    async vlabvms() {
+      const vlabId = this.route.params.vlabId;
+      this.vlabvms = (await VmVlabService.index({
+        VlabId: vlabId
+      })).data;
     }
   },
   async mounted() {
