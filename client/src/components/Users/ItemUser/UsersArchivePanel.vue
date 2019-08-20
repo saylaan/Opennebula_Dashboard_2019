@@ -98,12 +98,12 @@ export default {
           ]
         })
         if (opt === "0") {
-          const newUser = (await UserService.getUser(id)).data
+          let newUser = (await UserService.getUser(id)).data
           newUser.archive = false
-          await UserService.put(newUser)
-          setTimeout(async () => {
-            await document.location.reload(true)
-          }, 3000)
+          newUser = (await UserService.put(newUser)).data
+          // setTimeout(async () => {
+          //   await document.location.reload(true)
+          // }, 3000)
         }
       } catch (err) {
         console.log(err)
@@ -135,25 +135,5 @@ export default {
 </script>
 
 <style scoped>
-.user {
-  padding: 20px;
-  height: 100px;
-  overflow: hidden;
-}
 
-.user-companyname {
-  font-size: 20px;
-}
-
-.user-firstname {
-  font-size: 20px;
-}
-
-.user-lastname {
-  font-size: 20px;
-}
-
-.user-purpose {
-  font-size: 20px;
-}
 </style>
