@@ -20,6 +20,7 @@ const one = new Opennebula('geoffroy:2961Sailaan1992!',
   'http://10.1.2.150:2633/RPC2')
 const nodemailer = require('nodemailer')
 const sendmail = require('sendmail')
+const crypto = require('crypto')
 
 module.exports = {
   async index(req, res) {
