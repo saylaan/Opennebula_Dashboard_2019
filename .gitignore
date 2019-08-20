@@ -1,6 +1,7 @@
-client/build/*
-client/src/services/Api.js
-server/src/app.js
-server/src/password/axiosSIP.js
-server/src/password/HandlingPwd.js
-tabtracker.sqlite
+./client/build/*
+./client/src/services/Api.js
+./server/src/app.js
+./server/src/password/axiosSIP.js
+./server/src/password/HandlingPwd.js
+./server/seed
+./server/tabtracker.sqlite
