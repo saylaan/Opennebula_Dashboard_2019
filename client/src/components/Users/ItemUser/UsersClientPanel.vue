@@ -111,7 +111,7 @@ export default {
           ]
         })
         if (opt === "0") {
-          const newUser = (await UserService.getUser(id)).data
+          let newUser = (await UserService.getUser(id)).data
           if (newUser.dayleft !== 0) {
             let vlabs = (await VlabService.getAllVlabs()).data
             await vlabs.forEach(async vlab => {
@@ -135,10 +135,10 @@ export default {
           newUser.dayleft = 0
           newUser.assign = false
           newUser.archive = true
-          await UserService.put(newUser)
-          setTimeout(async () => {
-            await document.location.reload(true)
-          }, 3000)
+          newUser = (await UserService.put(newUser)).data
+          // setTimeout(async () => {
+          //   await document.location.reload(true)
+          // }, 3000)
         }
       } catch (err) {
         console.log(err)
