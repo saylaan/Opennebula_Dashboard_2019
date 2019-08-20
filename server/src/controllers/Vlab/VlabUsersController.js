@@ -111,18 +111,22 @@ module.exports = {
           pass: '6JQY^iN(^+7i'
         }
       });
+      var message = "Greetings " + usermail.firstname + "\n\n" +
+      "The DSPP would like to welcome you to your new virtual lab.\nIt is important to start by reading the documentation at https://vlab.aapp.al-enterprise.com/\n" +
+      "You will find a menubar on the left where all the important information you need are listed in order.\n\n" +
+      "When you are ready to use your lab, go to https://portal-vlab.ale-aapp.com , and use the following credentials:\n" +
+      "Login: " + usermail.email + "\n" + "Password: " + newpwd + "\n\n\n" +
+      "We hope you will enjoy your journey with us. If you have any question, feel free to email us at support@vlab.aapp.al-enterprise.com\n"
       var mailOpt = {
         from: 'support@vlab.dspp.al-enterprise.com',
         to: usermail.email,
         subject: 'AAPP Program - Account assign',
-        text: 'IM A TEST TEXT YEAH'
+        text: message
       }
       transporter.sendMail(mailOpt, function(error, info) {
         if (error) {
-          console.log('\n\n\n\n\n\n\n\n\n\n TEST \n\n\n\n\n\n\n\n')
           console.log(error)
         } else {
-          console.log('\n\n\n\n\n\n\n\n\n\n TEST \n\n\n\n\n\n\n\n')
           console.log('Email sent: ' + info.response)
         }
       })
