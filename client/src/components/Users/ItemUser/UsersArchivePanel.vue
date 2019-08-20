@@ -101,9 +101,9 @@ export default {
           let newUser = (await UserService.getUser(id)).data
           newUser.archive = false
           newUser = (await UserService.put(newUser)).data
-          // setTimeout(async () => {
-          //   await document.location.reload(true)
-          // }, 3000)
+          setTimeout(async () => {
+            await document.location.reload()
+          }, 3000)
         }
       } catch (err) {
         console.log(err)
