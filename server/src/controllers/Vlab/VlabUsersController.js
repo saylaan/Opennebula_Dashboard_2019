@@ -407,6 +407,7 @@ module.exports = {
                 const usertmp = await User.findByPk(vlabuser.UserId)
                 newUrl.log = usertmp.email
                 await handlingPwd.pwdVNC(newUrl, usertmp)
+                newUrl.log = "default"
               } else if (url.name === "O2G Access") {
                 newUrl.password = await generator.generate({
                   length: 8,

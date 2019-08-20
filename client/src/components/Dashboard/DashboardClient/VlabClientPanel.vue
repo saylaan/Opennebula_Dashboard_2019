@@ -38,15 +38,8 @@ export default {
     };
   },
   watch: {
-    async vlab() {
-      if (!this.isUserLoggedIn) {
-        return;
-      }
-      try {
-        this.vlabuser = (await VlabUserService.index()).data;
-      } catch (err) {
-        console.log(err);
-      }
+    async vlabuser() {
+      this.vlabuser = (await VlabUserService.index()).data;
     }
   },
   async mounted() {

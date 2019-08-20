@@ -15,7 +15,6 @@ export default { // Hitting the end point register
     return Api().get(`vlabs/${vlabId}`)
   },
   put(vlab, vlabId) {
-    console.log('WTFFFFFFFF')
     return Api().put(`vlabs/${vlabId}`, vlab)
   }
 }

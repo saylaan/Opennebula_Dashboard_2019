@@ -11,6 +11,9 @@ module.exports = function (req, res, next) {
         error: 'you do not have access to this resource'
       })
     } else {
+      console.log('user', user)
+      console.log('user', user)
+      console.log('user', user)
       req.user = user
       next()
     }
