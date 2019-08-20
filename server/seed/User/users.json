@@ -3,7 +3,7 @@
     "lastname": "admin",
     "firstname": "admin",
     "email": "admin",
-    "password": "ChangeMe123",
+    "password": "",
     "companyname": "ALE",
     "purpose": "admin",
     "active_hash": "9552bc7cc97e44c774e4f7a3da9eb34b0348166f18d1e55ca227245355c751195fe84bfd99d7bf64643fc4083241dd48b9bc0516699d371c88da595eeb76a16c",
