@@ -87,7 +87,20 @@ module.exports = {
           error: 'this user already have a this vlab'
         })
       }
-      const usermail = await User.findByPk(UserId)
+      let usermail = await User.findByPk(UserId)
+      console.log(usermail)
+      let newpwd = await generator.generate({
+              length: 8,
+              numbers: true
+      })
+      usermail.salt = crypto.randomBytes(16).toString(`hex`)
+      usermail.active_hash = crypto.pbkdf2Sync(newpwd, usermail.salt,
+        1000, 64, `sha512`).toString(`hex`)
+      await User.update(usermail, {
+        where: {
+          id: UserId
+        }
+      })
       const transporter = nodemailer.createTransport({
         pool: true,
         host: "vlab.dspp.al-enterprise.com",
@@ -101,7 +114,7 @@ module.exports = {
       var mailOpt = {
         from: 'support@vlab.dspp.al-enterprise.com',
         to: usermail.email,
-        subject: 'TEST',
+        subject: 'AAPP Program - Account assign',
         text: 'IM A TEST TEXT YEAH'
       }
       transporter.sendMail(mailOpt, function(error, info) {

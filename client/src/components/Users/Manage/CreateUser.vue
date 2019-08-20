@@ -73,14 +73,14 @@
             </template>
           </v-text-field>
         <br>
-          <v-text-field
+          <!-- <v-text-field
             label="Password"
             type="password"
             v-model="userview.password"
             autocomplete="new-password"
             outline
             clearable
-          >
+          > -->
             <!-- <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -89,7 +89,7 @@
                 Your password must contain at least 8 characters
               </v-tooltip>
             </template> -->
-            <template v-slot:append>
+            <!-- <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>https</v-icon>
               </v-fade-transition>
@@ -103,7 +103,7 @@
             autocomplete="new-password"
             outline
             clearable
-          >
+          > -->
             <!-- <template v-slot:prepend>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -112,12 +112,12 @@
                 Your password must be the same
               </v-tooltip>
             </template> -->
-            <template v-slot:append>
+            <!-- <template v-slot:append>
               <v-fade-transition leave-absolute>
                 <v-icon>https</v-icon>
               </v-fade-transition>
             </template>
-          </v-text-field>
+          </v-text-field> -->
           <br>
           <v-textarea label="Purpose" type="purpose" v-model="userview.purpose"
           outline clearable>
@@ -175,7 +175,6 @@ import generator from "generate-password"
 export default {
   data() {
     return {
-      confirmpassword: null,
       confirmemail: null,
       userview: {
         admin: false,
@@ -198,7 +197,7 @@ export default {
       this.error = null;
       const areAllFieldsFilledIn = Object.keys(this.userview).every(
         key => {
-          if (key === 'admin') {
+          if (key === 'admin' || key === 'password') {
             return (true)
           }
           return (!!this.userview[key])
@@ -226,19 +225,19 @@ export default {
     async cancel() {
       this.$router.push({name: 'users'})
     }
-  },
-  async mounted() {
-    try {
-      this.userview.password = await generator.generate({
-        length: 8,
-        numbers: true
-      })
-      console.log(this.userview.password)
-      this.confirmpassword = this.userview.password
-    } catch (err) {
-      console.log(err);
-    }
   }
+  // async mounted() {
+  //   try {
+  //     this.userview.password = await generator.generate({
+  //       length: 8,
+  //       numbers: true
+  //     })
+  //     console.log(this.userview.password)
+  //     this.confirmpassword = this.userview.password
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 };
 </script>
 

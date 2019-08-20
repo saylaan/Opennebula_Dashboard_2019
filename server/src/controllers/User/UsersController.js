@@ -42,8 +42,12 @@ module.exports = {
         active_hash: "",
         salt: ""
       }
+      let tmppwd = await generator.generate({
+        length: 8,
+        numbers: true
+      })
       newUser.salt = crypto.randomBytes(16).toString(`hex`)
-      newUser.active_hash = crypto.pbkdf2Sync(req.body.password, newUser.salt,
+      newUser.active_hash = crypto.pbkdf2Sync(tmppwd, newUser.salt,
         1000, 64, `sha512`).toString(`hex`)
       await User.update(newUser, {
         where: {
