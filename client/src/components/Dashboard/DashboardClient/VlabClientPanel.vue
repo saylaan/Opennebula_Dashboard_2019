@@ -39,7 +39,9 @@ export default {
   },
   watch: {
     async vlabuser() {
-      this.vlabuser = (await VlabUserService.index()).data;
+      await setTimeout(async () => {
+        this.vlabuser = (await VlabUserService.index()).data;
+      }, 3000)
     }
   },
   async mounted() {

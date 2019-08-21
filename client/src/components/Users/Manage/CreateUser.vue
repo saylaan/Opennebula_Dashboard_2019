@@ -72,7 +72,7 @@
               </v-fade-transition>
             </template>
           </v-text-field>
-          <v-textarea label="Purpose" type="purpose" v-model="userview.purpose"
+          <v-textarea label="Purpose" :maxlength="max" type="purpose" v-model="userview.purpose"
           outline clearable>
             <!-- <template v-slot:prepend>
               <v-tooltip bottom>
@@ -178,6 +178,7 @@ import generator from "generate-password"
 export default {
   data() {
     return {
+      max: 50,
       confirmemail: null,
       userview: {
         admin: false,

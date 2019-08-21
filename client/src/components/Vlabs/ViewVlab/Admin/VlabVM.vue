@@ -68,10 +68,12 @@ export default {
   },
   watch: {
     async vlabvms() {
-      const vlabId = this.route.params.vlabId;
-      this.vlabvms = (await VmVlabService.index({
-        VlabId: vlabId
-      })).data;
+      await setTimeout(async () => {
+        const vlabId = this.route.params.vlabId;
+        this.vlabvms = (await VmVlabService.index({
+          VlabId: vlabId
+        })).data;
+      }, 3000)
     }
   },
   async mounted() {

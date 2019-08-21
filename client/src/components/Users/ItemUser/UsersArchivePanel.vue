@@ -122,13 +122,15 @@ export default {
   },
   watch: {
     async users() {
-      this.users = (await UserService.index()).data;
-      for (let i = 0, j = 0; i !== this.users.length; i++) {
-        if (this.users[i].admin === true || this.users[i].archive !== true) {
-          this.users.splice(i, 1)
-          i--
+      await setTimeout(async () => {
+        this.users = (await UserService.index()).data;
+        for (let i = 0, j = 0; i !== this.users.length; i++) {
+          if (this.users[i].admin === true || this.users[i].archive !== true) {
+            this.users.splice(i, 1)
+            i--
+          }
         }
-      }
+      }, 5000)
     }
   }
 };

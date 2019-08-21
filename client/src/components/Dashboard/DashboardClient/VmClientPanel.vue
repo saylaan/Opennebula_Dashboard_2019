@@ -44,14 +44,16 @@ export default {
   },
   watch: {
     async vmusers() {
-      this.vmusers = (await VmUserService.index()).data;
-      for (let i = 0, j = 0; i !== this.vmusers.length; i++) {
-        var count = (this.vmusers[i].type.match(/_/g) || []).length
-        if (count >= 1) {
-          this.vmusers.splice(i, 1)
-          i--
+      await setTimeout(async () => {
+        this.vmusers = (await VmUserService.index()).data;
+        for (let i = 0, j = 0; i !== this.vmusers.length; i++) {
+          var count = (this.vmusers[i].type.match(/_/g) || []).length
+          if (count >= 1) {
+            this.vmusers.splice(i, 1)
+            i--
+          }
         }
-      }
+      }, 3000)
     }
   },
   async mounted() {

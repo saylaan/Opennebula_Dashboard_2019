@@ -48,7 +48,9 @@ export default {
   },
   watch: {
     async userurls() {
-      this.userurls = (await UrlUserService.index()).data;
+      await setTimeout(async () => {
+        this.userurls = (await UrlUserService.index()).data;
+      }, 3000)
     }
   },
   methods: {

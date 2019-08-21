@@ -1,6 +1,6 @@
 <template>
 <v-app id="sandbox">
-    <v-img v-if="!isUserLoggedIn" :src="require('@/assets/DSPP-banner.jpg')" width="100%">
+    <v-img v-if="!isUserLoggedIn" :src="require('@/assets/DSPP-banner.jpg')" v-bind:width="width" v-bind:height="height">
     <toolbar v-bind:drawer="drawer"/>
       <v-container fill-height fluid>
         <router-view v:bind:drawer="drawer"></router-view>
@@ -9,7 +9,7 @@
       <span class="nonePhone px-3">&copy; Copyright {{new Date().getFullYear()}} The Alcatel-Lucent name and logo are trademarks of Nokia used under license by ALE.</span>
     </v-footer>
     </v-img>
-    <v-img v-if="isUserLoggedIn" @click="isMini()" :gradiant="grad" width="100%">
+    <v-img v-if="isUserLoggedIn" @click="isMini()" :gradiant="grad" v-bind:width="width" v-bind:height="height">
     <navbar v-if="isUserLoggedIn" v-bind:drawer="drawer"/>
     <toolbar v-bind:drawer="drawer"/>
     <v-content>
@@ -33,6 +33,8 @@ import UserService from "@/services/User/UserService";
 export default {
   data() {
     return {
+      height: window.innerHeight,
+      width: window.innerWidth,
       hover: false,
       drawer: {
         model: null,
@@ -46,7 +48,15 @@ export default {
       }
     }
   },
+  mounted() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
   methods: {
+    handleResize: function() {
+      this.height = window.innerHeight
+      this.width = window.innerWidth
+    },
     isMini() {
       if (!this.drawer.mini) {
         this.drawer.mini = true

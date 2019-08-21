@@ -19,8 +19,6 @@ const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
   'http://10.1.2.150:2633/RPC2')
 const nodemailer = require('nodemailer')
-const sendmail = require('sendmail')
-const crypto = require('crypto')
 
 module.exports = {
   async index(req, res) {
@@ -89,19 +87,6 @@ module.exports = {
         })
       }
       let usermail = await User.findByPk(UserId)
-      console.log(usermail)
-      let newpwd = await generator.generate({
-              length: 8,
-              numbers: true
-      })
-      usermail.salt = crypto.randomBytes(16).toString(`hex`)
-      usermail.active_hash = crypto.pbkdf2Sync(newpwd, usermail.salt,
-        1000, 64, `sha512`).toString(`hex`)
-      await User.update(usermail, {
-        where: {
-          id: UserId
-        }
-      })
       const transporter = nodemailer.createTransport({
         pool: true,
         host: "vlab.dspp.al-enterprise.com",
@@ -116,12 +101,12 @@ module.exports = {
       "The DSPP would like to welcome you to your new virtual lab.\nIt is important to start by reading the documentation at https://vlab.aapp.al-enterprise.com/\n" +
       "You will find a menubar on the left where all the important information you need are listed in order.\n\n" +
       "When you are ready to use your lab, go to https://portal-vlab.ale-aapp.com , and use the following credentials:\n" +
-      "Login: " + usermail.email + "\n" + "Password: " + newpwd + "\n\n\n" +
+      "Login: " + usermail.email + "\n\n\n" +
       "We hope you will enjoy your journey with us. If you have any question, feel free to email us at support@vlab.aapp.al-enterprise.com\n"
       var mailOpt = {
         from: 'support@vlab.dspp.al-enterprise.com',
         to: usermail.email,
-        subject: 'AAPP Program - Account assign',
+        subject: 'AAPP Program - Lab Assign',
         text: message
       }
       transporter.sendMail(mailOpt, function(error, info) {
@@ -450,6 +435,33 @@ module.exports = {
             })
           })
         })
+      })
+      let usermail = await User.findByPk(vlabuser.UserId)
+      const transporter = nodemailer.createTransport({
+        pool: true,
+        host: "vlab.dspp.al-enterprise.com",
+        port: 465,
+        secure: true, // use TLS
+        auth: {
+          user: 'support@vlab.dspp.al-enterprise.com',
+          pass: '6JQY^iN(^+7i'
+        }
+      })
+      var message = "Greetings " + usermail.firstname + "\n" +
+      "We hope you enjoyed working with the DSPP virtual labs.\n"
+      "This is an email to let you know that your lab has expired\n"
+      var mailOpt = {
+        from: 'support@vlab.dspp.al-enterprise.com',
+        to: usermail.email,
+        subject: 'AAPP Program - Expiration Lab',
+        text: message
+      }
+      transporter.sendMail(mailOpt, function(error, info) {
+        if (error) {
+          console.log(error)
+        } else {
+          console.log('Email sent: ' + info.response)
+        }
       })
       await vlabuser.destroy()
       res.send(vlabuser)

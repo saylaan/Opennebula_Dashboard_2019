@@ -2,9 +2,9 @@ const { User } = require('../../models')
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
   'http://10.1.2.150:2633/RPC2')
-const date = require('date-and-time')
 const crypto = require('crypto')
 const generator = require('generate-password')
+const nodemailer = require('nodemailer')
 
 module.exports = {
   async index(req, res) {
@@ -53,6 +53,35 @@ module.exports = {
       await User.update(newUser, {
         where: {
           id: user.id
+        }
+      })
+      const transporter = nodemailer.createTransport({
+        pool: true,
+        host: "vlab.dspp.al-enterprise.com",
+        port: 465,
+        secure: true, // use TLS
+        auth: {
+          user: 'support@vlab.dspp.al-enterprise.com',
+          pass: '6JQY^iN(^+7i'
+        }
+      })
+      var message = "Greetings " + newUser.firstname + "\n" +
+      "A new account has been created for you in the Developer Solution Partner Program Virtual Lab.\n" +
+      "Please login to https://portal-vlab.ale-aapp.com , and use the following credentials:\n" + 
+      "Login: " + newUser.email + "\n" + "Password: " + tmppwd + "\n\n\n" +
+      "We hope you will enjoy your journey with your.\n" + 
+      "If you need any help, please do not hesitate to contact us at support@vlab.dspp.al-enterprise.com\n"
+      var mailOpt = {
+        from: 'support@vlab.dspp.al-enterprise.com',
+        to: newUser.email,
+        subject: 'AAPP Program - Created Account',
+        text: message
+      }
+      transporter.sendMail(mailOpt, function(error, info) {
+        if (error) {
+          console.log(error)
+        } else {
+          console.log('Email sent: ' + info.response)
         }
       })
       await one.getGroups(async (err, data) => {

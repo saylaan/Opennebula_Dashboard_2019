@@ -154,6 +154,7 @@
 <script>
 import UserService from "@/services/User/UserService";
 import { mapState } from "vuex";
+import crypto from "crypto"
 
 export default {
   data() {
@@ -166,7 +167,9 @@ export default {
         lastname: null,
         email: null,
         password: null,
-        purpose: null
+        purpose: null,
+        salt: null,
+        active_hash: null
       },
       error: null,
       required: value => !!value || "Required."
@@ -179,7 +182,12 @@ export default {
     async save() {
       this.error = null;
       const areAllFieldsFilledIn = Object.keys(this.userview).every(
-        key => !!this.userview[key]
+        key => {
+          if (key === 'salt' || key === 'active_hash') {
+            return (true)
+          }
+          return (!!this.userview[key])
+        }
       );
       if (this.confirmemail !== this.userview.email) {
         this.error = "The emails don't match"
@@ -189,6 +197,9 @@ export default {
         this.error = "The passwords don't match"
         return;
       }
+      this.userview.salt = crypto.randomBytes(16).toString(`hex`)
+      this.userview.active_hash = crypto.pbkdf2Sync(this.userview.password, this.userview.salt, 1000, 64, `sha512`).toString(`hex`)
+      this.userview.password = ""
       const userId = this.route.params.userId;
       try {
         await UserService.put(this.userview);

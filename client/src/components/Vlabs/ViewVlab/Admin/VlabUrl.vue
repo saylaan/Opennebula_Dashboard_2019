@@ -68,10 +68,12 @@ export default {
   },
   watch: {
     async vlaburls() {
-      const vlabId = this.route.params.vlabId;
-      this.vlaburls = (await UrlVlabService.index({
-        VlabId: vlabId
-      })).data;
+      await setTimeout(async () => {
+        const vlabId = this.route.params.vlabId;
+        this.vlaburls = (await UrlVlabService.index({
+          VlabId: vlabId
+        })).data;
+      }, 3000)
     }
   },
   methods: {

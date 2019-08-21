@@ -7,10 +7,10 @@
     <v-flex fill-height xs12 sm10 md9 d-flex class="mt-2">
       <users-client-panel/>
     </v-flex>
-    <v-flex fill-height xs12 sm10 md6 d-flex class="mt-2">
+    <v-flex fill-height xs12 sm10 md9 d-flex class="mt-2">
       <users-archive-panel/>
     </v-flex>
-    <v-flex fill-height xs12 sm10 md6 d-flex class="mt-2">
+    <v-flex fill-height xs12 sm10 md9 d-flex class="mt-2">
       <users-admin-panel/>
     </v-flex>
   </v-layout>

@@ -36,7 +36,9 @@ export default {
   },
   watch: {
     async usersips() {
-      this.usersips = (await SipUserService.index()).data;
+      await setTimeout(async () => {
+        this.usersips = (await SipUserService.index()).data;
+      }, 3000)
     }
   },
   methods: {

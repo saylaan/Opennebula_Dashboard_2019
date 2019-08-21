@@ -22,6 +22,7 @@ const {
 } = require('../models')
 const Promise = require('bluebird')
 const winston = require('winston')
+const nodemailer = require('nodemailer')
 // const log = require('../logs/log')
 
 const logger = winston.createLogger({
@@ -103,6 +104,32 @@ const checkLicence = async () => {
           }, {
             where: {
               id: user.id
+            }
+          })
+          const transporter = nodemailer.createTransport({
+            pool: true,
+            host: "vlab.dspp.al-enterprise.com",
+            port: 465,
+            secure: true, // use TLS
+            auth: {
+              user: 'support@vlab.dspp.al-enterprise.com',
+              pass: '6JQY^iN(^+7i'
+            }
+          })
+          var message = "Greetings " + user.firstname + "\n" +
+          "We hope you enjoyed working with the DSPP virtual labs.\n"
+          "This is an email to let you know that your account got archived\n"
+          var mailOpt = {
+            from: 'support@vlab.dspp.al-enterprise.com',
+            to: user.email,
+            subject: 'AAPP Program - Archive User',
+            text: message
+          }
+          transporter.sendMail(mailOpt, function(error, info) {
+            if (error) {
+              console.log(error)
+            } else {
+              console.log('Email sent: ' + info.response)
             }
           })
           await VmVlab.findAll({ // FOR THE VM DEASSIGN
