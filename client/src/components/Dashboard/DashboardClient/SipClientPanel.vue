@@ -10,6 +10,7 @@
        loading-text="No data for the moment"
        :items-per-page="10"
        :items="usersips"
+       :sort-by="['name']"
        class="elevation-12">
       </v-data-table>
   </panel>

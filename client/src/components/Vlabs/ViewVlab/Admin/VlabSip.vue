@@ -22,6 +22,7 @@
        loading-text="No data for the moment"
        :items-per-page="10"
        :items="vlabsips"
+       :sort-by="['name']"
        class="elevation-12">
         <!-- <template v-slot:item.id="props">
           <v-layout justify-center>

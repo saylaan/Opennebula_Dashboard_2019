@@ -9,7 +9,7 @@
       <span class="nonePhone px-3">&copy; Copyright {{new Date().getFullYear()}} The Alcatel-Lucent name and logo are trademarks of Nokia used under license by ALE.</span>
     </v-footer>
     </v-img>
-    <v-img v-if="isUserLoggedIn" @click="isMini()" :gradiant="grad" v-bind:width="width" v-bind:height="height">
+    <v-img v-if="isUserLoggedIn" @click="isMini()" :gradiant="grad" width="100%">
     <navbar v-if="isUserLoggedIn" v-bind:drawer="drawer"/>
     <toolbar v-bind:drawer="drawer"/>
     <v-content>
