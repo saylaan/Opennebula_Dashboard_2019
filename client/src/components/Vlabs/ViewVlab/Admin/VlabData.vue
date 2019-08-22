@@ -59,6 +59,7 @@
           >
           </v-text-field>
             </v-layout>
+          <span class="danger-alert">{{error}}</span>
             <v-layout justify-center align-center>
           <v-btn
             v-if="isUserLoggedIn && !this.vlabuser"
@@ -93,6 +94,7 @@ export default {
   },
   data() {
     return {
+      error: null,
       vlabuser: null,
       users: [],
       userassign: null,
@@ -200,24 +202,29 @@ export default {
         const vlabId = this.route.params.vlabId;
         this.vlab = (await VlabService.getVlab(vlabId)).data
         const newUser = (await UserService.getUser(id)).data
-        newUser.assign = true
-        newUser.dayleft = parseInt(this.dayslicence, 10)
-        await UserService.put(newUser)
-        await VlabService.put({
-          idopennebula: this.vlab[0].idopennebula,
-          ownername: this.userassign,
-          groupename: this.vlab[0].groupname,
-          name: this.vlab[0].name,
-          nameparse: this.vlab[0].nameparse,
-          vlanid: this.vlab[0].vlanid,
-          assign: true,
-          dayleft: parseInt(this.dayslicence, 10)
-        }, vlabId)
-        this.vlabuser = (await VlabUserService.post({
-          VlabId: this.vlab[0].id,
-          UserId: id
-        })).data;
-        this.vlab = (await VlabService.getVlab(vlabId)).data
+        console.log(newUser)
+        if (newUser.assign === true) {
+          this.error = "The user is already assign to a lab"
+        } else {
+          newUser.assign = true
+          newUser.dayleft = parseInt(this.dayslicence, 10)
+          await UserService.put(newUser)
+          await VlabService.put({
+            idopennebula: this.vlab[0].idopennebula,
+            ownername: this.userassign,
+            groupename: this.vlab[0].groupname,
+            name: this.vlab[0].name,
+            nameparse: this.vlab[0].nameparse,
+            vlanid: this.vlab[0].vlanid,
+            assign: true,
+            dayleft: parseInt(this.dayslicence, 10)
+          }, vlabId)
+          this.vlabuser = (await VlabUserService.post({
+            VlabId: this.vlab[0].id,
+            UserId: id
+          })).data;
+          this.vlab = (await VlabService.getVlab(vlabId)).data
+        }
       } catch (err) {
         console.log(err);
       }
