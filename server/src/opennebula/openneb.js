@@ -37,37 +37,6 @@ const logger = winston.createLogger({
   ]
 })
 
-
-
-const rainbowLink = async () => {
-  try {
-    await fs.readFile(path.join(__dirname, 'vlab.json'), 'utf8', (err, data) => {
-      // let test = data.split(`,\r\n`)
-      const jsonData = JSON.parse(data)
-      jsonData.forEach((dat) => {
-        console.log(dat)
-      })
-      // console.log(test.length)
-      // console.log(test.length)
-      // console.log(test.length)
-      // console.log(test.length)
-      // console.log(test.length)
-    })
-    // const pathFile = path.join(__dirname, "vlab.json")
-    // console.log(pathFile)
-    // console.log(pathFile)
-    // console.log(pathFile)
-    // console.log(pathFile)
-    // fs.readFile(pathFile, (err, data) => {
-    //   console.log(data)
-    //   console.log(data)
-    //   console.log(data)
-    // })
-  } catch (err) {
-    console.log(err)
-  }
-}
-
 const checkLicence = async () => {
   console.log("CHECKING ALL LICENCES BEGAN....")
   try {
