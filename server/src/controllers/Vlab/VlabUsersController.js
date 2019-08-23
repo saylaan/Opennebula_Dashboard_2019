@@ -18,6 +18,7 @@ const generator = require('generate-password')
 const Opennebula = require('opennebula')
 const one = new Opennebula('geoffroy:2961Sailaan1992!',
   'http://10.1.2.150:2633/RPC2')
+const { exec } = require('child_process')
 const nodemailer = require('nodemailer')
 
 module.exports = {
@@ -115,6 +116,19 @@ module.exports = {
         } else {
           console.log('Email sent: ' + info.response)
         }
+      })
+      let tmpvlab = await Vlab.findOne({
+        where: {
+          id: VlabId
+        }
+      })
+      const cmd = "./var/lib/one/script/rainbow.sh create " + tmpvlab.nameparse.toLowerCase() + usermail.email // RAINBOW CREATE
+      await exec(cmd, (err, stdout, stderr) => {
+        if (err) {
+          console.log(err)
+          return
+        }
+        console.log(stdout)
       })
       const newVlabUser = await VlabUser.create({
         VlabId: VlabId,
@@ -287,6 +301,19 @@ module.exports = {
           error: 'you do not have access to this vlabuser'
         })
       }
+      let tmpvlab = await Vlab.findOne({
+        where: {
+          id: vlabuser.VlabId
+        }
+      })
+      const cmd = "./var/lib/one/script/rainbow.sh delete " + tmpvlab.nameparse.toLowerCase() // RAINBOW DELETE
+      await exec(cmd, (err, stdout, stderr) => {
+        if (err) {
+          console.log(err)
+          return
+        }
+        console.log(stdout)
+      })
       await VmVlab.findAll({ // FOR THE VM DEASSIGN
         where: {
           VlabId: vlabuser.VlabId
