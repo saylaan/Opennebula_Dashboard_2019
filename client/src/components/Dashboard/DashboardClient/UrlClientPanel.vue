@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       headers: [
-        {text: "Name", value: "name", align: "left", sortable: false},
+        {text: "Name", value: "name", align: "center", sortable: false},
         {text: "Url", value: "url", align: "center"},
         {text: "Login", value: "log", align: "center"},
         {text: "Password", value: "password", align: "center"}

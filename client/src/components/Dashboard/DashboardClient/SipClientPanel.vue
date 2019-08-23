@@ -1,7 +1,7 @@
 <template>
   <panel v-if="isUserLoggedIn" title="SIP">
     <v-layout justify-center>
-    <div v-if="isSip()" class="title">SIP Domain: oxe-{{this.usersips[0].vlabname.toLowerCase()}}.ale-aapp.com</div>
+    <div v-if="isSip()" class="red--text title">SIP Domain: oxe-{{this.usersips[0].vlabname.toLowerCase()}}.ale-aapp.com</div>
     </v-layout>
       <v-data-table
        :headers="headers"
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       headers: [
-        {text: "Name", value: "name", sortable: false, align: "left"},
+        {text: "Name", value: "name", sortable: false, align: "center"},
         {text: "Login", value: "login", align: "center"},
         {text: "Password", value: "passwd", align: "center"}
       ],

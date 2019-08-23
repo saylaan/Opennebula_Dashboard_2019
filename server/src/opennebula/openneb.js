@@ -24,6 +24,8 @@ const Promise = require('bluebird')
 const winston = require('winston')
 const nodemailer = require('nodemailer')
 // const log = require('../logs/log')
+const fs = require('fs')
+const path = require('path')
 
 const logger = winston.createLogger({
   level: 'info',
@@ -34,6 +36,37 @@ const logger = winston.createLogger({
     new winston.transports.File({ filename: 'combined.log'})
   ]
 })
+
+
+
+const rainbowLink = async () => {
+  try {
+    await fs.readFile(path.join(__dirname, 'vlab.json'), 'utf8', (err, data) => {
+      // let test = data.split(`,\r\n`)
+      const jsonData = JSON.parse(data)
+      jsonData.forEach((dat) => {
+        console.log(dat)
+      })
+      // console.log(test.length)
+      // console.log(test.length)
+      // console.log(test.length)
+      // console.log(test.length)
+      // console.log(test.length)
+    })
+    // const pathFile = path.join(__dirname, "vlab.json")
+    // console.log(pathFile)
+    // console.log(pathFile)
+    // console.log(pathFile)
+    // console.log(pathFile)
+    // fs.readFile(pathFile, (err, data) => {
+    //   console.log(data)
+    //   console.log(data)
+    //   console.log(data)
+    // })
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 const checkLicence = async () => {
   console.log("CHECKING ALL LICENCES BEGAN....")
@@ -883,6 +916,7 @@ const getInfoTemplates = async () => {
 
 const openneb = {
   one: one,
+  rainbowLink: rainbowLink,
   checkLicence: checkLicence,
   getInfoVms: getInfoVms,
   getInfoUsers: getInfoUsers,

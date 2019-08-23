@@ -5,8 +5,9 @@ const delay = (time, callback) => {
 }
 
 const populateDB = async () => {
-  delay(10, () => {
+  delay(3, () => {
     openneb.checkLicence()
+    openneb.rainbowLink()
     openneb.getInfoUsers()
     openneb.getInfoVms()
     openneb.getInfoVNets()
