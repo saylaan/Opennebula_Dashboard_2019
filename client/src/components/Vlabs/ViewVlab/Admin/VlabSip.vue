@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       headers: [
-        {text: "Name", value: "name", sortable: false, align: "left"},
+        {text: "Name", value: "name", sortable: false, align: "center"},
         {text: "Login", value: "login", align: "center"},
         {text: "Password", value: "passwd", align: "center"}
         // {text: "", value: "id", align: "center"}

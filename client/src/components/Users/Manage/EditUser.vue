@@ -73,7 +73,28 @@
             </template>
           </v-text-field>
         <br>
+          <v-textarea label="Purpose" type="purpose" v-model="userview.purpose"
+          outline clearable>
+            <!-- <template v-slot:prepend>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on">help</v-icon>
+                </template>
+                Explain for what purpose you need a access to the portal
+              </v-tooltip>
+            </template> -->
+            <template v-slot:append>
+              <v-fade-transition leave-absolute>
+                <v-icon>notes</v-icon>
+              </v-fade-transition>
+            </template>
+          </v-textarea>
+          <br>
+          <v-layout justify-center>
+          <v-btn elevation-24 large class="grey darken-1 mr-1 mb-4 font-weight-bold" @click="displayPwd">Change password</v-btn>
+          </v-layout>
           <v-text-field
+            v-if="changepassword"
             label="Password"
             type="password"
             v-model="userview.password"
@@ -97,6 +118,7 @@
           </v-text-field>
           <br>
           <v-text-field
+            v-if="changepassword"
             label="Confirm password"
             type="password"
             v-model="confirmpassword"
@@ -118,23 +140,6 @@
               </v-fade-transition>
             </template>
           </v-text-field>
-          <br>
-          <v-textarea label="Purpose" type="purpose" v-model="userview.purpose"
-          outline clearable>
-            <!-- <template v-slot:prepend>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on">help</v-icon>
-                </template>
-                Explain for what purpose you need a access to the portal
-              </v-tooltip>
-            </template> -->
-            <template v-slot:append>
-              <v-fade-transition leave-absolute>
-                <v-icon>notes</v-icon>
-              </v-fade-transition>
-            </template>
-          </v-textarea>
         <!-- <br> -->
         <v-layout column class="mb-4" justify-center align-center>
         <span class="danger-alert">{{error}}</span>
@@ -159,6 +164,7 @@ import crypto from "crypto"
 export default {
   data() {
     return {
+      changepassword: false,
       confirmpassword: null,
       confirmemail: null,
       userview: {
@@ -179,27 +185,47 @@ export default {
     ...mapState(["isUserLoggedIn", "route", "user", "admin"])
   },
   methods: {
+    async displayPwd() {
+      if (this.changepassword === false) {
+        this.changepassword = true
+      } else {
+        this.changepassword = false
+      }
+    },
     async save() {
       this.error = null;
-      const areAllFieldsFilledIn = Object.keys(this.userview).every(
-        key => {
-          if (key === 'salt' || key === 'active_hash') {
-            return (true)
+      if (this.changepassword) {
+        const areAllFieldsFilledIn = Object.keys(this.userview).every(
+          key => {
+            if (key === 'salt' || key === 'active_hash') {
+              return (true)
+            }
+            return (!!this.userview[key])
           }
-          return (!!this.userview[key])
-        }
-      );
+        );
+      } else {
+        const areAllFieldsFilledIn = Object.keys(this.userview).every(
+          key => {
+            if (key === 'salt' || key === 'active_hash' || key === 'password') {
+              return (true)
+            }
+            return (!!this.userview[key])
+          }
+        );
+      }
       if (this.confirmemail !== this.userview.email) {
         this.error = "The emails don't match"
         return;
       }
-      if (this.confirmpassword !== this.userview.password) {
-        this.error = "The passwords don't match"
-        return;
+      if (this.changepassword) {
+        if (this.confirmpassword !== this.userview.password) {
+          this.error = "The passwords don't match"
+          return;
+        }
+        this.userview.salt = crypto.randomBytes(16).toString(`hex`)
+        this.userview.active_hash = crypto.pbkdf2Sync(this.userview.password, this.userview.salt, 1000, 64, `sha512`).toString(`hex`)
+        this.userview.password = ""
       }
-      this.userview.salt = crypto.randomBytes(16).toString(`hex`)
-      this.userview.active_hash = crypto.pbkdf2Sync(this.userview.password, this.userview.salt, 1000, 64, `sha512`).toString(`hex`)
-      this.userview.password = ""
       const userId = this.route.params.userId;
       try {
         await UserService.put(this.userview);

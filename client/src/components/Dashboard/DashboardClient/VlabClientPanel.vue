@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       headers: [
-        {text: "Name", value: "nameparse", align: "left", sortable: false},
+        {text: "Name", value: "nameparse", align: "center", sortable: false},
         {text: "Owner name", value: "ownername", align: "center"},
         {text: "Remaining days", value: "dayleft", align: "center"},
         {text: "", value: "assign", align: "center"}

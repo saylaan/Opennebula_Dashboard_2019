@@ -106,7 +106,7 @@ module.exports = {
       var mailOpt = {
         from: 'support@vlab.dspp.al-enterprise.com',
         to: usermail.email,
-        subject: 'AAPP Program - Lab Assign',
+        subject: 'AAPP Program - Your Virtual Lab is ready!',
         text: message
       }
       transporter.sendMail(mailOpt, function(error, info) {

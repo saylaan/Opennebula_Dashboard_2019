@@ -88,7 +88,7 @@ module.exports = {
         data.forEach(async element => {
           if (element.NAME === "users" && !user.admin) {
             console.log(element.NAME)
-            await one.createUser(user.email, user.password, 'core', async (err, data) => {
+            await one.createUser(user.email, tmppwd, 'core', async (err, data) => {
               console.log('The creation of the user in opennebula has been a success')
               const useron = await one.getUser(data.id)
               useron.chgrp(parseInt(element.ID, 10), (err, data) => {
@@ -98,7 +98,7 @@ module.exports = {
             })
           } else if (element.NAME === "oneadmin" && user.admin) {
             console.log(element.NAME)
-            await one.createUser(user.email, user.password, 'core', async (err, data) => {
+            await one.createUser(user.email, tmppwd, 'core', async (err, data) => {
               console.log('The creation of the user in opennebula has been a success')
               const useron = await one.getUser(data.id)
               useron.chgrp(parseInt(element.ID, 10), (err, data) => {

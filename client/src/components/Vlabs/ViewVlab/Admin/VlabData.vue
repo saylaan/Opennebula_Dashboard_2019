@@ -29,7 +29,7 @@
         <div>{{needCredential(vlab.dayleft)}}</div>
       </v-flex>
     </v-layout> -->
-    <v-divider></v-divider>
+    <!-- <v-divider></v-divider> -->
           <!-- <v-btn
             class="grey darken-1 font-weight-bold"
             :to="{
@@ -45,12 +45,14 @@
             <v-layout row justify-center align-center>
           <v-select v-if="isUserLoggedIn && !this.vlabuser"
             :items="users"
+            class="mt-2"
             item-text="email"
             v-model="userassign"
             label="User available"
             outline>
           </v-select>
           <v-text-field
+            class="ml-2"
             label="Number of days"
             v-model="dayslicence"
             :rules="[required]"
@@ -101,8 +103,8 @@ export default {
       vlab: [],
       dayslicence: 30,
       headers: [
-        {text: "Name", value: "nameparse"},
-        {text: "Owner name", value: "ownername"},
+        {text: "Name", value: "nameparse", align: "center"},
+        {text: "Owner name", value: "ownername", align: "center"},
         {text: "Remaining days", value: "dayleft", align: "center"},
         {text: "", value: "assign"}
       ],
