@@ -7,11 +7,52 @@
       loading-text="No data for the moment"
       :items-per-page="1"
       :items="vlab">
+        <template v-slot:item.groupname="{item}">
+          <v-btn
+            v-if="isUserLoggedIn && !vlabuser"
+            class="grey darken-1 font-weight-bold"
+            @click="setUser"
+          >Add User</v-btn>
+          <v-btn
+            v-if="isUserLoggedIn && vlabuser"
+            class="grey darken-1 font-weight-bold ml-2"
+            @click="deleteUser"
+          >Delete User</v-btn>
+        </template>
+        <template v-slot:item.startlicence>
+          <v-select v-if="isUserLoggedIn && !vlabuser"
+            :items="users"
+            class="mt-2"
+            item-text="email"
+            v-model="userassign"
+            label="User available"
+            outline>
+          </v-select>
+        </template>
         <template v-slot:item.dayleft="{item}">
           {{needCredential(item.dayleft, item.assign)}}
         </template>
         <template v-slot:item.assign="{item}">
           <v-chip :color="getWarning(item.dayleft)" text-color="white"></v-chip>
+        </template>
+        <template v-slot:item.vlanid="{item}">
+          <v-text-field
+            v-if="isUserLoggedIn && vlabuser"
+            class="ml-2"
+            label="Number of days"
+            v-model="dayslicence"
+            :rules="[required]"
+            outline
+            clearable
+          >
+          </v-text-field>
+        </template>
+        <template v-slot:item.endlicence="{item}">
+          <v-btn
+            v-if="isUserLoggedIn && vlabuser"
+            class="grey darken-1 font-weight-bold"
+            @click="addDays"
+          >Add Days</v-btn>
         </template>
       </v-data-table>
     <!-- <v-divider></v-divider>
@@ -41,44 +82,8 @@
                   }
                  }"
           >Edit</v-btn> -->
-          <v-layout class="mt-3 mb-3" column justify-center align-center>
-            <v-layout row justify-center align-center>
-          <v-select v-if="isUserLoggedIn && !this.vlabuser"
-            :items="users"
-            class="mt-2"
-            item-text="email"
-            v-model="userassign"
-            label="User available"
-            outline>
-          </v-select>
-          <v-text-field
-            class="ml-2"
-            label="Number of days"
-            v-model="dayslicence"
-            :rules="[required]"
-            outline
-            clearable
-          >
-          </v-text-field>
-            </v-layout>
+          <v-layout class="mt-3 mb-3" justify-center align-center>
           <span class="danger-alert">{{error}}</span>
-            <v-layout justify-center align-center>
-          <v-btn
-            v-if="isUserLoggedIn && !this.vlabuser"
-            class="grey darken-1 font-weight-bold"
-            @click="setUser"
-          >Add User</v-btn>
-          <v-btn
-            v-if="isUserLoggedIn && this.vlabuser"
-            class="grey darken-1 font-weight-bold"
-            @click="addDays"
-          >Add Days</v-btn>
-          <v-btn
-            v-if="isUserLoggedIn && this.vlabuser"
-            class="grey darken-1 font-weight-bold ml-2"
-            @click="deleteUser"
-          >Delete User</v-btn>
-            </v-layout>
           </v-layout>
   </panel>
 </template>
@@ -105,8 +110,12 @@ export default {
       headers: [
         {text: "Name", value: "nameparse", align: "center"},
         {text: "Owner name", value: "ownername", align: "center"},
+        {text: "", value: "startlicence", align: "center"},
+        {text: "", value: "groupname", align: "center"},
         {text: "Remaining days", value: "dayleft", align: "center"},
-        {text: "", value: "assign"}
+        {text: "", value: "assign", align: "center"},
+        {text: "", value: "vlanid", align: "center"},
+        {text: "", value: "endlicence", align: "center"}
       ],
       required: value => !!value || "Required."
     };
