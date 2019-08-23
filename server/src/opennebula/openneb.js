@@ -24,8 +24,6 @@ const Promise = require('bluebird')
 const winston = require('winston')
 const nodemailer = require('nodemailer')
 // const log = require('../logs/log')
-const fs = require('fs')
-const path = require('path')
 
 const logger = winston.createLogger({
   level: 'info',
@@ -885,7 +883,6 @@ const getInfoTemplates = async () => {
 
 const openneb = {
   one: one,
-  rainbowLink: rainbowLink,
   checkLicence: checkLicence,
   getInfoVms: getInfoVms,
   getInfoUsers: getInfoUsers,
