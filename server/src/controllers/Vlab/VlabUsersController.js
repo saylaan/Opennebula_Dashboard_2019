@@ -122,12 +122,21 @@ module.exports = {
           id: VlabId
         }
       })
+      console.log('RAINBOW CREATE')
+      console.log('RAINBOW CREATE')
+      console.log('RAINBOW CREATE')
+      console.log('RAINBOW CREATE')
       const cmd = "./var/lib/one/script/rainbow.sh create " + tmpvlab.nameparse.toLowerCase() + usermail.email // RAINBOW CREATE
       await exec(cmd, (err, stdout, stderr) => {
         if (err) {
           console.log(err)
           return
         }
+        console.log('RAINBOW CREATE DONE')
+        console.log('RAINBOW CREATE DONE')
+        console.log('RAINBOW CREATE DONE')
+        console.log('RAINBOW CREATE DONE')
+        console.log('RAINBOW CREATE DONE')
         console.log(stdout)
       })
       const newVlabUser = await VlabUser.create({
