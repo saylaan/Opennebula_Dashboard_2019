@@ -5,3 +5,4 @@
 ./server/src/password/HandlingPwd.js
 ./server/seed
 ./server/tabtracker.sqlite
+./server/src/rainbow.log

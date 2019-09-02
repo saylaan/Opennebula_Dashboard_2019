@@ -94,3 +94,23 @@
 {"message":8.999957997685184,"level":"info","service":"user-service"}
 {"message":10,"level":"info","service":"user-service"}
 {"message":{"id":5,"idopennebula":43,"ownername":"frank@alcatelunleashed.com","groupname":"oneadmin","name":"VLAB10 - 10.100.10.0","nameparse":"VLAB10","vlanid":10,"assign":true,"dayleft":10,"startlicence":"2019-08-19","endlicence":"2019-08-29","createdAt":"2019-08-19T13:55:41.305Z","updatedAt":"2019-08-19T14:29:36.093Z"},"level":"info","service":"user-service"}
+{"message":"reducing days remaining","level":"info","service":"user-service"}
+{"message":28.999988275462965,"level":"info","service":"user-service"}
+{"message":30,"level":"info","service":"user-service"}
+{"message":{"id":1,"idopennebula":47,"ownername":"geoffroy.huck@epitech.eu","groupname":"oneadmin","name":"VLAB50 - 10.100.50.0","nameparse":"VLAB50","vlanid":50,"assign":true,"dayleft":30,"startlicence":"2019-08-20","endlicence":"2019-09-19","createdAt":"2019-08-20T14:21:36.325Z","updatedAt":"2019-08-20T14:27:55.484Z"},"level":"info","service":"user-service"}
+{"message":"reducing days remaining","level":"info","service":"user-service"}
+{"message":8.999975358796297,"level":"info","service":"user-service"}
+{"message":10,"level":"info","service":"user-service"}
+{"message":{"id":5,"idopennebula":43,"ownername":"frank@alcatelunleashed.com","groupname":"oneadmin","name":"VLAB10 - 10.100.10.0","nameparse":"VLAB10","vlanid":10,"assign":true,"dayleft":10,"startlicence":"2019-08-21","endlicence":"2019-08-31","createdAt":"2019-08-20T14:21:36.326Z","updatedAt":"2019-08-21T15:07:13.124Z"},"level":"info","service":"user-service"}
+{"message":"reducing days remaining","level":"info","service":"user-service"}
+{"message":28.99990920138889,"level":"info","service":"user-service"}
+{"message":30,"level":"info","service":"user-service"}
+{"message":{"id":3,"idopennebula":45,"ownername":"etesting.shinken@gmail.com","groupname":"oneadmin","name":"VLAB30 - 10.100.30.0","nameparse":"VLAB30","vlanid":30,"assign":true,"dayleft":30,"startlicence":"2019-08-22","endlicence":"2019-09-21","createdAt":"2019-08-20T14:21:36.326Z","updatedAt":"2019-08-22T15:43:19.948Z"},"level":"info","service":"user-service"}
+{"message":"reducing days remaining","level":"info","service":"user-service"}
+{"message":28.99990920138889,"level":"info","service":"user-service"}
+{"message":30,"level":"info","service":"user-service"}
+{"message":{"id":4,"idopennebula":44,"ownername":"thierry.alcatel@gmail.com","groupname":"oneadmin","name":"VLAB20 - 10.100.20.0","nameparse":"VLAB20","vlanid":20,"assign":true,"dayleft":30,"startlicence":"2019-08-22","endlicence":"2019-09-21","createdAt":"2019-08-20T14:21:36.326Z","updatedAt":"2019-08-22T15:25:45.270Z"},"level":"info","service":"user-service"}
+{"message":"reducing days remaining","level":"info","service":"user-service"}
+{"message":7.999909201388889,"level":"info","service":"user-service"}
+{"message":9,"level":"info","service":"user-service"}
+{"message":{"id":5,"idopennebula":43,"ownername":"frank@alcatelunleashed.com","groupname":"oneadmin","name":"VLAB10 - 10.100.10.0","nameparse":"VLAB10","vlanid":10,"assign":true,"dayleft":9,"startlicence":"2019-08-21","endlicence":"2019-08-31","createdAt":"2019-08-20T14:21:36.326Z","updatedAt":"2019-08-22T00:00:02.158Z"},"level":"info","service":"user-service"}
