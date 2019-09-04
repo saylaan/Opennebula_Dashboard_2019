@@ -117,8 +117,8 @@ const checkLicence = async () => {
             }
           })
           var message = "Greetings " + user.firstname + "\n" +
-          "We hope you enjoyed working with the DSPP virtual labs.\n"
-          "This is an email to let you know that your account got archived\n"
+          "We are writting to you to let you know that your DSPP VLAB account got archived.\n"
+          "We hope you had fun with it, and we can't wait to see the result of your project!\n"
           var mailOpt = {
             from: 'support@vlab.dspp.al-enterprise.com',
             to: user.email,
@@ -157,7 +157,7 @@ const checkLicence = async () => {
                                 if (err) {
                                   console.log(err)
                                 } else {
-                                  console.log('The snapshotrevert has been process')
+                                  console.log('The snapshotrevert has been processed')
                                   console.log(data)
                                 }
                             })
@@ -169,7 +169,7 @@ const checkLicence = async () => {
                             if (err) {
                               console.log(err)
                             } else {
-                              console.log('The snapshotrevert has been process')
+                              console.log('The snapshotrevert has been processed')
                               console.log(data)
                             }
                           })
