@@ -20,7 +20,11 @@ if [ -z "$1" ]; then
     cat<<EOF >/root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$
 Greetings, 
 
-Please find below the credential for each of your Rainbow users
+As a part of the Virtual Labs, you will have access to our Rainbow development platform. 
+Please read the documentation at http://vlab.aapp.al-enterprise.com in order to find out how to connect. 
+The credentials for each of your Rainbow users are the following:
+
+ROLE / Email / Password
 
 EOF
 else
@@ -33,11 +37,11 @@ fi
 
 function sendEmail()
 {
-    cat /root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$ | /usr/local/bin/mutt -s "Rainbow credentials" ${EMAIL}
+    cat /root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$ | /usr/bin/mutt -s "Rainbow credentials" ${EMAIL}
     
-#    if [ -f "/root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$" ]; then
-#        rm /root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$
-#    fi
+    if [ -f "/root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$" ]; then
+        rm /root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$
+    fi
 }
 
 
@@ -77,13 +81,13 @@ if [ ${ACTION} == "create" ]; then
     PASSWORD="$(password)"
     log "${VLAB} ADMIN admin@${VLABmin}.dspp.al-enterprise.com ${PASSWORD}"
     email
-    email "${VLAB} ADMIN admin@${VLABmin}.dspp.al-enterprise.com ${PASSWORD}"
+    email "ADMIN admin@${VLABmin}.dspp.al-enterprise.com ${PASSWORD}"
     rbw create user -c ${COMPANYID} -a admin@${VLABmin}.dspp.al-enterprise.com ${PASSWORD} Admin ${VLABmaj}
     
     for SIP in {1001..1005}; do
         PASSWORD="$(password)"
         log "${VLAB} USER ${SIP}@${VLABmin}.dspp.al-enterprise.com ${PASSWORD}"
-        email "${VLAB} USER ${SIP}@${VLABmin}.dspp.al-enterprise.com ${PASSWORD}"
+        email "USER ${SIP}@${VLABmin}.dspp.al-enterprise.com ${PASSWORD}"
         rbw create user -c ${COMPANYID} ${SIP}@${VLABmin}.dspp.al-enterprise.com ${PASSWORD} SIP ${SIP}
     done
     
