@@ -126,7 +126,7 @@ module.exports = {
       console.log('RAINBOW CREATE')
       console.log('RAINBOW CREATE')
       console.log('RAINBOW CREATE')
-      const cmd = "/root/SandboxALE-AAPP_2019/server/src/rainbow/rainbow.sh create " + tmpvlab.nameparse.toLowerCase() + usermail.email // RAINBOW CREATE
+      const cmd = "/root/SandboxALE-AAPP_2019/server/src/rainbow/rainbow.sh create " + tmpvlab.nameparse.toLowerCase() + " " + usermail.email // RAINBOW CREATE
       await exec(cmd, (err, stdout, stderr) => {
         if (err) {
           console.log(err)
