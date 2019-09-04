@@ -31,9 +31,9 @@ function sendEmail()
 {
     cat /root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$ | /usr/local/bin/mutt -s "Rainbow credentials" ${EMAIL}
     
-    if [ -f "/root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$" ]; then
-        rm /root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$
-    fi
+#    if [ -f "/root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$" ]; then
+#        rm /root/SandboxALE-AAPP_2019/server/src/rainbow/message.$$
+#    fi
 }
 
 
@@ -51,6 +51,7 @@ else #Let's make it easy to read
     VLAB=`echo ${2}|tr [a-z] [A-Z]`
     if [ $# -eq 3 ]; then
         EMAIL=`echo ${3}|tr [A-Z] [a-z]`
+    fi
 fi
 
 
