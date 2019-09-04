@@ -7,6 +7,12 @@ function log()
 
 
 
+function password()
+{
+    #openssl rand -base64 20|tr -d "=+/"|cut -c1-8
+    openssl rand -base64 10
+}
+
 
 function email()
 {
@@ -23,8 +29,6 @@ ${1}
 EOF
 fi
 }
-
-
 
 
 function sendEmail()
