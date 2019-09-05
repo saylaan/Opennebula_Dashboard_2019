@@ -35,7 +35,7 @@ Vue.use(Router)
 export default new Router({
   hashbang: false,
   hash: false,
-  mode: 'history',
+  mode: 'hash',
   routes: [
     {
       path: '/',

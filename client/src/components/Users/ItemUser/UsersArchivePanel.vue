@@ -31,6 +31,10 @@
                     userId: item.id}
               }"
            >Edit</v-btn>
+            <v-btn
+              class="grey darken-1 font-weight-bold ml-1 mt-1"
+              @click="deleteUser(item.id)"
+           >Delete</v-btn>         
             <v-btn @click="unarchiveUser(item.id)"
               class="grey darken-1 font-weight-bold ml-1 mt-1 "
             >Unarchive</v-btn>
@@ -85,6 +89,23 @@ export default {
         return ('YES')
       } else {
         return ('NO')
+      }
+    },
+    async deleteUser(id) {
+      try {
+        const {value: opt} = await Swal.fire({
+          title: 'Are you sure you want to delete the User?',
+          input: 'radio',
+          inputOptions: [
+            'Yes',
+            'No'
+          ]
+        })
+        if (opt === "0") {
+          let tmpUser = (await UserService.delete(id)).data
+        }
+      } catch (err) {
+        console.log(err)
       }
     },
     async unarchiveUser(id) { // ASSIGN VLAB IF WE WANT!

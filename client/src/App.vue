@@ -96,10 +96,18 @@ export default {
   opacity: 0.7
 }
 
-table.v-table thead th {
+div.v-input {
+  font-size: 16px !important;
+}
+
+div input {
   font-size: 18px !important;
 }
-table.v-table tbody td {
+
+table thead th {
+  font-size: 18px !important;
+}
+table tbody td {
   font-size: 16px !important;
 }
 
