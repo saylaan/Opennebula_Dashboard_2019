@@ -1,0 +1,34 @@
+2019.09.04 20:56:28 - ********** create VLAB50 5d445da1ec273b6d26ff2fe9 **********
+2019.09.04 20:56:28 - VLAB50 ADMIN admin@vlab50.dspp.al-enterprise.com /YFlQ8X4DG0YxQ==
+2019.09.04 20:56:32 - VLAB50 USER 1001@vlab50.dspp.al-enterprise.com wY00TiCCIQ8Ntw==
+2019.09.04 20:56:34 - VLAB50 USER 1002@vlab50.dspp.al-enterprise.com jjczrhFtG/gWRg==
+2019.09.04 20:56:37 - VLAB50 USER 1003@vlab50.dspp.al-enterprise.com 8PcQtcOZ7HEaxw==
+2019.09.04 20:56:40 - VLAB50 USER 1004@vlab50.dspp.al-enterprise.com qSnCU1aT/3QoPA==
+2019.09.04 20:56:43 - VLAB50 USER 1005@vlab50.dspp.al-enterprise.com RR7YsG9Wh7A78Q==
+2019.09.04 21:11:09 - ********** delete VLAB50  **********
+2019.09.04 21:40:35 - ********** delete VLAB40  **********
+2019.09.04 21:40:38 - VLAB40 not found
+2019.09.04 21:40:45 - ********** delete VLAB10  **********
+2019.09.04 21:40:48 - VLAB10 not found
+2019.09.05 16:07:08 - ********** create VLAB10 5d2f0f6d17caeb02b554e6d6 **********
+2019.09.05 16:07:08 - VLAB10 ADMIN admin@vlab10.dspp.al-enterprise.com 6uw+Fd3iTbg0KQ==
+2019.09.05 16:07:11 - VLAB10 USER 1001@vlab10.dspp.al-enterprise.com wvFHESd673RtPw==
+2019.09.05 16:07:14 - VLAB10 USER 1002@vlab10.dspp.al-enterprise.com W+49YXuRcFv5oA==
+2019.09.05 16:07:18 - VLAB10 USER 1003@vlab10.dspp.al-enterprise.com v0sby0J0FF+/7Q==
+2019.09.05 16:07:21 - VLAB10 USER 1004@vlab10.dspp.al-enterprise.com bmJ3tVzSRBsUaw==
+2019.09.05 16:07:24 - VLAB10 USER 1005@vlab10.dspp.al-enterprise.com 2V6w167nFJ9IYA==
+2019.09.05 16:45:23 - ********** create VLAB20 5d2f130017caeb02b554e6e8 **********
+2019.09.05 16:45:23 - VLAB20 ADMIN admin@vlab20.dspp.al-enterprise.com v9xo9qCXLGbExg==
+2019.09.05 16:45:26 - VLAB20 USER 1001@vlab20.dspp.al-enterprise.com nb5V6vdt8u59qA==
+2019.09.05 16:45:29 - VLAB20 USER 1002@vlab20.dspp.al-enterprise.com Ytc4plzD9JZM4A==
+2019.09.05 16:45:32 - VLAB20 USER 1003@vlab20.dspp.al-enterprise.com c29FFaXtaT4onA==
+2019.09.05 16:45:34 - VLAB20 USER 1004@vlab20.dspp.al-enterprise.com BjNxApy124OcFA==
+2019.09.05 16:45:37 - VLAB20 USER 1005@vlab20.dspp.al-enterprise.com 3kyjRQdfRubRUg==
+2019.09.05 16:49:01 - ********** create VLAB20 5d2f130017caeb02b554e6e8 **********
+2019.09.05 16:49:01 - VLAB20 ADMIN admin@vlab20.dspp.al-enterprise.com Hf6yM7W6+RRuMw==
+2019.09.05 16:49:04 - VLAB20 USER 1001@vlab20.dspp.al-enterprise.com gcHTsTpBKdw33g==
+2019.09.05 16:49:07 - VLAB20 USER 1002@vlab20.dspp.al-enterprise.com UWqVt3sy2N6E3g==
+2019.09.05 16:49:10 - VLAB20 USER 1003@vlab20.dspp.al-enterprise.com UL9ouTpKjJ/5lw==
+2019.09.05 16:49:12 - VLAB20 USER 1004@vlab20.dspp.al-enterprise.com stfdzInVxrwUnA==
+2019.09.05 16:49:15 - VLAB20 USER 1005@vlab20.dspp.al-enterprise.com bX8eeKdKCn4TIQ==
+2019.09.05 17:04:01 - ********** delete VLAB20  **********
