@@ -112,6 +112,4 @@ if [ "$1" == "delete" ]; then
     done
 fi
 
-
 exit
-
