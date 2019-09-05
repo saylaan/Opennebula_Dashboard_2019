@@ -102,7 +102,7 @@ module.exports = {
       "The DSPP would like to welcome you to your new virtual lab.\nIt is important to start by reading the documentation at https://vlab.aapp.al-enterprise.com/\n" +
       "You will find a menubar on the left where all the important information you need are listed in order.\n\n" +
       "When you are ready to use your lab, go to https://portal-vlab.ale-aapp.com , and use the following credentials:\n" +
-      "Login: " + usermail.email + "\n\n\n" +
+      "Login: " + usermail.email + "\n" + "THe password for this account was sent to you previously in a different email.\n\n" +
       "We hope you will enjoy your journey with us. If you have any question, feel free to email us at support@vlab.aapp.al-enterprise.com\n"
       var mailOpt = {
         from: 'support@vlab.dspp.al-enterprise.com',
