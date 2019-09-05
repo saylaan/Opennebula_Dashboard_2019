@@ -1,6 +1,6 @@
 const { User } = require('../../models')
 const Opennebula = require('opennebula')
-const one = new Opennebula('geoffroy:2961Sailaan1992!',
+const one = new Opennebula('vlabportal:A-hj*@qd7q',
   'http://10.1.2.150:2633/RPC2')
 const crypto = require('crypto')
 const generator = require('generate-password')

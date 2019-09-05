@@ -16,7 +16,7 @@ const _ = require('lodash')
 const handlingPwd = require('../../password/HandlingPwd')
 const generator = require('generate-password')
 const Opennebula = require('opennebula')
-const one = new Opennebula('geoffroy:2961Sailaan1992!',
+const one = new Opennebula('vlabportal:A-hj*@qd7q',
   'http://10.1.2.150:2633/RPC2')
 const { exec } = require('child_process')
 const nodemailer = require('nodemailer')

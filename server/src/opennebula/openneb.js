@@ -1,5 +1,5 @@
 const Opennebula = require('opennebula')
-const one = new Opennebula('geoffroy:2961Sailaan1992!',
+const one = new Opennebula('vlabportal:A-hj*@qd7q',
   'http://vlab.ale-aapp.com:2633/RPC2')
 const handlingPwd = require('../password/HandlingPwd')
 const generator = require('generate-password')
