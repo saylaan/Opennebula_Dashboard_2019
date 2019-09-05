@@ -69,8 +69,8 @@ module.exports = {
       "A new account has been created for you in the Developer Solution Partner Program Virtual Lab.\n" +
       "Please login to https://portal-vlab.ale-aapp.com , and use the following credentials:\n" + 
       "Login: " + newUser.email + "\n" + "Password: " + tmppwd + "\n\n\n" +
-      "We hope you will enjoy your journey with your.\n" + 
-      "If you need any help, please do not hesitate to contact us at support@vlab.dspp.al-enterprise.com\n"
+      "We hope you will enjoy your journey with us.\n" + 
+      "If you need any help, please do not hesitate to contact support@vlab.dspp.al-enterprise.com\n"
       var mailOpt = {
         from: 'support@vlab.dspp.al-enterprise.com',
         to: newUser.email,
