@@ -51,6 +51,8 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 It like materialize but you can have new tag like html <v-btn> etc
 
+
+npm install --save node-pre-gryp
 Repaire Sqlite3
 npm uninstall sqlite3
 npm cache clean
